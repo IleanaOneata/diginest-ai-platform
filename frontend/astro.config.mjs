@@ -17,15 +17,7 @@ export default defineConfig({
 
   integrations: [
     tailwind(),
-    sitemap({
-      i18n: {
-        defaultLocale: 'ro',
-        locales: {
-          ro: 'ro-RO',
-          en: 'en-US',
-        },
-      },
-    }),
+    sitemap(),
   ],
 
   // Build configuration
