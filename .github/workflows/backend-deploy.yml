@@ -40,10 +40,10 @@ jobs:
           cache: 'maven'
 
       - name: Build with Maven
-        run: ./mvnw clean package -DskipTests
+        run: mvn clean package -DskipTests
 
       - name: Run tests
-        run: ./mvnw test
+        run: mvn test
 
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
@@ -72,7 +72,7 @@ jobs:
           cache: 'maven'
 
       - name: Run OWASP Dependency Check
-        run: ./mvnw org.owasp:dependency-check-maven:check
+        run: mvn org.owasp:dependency-check-maven:check
         continue-on-error: true
 
   # ============================================
