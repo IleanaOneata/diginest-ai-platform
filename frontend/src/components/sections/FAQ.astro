@@ -1,0 +1,134 @@
+---
+/**
+ * FAQ Section Component
+ *
+ * Accordion FAQ section optimized for SEO/AEO
+ * Includes Schema.org FAQPage structured data
+ */
+
+import { getTranslations, type Locale } from '@i18n/index';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+// Get FAQ items from translations
+const faqItems = t.faq.items as Array<{ question: string; answer: string }>;
+
+// Generate FAQ Schema
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<section id="faq" class="section bg-white">
+  <div class="container-md">
+    <!-- Section header -->
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <h2 class="text-heading-lg md:text-display text-neutral-900 mb-4">
+        {t.faq.title}
+      </h2>
+      <p class="text-body-lg text-neutral-600">
+        {t.faq.subtitle}
+      </p>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="space-y-4" role="list">
+      {faqItems.map((item, index) => (
+        <div
+          class="border border-neutral-200 rounded-xl overflow-hidden"
+          role="listitem"
+        >
+          <button
+            class="faq-trigger w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-neutral-50 transition-colors"
+            aria-expanded="false"
+            aria-controls={`faq-content-${index}`}
+            data-faq-trigger
+          >
+            <h3 class="text-lg font-semibold text-neutral-900 pr-8">
+              {item.question}
+            </h3>
+            <span class="flex-shrink-0 w-6 h-6 text-neutral-400" aria-hidden="true">
+              <svg class="faq-icon-plus w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              <svg class="faq-icon-minus w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+              </svg>
+            </span>
+          </button>
+          <div
+            id={`faq-content-${index}`}
+            class="faq-content hidden"
+            role="region"
+            aria-labelledby={`faq-trigger-${index}`}
+          >
+            <div class="px-6 pb-6">
+              <p class="text-neutral-600 leading-relaxed">
+                {item.answer}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- FAQ Schema.org -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>
+
+<script>
+  // FAQ Accordion functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const triggers = document.querySelectorAll('[data-faq-trigger]');
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+        const content = trigger.nextElementSibling as HTMLElement;
+        const plusIcon = trigger.querySelector('.faq-icon-plus') as HTMLElement;
+        const minusIcon = trigger.querySelector('.faq-icon-minus') as HTMLElement;
+
+        // Close all other items
+        triggers.forEach((otherTrigger) => {
+          if (otherTrigger !== trigger) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            const otherContent = otherTrigger.nextElementSibling as HTMLElement;
+            const otherPlus = otherTrigger.querySelector('.faq-icon-plus') as HTMLElement;
+            const otherMinus = otherTrigger.querySelector('.faq-icon-minus') as HTMLElement;
+
+            otherContent?.classList.add('hidden');
+            otherPlus?.classList.remove('hidden');
+            otherMinus?.classList.add('hidden');
+          }
+        });
+
+        // Toggle current item
+        trigger.setAttribute('aria-expanded', (!isExpanded).toString());
+
+        if (content) {
+          content.classList.toggle('hidden');
+        }
+
+        if (plusIcon && minusIcon) {
+          plusIcon.classList.toggle('hidden');
+          minusIcon.classList.toggle('hidden');
+        }
+      });
+    });
+  });
+</script>

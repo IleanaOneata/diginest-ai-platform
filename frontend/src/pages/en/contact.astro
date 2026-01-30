@@ -1,0 +1,24 @@
+---
+/**
+ * English Contact Page
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ContactForm from '@components/sections/ContactForm.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'en';
+const t = getTranslations(locale);
+
+const title = `Contact - ${t.site.name}`;
+const description = 'Contact us for a free consultation about how AI agents can transform your business. We respond within 24 hours.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/en/contact/"
+>
+  <ContactForm locale={locale} />
+</BaseLayout>

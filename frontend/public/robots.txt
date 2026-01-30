@@ -1,0 +1,11 @@
+# Robots.txt for diginest.ai
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://diginest.ai/sitemap-index.xml
+
+# Disallow admin or private areas (when they exist)
+# Disallow: /admin/
+# Disallow: /api/

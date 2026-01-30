@@ -1,0 +1,262 @@
+{
+  "site": {
+    "name": "Diginest AI",
+    "tagline": "AI Agents for your business",
+    "description": "We automate your business processes with AI agents. Reduce costs, increase productivity, scale without hiring."
+  },
+
+  "nav": {
+    "services": "Services",
+    "solutions": "Solutions",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "cta": "Book a Demo"
+  },
+
+  "services": {
+    "title": "Services",
+    "automation": {
+      "title": "Process Automation",
+      "description": "We automate repetitive processes with intelligent AI agents"
+    },
+    "conversational": {
+      "title": "Conversational Agents",
+      "description": "Chatbots and virtual assistants for support and sales"
+    },
+    "integrations": {
+      "title": "AI Integrations",
+      "description": "We connect AI to your existing systems"
+    }
+  },
+
+  "hero": {
+    "badge": "AI solutions for business",
+    "title": "We automate your business processes with AI Agents",
+    "subtitle": "Reduce costs by up to 70%, increase productivity and scale without hiring. Implementation in weeks, not months.",
+    "cta_primary": "Book a free consultation",
+    "cta_secondary": "See how it works",
+    "trust": {
+      "companies": "companies helped",
+      "roi": "average ROI"
+    }
+  },
+
+  "problems": {
+    "title": "Challenges we solve daily",
+    "subtitle": "Businesses face the same problems. AI provides concrete solutions.",
+    "items": {
+      "costs": {
+        "title": "High HR costs",
+        "description": "Employees are expensive, hard to find and retain"
+      },
+      "manual": {
+        "title": "Repetitive manual processes",
+        "description": "Teams waste time on tasks that can be automated"
+      },
+      "scale": {
+        "title": "Difficult scaling",
+        "description": "Growth requires more people and more errors"
+      }
+    }
+  },
+
+  "benefits": {
+    "title": "Why companies choose to work with us",
+    "subtitle": "Measurable results, not promises",
+    "items": {
+      "cost": {
+        "value": "70%",
+        "label": "Cost reduction",
+        "description": "Automation significantly reduces operational costs"
+      },
+      "availability": {
+        "value": "24/7",
+        "label": "Availability",
+        "description": "AI agents work non-stop, without breaks or vacations"
+      },
+      "speed": {
+        "value": "10x",
+        "label": "Faster",
+        "description": "Process requests 10 times faster than manually"
+      },
+      "roi": {
+        "value": "300%",
+        "label": "Average ROI",
+        "description": "Investment pays off within the first 3-6 months"
+      }
+    }
+  },
+
+  "process": {
+    "title": "How we work",
+    "subtitle": "A clear, results-oriented process",
+    "steps": {
+      "discovery": {
+        "title": "Analysis",
+        "description": "We understand your processes and identify automation opportunities"
+      },
+      "design": {
+        "title": "Design",
+        "description": "We design the optimal AI solution for your specific needs"
+      },
+      "implement": {
+        "title": "Implementation",
+        "description": "We develop and integrate AI agents into existing systems"
+      },
+      "optimize": {
+        "title": "Optimization",
+        "description": "We monitor performance and continuously improve results"
+      }
+    }
+  },
+
+  "useCases": {
+    "title": "Solutions for your industry",
+    "subtitle": "We adapt AI agents to each industry's specifics",
+    "industries": {
+      "retail": {
+        "title": "Retail & E-commerce",
+        "description": "Customer support, order processing, personalized recommendations"
+      },
+      "finance": {
+        "title": "Financial Services",
+        "description": "Document verification, request processing, automated compliance"
+      },
+      "manufacturing": {
+        "title": "Manufacturing",
+        "description": "Quality monitoring, production planning, predictive maintenance"
+      },
+      "healthcare": {
+        "title": "Healthcare",
+        "description": "Appointments, patient triage, documentation automation"
+      }
+    }
+  },
+
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions about AI agents",
+    "items": [
+      {
+        "question": "What are AI agents?",
+        "answer": "AI agents are intelligent software programs that can autonomously perform complex tasks. Unlike simple rule-based automations, AI agents can make decisions, learn from experience, and adapt to new situations."
+      },
+      {
+        "question": "How long does it take to implement an AI agent?",
+        "answer": "Implementation takes between 2-8 weeks depending on the complexity of the automated process and required integrations. We start with a functional MVP and iterate based on feedback."
+      },
+      {
+        "question": "Will AI agents replace employees?",
+        "answer": "No. AI agents take over repetitive and time-consuming tasks, allowing your team to focus on strategic and creative activities that require human judgment."
+      },
+      {
+        "question": "What systems can be integrated with AI agents?",
+        "answer": "Our agents integrate with most popular systems: CRM (Salesforce, HubSpot), ERP (SAP, Odoo), ticketing systems, email, chat platforms, and many more."
+      },
+      {
+        "question": "What are the costs?",
+        "answer": "Costs depend on the solution's complexity. We offer free consultation to assess needs and propose a solution with transparent budget. Typical ROI is 3-6 months."
+      }
+    ]
+  },
+
+  "cta": {
+    "title": "Ready to automate?",
+    "subtitle": "Book a free 30-minute consultation. No obligations, just clarity.",
+    "button": "Book now"
+  },
+
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Let's discuss how AI can help your business",
+    "form": {
+      "name": "Full name",
+      "email": "Email",
+      "company": "Company",
+      "phone": "Phone (optional)",
+      "message": "Message",
+      "submit": "Send message",
+      "success": "Message sent successfully! We'll contact you soon.",
+      "error": "An error occurred. Please try again."
+    },
+    "info": {
+      "email": "contact@diginest.ai",
+      "schedule": "Monday - Friday, 9:00 AM - 6:00 PM"
+    }
+  },
+
+  "footer": {
+    "company": {
+      "title": "Company",
+      "about": "About us",
+      "contact": "Contact",
+      "careers": "Careers"
+    },
+    "services": {
+      "title": "Services",
+      "automation": "Process automation",
+      "conversational": "Conversational agents",
+      "integrations": "AI integrations"
+    },
+    "resources": {
+      "title": "Resources",
+      "blog": "Blog",
+      "caseStudies": "Case studies",
+      "faq": "FAQ"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "cookies": "Cookie Policy"
+    },
+    "copyright": "All rights reserved."
+  },
+
+  "cookies": {
+    "title": "This site uses cookies",
+    "description": "We use cookies to improve your experience. You can accept all cookies or customize your preferences.",
+    "accept": "Accept all",
+    "reject": "Reject",
+    "customize": "Customize"
+  },
+
+  "404": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "button": "Back to homepage"
+  },
+
+  "demo": {
+    "title": "Try an AI agent",
+    "subtitle": "Experience the power of automation in an interactive demo",
+    "placeholder": "Demo under construction - Coming soon"
+  },
+
+  "about": {
+    "title": "About Diginest AI",
+    "subtitle": "Transforming Romanian businesses with artificial intelligence",
+    "mission": {
+      "title": "Our mission",
+      "description": "We make artificial intelligence accessible and practical for Romanian businesses. We don't sell technology for technology's sake - we deliver concrete solutions that generate measurable results."
+    },
+    "values": {
+      "title": "Our values",
+      "items": {
+        "results": {
+          "title": "Results-oriented",
+          "description": "We measure success in ROI and real impact, not lines of code"
+        },
+        "transparency": {
+          "title": "Transparency",
+          "description": "We communicate clearly, honestly and without unnecessary jargon"
+        },
+        "partnership": {
+          "title": "Partnership",
+          "description": "We are long-term partners, not project vendors"
+        }
+      }
+    }
+  }
+}

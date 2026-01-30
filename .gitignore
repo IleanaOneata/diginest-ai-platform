@@ -1,0 +1,107 @@
+# =============================================================================
+# Git Ignore - Diginest AI Agents Platform
+# =============================================================================
+
+# =============================================================================
+# Frontend (Node.js / Astro)
+# =============================================================================
+
+# Dependencies
+frontend/node_modules/
+node_modules/
+
+# Build output
+frontend/dist/
+frontend/.astro/
+
+# Cache
+frontend/.cache/
+.npm
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+frontend/.env
+frontend/.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+# =============================================================================
+# Backend (Java / Spring Boot)
+# =============================================================================
+
+# Build output
+backend/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# Gradle (if ever used)
+.gradle/
+build/
+
+# IDE
+*.iml
+backend/.idea/
+backend/*.ipr
+backend/*.iws
+
+# Logs
+backend/logs/
+*.log
+
+# Environment
+backend/.env
+
+# H2 Database files
+*.db
+*.mv.db
+*.trace.db
+
+# =============================================================================
+# General
+# =============================================================================
+
+# Credentials and secrets
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Test coverage
+coverage/
+*.lcov
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Documentation build
+docs/_build/
+
+# Local configuration
+local.properties
+*.local.*

@@ -1,0 +1,213 @@
+---
+/**
+ * ContactForm Section Component
+ *
+ * Contact form with validation
+ * TODO: Connect to backend API when ready
+ */
+
+import { getTranslations, type Locale } from '@i18n/index';
+import Button from '@components/common/Button.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section id="contact-form" class="section bg-neutral-50">
+  <div class="container-md">
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <!-- Left: Info -->
+      <div>
+        <h2 class="text-heading-lg md:text-display text-neutral-900 mb-4">
+          {t.contact.title}
+        </h2>
+        <p class="text-body-lg text-neutral-600 mb-8">
+          {t.contact.subtitle}
+        </p>
+
+        <!-- Contact info -->
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 flex-shrink-0">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-neutral-900">Email</h3>
+              <a href="mailto:contact@diginest.ai" class="text-primary-600 hover:text-primary-700">
+                {t.contact.info.email}
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 flex-shrink-0">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-neutral-900">{locale === 'ro' ? 'Program' : 'Schedule'}</h3>
+              <p class="text-neutral-600">{t.contact.info.schedule}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="bg-white p-8 rounded-2xl shadow-soft">
+        <form
+          id="contact-form-element"
+          class="space-y-6"
+          data-contact-form
+        >
+          <!-- Name -->
+          <div>
+            <label for="name" class="label">{t.contact.form.name} *</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="input"
+              placeholder={locale === 'ro' ? 'Ion Popescu' : 'John Doe'}
+            />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="label">{t.contact.form.email} *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="input"
+              placeholder="email@companie.ro"
+            />
+          </div>
+
+          <!-- Company -->
+          <div>
+            <label for="company" class="label">{t.contact.form.company} *</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              required
+              class="input"
+              placeholder={locale === 'ro' ? 'Numele companiei' : 'Company name'}
+            />
+          </div>
+
+          <!-- Phone (optional) -->
+          <div>
+            <label for="phone" class="label">{t.contact.form.phone}</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="input"
+              placeholder="+40 7XX XXX XXX"
+            />
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="label">{t.contact.form.message} *</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="4"
+              class="input resize-none"
+              placeholder={locale === 'ro' ? 'Descrie-ne proiectul sau întrebarea ta...' : 'Describe your project or question...'}
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <Button type="submit" variant="primary" class="w-full justify-center">
+            <span class="submit-text">{t.contact.form.submit}</span>
+            <span class="submit-loading hidden">
+              <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </span>
+          </Button>
+
+          <!-- Status messages -->
+          <div class="form-message hidden" data-form-message>
+            <div class="success hidden p-4 bg-green-50 text-green-700 rounded-lg">
+              {t.contact.form.success}
+            </div>
+            <div class="error hidden p-4 bg-red-50 text-red-700 rounded-lg">
+              {t.contact.form.error}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Contact form handling
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('[data-contact-form]') as HTMLFormElement;
+    if (!form) return;
+
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const submitText = submitBtn?.querySelector('.submit-text') as HTMLElement;
+    const submitLoading = submitBtn?.querySelector('.submit-loading') as HTMLElement;
+    const messageContainer = form.querySelector('[data-form-message]') as HTMLElement;
+    const successMessage = messageContainer?.querySelector('.success') as HTMLElement;
+    const errorMessage = messageContainer?.querySelector('.error') as HTMLElement;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Show loading state
+      submitText?.classList.add('hidden');
+      submitLoading?.classList.remove('hidden');
+      submitBtn.disabled = true;
+
+      // Hide previous messages
+      messageContainer?.classList.add('hidden');
+      successMessage?.classList.add('hidden');
+      errorMessage?.classList.add('hidden');
+
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        // TODO: Replace with actual API endpoint when backend is ready
+        // For now, simulate a successful submission
+        console.log('Form data:', data);
+
+        // Simulate API call delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // Show success message
+        messageContainer?.classList.remove('hidden');
+        successMessage?.classList.remove('hidden');
+        form.reset();
+
+      } catch (error) {
+        console.error('Form submission error:', error);
+        messageContainer?.classList.remove('hidden');
+        errorMessage?.classList.remove('hidden');
+      } finally {
+        // Reset button state
+        submitText?.classList.remove('hidden');
+        submitLoading?.classList.add('hidden');
+        submitBtn.disabled = false;
+      }
+    });
+  });
+</script>

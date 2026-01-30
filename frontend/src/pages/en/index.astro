@@ -1,0 +1,61 @@
+---
+/**
+ * English Homepage
+ *
+ * Main landing page with all sections:
+ * - Hero
+ * - Services overview
+ * - Benefits
+ * - Process
+ * - FAQ
+ * - CTA
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/sections/Hero.astro';
+import Services from '@components/sections/Services.astro';
+import Benefits from '@components/sections/Benefits.astro';
+import Process from '@components/sections/Process.astro';
+import FAQ from '@components/sections/FAQ.astro';
+import CTA from '@components/sections/CTA.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'en';
+const t = getTranslations(locale);
+
+// Page metadata
+const title = `${t.site.name} - ${t.site.tagline}`;
+const description = t.site.description;
+
+// WebPage schema
+const pageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://diginest.ai/en/#webpage',
+  url: 'https://diginest.ai/en/',
+  name: title,
+  description: description,
+  inLanguage: 'en-US',
+  isPartOf: {
+    '@id': 'https://diginest.ai/#website',
+  },
+  about: {
+    '@id': 'https://diginest.ai/#organization',
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/en/"
+  schema={pageSchema}
+>
+  <Hero locale={locale} />
+  <Services locale={locale} />
+  <Benefits locale={locale} />
+  <Process locale={locale} />
+  <FAQ locale={locale} />
+  <CTA locale={locale} />
+</BaseLayout>

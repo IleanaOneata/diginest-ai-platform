@@ -1,0 +1,95 @@
+---
+/**
+ * Process Section Component
+ *
+ * Shows the working methodology in 4 steps
+ */
+
+import { getTranslations, type Locale } from '@i18n/index';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+const steps = [
+  {
+    number: '01',
+    title: t.process.steps.discovery.title,
+    description: t.process.steps.discovery.description,
+    icon: 'search',
+  },
+  {
+    number: '02',
+    title: t.process.steps.design.title,
+    description: t.process.steps.design.description,
+    icon: 'pencil',
+  },
+  {
+    number: '03',
+    title: t.process.steps.implement.title,
+    description: t.process.steps.implement.description,
+    icon: 'code',
+  },
+  {
+    number: '04',
+    title: t.process.steps.optimize.title,
+    description: t.process.steps.optimize.description,
+    icon: 'chart',
+  },
+];
+---
+
+<section id="how-it-works" class="section bg-neutral-50">
+  <div class="container-lg">
+    <!-- Section header -->
+    <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+      <h2 class="text-heading-lg md:text-display text-neutral-900 mb-4">
+        {t.process.title}
+      </h2>
+      <p class="text-body-lg text-neutral-600">
+        {t.process.subtitle}
+      </p>
+    </div>
+
+    <!-- Process steps -->
+    <div class="relative">
+      <!-- Connector line (desktop) -->
+      <div class="hidden lg:block absolute top-20 left-0 right-0 h-0.5 bg-neutral-200" aria-hidden="true">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-500" style="width: 100%"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+        {steps.map((step, index) => (
+          <div class="relative flex flex-col items-center text-center">
+            <!-- Step number circle -->
+            <div class="relative z-10 w-16 h-16 bg-white rounded-full border-2 border-primary-500 flex items-center justify-center mb-6 shadow-soft">
+              <span class="text-xl font-bold text-primary-600">{step.number}</span>
+            </div>
+
+            <!-- Content -->
+            <div class="flex-1">
+              <h3 class="text-heading-sm text-neutral-900 mb-2">
+                {step.title}
+              </h3>
+              <p class="text-neutral-600">
+                {step.description}
+              </p>
+            </div>
+
+            <!-- Arrow for mobile/tablet -->
+            {index < steps.length - 1 && (
+              <div class="lg:hidden my-4">
+                <svg class="w-6 h-6 text-neutral-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

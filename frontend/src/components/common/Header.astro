@@ -1,0 +1,227 @@
+---
+/**
+ * Header Component - Main navigation header
+ *
+ * Features:
+ * - Sticky header with blur effect on scroll
+ * - Responsive navigation with mobile menu
+ * - Language switcher
+ * - CTA button
+ */
+
+import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Button from './Button.astro';
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const t = getTranslations(locale);
+
+// Navigation items
+const navItems = [
+  {
+    label: t.nav.services,
+    href: buildLocalePath('/servicii/', locale),
+    hasDropdown: true,
+    items: [
+      { label: t.services.automation.title, href: buildLocalePath('/servicii/automatizare-procese/', locale) },
+      { label: t.services.conversational.title, href: buildLocalePath('/servicii/agenti-conversationali/', locale) },
+      { label: t.services.integrations.title, href: buildLocalePath('/servicii/integrari-ai/', locale) },
+    ],
+  },
+  { label: t.nav.about, href: buildLocalePath('/despre/', locale) },
+  { label: t.nav.blog, href: buildLocalePath('/blog/', locale) },
+  { label: t.nav.contact, href: buildLocalePath('/contact/', locale) },
+];
+
+// Adjust paths for English
+const navItemsAdjusted = locale === 'en' ? navItems.map(item => ({
+  ...item,
+  href: item.href.replace('/servicii/', '/services/')
+    .replace('/despre/', '/about/')
+    .replace('/automatizare-procese/', '/process-automation/')
+    .replace('/agenti-conversationali/', '/conversational-agents/')
+    .replace('/integrari-ai/', '/ai-integrations/'),
+  items: item.items?.map(subItem => ({
+    ...subItem,
+    href: subItem.href.replace('/servicii/', '/services/')
+      .replace('/automatizare-procese/', '/process-automation/')
+      .replace('/agenti-conversationali/', '/conversational-agents/')
+      .replace('/integrari-ai/', '/ai-integrations/'),
+  })),
+})) : navItems;
+
+const ctaHref = buildLocalePath('/contact/', locale);
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-neutral-200/50 transition-all duration-300"
+>
+  <div class="container-lg">
+    <nav class="flex items-center justify-between h-16 lg:h-20" aria-label="Main navigation">
+      <!-- Logo -->
+      <a
+        href={buildLocalePath('/', locale)}
+        class="flex items-center gap-2 text-xl font-bold text-neutral-900 hover:text-primary-600 transition-colors"
+        aria-label="Diginest AI - Home"
+      >
+        <!-- Logo SVG -->
+        <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#3b82f6" />
+              <stop offset="100%" style="stop-color:#06b6d4" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M16 2L4 9v14l12 7 12-7V9L16 2zm0 4l8 4.67v9.33L16 25l-8-5V10.67L16 6z"
+            fill="url(#logo-gradient)"
+          />
+          <circle cx="16" cy="16" r="4" fill="url(#logo-gradient)" />
+        </svg>
+        <span class="hidden sm:inline">Diginest <span class="text-primary-600">AI</span></span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-1">
+        {navItemsAdjusted.map((item) => (
+          item.hasDropdown ? (
+            <div class="relative group">
+              <button
+                class="flex items-center gap-1 px-4 py-2 text-neutral-600 hover:text-neutral-900 font-medium transition-colors"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                {item.label}
+                <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <!-- Dropdown -->
+              <div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div class="bg-white rounded-xl shadow-medium border border-neutral-200 py-2 min-w-[220px]">
+                  {item.items?.map((subItem) => (
+                    <a
+                      href={subItem.href}
+                      class="block px-4 py-2 text-neutral-600 hover:text-primary-600 hover:bg-neutral-50 transition-colors"
+                    >
+                      {subItem.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class:list={[
+                'px-4 py-2 font-medium transition-colors',
+                currentPath.startsWith(item.href)
+                  ? 'text-primary-600'
+                  : 'text-neutral-600 hover:text-neutral-900',
+              ]}
+            >
+              {item.label}
+            </a>
+          )
+        ))}
+      </div>
+
+      <!-- Right side: Language + CTA -->
+      <div class="flex items-center gap-4">
+        <LanguageSwitcher locale={locale} currentPath={currentPath} />
+
+        <Button
+          href={ctaHref}
+          variant="primary"
+          size="sm"
+          class="hidden sm:inline-flex"
+        >
+          {t.nav.cta}
+        </Button>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-button"
+          type="button"
+          class="lg:hidden p-2 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Toggle menu"
+        >
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div
+    id="mobile-menu"
+    class="hidden lg:hidden border-t border-neutral-200 bg-white"
+  >
+    <div class="container-lg py-4 space-y-1">
+      {navItemsAdjusted.map((item) => (
+        item.hasDropdown ? (
+          <div class="space-y-1">
+            <div class="px-4 py-2 font-medium text-neutral-900">
+              {item.label}
+            </div>
+            {item.items?.map((subItem) => (
+              <a
+                href={subItem.href}
+                class="block px-6 py-2 text-neutral-600 hover:text-primary-600 hover:bg-neutral-50 rounded-lg transition-colors"
+              >
+                {subItem.label}
+              </a>
+            ))}
+          </div>
+        ) : (
+          <a
+            href={item.href}
+            class="block px-4 py-2 font-medium text-neutral-600 hover:text-primary-600 hover:bg-neutral-50 rounded-lg transition-colors"
+          >
+            {item.label}
+          </a>
+        )
+      ))}
+
+      <div class="pt-4 px-4">
+        <Button href={ctaHref} variant="primary" class="w-full justify-center">
+          {t.nav.cta}
+        </Button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-16 lg:h-20"></div>
+
+<script>
+  // Header scroll effect
+  const header = document.getElementById('site-header');
+
+  if (header) {
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll > 100) {
+        header.classList.add('shadow-soft');
+      } else {
+        header.classList.remove('shadow-soft');
+      }
+
+      lastScroll = currentScroll;
+    });
+  }
+</script>

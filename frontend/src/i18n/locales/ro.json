@@ -1,0 +1,262 @@
+{
+  "site": {
+    "name": "Diginest AI",
+    "tagline": "Agenți AI pentru afacerea ta",
+    "description": "Automatizăm procesele afacerii tale cu agenți AI. Reduci costurile, crești productivitatea, scalezi fără să angajezi."
+  },
+
+  "nav": {
+    "services": "Servicii",
+    "solutions": "Soluții",
+    "about": "Despre",
+    "blog": "Blog",
+    "contact": "Contact",
+    "cta": "Programează Demo"
+  },
+
+  "services": {
+    "title": "Servicii",
+    "automation": {
+      "title": "Automatizare Procese",
+      "description": "Automatizăm procesele repetitive cu agenți AI inteligenți"
+    },
+    "conversational": {
+      "title": "Agenți Conversaționali",
+      "description": "Chatboți și asistenți virtuali pentru suport și vânzări"
+    },
+    "integrations": {
+      "title": "Integrări AI",
+      "description": "Conectăm AI-ul la sistemele tale existente"
+    }
+  },
+
+  "hero": {
+    "badge": "Soluții AI pentru business",
+    "title": "Automatizăm procesele afacerii tale cu Agenți AI",
+    "subtitle": "Reduci costurile cu până la 70%, crești productivitatea și scalezi fără să angajezi. Implementare în săptămâni, nu luni.",
+    "cta_primary": "Programează o consultanță gratuită",
+    "cta_secondary": "Vezi cum funcționează",
+    "trust": {
+      "companies": "companii ajutate",
+      "roi": "ROI mediu"
+    }
+  },
+
+  "problems": {
+    "title": "Provocări pe care le rezolvăm zilnic",
+    "subtitle": "Afacerile se confruntă cu aceleași probleme. AI-ul oferă soluții concrete.",
+    "items": {
+      "costs": {
+        "title": "Costuri ridicate cu HR",
+        "description": "Angajații sunt scumpi, greu de găsit și de păstrat"
+      },
+      "manual": {
+        "title": "Procese manuale repetitive",
+        "description": "Echipa pierde timp cu task-uri care pot fi automatizate"
+      },
+      "scale": {
+        "title": "Scalare dificilă",
+        "description": "Creșterea necesită mai mulți oameni și mai multe erori"
+      }
+    }
+  },
+
+  "benefits": {
+    "title": "De ce aleg companiile să lucreze cu noi",
+    "subtitle": "Rezultate măsurabile, nu promisiuni",
+    "items": {
+      "cost": {
+        "value": "70%",
+        "label": "Reducere costuri",
+        "description": "Automatizarea reduce costurile operaționale semnificativ"
+      },
+      "availability": {
+        "value": "24/7",
+        "label": "Disponibilitate",
+        "description": "Agenții AI lucrează non-stop, fără pauze sau concedii"
+      },
+      "speed": {
+        "value": "10x",
+        "label": "Mai rapid",
+        "description": "Procesează cereri de 10 ori mai rapid decât manual"
+      },
+      "roi": {
+        "value": "300%",
+        "label": "ROI mediu",
+        "description": "Investiția se recuperează în primele 3-6 luni"
+      }
+    }
+  },
+
+  "process": {
+    "title": "Cum lucrăm",
+    "subtitle": "Un proces clar, orientat pe rezultate",
+    "steps": {
+      "discovery": {
+        "title": "Analiză",
+        "description": "Înțelegem procesele tale și identificăm oportunitățile de automatizare"
+      },
+      "design": {
+        "title": "Design",
+        "description": "Proiectăm soluția AI optimă pentru nevoile tale specifice"
+      },
+      "implement": {
+        "title": "Implementare",
+        "description": "Dezvoltăm și integrăm agenții AI în sistemele existente"
+      },
+      "optimize": {
+        "title": "Optimizare",
+        "description": "Monitorizăm performanța și îmbunătățim continuu rezultatele"
+      }
+    }
+  },
+
+  "useCases": {
+    "title": "Soluții pentru industria ta",
+    "subtitle": "Adaptăm agenții AI la specificul fiecărei industrii",
+    "industries": {
+      "retail": {
+        "title": "Retail & E-commerce",
+        "description": "Suport clienți, procesare comenzi, recomandări personalizate"
+      },
+      "finance": {
+        "title": "Servicii Financiare",
+        "description": "Verificare documente, procesare cereri, compliance automat"
+      },
+      "manufacturing": {
+        "title": "Producție",
+        "description": "Monitorizare calitate, planificare producție, mentenanță predictivă"
+      },
+      "healthcare": {
+        "title": "Sănătate",
+        "description": "Programări, triaj pacienți, automatizare documentație"
+      }
+    }
+  },
+
+  "faq": {
+    "title": "Întrebări frecvente",
+    "subtitle": "Răspunsuri la cele mai comune întrebări despre agenții AI",
+    "items": [
+      {
+        "question": "Ce sunt agenții AI?",
+        "answer": "Agenții AI sunt programe software inteligente care pot îndeplini sarcini complexe autonom. Spre deosebire de automatizările simple bazate pe reguli, agenții AI pot lua decizii, învăța din experiență și se adapta la situații noi."
+      },
+      {
+        "question": "Cât durează implementarea unui agent AI?",
+        "answer": "Implementarea durează între 2-8 săptămâni în funcție de complexitatea procesului automatizat și integrările necesare. Începem cu un MVP funcțional și iterăm pe baza feedback-ului."
+      },
+      {
+        "question": "Agenții AI vor înlocui angajații?",
+        "answer": "Nu. Agenții AI preiau sarcinile repetitive și consumatoare de timp, permițând echipei tale să se concentreze pe activități strategice și creative care necesită judecată umană."
+      },
+      {
+        "question": "Ce sisteme pot fi integrate cu agenții AI?",
+        "answer": "Agenții noștri se integrează cu majoritatea sistemelor populare: CRM (Salesforce, HubSpot), ERP (SAP, Odoo), sisteme de ticketing, email, chat platforms și multe altele."
+      },
+      {
+        "question": "Care sunt costurile?",
+        "answer": "Costurile depind de complexitatea soluției. Oferim consultanță gratuită pentru a evalua nevoile și a propune o soluție cu buget transparent. ROI-ul tipic este de 3-6 luni."
+      }
+    ]
+  },
+
+  "cta": {
+    "title": "Pregătit să automatizezi?",
+    "subtitle": "Programează o consultanță gratuită de 30 minute. Fără obligații, doar claritate.",
+    "button": "Programează acum"
+  },
+
+  "contact": {
+    "title": "Contactează-ne",
+    "subtitle": "Hai să discutăm despre cum AI poate ajuta afacerea ta",
+    "form": {
+      "name": "Nume complet",
+      "email": "Email",
+      "company": "Companie",
+      "phone": "Telefon (opțional)",
+      "message": "Mesaj",
+      "submit": "Trimite mesajul",
+      "success": "Mesajul a fost trimis cu succes! Te vom contacta în curând.",
+      "error": "A apărut o eroare. Te rugăm să încerci din nou."
+    },
+    "info": {
+      "email": "contact@diginest.ai",
+      "schedule": "Luni - Vineri, 9:00 - 18:00"
+    }
+  },
+
+  "footer": {
+    "company": {
+      "title": "Companie",
+      "about": "Despre noi",
+      "contact": "Contact",
+      "careers": "Cariere"
+    },
+    "services": {
+      "title": "Servicii",
+      "automation": "Automatizare procese",
+      "conversational": "Agenți conversaționali",
+      "integrations": "Integrări AI"
+    },
+    "resources": {
+      "title": "Resurse",
+      "blog": "Blog",
+      "caseStudies": "Studii de caz",
+      "faq": "FAQ"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Politica de confidențialitate",
+      "terms": "Termeni și condiții",
+      "cookies": "Politica cookies"
+    },
+    "copyright": "Toate drepturile rezervate."
+  },
+
+  "cookies": {
+    "title": "Acest site folosește cookies",
+    "description": "Folosim cookies pentru a îmbunătăți experiența ta. Poți accepta toate cookies sau personaliza preferințele.",
+    "accept": "Accept toate",
+    "reject": "Refuz",
+    "customize": "Personalizează"
+  },
+
+  "404": {
+    "title": "Pagină negăsită",
+    "description": "Pagina pe care o cauți nu există sau a fost mutată.",
+    "button": "Înapoi la pagina principală"
+  },
+
+  "demo": {
+    "title": "Testează un agent AI",
+    "subtitle": "Experimentează puterea automatizării într-un demo interactiv",
+    "placeholder": "Demo în construcție - Disponibil în curând"
+  },
+
+  "about": {
+    "title": "Despre Diginest AI",
+    "subtitle": "Transformăm afacerile din România cu inteligență artificială",
+    "mission": {
+      "title": "Misiunea noastră",
+      "description": "Facem inteligența artificială accesibilă și practică pentru afacerile românești. Nu vindem tehnologie de dragul tehnologiei - oferim soluții concrete care generează rezultate măsurabile."
+    },
+    "values": {
+      "title": "Valorile noastre",
+      "items": {
+        "results": {
+          "title": "Orientare pe rezultate",
+          "description": "Măsurăm succesul în ROI și impact real, nu în linii de cod"
+        },
+        "transparency": {
+          "title": "Transparență",
+          "description": "Comunicăm clar, onest și fără jargon inutil"
+        },
+        "partnership": {
+          "title": "Parteneriat",
+          "description": "Suntem parteneri pe termen lung, nu furnizori de proiecte"
+        }
+      }
+    }
+  }
+}

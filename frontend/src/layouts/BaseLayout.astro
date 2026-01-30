@@ -1,0 +1,188 @@
+---
+/**
+ * BaseLayout - The main layout wrapper for all pages
+ *
+ * Includes:
+ * - HTML document structure
+ * - Meta tags and SEO
+ * - Schema.org structured data
+ * - Global styles and scripts
+ * - Analytics
+ */
+
+import { getTranslations, getHtmlLang, type Locale } from '@i18n/index';
+import Header from '@components/common/Header.astro';
+import Footer from '@components/common/Footer.astro';
+import CookieBanner from '@components/common/CookieBanner.astro';
+import '@styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+  canonicalUrl?: string;
+  ogImage?: string;
+  noIndex?: boolean;
+  schema?: object;
+}
+
+const {
+  title,
+  description,
+  locale,
+  canonicalUrl = Astro.url.href,
+  ogImage = '/images/og-image.png',
+  noIndex = false,
+  schema,
+} = Astro.props;
+
+const t = getTranslations(locale);
+const htmlLang = getHtmlLang(locale);
+const alternateLocale = locale === 'ro' ? 'en' : 'ro';
+const currentPath = Astro.url.pathname;
+const alternatePath = currentPath.replace(`/${locale}`, `/${alternateLocale}`);
+
+// Full URLs
+const siteUrl = 'https://diginest.ai';
+const fullCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : `${siteUrl}${canonicalUrl}`;
+const fullAlternateUrl = `${siteUrl}${alternatePath}`;
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+// Default Organization schema
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: 'Diginest AI',
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${siteUrl}/images/logo.png`,
+    width: 512,
+    height: 512,
+  },
+  description: t.site.description,
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'RO',
+    addressLocality: 'București',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: 'contact@diginest.ai',
+    availableLanguage: ['Romanian', 'English'],
+  },
+};
+
+// Merge with page-specific schema
+const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
+---
+
+<!doctype html>
+<html lang={htmlLang} class="scroll-smooth">
+  <head>
+    <!-- Basic Meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <!-- Robots -->
+    {noIndex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    )}
+
+    <!-- Canonical & Hreflang -->
+    <link rel="canonical" href={fullCanonicalUrl} />
+    <link rel="alternate" hreflang="ro" href={locale === 'ro' ? fullCanonicalUrl : fullAlternateUrl} />
+    <link rel="alternate" hreflang="en" href={locale === 'en' ? fullCanonicalUrl : fullAlternateUrl} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/en/`} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={fullCanonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={locale === 'ro' ? 'ro_RO' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'ro' ? 'en_US' : 'ro_RO'} />
+    <meta property="og:site_name" content="Diginest AI" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={fullCanonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#3b82f6" />
+
+    <!-- Preconnect to important third-party origins -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Schema.org JSON-LD -->
+    {pageSchema.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+
+    <!-- Analytics (Plausible - privacy-friendly) -->
+    <!-- TODO: Uncomment and update domain when Plausible is configured -->
+    <!-- <script defer data-domain="diginest.ai" src="https://plausible.io/js/script.js"></script> -->
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-white text-neutral-900 antialiased">
+    <!-- Skip to main content link for accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded-lg"
+    >
+      {locale === 'ro' ? 'Sari la conținut' : 'Skip to content'}
+    </a>
+
+    <!-- Header -->
+    <Header locale={locale} currentPath={currentPath} />
+
+    <!-- Main Content -->
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer locale={locale} />
+
+    <!-- Cookie Banner -->
+    <CookieBanner locale={locale} />
+
+    <!-- Scripts -->
+    <script>
+      // Mobile menu toggle
+      document.addEventListener('DOMContentLoaded', () => {
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuButton && mobileMenu) {
+          menuButton.addEventListener('click', () => {
+            const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+            mobileMenu.classList.toggle('hidden');
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

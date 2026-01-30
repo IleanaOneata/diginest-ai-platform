@@ -1,0 +1,124 @@
+---
+/**
+ * CookieBanner Component
+ *
+ * EU GDPR compliant cookie consent banner
+ */
+
+import { getTranslations, type Locale } from '@i18n/index';
+import Button from './Button.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-neutral-200 shadow-lg transform translate-y-full transition-transform duration-300"
+  role="dialog"
+  aria-labelledby="cookie-title"
+  aria-describedby="cookie-description"
+  data-cookie-banner
+>
+  <div class="container-lg">
+    <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+      <div class="flex-1">
+        <h2 id="cookie-title" class="text-lg font-semibold text-neutral-900 mb-1">
+          {t.cookies.title}
+        </h2>
+        <p id="cookie-description" class="text-sm text-neutral-600">
+          {t.cookies.description}
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <Button
+          variant="ghost"
+          size="sm"
+          class="cookie-reject"
+          data-action="reject"
+        >
+          {t.cookies.reject}
+        </Button>
+        <Button
+          variant="primary"
+          size="sm"
+          class="cookie-accept"
+          data-action="accept"
+        >
+          {t.cookies.accept}
+        </Button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Cookie consent management
+  const COOKIE_NAME = 'diginest_cookie_consent';
+  const COOKIE_DURATION = 365; // days
+
+  function getCookie(name: string): string | null {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop()?.split(';').shift() || null;
+    }
+    return null;
+  }
+
+  function setCookie(name: string, value: string, days: number): void {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = `expires=${date.toUTCString()}`;
+    document.cookie = `${name}=${value};${expires};path=/;SameSite=Lax`;
+  }
+
+  function showBanner(): void {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.classList.remove('translate-y-full');
+    }
+  }
+
+  function hideBanner(): void {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.classList.add('translate-y-full');
+    }
+  }
+
+  function handleConsent(accepted: boolean): void {
+    setCookie(COOKIE_NAME, accepted ? 'accepted' : 'rejected', COOKIE_DURATION);
+    hideBanner();
+
+    if (accepted) {
+      // Enable analytics if accepted
+      // TODO: Initialize analytics here when configured
+      console.log('Cookie consent: accepted - analytics enabled');
+    } else {
+      console.log('Cookie consent: rejected - analytics disabled');
+    }
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    const consent = getCookie(COOKIE_NAME);
+
+    if (!consent) {
+      // Show banner after a short delay for better UX
+      setTimeout(showBanner, 1000);
+    }
+
+    // Handle button clicks
+    document.querySelectorAll('[data-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const action = (button as HTMLElement).dataset.action;
+        handleConsent(action === 'accept');
+      });
+    });
+  });
+</script>

@@ -1,0 +1,92 @@
+---
+/**
+ * Hero Section Component
+ *
+ * The main hero section for the homepage with:
+ * - Headline and subheadline
+ * - Primary and secondary CTAs
+ * - Trust indicators
+ * - Decorative elements
+ */
+
+import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
+import Button from '@components/common/Button.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+---
+
+<section class="relative overflow-hidden bg-gradient-hero">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 bg-grid opacity-30"></div>
+  <div class="absolute top-20 right-0 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+  <div class="container-lg relative py-20 md:py-28 lg:py-36">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-6 animate-fade-in">
+        <span class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></span>
+        {t.hero.badge}
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 text-balance animate-slide-up">
+        {t.hero.title}
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="text-lg md:text-xl text-neutral-600 mb-10 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 100ms;">
+        {t.hero.subtitle}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 animate-slide-up" style="animation-delay: 200ms;">
+        <Button
+          href={buildLocalePath('/contact/', locale)}
+          variant="primary"
+          size="lg"
+        >
+          {t.hero.cta_primary}
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </Button>
+        <Button
+          href="#how-it-works"
+          variant="outline"
+          size="lg"
+        >
+          {t.hero.cta_secondary}
+        </Button>
+      </div>
+
+      <!-- Trust indicators -->
+      <div class="flex flex-wrap items-center justify-center gap-8 text-sm text-neutral-600 animate-fade-in" style="animation-delay: 400ms;">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span><strong class="text-neutral-900">50+</strong> {t.hero.trust.companies}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+          <span><strong class="text-neutral-900">300%</strong> {t.hero.trust.roi}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom wave decoration -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg class="w-full h-16 text-white" viewBox="0 0 1440 64" fill="currentColor" preserveAspectRatio="none">
+      <path d="M0,32L60,37.3C120,43,240,53,360,53.3C480,53,600,43,720,37.3C840,32,960,32,1080,37.3C1200,43,1320,53,1380,58.7L1440,64L1440,64L1380,64C1320,64,1200,64,1080,64C960,64,840,64,720,64C600,64,480,64,360,64C240,64,120,64,60,64L0,64Z"></path>
+    </svg>
+  </div>
+</section>

@@ -1,0 +1,318 @@
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+@layer base {
+  /* Font imports - Inter from Google Fonts */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff2') format('woff2');
+  }
+
+  /* HTML & Body */
+  html {
+    @apply scroll-smooth antialiased;
+  }
+
+  body {
+    @apply bg-white text-neutral-900 font-sans;
+  }
+
+  /* Typography defaults */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-neutral-900;
+  }
+
+  h1 {
+    @apply text-display-lg md:text-display;
+  }
+
+  h2 {
+    @apply text-heading-lg;
+  }
+
+  h3 {
+    @apply text-heading;
+  }
+
+  h4 {
+    @apply text-heading-sm;
+  }
+
+  p {
+    @apply text-body text-neutral-600;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  /* Focus states for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-primary-100 text-primary-900;
+  }
+}
+
+/* ==========================================================================
+   Component Styles
+   ========================================================================== */
+@layer components {
+  /* Container with max width */
+  .container-lg {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-md {
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-sm {
+    @apply max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           font-medium rounded-lg transition-all duration-200
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white
+           hover:bg-primary-700
+           focus-visible:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-neutral-100 text-neutral-900
+           hover:bg-neutral-200
+           focus-visible:ring-neutral-400;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary-600 text-primary-600
+           hover:bg-primary-50
+           focus-visible:ring-primary-500;
+  }
+
+  .btn-ghost {
+    @apply btn text-neutral-600
+           hover:bg-neutral-100 hover:text-neutral-900
+           focus-visible:ring-neutral-400;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-2xl border border-neutral-200 p-6
+           transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-soft hover:border-neutral-300;
+  }
+
+  .card-interactive {
+    @apply card hover:shadow-medium hover:border-primary-200 cursor-pointer;
+  }
+
+  /* Links */
+  .link {
+    @apply text-primary-600 hover:text-primary-700 underline underline-offset-4;
+  }
+
+  .link-subtle {
+    @apply text-neutral-600 hover:text-neutral-900;
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-lg {
+    @apply py-24 md:py-32;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-primary-100 text-primary-700;
+  }
+
+  .badge-accent {
+    @apply badge bg-accent-500/10 text-accent-600;
+  }
+
+  .badge-neutral {
+    @apply badge bg-neutral-100 text-neutral-700;
+  }
+
+  /* Form elements */
+  .input {
+    @apply w-full px-4 py-3 rounded-lg border border-neutral-300
+           bg-white text-neutral-900
+           placeholder:text-neutral-400
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           transition-all duration-200;
+  }
+
+  .input-error {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-500/20;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-neutral-700 mb-2;
+  }
+
+  .helper-text {
+    @apply text-sm text-neutral-500 mt-1;
+  }
+
+  .error-text {
+    @apply text-sm text-red-600 mt-1;
+  }
+
+  /* Prose for rich content (blog, etc.) */
+  .prose {
+    @apply text-neutral-700 leading-relaxed;
+  }
+
+  .prose h2 {
+    @apply text-heading-lg text-neutral-900 mt-12 mb-4;
+  }
+
+  .prose h3 {
+    @apply text-heading text-neutral-900 mt-8 mb-3;
+  }
+
+  .prose p {
+    @apply mb-4;
+  }
+
+  .prose ul, .prose ol {
+    @apply mb-4 ml-6;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose ul li {
+    @apply list-disc;
+  }
+
+  .prose ol li {
+    @apply list-decimal;
+  }
+
+  .prose a {
+    @apply link;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-primary-500 pl-4 italic text-neutral-600 my-4;
+  }
+
+  .prose code {
+    @apply bg-neutral-100 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose pre {
+    @apply bg-neutral-900 text-neutral-100 p-4 rounded-lg overflow-x-auto my-4;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+@layer utilities {
+  /* Text balance for headings */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-500;
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-hero {
+    background: linear-gradient(to bottom right, #eff6ff, #ffffff, #ecfeff);
+  }
+
+  .bg-gradient-subtle {
+    @apply bg-gradient-to-b from-neutral-50 to-white;
+  }
+
+  /* Grid pattern background */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, theme('colors.neutral.200') 1px, transparent 1px),
+      linear-gradient(to bottom, theme('colors.neutral.200') 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Dot pattern background */
+  .bg-dots {
+    background-image: radial-gradient(theme('colors.neutral.300') 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Smooth scroll on element */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

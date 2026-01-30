@@ -1,0 +1,45 @@
+---
+/**
+ * 404 Error Page
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/common/Button.astro';
+
+// Try to detect locale from URL
+const path = Astro.url.pathname;
+const locale = path.startsWith('/en') ? 'en' : 'ro';
+
+const content = {
+  ro: {
+    title: 'Pagină negăsită',
+    description: 'Pagina pe care o cauți nu există sau a fost mutată.',
+    button: 'Înapoi la pagina principală',
+  },
+  en: {
+    title: 'Page not found',
+    description: "The page you're looking for doesn't exist or has been moved.",
+    button: 'Back to homepage',
+  },
+};
+
+const t = content[locale];
+---
+
+<BaseLayout
+  title={`404 - ${t.title}`}
+  description={t.description}
+  locale={locale}
+  noIndex={true}
+>
+  <section class="section min-h-[60vh] flex items-center justify-center">
+    <div class="container-sm text-center">
+      <div class="text-8xl font-bold text-primary-500 mb-4">404</div>
+      <h1 class="text-heading-lg text-neutral-900 mb-4">{t.title}</h1>
+      <p class="text-body-lg text-neutral-600 mb-8">{t.description}</p>
+      <Button href={`/${locale}/`} variant="primary">
+        {t.button}
+      </Button>
+    </div>
+  </section>
+</BaseLayout>

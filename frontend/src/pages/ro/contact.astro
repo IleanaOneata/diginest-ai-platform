@@ -1,0 +1,25 @@
+---
+/**
+ * Romanian Contact Page
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ContactForm from '@components/sections/ContactForm.astro';
+import CTA from '@components/sections/CTA.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'ro';
+const t = getTranslations(locale);
+
+const title = `Contact - ${t.site.name}`;
+const description = 'Contactează-ne pentru o consultanță gratuită despre cum agenții AI pot transforma afacerea ta. Răspundem în maxim 24 de ore.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/ro/contact/"
+>
+  <ContactForm locale={locale} />
+</BaseLayout>
