@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://diginest.ai',
+  site: 'https://diginest-ai-platform.vercel.app',
 
   // Default language and i18n configuration
   i18n: {
