@@ -1,6 +1,7 @@
 ---
 /**
  * BaseLayout - The main layout wrapper for all pages
+ * GENERATIVA - AI Agents Platform
  *
  * Includes:
  * - HTML document structure
@@ -36,28 +37,34 @@ const {
   schema,
 } = Astro.props;
 
+// Force noindex on staging/preview deployments
+const isStaging = import.meta.env.PUBLIC_STAGING === 'true' ||
+                  Astro.url.hostname.includes('vercel.app');
+const shouldNoIndex = noIndex || isStaging;
+
 const t = getTranslations(locale);
 const htmlLang = getHtmlLang(locale);
 const alternateLocale = locale === 'ro' ? 'en' : 'ro';
 const currentPath = Astro.url.pathname;
 const alternatePath = currentPath.replace(`/${locale}`, `/${alternateLocale}`);
 
-// Full URLs
-const siteUrl = 'https://diginest.ai';
+// Full URLs - Updated for GENERATIVA
+// TODO: Update to generativa.ro when domain is purchased
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
 const fullCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : `${siteUrl}${canonicalUrl}`;
 const fullAlternateUrl = `${siteUrl}${alternatePath}`;
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 
-// Default Organization schema
+// Default Organization schema - GENERATIVA
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': `${siteUrl}/#organization`,
-  name: 'Diginest AI',
+  name: 'GENERATIVA',
   url: siteUrl,
   logo: {
     '@type': 'ImageObject',
-    url: `${siteUrl}/images/logo.png`,
+    url: `${siteUrl}/images/generativa-logo.png`,
     width: 512,
     height: 512,
   },
@@ -70,7 +77,7 @@ const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
-    email: 'contact@diginest.ai',
+    email: 'contact@generativa.ro',
     availableLanguage: ['Romanian', 'English'],
   },
 };
@@ -92,8 +99,8 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
     <meta name="title" content={title} />
     <meta name="description" content={description} />
 
-    <!-- Robots -->
-    {noIndex ? (
+    <!-- Robots - noindex on staging/preview deployments -->
+    {shouldNoIndex ? (
       <meta name="robots" content="noindex, nofollow" />
     ) : (
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -115,7 +122,7 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content={locale === 'ro' ? 'ro_RO' : 'en_US'} />
     <meta property="og:locale:alternate" content={locale === 'ro' ? 'en_US' : 'ro_RO'} />
-    <meta property="og:site_name" content="Diginest AI" />
+    <meta property="og:site_name" content="GENERATIVA" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -124,16 +131,20 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullOgImage} />
 
-    <!-- Favicon -->
+    <!-- Favicon - GENERATIVA brand colors -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#3b82f6" />
+    <meta name="theme-color" content="#22d3ee" />
 
     <!-- Preconnect to important third-party origins -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts - Space Grotesk for display text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
     <!-- Schema.org JSON-LD -->
     {pageSchema.map((schema) => (
@@ -142,14 +153,14 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
 
     <!-- Analytics (Plausible - privacy-friendly) -->
     <!-- TODO: Uncomment and update domain when Plausible is configured -->
-    <!-- <script defer data-domain="diginest.ai" src="https://plausible.io/js/script.js"></script> -->
+    <!-- <script defer data-domain="generativa.ro" src="https://plausible.io/js/script.js"></script> -->
   </head>
 
   <body class="min-h-screen flex flex-col bg-white text-neutral-900 antialiased">
     <!-- Skip to main content link for accessibility -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded-lg"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-400 focus:text-white focus:rounded-lg"
     >
       {locale === 'ro' ? 'Sari la conținut' : 'Skip to content'}
     </a>

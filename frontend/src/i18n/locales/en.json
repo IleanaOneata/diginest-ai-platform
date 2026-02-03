@@ -1,6 +1,6 @@
 {
   "site": {
-    "name": "Diginest AI",
+    "name": "GENERATIVA",
     "tagline": "AI Agents for your business",
     "description": "We automate your business processes with AI agents. Reduce costs, increase productivity, scale without hiring."
   },
@@ -181,7 +181,7 @@
       "error": "An error occurred. Please try again."
     },
     "info": {
-      "email": "contact@diginest.ai",
+      "email": "contact@generativa.ro",
       "schedule": "Monday - Friday, 9:00 AM - 6:00 PM"
     }
   },
@@ -235,7 +235,7 @@
   },
 
   "about": {
-    "title": "About Diginest AI",
+    "title": "About GENERATIVA",
     "subtitle": "Transforming Romanian businesses with artificial intelligence",
     "mission": {
       "title": "Our mission",

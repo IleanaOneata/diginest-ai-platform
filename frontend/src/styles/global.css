@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   Base Styles
+   Base Styles - GENERATIVA Brand
    ========================================================================== */
 @layer base {
   /* Font imports - Inter from Google Fonts */
@@ -54,19 +54,19 @@
     @apply transition-colors duration-200;
   }
 
-  /* Focus states for accessibility */
+  /* Focus states for accessibility - GENERATIVA cyan */
   :focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+    @apply outline-none ring-2 ring-primary-400 ring-offset-2;
   }
 
-  /* Selection */
+  /* Selection - GENERATIVA brand colors */
   ::selection {
     @apply bg-primary-100 text-primary-900;
   }
 }
 
 /* ==========================================================================
-   Component Styles
+   Component Styles - GENERATIVA Brand
    ========================================================================== */
 @layer components {
   /* Container with max width */
@@ -82,7 +82,7 @@
     @apply max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Buttons */
+  /* Buttons - Updated with GENERATIVA colors */
   .btn {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3
            font-medium rounded-lg transition-all duration-200
@@ -90,9 +90,16 @@
   }
 
   .btn-primary {
-    @apply btn bg-primary-600 text-white
-           hover:bg-primary-700
-           focus-visible:ring-primary-500;
+    @apply btn bg-primary-400 text-neutral-900
+           hover:bg-primary-500
+           focus-visible:ring-primary-400;
+  }
+
+  .btn-gradient {
+    @apply btn bg-gradient-to-r from-primary-400 to-accent-600 text-white
+           hover:from-primary-500 hover:to-accent-700
+           focus-visible:ring-accent-500
+           shadow-md hover:shadow-lg;
   }
 
   .btn-secondary {
@@ -102,9 +109,9 @@
   }
 
   .btn-outline {
-    @apply btn border-2 border-primary-600 text-primary-600
+    @apply btn border-2 border-primary-400 text-primary-500
            hover:bg-primary-50
-           focus-visible:ring-primary-500;
+           focus-visible:ring-primary-400;
   }
 
   .btn-ghost {
@@ -132,12 +139,12 @@
   }
 
   .card-interactive {
-    @apply card hover:shadow-medium hover:border-primary-200 cursor-pointer;
+    @apply card hover:shadow-medium hover:border-primary-300 cursor-pointer;
   }
 
-  /* Links */
+  /* Links - Updated with GENERATIVA colors */
   .link {
-    @apply text-primary-600 hover:text-primary-700 underline underline-offset-4;
+    @apply text-primary-500 hover:text-primary-600 underline underline-offset-4;
   }
 
   .link-subtle {
@@ -153,7 +160,7 @@
     @apply py-24 md:py-32;
   }
 
-  /* Badge */
+  /* Badge - Updated with GENERATIVA colors */
   .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
   }
@@ -163,19 +170,23 @@
   }
 
   .badge-accent {
-    @apply badge bg-accent-500/10 text-accent-600;
+    @apply badge bg-accent-100 text-accent-700;
+  }
+
+  .badge-gradient {
+    @apply badge bg-gradient-to-r from-primary-100 to-accent-100 text-accent-700;
   }
 
   .badge-neutral {
     @apply badge bg-neutral-100 text-neutral-700;
   }
 
-  /* Form elements */
+  /* Form elements - Updated with GENERATIVA colors */
   .input {
     @apply w-full px-4 py-3 rounded-lg border border-neutral-300
            bg-white text-neutral-900
            placeholder:text-neutral-400
-           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20
            transition-all duration-200;
   }
 
@@ -195,7 +206,7 @@
     @apply text-sm text-red-600 mt-1;
   }
 
-  /* Prose for rich content (blog, etc.) */
+  /* Prose for rich content (blog, etc.) - Updated with GENERATIVA colors */
   .prose {
     @apply text-neutral-700 leading-relaxed;
   }
@@ -233,7 +244,7 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 border-primary-500 pl-4 italic text-neutral-600 my-4;
+    @apply border-l-4 border-primary-400 pl-4 italic text-neutral-600 my-4;
   }
 
   .prose code {
@@ -250,7 +261,7 @@
 }
 
 /* ==========================================================================
-   Utility Classes
+   Utility Classes - GENERATIVA Brand
    ========================================================================== */
 @layer utilities {
   /* Text balance for headings */
@@ -258,18 +269,30 @@
     text-wrap: balance;
   }
 
-  /* Gradient text */
+  /* Gradient text - GENERATIVA cyan to purple */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-600;
   }
 
-  /* Gradient backgrounds */
+  /* Gradient backgrounds - GENERATIVA brand */
   .bg-gradient-hero {
-    background: linear-gradient(to bottom right, #eff6ff, #ffffff, #ecfeff);
+    background: linear-gradient(to bottom right, #ecfeff, #ffffff, #faf5ff);
+  }
+
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+  }
+
+  .bg-gradient-brand-reverse {
+    background: linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%);
   }
 
   .bg-gradient-subtle {
     @apply bg-gradient-to-b from-neutral-50 to-white;
+  }
+
+  .bg-gradient-dark {
+    background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
   }
 
   /* Grid pattern background */
@@ -314,5 +337,10 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* GENERATIVA brand highlight glow */
+  .glow-brand {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3), 0 0 40px rgba(139, 92, 246, 0.2);
   }
 }

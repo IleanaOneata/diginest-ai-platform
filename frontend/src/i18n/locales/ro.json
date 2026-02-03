@@ -1,6 +1,6 @@
 {
   "site": {
-    "name": "Diginest AI",
+    "name": "GENERATIVA",
     "tagline": "Agenți AI pentru afacerea ta",
     "description": "Automatizăm procesele afacerii tale cu agenți AI. Reduci costurile, crești productivitatea, scalezi fără să angajezi."
   },
@@ -181,7 +181,7 @@
       "error": "A apărut o eroare. Te rugăm să încerci din nou."
     },
     "info": {
-      "email": "contact@diginest.ai",
+      "email": "contact@generativa.ro",
       "schedule": "Luni - Vineri, 9:00 - 18:00"
     }
   },
@@ -235,7 +235,7 @@
   },
 
   "about": {
-    "title": "Despre Diginest AI",
+    "title": "Despre GENERATIVA",
     "subtitle": "Transformăm afacerile din România cu inteligență artificială",
     "mission": {
       "title": "Misiunea noastră",
