@@ -1,0 +1,159 @@
+---
+/**
+ * Interactive Hero Section - GENERATIVA
+ *
+ * Abordare "Demo-First": Vizitatorii văd AI-ul în acțiune în primele 5 secunde.
+ *
+ * Layout:
+ * - Stânga: Headline + subheadline + CTA
+ * - Dreapta: Chat Simulator interactiv
+ *
+ * Diferențiere vs competiție:
+ * - Agentic.ro: grafică abstractă cu orbite → noi: demo real
+ * - Inflate: video → noi: interactiv (mai engaging)
+ */
+
+import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
+import Button from '@components/common/Button.astro';
+import ChatSimulator from '@components/demo/ChatSimulator.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+
+// Texte specifice pentru Hero interactiv
+const heroTexts = {
+  ro: {
+    eyebrow: 'Vezi AI-ul în acțiune',
+    headline: 'Agenți AI care răspund clienților tăi',
+    headlineAccent: '24/7',
+    subheadline: 'În timp ce tu citești asta, demo-ul nostru arată cum un agent AI rezolvă o cerere de suport în 30 de secunde. Fără pauze, fără erori, fără ore suplimentare.',
+    cta_primary: 'Vreau și eu așa ceva',
+    cta_secondary: 'Cum funcționează?',
+    stats: [
+      { value: '0.8s', label: 'timp răspuns' },
+      { value: '24/7', label: 'disponibilitate' },
+      { value: '90%', label: 'întrebări rezolvate automat' },
+    ],
+  },
+  en: {
+    eyebrow: 'See AI in action',
+    headline: 'AI Agents that respond to your customers',
+    headlineAccent: '24/7',
+    subheadline: 'While you\'re reading this, our demo shows how an AI agent resolves a support request in 30 seconds. No breaks, no errors, no overtime.',
+    cta_primary: 'I want this too',
+    cta_secondary: 'How does it work?',
+    stats: [
+      { value: '0.8s', label: 'response time' },
+      { value: '24/7', label: 'availability' },
+      { value: '90%', label: 'queries auto-resolved' },
+    ],
+  },
+};
+
+const hero = heroTexts[locale] || heroTexts.ro;
+---
+
+<section class="relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary-50/30 min-h-[90vh] flex items-center">
+  <!-- Subtle background elements -->
+  <div class="absolute inset-0 bg-grid opacity-20"></div>
+  <div class="absolute top-20 right-1/4 w-72 h-72 bg-primary-400/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-20 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+  <div class="container-lg relative py-16 md:py-20 lg:py-24">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <!-- Left: Content -->
+      <div class="order-2 lg:order-1">
+        <!-- Eyebrow -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100/80 text-primary-700 rounded-full text-sm font-medium mb-6 animate-fade-in backdrop-blur-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+          </span>
+          {hero.eyebrow}
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 animate-slide-up leading-tight">
+          {hero.headline}
+          <span class="bg-gradient-to-r from-primary-400 to-accent-600 bg-clip-text text-transparent">
+            {' '}{hero.headlineAccent}
+          </span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="text-lg md:text-xl text-neutral-600 mb-8 leading-relaxed animate-slide-up max-w-xl" style="animation-delay: 100ms;">
+          {hero.subheadline}
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row items-start gap-4 mb-10 animate-slide-up" style="animation-delay: 200ms;">
+          <Button
+            href={buildLocalePath('/contact/', locale)}
+            variant="gradient"
+            size="lg"
+          >
+            {hero.cta_primary}
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Button>
+          <Button
+            href="#how-it-works"
+            variant="ghost"
+            size="lg"
+          >
+            {hero.cta_secondary}
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </Button>
+        </div>
+
+        <!-- Mini Stats -->
+        <div class="flex flex-wrap gap-6 animate-fade-in" style="animation-delay: 400ms;">
+          {hero.stats.map((stat) => (
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold bg-gradient-to-r from-primary-500 to-accent-600 bg-clip-text text-transparent">
+                {stat.value}
+              </span>
+              <span class="text-sm text-neutral-500">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Chat Simulator -->
+      <div class="order-1 lg:order-2 flex justify-center lg:justify-end animate-fade-in" style="animation-delay: 300ms;">
+        <div class="relative">
+          <!-- Decorative elements behind chat -->
+          <div class="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-primary-400/20 to-accent-500/20 rounded-2xl transform rotate-3"></div>
+          <div class="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-accent-400/20 to-primary-500/20 rounded-2xl transform -rotate-3"></div>
+
+          <!-- Chat Simulator -->
+          <div class="relative z-10">
+            <ChatSimulator locale={locale} autoPlay={true} />
+          </div>
+
+          <!-- Floating badges -->
+          <div class="absolute -top-2 -right-2 bg-white px-3 py-1.5 rounded-full shadow-lg text-xs font-medium text-primary-600 animate-bounce z-20">
+            Live Demo
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtle bottom fade -->
+  <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
+</section>
+
+<style>
+  .bg-grid {
+    background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+</style>

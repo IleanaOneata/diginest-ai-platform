@@ -1,7 +1,25 @@
 # GENERATIVA - Branding Notes
 
+> **Pentru AI în sesiuni noi**: Acest document conține toate deciziile de branding și design system. Citește-l pentru context vizual.
+
 ## Status: ✅ IMPLEMENTAT
 **Ultima actualizare**: Februarie 2026
+
+---
+
+## 0. Quick Reference (pentru AI)
+
+| Element | Valoare |
+|---------|---------|
+| **Nume** | GENERATIVA |
+| **Tagline RO** | "Agenți AI pentru afacerea ta" |
+| **Tagline EN** | "AI Agents for your business" |
+| **Primary color** | `#22d3ee` (cyan) |
+| **Accent color** | `#8b5cf6` (purple) |
+| **Gradient** | `linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%)` |
+| **Dark sections** | `linear-gradient(to-br, #0a1628, #0f172a, #1e1b4b)` - stil Stripe |
+| **Font** | Inter (sans-serif) |
+| **Logo** | `frontend/src/components/common/Logo.astro` |
 
 ---
 
@@ -183,9 +201,86 @@ frontend/
 
 ### ⏳ Pending
 - [ ] Achiziție domeniu generativa.ro
-- [ ] OG Image
-- [ ] Finisare design logo (feedback utilizator)
+- [ ] OG Image (1200x630)
+- [ ] Favicon PNG variants
 
 ---
 
-*Document actualizat: Februarie 2026*
+## 9. DESIGN PATTERNS ADĂUGATE (Februarie 2026)
+
+### Secțiuni Dark (stil Stripe)
+Folosite în: `IntegrationHub.astro`
+
+```css
+/* Background gradient - NU solid black */
+background: linear-gradient(to-br, #0a1628, #0f172a, #1e1b4b);
+
+/* Dot pattern overlay */
+background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+background-size: 24px 24px;
+
+/* Gradient orbs pentru depth */
+.orb {
+  background: rgba(34, 211, 238, 0.1); /* cyan */
+  /* sau */
+  background: rgba(139, 92, 246, 0.1); /* purple */
+  filter: blur(60px);
+}
+```
+
+### Glassmorphism Cards
+Folosite în: `IntegrationHub.astro`
+
+```css
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow: 0 10px 40px rgba(34, 211, 238, 0.1);
+}
+```
+
+### Linii Animate (SVG)
+Folosite în: `IntegrationHub.astro`
+
+```css
+/* SVG path */
+stroke: url(#gradient);
+stroke-dasharray: 8 4;
+
+@keyframes dash {
+  to { stroke-dashoffset: -24; }
+}
+
+.animated-line {
+  animation: dash 2s linear infinite;
+}
+```
+
+### Principii de Design (de la Stripe)
+
+1. **Restraint elegant** - spațiu > decorații
+2. **Gradient > Solid** - mereu adaugă subtilitate
+3. **Dark ≠ Black** - folosește `#0a1628`, nu `#000`
+4. **Animate subtil** - dashed lines, hover glow
+5. **Glassmorphism** - transparency pentru modernitate
+
+---
+
+## 10. COMPONENTE VIZUALE NOI
+
+| Component | Locație | Stil |
+|-----------|---------|------|
+| ChatSimulator | `components/demo/` | Light, cu gradient header |
+| BenefitsStrip | `components/sections/` | Light background |
+| UseCases | `components/sections/` | Light cu gradient subtle |
+| IntegrationHub | `components/sections/` | Dark stil Stripe |
+
+---
+
+*Document actualizat: Februarie 2026 - Adăugate pattern-uri design de la Stripe*

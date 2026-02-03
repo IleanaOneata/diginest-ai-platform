@@ -1,19 +1,27 @@
 ---
 /**
- * English Homepage
+ * English Homepage - GENERATIVA
  *
- * Main landing page with all sections:
- * - Hero
- * - Services overview
- * - Benefits
- * - Process
- * - FAQ
- * - CTA
+ * Strategy "Demo-First + Storytelling"
+ * NEW Flow (see docs/STRATEGY.md section 7.4):
+ *
+ * 1. HeroInteractive - Chat demo in the first 5 seconds
+ * 2. BenefitsStrip - Instant visual impact (6 benefits)
+ * 3. Services - What we offer
+ * 4. UseCases - "Sound familiar?" (self-identification)
+ * 5. IntegrationHub - "What happens behind the scenes" (visual)
+ * 6. Benefits - Concrete results
+ * 7. Process - How it works
+ * 8. FAQ - Frequently asked questions
+ * 9. CTA - Contact
  */
 
 import BaseLayout from '@layouts/BaseLayout.astro';
-import Hero from '@components/sections/Hero.astro';
+import HeroInteractive from '@components/sections/HeroInteractive.astro';
+import BenefitsStrip from '@components/sections/BenefitsStrip.astro';
 import Services from '@components/sections/Services.astro';
+import UseCases from '@components/sections/UseCases.astro';
+import IntegrationHub from '@components/sections/IntegrationHub.astro';
 import Benefits from '@components/sections/Benefits.astro';
 import Process from '@components/sections/Process.astro';
 import FAQ from '@components/sections/FAQ.astro';
@@ -52,8 +60,11 @@ const pageSchema = {
   canonicalUrl="/en/"
   schema={pageSchema}
 >
-  <Hero locale={locale} />
+  <HeroInteractive locale={locale} />
+  <BenefitsStrip locale={locale} />
   <Services locale={locale} />
+  <UseCases locale={locale} />
+  <IntegrationHub locale={locale} />
   <Benefits locale={locale} />
   <Process locale={locale} />
   <FAQ locale={locale} />

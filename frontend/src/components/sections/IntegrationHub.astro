@@ -1,0 +1,264 @@
+---
+/**
+ * Integration Hub - "What Happens Behind the Call" Section
+ *
+ * REDESIGN inspirat de Stripe:
+ * - Gradient dark subtil (nu solid black)
+ * - Layout asimetric pentru conexiuni (nu cerc perfect)
+ * - Linii punctate animate
+ * - Carduri cu glassmorphism subtil
+ * - Pattern dot discret pe fundal
+ * - Spațiere generoasă
+ *
+ * Vezi docs/STRATEGY.md secțiunea 7.3
+ */
+
+import { type Locale } from '@i18n/index';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+
+const content = {
+  ro: {
+    eyebrow: 'Totul conectat',
+    headline: 'Tot ce ai nevoie, într-un singur loc',
+    subheadline: 'Când un client te contactează, noi nu doar răspundem - coordonăm totul în spatele scenei, automat. Tu te ocupi de business, noi de restul.',
+    centerLabel: 'GENERATIVA',
+    centerSubtitle: 'Coordonare centrală',
+    connections: [
+      { id: 'phone', label: 'Apeluri telefonice', row: 1, col: 2 },
+      { id: 'whatsapp', label: 'WhatsApp', row: 1, col: 3 },
+      { id: 'email', label: 'Email', row: 2, col: 4 },
+      { id: 'crm', label: 'CRM', row: 3, col: 4 },
+      { id: 'calendar', label: 'Calendar', row: 4, col: 3 },
+      { id: 'team', label: 'Notificări echipă', row: 4, col: 2 },
+      { id: 'software', label: 'Software existent', row: 3, col: 1 },
+      { id: 'sms', label: 'SMS', row: 2, col: 1 },
+    ],
+    benefits: [
+      { title: 'Fără copy-paste', description: 'Informațiile circulă automat între sisteme' },
+      { title: 'Nimic uitat', description: 'Fără "am uitat să trec în calendar"' },
+      { title: 'Timp real', description: 'Totul se întâmplă instant, automat' },
+      { title: 'Liniște', description: 'Știi că nimic nu se pierde' },
+    ],
+  },
+  en: {
+    eyebrow: 'All connected',
+    headline: 'Everything you need, in one place',
+    subheadline: 'When a customer contacts you, we don\'t just answer - we coordinate everything behind the scenes, automatically. You focus on your business, we handle the rest.',
+    centerLabel: 'GENERATIVA',
+    centerSubtitle: 'Central coordination',
+    connections: [
+      { id: 'phone', label: 'Phone calls', row: 1, col: 2 },
+      { id: 'whatsapp', label: 'WhatsApp', row: 1, col: 3 },
+      { id: 'email', label: 'Email', row: 2, col: 4 },
+      { id: 'crm', label: 'CRM', row: 3, col: 4 },
+      { id: 'calendar', label: 'Calendar', row: 4, col: 3 },
+      { id: 'team', label: 'Team notifications', row: 4, col: 2 },
+      { id: 'software', label: 'Existing software', row: 3, col: 1 },
+      { id: 'sms', label: 'SMS', row: 2, col: 1 },
+    ],
+    benefits: [
+      { title: 'No copy-paste', description: 'Information flows automatically between systems' },
+      { title: 'Nothing forgotten', description: 'No more "I forgot to add it to the calendar"' },
+      { title: 'Real-time', description: 'Everything happens instantly, automatically' },
+      { title: 'Peace of mind', description: 'You know nothing gets lost' },
+    ],
+  },
+};
+
+const t = content[locale] || content.ro;
+
+const connectionIcons: Record<string, string> = {
+  phone: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />`,
+  whatsapp: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />`,
+  email: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`,
+  crm: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />`,
+  calendar: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />`,
+  team: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />`,
+  software: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`,
+  sms: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />`,
+};
+---
+
+<section class="relative py-20 md:py-32 overflow-hidden">
+  <!-- Gradient Background - Stripe style -->
+  <div class="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0f172a] to-[#1e1b4b]"></div>
+
+  <!-- Dot pattern overlay -->
+  <div class="absolute inset-0 opacity-30" style="background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+  <!-- Subtle gradient orbs -->
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+  <div class="container-lg relative z-10">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+      <span class="inline-block px-4 py-1.5 bg-primary-500/10 text-primary-300 rounded-full text-sm font-medium mb-4 border border-primary-500/20">
+        {t.eyebrow}
+      </span>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+        {t.headline}
+      </h2>
+      <p class="text-lg md:text-xl text-slate-400 leading-relaxed">
+        {t.subheadline}
+      </p>
+    </div>
+
+    <!-- Integration Grid - Asymmetric Stripe-style layout -->
+    <div class="relative max-w-4xl mx-auto mb-16">
+      <!-- SVG Connection Lines -->
+      <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.6" />
+            <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.4" />
+          </linearGradient>
+        </defs>
+
+        <!-- Animated dashed lines from center to each node -->
+        <!-- Top connections -->
+        <path d="M 400 250 Q 300 150 200 100" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" />
+        <path d="M 400 250 Q 500 150 600 100" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" style="animation-delay: 0.5s" />
+
+        <!-- Side connections -->
+        <path d="M 400 250 Q 550 250 700 180" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" style="animation-delay: 1s" />
+        <path d="M 400 250 Q 550 280 700 320" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" style="animation-delay: 1.5s" />
+
+        <!-- Bottom connections -->
+        <path d="M 400 250 Q 500 350 600 400" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" style="animation-delay: 2s" />
+        <path d="M 400 250 Q 300 350 200 400" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" style="animation-delay: 2.5s" />
+
+        <!-- Left connections -->
+        <path d="M 400 250 Q 250 280 100 320" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" style="animation-delay: 3s" />
+        <path d="M 400 250 Q 250 220 100 180" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" style="animation-delay: 3.5s" />
+      </svg>
+
+      <!-- Grid Container -->
+      <div class="grid grid-cols-5 gap-4 md:gap-6 min-h-[500px] items-center">
+
+        <!-- Row 1: Top nodes -->
+        <div class="col-start-1"></div>
+        <div class="col-start-2 justify-self-center self-start pt-4">
+          <div class="integration-card group">
+            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.phone} />
+            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[0].label}</span>
+          </div>
+        </div>
+        <div class="col-start-3"></div>
+        <div class="col-start-4 justify-self-center self-start pt-4">
+          <div class="integration-card group">
+            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.whatsapp} />
+            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[1].label}</span>
+          </div>
+        </div>
+        <div class="col-start-5"></div>
+
+        <!-- Row 2: Side nodes -->
+        <div class="col-start-1 justify-self-start self-center">
+          <div class="integration-card group">
+            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.sms} />
+            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[7].label}</span>
+          </div>
+        </div>
+        <div class="col-start-2"></div>
+
+        <!-- Center Hub -->
+        <div class="col-start-3 row-span-2 justify-self-center self-center">
+          <div class="relative">
+            <!-- Glow effect -->
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-400 to-accent-600 rounded-full blur-xl opacity-40 scale-110"></div>
+
+            <!-- Main hub -->
+            <div class="relative w-36 h-36 md:w-44 md:h-44 rounded-full bg-gradient-to-br from-primary-400 via-primary-500 to-accent-600 flex flex-col items-center justify-center shadow-2xl">
+              <span class="font-bold text-base md:text-lg text-white tracking-wide">{t.centerLabel}</span>
+              <span class="text-[10px] md:text-xs text-white/70 mt-1">{t.centerSubtitle}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-start-4"></div>
+        <div class="col-start-5 justify-self-end self-center">
+          <div class="integration-card group">
+            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.email} />
+            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[2].label}</span>
+          </div>
+        </div>
+
+        <!-- Row 3: More side nodes -->
+        <div class="col-start-1 justify-self-start self-center">
+          <div class="integration-card group">
+            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.software} />
+            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[6].label}</span>
+          </div>
+        </div>
+        <div class="col-start-2"></div>
+        <div class="col-start-4"></div>
+        <div class="col-start-5 justify-self-end self-center">
+          <div class="integration-card group">
+            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.crm} />
+            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[3].label}</span>
+          </div>
+        </div>
+
+        <!-- Row 4: Bottom nodes -->
+        <div class="col-start-1"></div>
+        <div class="col-start-2 justify-self-center self-end pb-4">
+          <div class="integration-card group">
+            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.team} />
+            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[5].label}</span>
+          </div>
+        </div>
+        <div class="col-start-3"></div>
+        <div class="col-start-4 justify-self-center self-end pb-4">
+          <div class="integration-card group">
+            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.calendar} />
+            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[4].label}</span>
+          </div>
+        </div>
+        <div class="col-start-5"></div>
+      </div>
+    </div>
+
+    <!-- Benefits row - Stripe style minimal -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+      {t.benefits.map((benefit, index) => (
+        <div class="text-center group" style={`animation-delay: ${index * 100}ms`}>
+          <div class="w-10 h-10 mx-auto mb-3 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary-500/30 group-hover:bg-primary-500/10 transition-all duration-300">
+            <svg class="w-5 h-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white mb-1">{benefit.title}</h3>
+          <p class="text-sm text-slate-500">{benefit.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .integration-card {
+    @apply flex flex-col items-center p-4 rounded-xl
+           bg-white/5 border border-white/10
+           backdrop-blur-sm
+           hover:bg-white/10 hover:border-primary-500/30
+           hover:shadow-lg hover:shadow-primary-500/10
+           transition-all duration-300 cursor-default;
+    min-width: 90px;
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+
+  .animate-dash {
+    animation: dash 2s linear infinite;
+  }
+</style>
