@@ -225,13 +225,18 @@ const t = content[locale];
   // 2. SETUP CANVAS
   // ==========================================
 
-  const canvas = document.getElementById('waveCanvas') as HTMLCanvasElement;
-  const container = document.getElementById('waveContainer') as HTMLElement;
+  const canvasEl = document.getElementById('waveCanvas') as HTMLCanvasElement | null;
+  const containerEl = document.getElementById('waveContainer') as HTMLElement | null;
 
-  if (!canvas || !container) return;
+  if (!canvasEl || !containerEl) return;
 
-  const ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  const ctxNullable = canvasEl.getContext('2d');
+  if (!ctxNullable) return;
+
+  // TypeScript now knows these are never null in this scope
+  const canvas: HTMLCanvasElement = canvasEl;
+  const container: HTMLElement = containerEl;
+  const ctx: CanvasRenderingContext2D = ctxNullable;
 
   // Device Pixel Ratio pentru afișare crisp pe ecrane Retina
   let dpr = window.devicePixelRatio || 1;
