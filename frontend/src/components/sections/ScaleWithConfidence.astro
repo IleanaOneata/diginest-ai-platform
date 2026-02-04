@@ -1,0 +1,519 @@
+---
+/**
+ * ScaleWithConfidence Section
+ *
+ * Animație de tip "flow/wave" care transmite:
+ * - Scalare și throughput mare
+ * - Flux stabil de date
+ * - Orchestrare inteligentă
+ * - Consistență sub sarcină mare
+ *
+ * Conceptul vizual:
+ * - Fluxuri de date pornesc din stânga (input mare)
+ * - Se comprimă într-un punct central (orchestrare/load balancing)
+ * - Se redistribuie spre dreapta (output stabil)
+ */
+
+interface Props {
+  locale: 'ro' | 'en';
+}
+
+const { locale } = Astro.props;
+
+const content = {
+  ro: {
+    headline: 'Scalează cu încredere.',
+    subheadline: 'Gestionează sute de conversații simultan cu aceeași calitate și viteză, chiar și în perioadele de vârf.',
+    stats: [
+      { value: '24/7', label: 'disponibilitate' },
+      { value: '<1s', label: 'timp de răspuns' },
+      { value: '100%', label: 'mesaje procesate' }
+    ]
+  },
+  en: {
+    headline: 'Scale with confidence.',
+    subheadline: 'Handle hundreds of conversations simultaneously with consistent quality and speed, even during peak periods.',
+    stats: [
+      { value: '24/7', label: 'availability' },
+      { value: '<1s', label: 'response time' },
+      { value: '100%', label: 'messages processed' }
+    ]
+  }
+};
+
+const t = content[locale];
+---
+
+<section class="scale-section relative overflow-hidden">
+  <!-- Background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-[#0f172a] to-[#0a1628]"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <!-- Text content -->
+    <div class="max-w-xl mb-8 lg:mb-12">
+      <h2 class="text-xl lg:text-2xl leading-relaxed">
+        <span class="text-white font-semibold">{t.headline}</span>
+        <span class="text-slate-400 font-normal"> {t.subheadline}</span>
+      </h2>
+    </div>
+
+    <!-- Wave animation container -->
+    <div class="wave-container relative" id="waveContainer">
+      <canvas id="waveCanvas"></canvas>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-container flex justify-between max-w-4xl mt-8 lg:mt-12">
+      {t.stats.map((stat, index) => (
+        <div class="stat-item" style={`--stat-delay: ${index * 0.15}s`}>
+          <div class="stat-value text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight">
+            {stat.value}
+          </div>
+          <div class="text-slate-500 text-sm mt-2">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .scale-section {
+    min-height: 520px;
+  }
+
+  .wave-container {
+    height: 280px;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  #waveCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .wave-container {
+      height: 320px;
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .wave-container {
+      height: 380px;
+      margin-left: -4rem;
+      margin-right: -4rem;
+    }
+  }
+
+  /* Stat values - gradient text */
+  .stat-value {
+    background: linear-gradient(135deg, #67e8f9 0%, #a78bfa 50%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Stat entrance animation */
+  .stat-item {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: statFadeIn 0.6s ease-out forwards;
+    animation-delay: calc(0.6s + var(--stat-delay, 0s));
+  }
+
+  @keyframes statFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stat-item {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+/**
+ * Wave Animation - Enterprise Flow Visualization
+ *
+ * Arhitectură:
+ * 1. Setup: Canvas cu suport High-DPI
+ * 2. Configurație: Parametri ușor de ajustat
+ * 3. Geometrie: Calcul poziții pentru fiecare linie
+ * 4. Render: Desenare curbe Bezier cu gradient
+ * 5. Animație: Loop controlat cu IntersectionObserver
+ */
+
+(function() {
+  'use strict';
+
+  // ==========================================
+  // 1. CONFIGURAȚIE - Parametri ajustabili
+  // ==========================================
+
+  // Detectare mobile/low-power device
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const CONFIG = {
+    // Număr de linii - mai puține pe mobile pentru performanță
+    lineCount: isMobile ? 35 : 50,
+
+    // Viteza animației (mai mic = mai lent, enterprise-safe)
+    animationSpeed: 0.008,
+
+    // Spread-ul liniilor (distanța verticală)
+    spreadStart: 70,      // Deschidere la start (stânga)
+    spreadTwist: 8,       // Compresie la twist (centru)
+    spreadEnd: 90,        // Deschidere la end (dreapta)
+
+    // Poziții orizontale (procent din width)
+    startX: 0.03,         // Unde încep liniile
+    twistX: 0.50,         // Unde e punctul de twist
+    endX: 0.97,           // Unde se termină liniile
+
+    // Curba convexă - cât de mult "ies" liniile în exterior
+    bulgeFactor: 60,
+
+    // Amplitudinea undelor în zona de mijloc
+    waveAmplitude: 25,
+    waveFrequency: 0.8,
+
+    // Offset vertical pentru efect diagonal
+    verticalOffset: {
+      start: 15,          // Offset la start (pozitiv = mai jos)
+      end: -20            // Offset la end (negativ = mai sus)
+    },
+
+    // Grosimea liniilor
+    lineWidth: {
+      min: 1.1,
+      max: 1.8
+    },
+
+    // Opacitate
+    opacity: {
+      min: 0.12,
+      max: 0.95
+    }
+  };
+
+  // Paletă de culori - gradient orizontal
+  const COLOR_STOPS = [
+    { pos: 0.00, r: 249, g: 115, b: 22 },   // Orange
+    { pos: 0.15, r: 251, g: 146, b: 60 },   // Orange light
+    { pos: 0.30, r: 251, g: 113, b: 133 },  // Rose
+    { pos: 0.45, r: 244, g: 114, b: 182 },  // Pink
+    { pos: 0.55, r: 232, g: 121, b: 249 },  // Fuchsia
+    { pos: 0.70, r: 192, g: 132, b: 252 },  // Purple
+    { pos: 0.85, r: 129, g: 140, b: 248 },  // Indigo
+    { pos: 1.00, r: 96, g: 165, b: 250 }    // Blue
+  ];
+
+  // ==========================================
+  // 2. SETUP CANVAS
+  // ==========================================
+
+  const canvas = document.getElementById('waveCanvas') as HTMLCanvasElement;
+  const container = document.getElementById('waveContainer') as HTMLElement;
+
+  if (!canvas || !container) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  // Device Pixel Ratio pentru afișare crisp pe ecrane Retina
+  let dpr = window.devicePixelRatio || 1;
+  let width = 0;
+  let height = 0;
+
+  /**
+   * Redimensionare canvas cu suport High-DPI
+   */
+  function resizeCanvas(): void {
+    const rect = container.getBoundingClientRect();
+    dpr = window.devicePixelRatio || 1;
+
+    // Setează dimensiunile interne (pixeli reali)
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    // Setează dimensiunile CSS (display)
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+
+    // Scalează contextul pentru High-DPI
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Cache dimensiuni pentru folosire în draw
+    width = rect.width;
+    height = rect.height;
+  }
+
+  // ==========================================
+  // 3. FUNCȚII UTILITAR
+  // ==========================================
+
+  /**
+   * Interpolare culoare pe gradient
+   */
+  function getColorAtPosition(t: number): string {
+    // Clamp între 0 și 1
+    t = Math.max(0, Math.min(1, t));
+
+    // Găsește cele două color stops între care suntem
+    let c1 = COLOR_STOPS[0];
+    let c2 = COLOR_STOPS[1];
+
+    for (let i = 0; i < COLOR_STOPS.length - 1; i++) {
+      if (t >= COLOR_STOPS[i].pos && t <= COLOR_STOPS[i + 1].pos) {
+        c1 = COLOR_STOPS[i];
+        c2 = COLOR_STOPS[i + 1];
+        break;
+      }
+    }
+
+    // Interpolare liniară
+    const localT = (t - c1.pos) / (c2.pos - c1.pos || 1);
+    const r = Math.round(c1.r + (c2.r - c1.r) * localT);
+    const g = Math.round(c1.g + (c2.g - c1.g) * localT);
+    const b = Math.round(c1.b + (c2.b - c1.b) * localT);
+
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  /**
+   * Calculează variația organică pentru fiecare linie
+   * Evită simetria perfectă, adaugă naturalețe
+   */
+  function getLineVariation(index: number): number {
+    return Math.sin(index * 0.7) * 0.12 + Math.cos(index * 1.1) * 0.08;
+  }
+
+  // ==========================================
+  // 4. ANIMAȚIE
+  // ==========================================
+
+  let time = 0;
+  let animationId: number | null = null;
+  let isRunning = false;
+
+  /**
+   * Funcția principală de desenare
+   */
+  function draw(): void {
+    if (!ctx || width === 0) return;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+
+    const centerY = height * 0.5;
+    const { lineCount, animationSpeed } = CONFIG;
+
+    // Desenează fiecare linie
+    for (let i = 0; i < lineCount; i++) {
+      drawLine(i, lineCount, centerY);
+    }
+
+    // Incrementează timpul pentru animație
+    time += animationSpeed;
+
+    // Continuă loop-ul doar dacă e activ
+    if (isRunning) {
+      animationId = requestAnimationFrame(draw);
+    }
+  }
+
+  /**
+   * Desenează o singură linie
+   */
+  function drawLine(index: number, total: number, centerY: number): void {
+    // Poziție normalizată: -1 (sus) la +1 (jos)
+    const normalized = (index / (total - 1)) * 2 - 1;
+    const distFromCenter = Math.abs(normalized);
+
+    // Variație organică per linie
+    const variation = getLineVariation(index);
+
+    // Fază pentru efectul de undă (fiecare linie are fază diferită)
+    const linePhase = index * 0.15;
+
+    // === CALCULUL UNDEI ÎN ZONA DE MIJLOC ===
+    // Unda principală - afectează zona de twist
+    const waveCenter = Math.sin(time * CONFIG.waveFrequency + linePhase) * CONFIG.waveAmplitude;
+    // Undă secundară pentru variație
+    const waveSecondary = Math.sin(time * 0.6 + linePhase * 0.8) * (CONFIG.waveAmplitude * 0.4);
+
+    // === SPREAD-URI cu variație ===
+    const spreadStart = CONFIG.spreadStart + variation * 10;
+    const spreadTwist = CONFIG.spreadTwist + variation * 3 + Math.abs(waveCenter) * 0.15;
+    const spreadEnd = CONFIG.spreadEnd + variation * 12;
+
+    // === POZIȚII CHEIE ===
+
+    // START (stânga)
+    const startX = width * CONFIG.startX;
+    const startY = centerY + normalized * spreadStart + CONFIG.verticalOffset.start;
+
+    // TWIST (centru) - aici se aplică efectul de undă
+    const twistX = width * CONFIG.twistX;
+    const twistY = centerY + normalized * spreadTwist + waveCenter + waveSecondary * (1 - distFromCenter);
+
+    // END (dreapta)
+    const endX = width * CONFIG.endX;
+    const endY = centerY - normalized * spreadEnd + CONFIG.verticalOffset.end;
+
+    // === CONTROL POINTS PENTRU CURBE CONVEXE ===
+    // Direcția bulgului: liniile de sus (normalized < 0) fac arc în sus
+    // liniile de jos (normalized > 0) fac arc în jos
+    const bulgeDir = normalized;
+    const bulge = CONFIG.bulgeFactor + distFromCenter * 20;
+
+    // Efectul de undă afectează și bulge-ul
+    const waveBulgeEffect = waveCenter * 0.3;
+
+    // Control points pentru prima curbă (start -> twist)
+    const cp1x = startX + width * 0.20;
+    const cp1y = startY + bulgeDir * (bulge + waveBulgeEffect);
+
+    const cp2x = twistX - width * 0.18;
+    const cp2y = twistY + bulgeDir * (bulge * 0.6 + waveBulgeEffect);
+
+    // Control points pentru a doua curbă (twist -> end)
+    // După twist, direcția se inversează
+    const cp3x = twistX + width * 0.18;
+    const cp3y = twistY - bulgeDir * (bulge * 0.6 + waveBulgeEffect);
+
+    const cp4x = endX - width * 0.20;
+    const cp4y = endY - bulgeDir * (bulge + waveBulgeEffect);
+
+    // === GRADIENT ===
+    const gradient = ctx.createLinearGradient(startX, 0, endX, 0);
+
+    // Fade in la start
+    gradient.addColorStop(0, 'rgba(249, 115, 22, 0)');
+    gradient.addColorStop(0.05, getColorAtPosition(0.05));
+
+    // Culori principale
+    gradient.addColorStop(0.20, getColorAtPosition(0.20));
+    gradient.addColorStop(0.40, getColorAtPosition(0.40));
+    gradient.addColorStop(0.50, getColorAtPosition(0.50));
+    gradient.addColorStop(0.60, getColorAtPosition(0.60));
+    gradient.addColorStop(0.80, getColorAtPosition(0.80));
+
+    // Fade out la end
+    gradient.addColorStop(0.95, getColorAtPosition(0.95));
+    gradient.addColorStop(1, 'rgba(96, 165, 250, 0)');
+
+    // === DESENARE ===
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+
+    // Prima curbă: Start -> Twist
+    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, twistX, twistY);
+
+    // A doua curbă: Twist -> End
+    ctx.bezierCurveTo(cp3x, cp3y, cp4x, cp4y, endX, endY);
+
+    // Stil
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = CONFIG.lineWidth.min + (1 - distFromCenter) * (CONFIG.lineWidth.max - CONFIG.lineWidth.min);
+    ctx.globalAlpha = CONFIG.opacity.min + (1 - distFromCenter * distFromCenter) * (CONFIG.opacity.max - CONFIG.opacity.min);
+    ctx.lineCap = 'round';
+
+    ctx.stroke();
+
+    // Reset alpha
+    ctx.globalAlpha = 1;
+  }
+
+  // ==========================================
+  // 5. CONTROL ANIMAȚIE CU INTERSECTION OBSERVER
+  // ==========================================
+
+  /**
+   * Pornește animația
+   */
+  function startAnimation(): void {
+    if (isRunning) return; // Previne porniri multiple
+
+    isRunning = true;
+    animationId = requestAnimationFrame(draw);
+  }
+
+  /**
+   * Oprește animația
+   */
+  function stopAnimation(): void {
+    isRunning = false;
+
+    if (animationId !== null) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+  }
+
+  // Intersection Observer - pornește/oprește animația bazat pe vizibilitate
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '50px'
+    }
+  );
+
+  // ==========================================
+  // 6. INIȚIALIZARE
+  // ==========================================
+
+  // Dacă utilizatorul preferă reduced motion, desenăm o singură dată static
+  if (prefersReducedMotion) {
+    resizeCanvas();
+    time = 0.5; // O poziție fixă frumoasă
+    draw();
+    return; // Nu pornim animația
+  }
+
+  // Setup inițial
+  resizeCanvas();
+
+  // Throttle pentru resize (evită prea multe recalculări)
+  let resizeTimeout: number | null = null;
+  window.addEventListener('resize', () => {
+    if (resizeTimeout) clearTimeout(resizeTimeout);
+    resizeTimeout = window.setTimeout(() => {
+      resizeCanvas();
+      if (isRunning) draw();
+    }, 100);
+  });
+
+  // Începe observarea
+  observer.observe(container);
+
+  // Cleanup la navigare (pentru SPA)
+  document.addEventListener('astro:before-preparation', () => {
+    stopAnimation();
+    observer.disconnect();
+  });
+
+})();
+</script>

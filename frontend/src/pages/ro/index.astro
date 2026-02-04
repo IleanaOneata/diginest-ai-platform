@@ -10,10 +10,11 @@
  * 3. Services - Ce oferim
  * 4. UseCases - "Ți se pare familiar?" (auto-identificare)
  * 5. IntegrationHub - "Ce se întâmplă în spate" (vizual)
- * 6. Benefits - Rezultate concrete
- * 7. Process - Cum funcționează
- * 8. FAQ - Întrebări frecvente
- * 9. CTA - Contact
+ * 6. ScaleWithConfidence - Statistici cu animație wave (stil Stripe)
+ * 7. Benefits - Rezultate concrete
+ * 8. Process - Cum funcționează
+ * 9. FAQ - Întrebări frecvente
+ * 10. CTA - Contact
  */
 
 import BaseLayout from '@layouts/BaseLayout.astro';
@@ -22,6 +23,7 @@ import BenefitsStrip from '@components/sections/BenefitsStrip.astro';
 import Services from '@components/sections/Services.astro';
 import UseCases from '@components/sections/UseCases.astro';
 import IntegrationHub from '@components/sections/IntegrationHub.astro';
+import ScaleWithConfidence from '@components/sections/ScaleWithConfidence.astro';
 import Benefits from '@components/sections/Benefits.astro';
 import Process from '@components/sections/Process.astro';
 import FAQ from '@components/sections/FAQ.astro';
@@ -65,6 +67,7 @@ const pageSchema = {
   <Services locale={locale} />
   <UseCases locale={locale} />
   <IntegrationHub locale={locale} />
+  <ScaleWithConfidence locale={locale} />
   <Benefits locale={locale} />
   <Process locale={locale} />
   <FAQ locale={locale} />
