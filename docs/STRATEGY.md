@@ -538,6 +538,7 @@ animation: dash 2s linear infinite;
 | BenefitsStrip | `components/sections/BenefitsStrip.astro` | ✅ | 6 beneficii vizuale |
 | UseCases | `components/sections/UseCases.astro` | ✅ | Auto-identificare industrii |
 | IntegrationHub | `components/sections/IntegrationHub.astro` | ✅ | Hub conexiuni (stil Stripe) |
+| ScaleWithConfidence | `components/sections/ScaleWithConfidence.astro` | ✅ | Animație wave Canvas (scalare) |
 
 ### Flow Pagină Implementat
 
@@ -545,15 +546,16 @@ animation: dash 2s linear infinite;
 frontend/src/pages/ro/index.astro
 frontend/src/pages/en/index.astro
 
-1. <HeroInteractive />   ✅
-2. <BenefitsStrip />     ✅
-3. <Services />          (existent)
-4. <UseCases />          ✅
-5. <IntegrationHub />    ✅
-6. <Benefits />          (existent)
-7. <Process />           (existent)
-8. <FAQ />               (existent)
-9. <CTA />               (existent)
+1. <HeroInteractive />      ✅
+2. <BenefitsStrip />        ✅
+3. <Services />             (existent)
+4. <UseCases />             ✅
+5. <IntegrationHub />       ✅
+6. <ScaleWithConfidence />  ✅ (NOU)
+7. <Benefits />             (existent)
+8. <Process />              (existent)
+9. <FAQ />                  (existent)
+10. <CTA />                 (existent)
 ```
 
 ### Stiluri Cheie Adăugate
@@ -607,6 +609,43 @@ animation: dash 2s linear infinite;
 - **Eyebrow**: "Totul conectat"
 - **Headline**: "Tot ce ai nevoie, într-un singur loc"
 - **Subheadline**: "Când un client te contactează, noi nu doar răspundem - coordonăm totul în spatele scenei, automat. Tu te ocupi de business, noi de restul."
+
+### ScaleWithConfidence (RO)
+- **Headline**: "Scalează cu încredere."
+- **Subheadline**: "Gestionează sute de conversații simultan cu aceeași calitate și viteză, chiar și în perioadele de vârf."
+- **Stats**: 24/7 disponibilitate | <1s timp de răspuns | 100% mesaje procesate
+
+### ScaleWithConfidence (EN)
+- **Headline**: "Scale with confidence."
+- **Subheadline**: "Handle hundreds of conversations simultaneously with consistent quality and speed, even during peak periods."
+- **Stats**: 24/7 availability | <1s response time | 100% messages processed
+
+---
+
+## 10.1 ScaleWithConfidence - Specificații Animație
+
+> **Notă**: Detalii complete în `CLAUDE.md` secțiunea dedicată.
+
+### Concept
+Animație de tip "flow/wave" care transmite vizual:
+- Scalare și throughput mare
+- Flux stabil de date
+- Orchestrare inteligentă
+- Consistență sub sarcină mare
+
+### Descriere Vizuală
+- Fluxuri de date pornesc din stânga (input mare)
+- Se comprimă într-un punct central (orchestrare/load balancing)
+- Se redistribuie spre dreapta (output stabil)
+
+### Tehnologie
+- HTML Canvas 2D (performant pe toate dispozitivele)
+- IntersectionObserver pentru control animație
+- Suport High-DPI (devicePixelRatio)
+- Respect `prefers-reduced-motion`
+
+### Feeling Final
+**Nu "wow effect", ci "this company knows what it's doing".**
 
 ---
 

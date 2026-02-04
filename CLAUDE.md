@@ -23,14 +23,16 @@
 8. ✅ **BenefitsStrip** - 6 beneficii vizuale sub Hero
 9. ✅ **UseCases** - Secțiune auto-identificare "Ți se pare familiar?"
 10. ✅ **IntegrationHub** - Vizualizare conexiuni stil Stripe (redesign complet)
+11. ✅ **ScaleWithConfidence** - Animație wave Canvas pentru scalare (vezi secțiunea dedicată)
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
 - [ ] Test complet pe staging
 - [ ] Mobile responsive fine-tuning
+- [ ] Optimizare animații pentru toate dispozitivele
 
 ### Următorii pași:
-1. [ ] Push și verificare pe staging URL
+1. [ ] Verificare staging URL după deploy
 2. [ ] Achiziție domeniu generativa.ro
 3. [ ] Merge în `main` când e aprobat
 
@@ -185,6 +187,7 @@ background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
 | **BenefitsStrip** | `components/sections/BenefitsStrip.astro` | 6 beneficii în strip vizual |
 | **UseCases** | `components/sections/UseCases.astro` | Auto-identificare pe industrii |
 | **IntegrationHub** | `components/sections/IntegrationHub.astro` | Vizualizare conexiuni (stil Stripe) |
+| **ScaleWithConfidence** | `components/sections/ScaleWithConfidence.astro` | Animație wave Canvas (scalare, throughput) |
 
 ### Flow Homepage (RO & EN)
 
@@ -193,15 +196,16 @@ frontend/src/pages/ro/index.astro
 frontend/src/pages/en/index.astro
 
 Secțiuni în ordine:
-1. <HeroInteractive />   - Demo chat + headline + CTA
-2. <BenefitsStrip />     - 6 beneficii vizuale
-3. <Services />          - Ce oferim (3 servicii)
-4. <UseCases />          - 6 industrii cu problemă→soluție
-5. <IntegrationHub />    - Hub central + 8 conexiuni
-6. <Benefits />          - Rezultate cu numere
-7. <Process />           - 4 pași cum funcționăm
-8. <FAQ />               - Întrebări frecvente
-9. <CTA />               - Contact final
+1. <HeroInteractive />      - Demo chat + headline + CTA
+2. <BenefitsStrip />        - 6 beneficii vizuale
+3. <Services />             - Ce oferim (3 servicii)
+4. <UseCases />             - 6 industrii cu problemă→soluție
+5. <IntegrationHub />       - Hub central + 8 conexiuni
+6. <ScaleWithConfidence />  - Animație wave + statistici scalare
+7. <Benefits />             - Rezultate cu numere
+8. <Process />              - 4 pași cum funcționăm
+9. <FAQ />                  - Întrebări frecvente
+10. <CTA />                 - Contact final
 ```
 
 ### Conținut Cheie per Secțiune
@@ -400,6 +404,182 @@ git push origin main
 
 ---
 
+## 🎬 SCALEWITHCONFIDENCE - ANIMAȚIE WAVE (DETALII TEHNICE)
+
+> **Pentru AI**: Această secțiune conține specificațiile complete pentru animația wave. Citește-o înainte de orice modificare la ScaleWithConfidence.astro.
+
+### Rolul AI pentru Animații
+
+Când lucrezi la animații canvas/motion design, acționează ca:
+- **Senior Frontend Engineer** + **Motion Designer**
+- Cu experiență în animații canvas/WebGL
+- Stil de referință: **Stripe / Linear / ElevenLabs**
+
+### Conceptul Animației
+
+Animația reprezintă **fluxuri de date** care:
+1. **Pornesc din stânga** (input mare, volum)
+2. **Se comprimă într-un punct central** (orchestrare / load balancing)
+3. **Se redistribuie spre dreapta** (output stabil, controlat)
+
+**CE TRANSMITE VIZUAL:**
+- Scalare și throughput mare
+- Flux stabil de date
+- Orchestrare inteligentă
+- Consistență sub sarcină mare
+
+⚠️ **Animația NU este un gimmick vizual, ci un element de brand și UX.**
+
+### Specificații Vizuale
+
+| Element | Detalii |
+|---------|---------|
+| **Fundal** | Gradient dark: `#0a1628` → `#0f172a` → `#0a1628` |
+| **Nr. linii** | 40-60 (35 pe mobile pentru performanță) |
+| **Tip linie** | Curbe Bezier |
+| **Gradient culori** | Portocaliu → Roz → Mov → Indigo → Albastru |
+| **Fade** | Capetele wave-ului au opacity 0 (fade-out) |
+| **Twist central** | Linii comprimate în centru, răsfirate la margini |
+
+### Cerințe Tehnice OBLIGATORII
+
+#### 1. Tehnologie
+- **HTML Canvas 2D** (nu SVG, nu WebGL)
+- Performanță stabilă pe **desktop și mobile**
+- Fără jitter, fără flicker
+
+#### 2. Canvas Setup
+```javascript
+// High-DPI support
+const dpr = window.devicePixelRatio || 1;
+canvas.width = rect.width * dpr;
+canvas.height = rect.height * dpr;
+ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+// Resize corect la window resize
+```
+
+#### 3. Desenarea Liniilor
+- Fiecare linie: index, poziție verticală relativă la centru, variație de fază
+- Poziții cheie: **start** (stânga), **twist** (centru), **end** (dreapta)
+- Curbe **convexe și fluide**, nu rigide
+- **Asimetrie subtilă** - evită simetria perfectă
+
+#### 4. Animație
+- `requestAnimationFrame` pentru loop continuu
+- Mișcare **lentă, calmă, "enterprise-safe"**
+- Animația trebuie să pară "vie", nu matematică
+
+#### 5. Control Animație (CRITIC)
+```javascript
+// IntersectionObserver - animația rulează DOAR când e vizibilă
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      startAnimation();  // Pornește DOAR când vizibil
+    } else {
+      stopAnimation();   // Oprește când iese din viewport
+    }
+  });
+}, { threshold: 0.1, rootMargin: '50px' });
+```
+
+#### 6. Reducerea Mișcării
+```javascript
+// Respectă preferințele utilizatorului
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  // Desenează static, fără animație
+}
+```
+
+### CE TREBUIE EVITAT
+
+❌ `return` în script global care oprește execuția
+❌ Pornirea multiplă a `requestAnimationFrame` (memory leak)
+❌ Logică greu de urmărit
+❌ Animații prea agresive sau "gaming-like"
+❌ Simetrie perfectă
+❌ Animații care crapă pe mobile
+
+### TypeScript - Null Checks în Closures
+
+**Problemă rezolvată**: TypeScript nu urmărește verificările null în funcții nested.
+
+**Soluție**:
+```typescript
+// ❌ GREȘIT - TypeScript nu știe că ctx nu e null în funcții nested
+const ctx = canvas.getContext('2d');
+if (!ctx) return;
+// ... în altă funcție, ctx e considerat posibil null
+
+// ✅ CORECT - Reasignare explicită după verificare
+const ctxNullable = canvas.getContext('2d');
+if (!ctxNullable) return;
+const ctx: CanvasRenderingContext2D = ctxNullable;
+```
+
+### Feeling Final Dorit
+
+Când vezi animația, trebuie să simți:
+- ✅ **Control**
+- ✅ **Stabilitate**
+- ✅ **Putere**
+- ✅ **Încredere**
+- ✅ **Tehnologie matură**
+
+**Nu "wow effect", ci "this company knows what it's doing".**
+
+### Parametri Ajustabili (CONFIG)
+
+```javascript
+const CONFIG = {
+  lineCount: isMobile ? 35 : 50,      // Nr linii
+  animationSpeed: 0.008,               // Viteza (mai mic = mai lent)
+  spreadStart: 70,                     // Deschidere la start
+  spreadTwist: 8,                      // Compresie la twist
+  spreadEnd: 90,                       // Deschidere la end
+  bulgeFactor: 60,                     // Cât de mult "ies" liniile
+  waveAmplitude: 25,                   // Amplitudinea undelor
+  waveFrequency: 0.8,                  // Frecvența undelor
+};
+```
+
+---
+
+## ⚡ REGULI PENTRU ANIMAȚII (TOATE COMPONENTELE)
+
+> **CRITIC**: Orice animație trebuie să respecte aceste reguli pentru a nu crăpa site-ul.
+
+### 1. Performanță pe Toate Dispozitivele
+- Testează pe mobile (Android + iOS)
+- Reduce complexitatea pe dispozitive low-power
+- Folosește `will-change` cu moderație
+
+### 2. Respectă Preferințele Utilizator
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* Dezactivează sau reduce animațiile */
+}
+```
+
+### 3. Animații Condiționate de Vizibilitate
+- Folosește `IntersectionObserver` pentru a porni/opri
+- NU lăsa animații să ruleze în background (battery drain)
+
+### 4. Cleanup la Navigare (SPA)
+```javascript
+document.addEventListener('astro:before-preparation', () => {
+  stopAnimation();
+  observer.disconnect();
+});
+```
+
+### 5. Error Handling
+- Verifică dacă canvas/context există înainte de a desena
+- Graceful degradation pe browsere vechi
+
+---
+
 ## 🔄 ISTORIC SESIUNI
 
 ### Sesiune Februarie 2026 - Redesign Major
@@ -408,6 +588,12 @@ git push origin main
 - Implementare HeroInteractive cu ChatSimulator
 - Creare BenefitsStrip, UseCases, IntegrationHub
 - Redesign IntegrationHub stil Stripe (gradient dark, glassmorphism, linii animate)
+
+### Sesiune Februarie 2026 - ScaleWithConfidence
+- Creare animație wave Canvas pentru secțiunea "Scale with confidence"
+- Concept: fluxuri de date care se comprimă și redistribuie
+- Fix TypeScript null checks în closures pentru canvas
+- Documentare completă a specificațiilor pentru animații
 
 ---
 
