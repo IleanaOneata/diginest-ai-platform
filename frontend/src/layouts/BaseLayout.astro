@@ -15,6 +15,7 @@ import { getTranslations, getHtmlLang, type Locale } from '@i18n/index';
 import Header from '@components/common/Header.astro';
 import Footer from '@components/common/Footer.astro';
 import CookieBanner from '@components/common/CookieBanner.astro';
+import ScrollToTop from '@components/common/ScrollToTop.astro';
 import '@styles/global.css';
 
 interface Props {
@@ -178,6 +179,9 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
 
     <!-- Cookie Banner -->
     <CookieBanner locale={locale} />
+
+    <!-- Scroll to Top Button -->
+    <ScrollToTop locale={locale} />
 
     <!-- Scripts -->
     <script>

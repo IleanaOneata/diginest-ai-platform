@@ -1,0 +1,253 @@
+---
+/**
+ * ScrollToTop Component
+ * GENERATIVA - AI Agents Platform
+ *
+ * Floating button that appears when user scrolls down
+ * Allows quick navigation back to the top of the page
+ *
+ * Design:
+ * - Gradient background matching brand (cyan→purple)
+ * - Smooth fade in/out animation
+ * - Fixed position, responsive placement
+ * - Accessible with keyboard and screen readers
+ */
+
+interface Props {
+  locale?: 'ro' | 'en';
+}
+
+const { locale = 'ro' } = Astro.props;
+
+const labels = {
+  ro: 'Înapoi sus',
+  en: 'Back to top'
+};
+
+const ariaLabel = labels[locale];
+---
+
+<button
+  id="scroll-to-top"
+  type="button"
+  aria-label={ariaLabel}
+  title={ariaLabel}
+  class="scroll-to-top-btn"
+>
+  <!-- Arrow up icon -->
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="w-5 h-5 sm:w-6 sm:h-6"
+    aria-hidden="true"
+  >
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<style>
+  .scroll-to-top-btn {
+    /* Position - fixed bottom right */
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+
+    /* Size */
+    width: 3rem;
+    height: 3rem;
+
+    /* Appearance - Brand gradient */
+    background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    /* Flexbox for centering icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Shadow for depth */
+    box-shadow:
+      0 4px 14px rgba(34, 211, 238, 0.3),
+      0 2px 6px rgba(139, 92, 246, 0.2);
+
+    /* Initial state - hidden */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(1rem) scale(0.9);
+
+    /* Smooth transitions */
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.2s ease;
+  }
+
+  /* Visible state */
+  .scroll-to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Hover state */
+  .scroll-to-top-btn:hover {
+    box-shadow:
+      0 6px 20px rgba(34, 211, 238, 0.4),
+      0 4px 10px rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  /* Active/pressed state */
+  .scroll-to-top-btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Focus state for accessibility */
+  .scroll-to-top-btn:focus {
+    outline: none;
+  }
+
+  .scroll-to-top-btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+    box-shadow:
+      0 6px 20px rgba(34, 211, 238, 0.4),
+      0 4px 10px rgba(139, 92, 246, 0.3),
+      0 0 0 4px rgba(34, 211, 238, 0.3);
+  }
+
+  /* Tablet - slightly larger */
+  @media (min-width: 640px) {
+    .scroll-to-top-btn {
+      width: 3.25rem;
+      height: 3.25rem;
+      bottom: 2rem;
+      right: 2rem;
+    }
+  }
+
+  /* Desktop - larger with more spacing */
+  @media (min-width: 1024px) {
+    .scroll-to-top-btn {
+      width: 3.5rem;
+      height: 3.5rem;
+      bottom: 2.5rem;
+      right: 2.5rem;
+    }
+  }
+
+  /* Large screens - even more spacing from edge */
+  @media (min-width: 1280px) {
+    .scroll-to-top-btn {
+      right: 3rem;
+    }
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-to-top-btn {
+      transition: opacity 0.15s ease;
+      transform: none !important;
+    }
+
+    .scroll-to-top-btn.visible {
+      transform: none !important;
+    }
+
+    .scroll-to-top-btn:hover {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * ScrollToTop functionality
+   *
+   * - Shows button after scrolling 400px
+   * - Smooth scroll to top on click
+   * - Throttled scroll listener for performance
+   */
+
+  (function() {
+    'use strict';
+
+    const buttonEl = document.getElementById('scroll-to-top');
+    if (!buttonEl) return;
+
+    // TypeScript now knows button is never null in this scope
+    const button: HTMLElement = buttonEl;
+
+    const SCROLL_THRESHOLD = 400; // px before button appears
+    let isVisible = false;
+    let ticking = false;
+
+    /**
+     * Update button visibility based on scroll position
+     */
+    function updateButtonVisibility(): void {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const shouldBeVisible = scrollY > SCROLL_THRESHOLD;
+
+      if (shouldBeVisible !== isVisible) {
+        isVisible = shouldBeVisible;
+        button.classList.toggle('visible', isVisible);
+      }
+    }
+
+    /**
+     * Throttled scroll handler using requestAnimationFrame
+     */
+    function onScroll(): void {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateButtonVisibility();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    /**
+     * Scroll to top with smooth animation
+     */
+    function scrollToTop(): void {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+
+      // Focus on skip link or first focusable element for accessibility
+      const skipLink = document.querySelector('a[href="#main-content"]') as HTMLElement;
+      if (skipLink) {
+        // Small delay to allow scroll to complete
+        setTimeout(() => {
+          skipLink.focus({ preventScroll: true });
+        }, 500);
+      }
+    }
+
+    // Event listeners
+    window.addEventListener('scroll', onScroll, { passive: true });
+    button.addEventListener('click', scrollToTop);
+
+    // Initial check in case page loads scrolled
+    updateButtonVisibility();
+
+    // Cleanup for SPA navigation (Astro)
+    document.addEventListener('astro:before-preparation', () => {
+      window.removeEventListener('scroll', onScroll);
+      button.removeEventListener('click', scrollToTop);
+    });
+  })();
+</script>

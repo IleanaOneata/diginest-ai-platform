@@ -393,6 +393,68 @@ git push origin main
 
 ---
 
+## 📱 RESPONSIVE DESIGN GUIDELINES
+
+> **IMPLICIT pentru toate componentele**: Fiecare componentă nouă trebuie să respecte aceste reguli fără a fi nevoie să le specific de fiecare dată.
+
+### Breakpoints (Tailwind CSS)
+
+| Breakpoint | Prefix | Min Width | Utilizare |
+|------------|--------|-----------|-----------|
+| Mobile | (none) | 0px | Design implicit, mobile-first |
+| SM | `sm:` | 640px | Telefoane mari, landscape |
+| MD | `md:` | 768px | Tablete |
+| LG | `lg:` | 1024px | Desktop |
+| XL | `xl:` | 1280px | Desktop mare |
+| 2XL | `2xl:` | 1536px | Ecrane foarte mari |
+
+### Principii OBLIGATORII
+
+1. **Mobile-First**: Stilurile de bază sunt pentru mobile, apoi adaugi pentru ecrane mai mari
+2. **Testare pe toate breakpoints**: Verifică pe 375px, 768px, 1024px, 1440px
+3. **Touch-friendly**: Butoanele/link-urile au minim 44x44px pe mobile
+4. **Spațiere consistentă**: Folosește scale Tailwind (`p-4`, `p-6`, `p-8`)
+5. **Font sizing responsive**: Text mai mic pe mobile, mai mare pe desktop
+
+### Pattern-uri Standard
+
+```css
+/* Spacing responsive */
+padding: 1rem;           /* Mobile */
+@media (sm) padding: 1.5rem;
+@media (lg) padding: 2rem;
+
+/* Container max-width */
+max-width: 100%;         /* Mobile - full width */
+@media (lg) max-width: 1280px;  /* Desktop - constrained */
+
+/* Grid responsive */
+grid-cols-1              /* Mobile - 1 coloană */
+sm:grid-cols-2           /* Tablet - 2 coloane */
+lg:grid-cols-3           /* Desktop - 3 coloane */
+
+/* Fixed elements (butoane, modals) */
+position: fixed;
+bottom: 1.5rem;          /* Mobile */
+right: 1.5rem;
+@media (lg) bottom: 2.5rem;
+@media (lg) right: 2.5rem;
+```
+
+### Checklist Responsive (pentru fiecare componentă)
+
+- [ ] Arată bine pe 375px (iPhone SE)
+- [ ] Arată bine pe 768px (iPad)
+- [ ] Arată bine pe 1024px (Desktop mic)
+- [ ] Arată bine pe 1440px (Desktop standard)
+- [ ] Textul e lizibil pe toate dimensiunile
+- [ ] Butoanele sunt ușor de apăsat pe touch
+- [ ] Imaginile se scalează corect
+- [ ] Nu există overflow horizontal
+- [ ] Animațiile nu crapă pe mobile
+
+---
+
 ## 📚 DOCUMENTE CONEXE
 
 | Document | Conține |
