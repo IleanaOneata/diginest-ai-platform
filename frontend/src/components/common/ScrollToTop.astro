@@ -189,15 +189,31 @@ const ariaLabel = labels[locale];
     const button: HTMLElement = buttonEl;
 
     const SCROLL_THRESHOLD = 400; // px before button appears
+    const COOKIE_NAME = 'diginest_cookie_consent';
+
     let isVisible = false;
     let ticking = false;
+    let cookieBannerDismissed = false;
 
     /**
-     * Update button visibility based on scroll position
+     * Check if cookie consent has been given (banner is dismissed)
+     */
+    function checkCookieConsent(): boolean {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${COOKIE_NAME}=`);
+      if (parts.length === 2) {
+        return true; // Cookie exists, banner was dismissed
+      }
+      return false;
+    }
+
+    /**
+     * Update button visibility based on scroll position AND cookie banner state
      */
     function updateButtonVisibility(): void {
       const scrollY = window.scrollY || window.pageYOffset;
-      const shouldBeVisible = scrollY > SCROLL_THRESHOLD;
+      // Show button only if: scrolled enough AND cookie banner is dismissed
+      const shouldBeVisible = scrollY > SCROLL_THRESHOLD && cookieBannerDismissed;
 
       if (shouldBeVisible !== isVisible) {
         isVisible = shouldBeVisible;
@@ -241,7 +257,14 @@ const ariaLabel = labels[locale];
     window.addEventListener('scroll', onScroll, { passive: true });
     button.addEventListener('click', scrollToTop);
 
-    // Initial check in case page loads scrolled
+    // Listen for cookie banner being dismissed
+    window.addEventListener('cookieBannerHidden', () => {
+      cookieBannerDismissed = true;
+      updateButtonVisibility();
+    });
+
+    // Initial check - cookie consent already given?
+    cookieBannerDismissed = checkCookieConsent();
     updateButtonVisibility();
 
     // Cleanup for SPA navigation (Astro)

@@ -88,6 +88,8 @@ const t = getTranslations(locale);
     const banner = document.getElementById('cookie-banner');
     if (banner) {
       banner.classList.add('translate-y-full');
+      // Dispatch custom event so other components (like ScrollToTop) know banner is hidden
+      window.dispatchEvent(new CustomEvent('cookieBannerHidden'));
     }
   }
 
