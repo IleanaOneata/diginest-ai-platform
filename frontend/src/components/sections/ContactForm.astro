@@ -39,7 +39,7 @@ const t = getTranslations(locale);
             </div>
             <div>
               <h3 class="font-semibold text-neutral-900">Email</h3>
-              <a href="mailto:contact@diginest.ai" class="text-primary-600 hover:text-primary-700">
+              <a href="mailto:contact@generativa.ro" class="text-primary-600 hover:text-primary-700">
                 {t.contact.info.email}
               </a>
             </div>
@@ -158,6 +158,9 @@ const t = getTranslations(locale);
 
 <script>
   // Contact form handling
+  // Backend API URL - Railway production
+  const API_URL = 'https://diginest-backend-production.up.railway.app/api/v1/contact';
+
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('[data-contact-form]') as HTMLFormElement;
     if (!form) return;
@@ -168,6 +171,9 @@ const t = getTranslations(locale);
     const messageContainer = form.querySelector('[data-form-message]') as HTMLElement;
     const successMessage = messageContainer?.querySelector('.success') as HTMLElement;
     const errorMessage = messageContainer?.querySelector('.error') as HTMLElement;
+
+    // Get locale from URL path
+    const locale = window.location.pathname.startsWith('/en') ? 'en' : 'ro';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -183,20 +189,39 @@ const t = getTranslations(locale);
       errorMessage?.classList.add('hidden');
 
       const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
+
+      // Build request body matching ContactRequestDTO
+      const requestBody = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        company: formData.get('company'),
+        phone: formData.get('phone') || null,
+        message: formData.get('message'),
+        locale: locale
+      };
 
       try {
-        // TODO: Replace with actual API endpoint when backend is ready
-        // For now, simulate a successful submission
-        console.log('Form data:', data);
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody)
+        });
 
-        // Simulate API call delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        const result = await response.json();
 
-        // Show success message
-        messageContainer?.classList.remove('hidden');
-        successMessage?.classList.remove('hidden');
-        form.reset();
+        if (response.ok && result.success) {
+          // Show success message
+          messageContainer?.classList.remove('hidden');
+          successMessage?.classList.remove('hidden');
+          form.reset();
+        } else {
+          // Show error from API or generic error
+          console.error('API Error:', result);
+          messageContainer?.classList.remove('hidden');
+          errorMessage?.classList.remove('hidden');
+        }
 
       } catch (error) {
         console.error('Form submission error:', error);
