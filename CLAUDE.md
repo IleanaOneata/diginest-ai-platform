@@ -24,6 +24,8 @@
 9. ✅ **UseCases** - Secțiune auto-identificare "Ți se pare familiar?"
 10. ✅ **IntegrationHub** - Vizualizare conexiuni stil Stripe (redesign complet)
 11. ✅ **ScaleWithConfidence** - Animație wave Canvas pentru scalare (vezi secțiunea dedicată)
+12. ✅ **ScrollToTop** - Buton floating pentru navigare rapidă sus
+13. ✅ **CookieBanner** - Redesign modern corner popup (GDPR compliant)
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -188,6 +190,8 @@ background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
 | **UseCases** | `components/sections/UseCases.astro` | Auto-identificare pe industrii |
 | **IntegrationHub** | `components/sections/IntegrationHub.astro` | Vizualizare conexiuni (stil Stripe) |
 | **ScaleWithConfidence** | `components/sections/ScaleWithConfidence.astro` | Animație wave Canvas (scalare, throughput) |
+| **ScrollToTop** | `components/common/ScrollToTop.astro` | Buton floating pentru scroll to top |
+| **CookieBanner** | `components/common/CookieBanner.astro` | Cookie consent modern corner popup |
 
 ### Flow Homepage (RO & EN)
 
@@ -642,6 +646,117 @@ document.addEventListener('astro:before-preparation', () => {
 
 ---
 
+## 🍪 COOKIE BANNER - DESIGN GUIDELINES (2025-2026)
+
+> **Pentru AI**: Această secțiune conține specificațiile pentru Cookie Banner modern și GDPR-compliant.
+
+### Principii de Design Modern
+
+**Surse de referință**:
+- https://secureprivacy.ai/blog/cookie-banner-design-2026
+- https://cookieinformation.com/blog/designing-compliant-cookie-banners/
+- https://www.enzuzo.com/learn/best-cookie-banner-examples
+
+### Caracteristici Implementate
+
+| Aspect | Descriere |
+|--------|-----------|
+| **Stil** | Corner popup (colț stânga-jos) - nu blochează conținutul |
+| **Dimensiune** | Compact: max-width 320px (400px pe tablet+) |
+| **Poziție** | Fixed, bottom-left cu margini responsive |
+| **Animație** | Fade-in subtil cu scale + translateY |
+| **Button parity** | GDPR compliant - butoanele au aceeași dimensiune vizuală |
+
+### GDPR Compliance - Reguli OBLIGATORII
+
+1. **Button Parity** (Paritate butoane):
+   - Butoanele "Accept" și "Refuz/Decline" TREBUIE să aibă aceeași dimensiune
+   - NU se permite "Accept" mare și "Decline" mic/ascuns
+   - Culori diferite sunt OK, dar dimensiunea trebuie egală
+
+2. **No Dark Patterns**:
+   - NU ascunde opțiunea de refuz
+   - NU face dificilă respingerea cookie-urilor
+   - NU pre-bifează checkbox-uri pentru marketing
+
+3. **Clear Language**:
+   - Text scurt, ușor de înțeles
+   - Evită jargon legal excesiv
+
+### Specificații Tehnice
+
+```css
+/* Poziție - Corner popup stânga-jos */
+.cookie-banner {
+  position: fixed;
+  bottom: 1rem;      /* 1.5rem pe tablet, 2rem pe desktop */
+  left: 1rem;        /* 1.5rem pe tablet, 2rem pe desktop */
+  z-index: 50;
+  max-width: 320px;  /* 400px pe tablet+ */
+}
+
+/* Animație - Subtle fade in */
+.cookie-banner {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem) scale(0.95);
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+
+.cookie-banner.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Butoane - EGAL visual weight */
+.cookie-btn {
+  flex: 1;  /* Ambele butoane ocupă spațiu egal */
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+}
+```
+
+### Funcționalitate JavaScript
+
+```javascript
+// Cookie name și duration
+const COOKIE_NAME = 'generativa_cookie_consent';
+const COOKIE_DURATION = 365; // days
+
+// Valori posibile
+// 'accepted' - utilizatorul a acceptat
+// 'rejected' - utilizatorul a refuzat
+
+// Event dispatch pentru alte componente
+window.dispatchEvent(new CustomEvent('cookieBannerHidden'));
+```
+
+### Integrare cu ScrollToTop
+
+Cookie Banner și ScrollToTop sunt coordonate:
+- ScrollToTop așteaptă până când Cookie Banner este închis
+- Se folosește custom event `cookieBannerHidden`
+- Evită suprapunerea pe mobile
+
+### Responsive Breakpoints
+
+| Breakpoint | Banner Width | Position |
+|------------|--------------|----------|
+| Mobile (<400px) | calc(100% - 2rem) max 320px | bottom: 1rem, left: 1rem |
+| Tablet (≥400px) | max 400px | bottom: 1.5rem, left: 1.5rem |
+| Desktop (≥640px) | max 400px | bottom: 1.5rem, left: 1.5rem |
+| Large (≥1024px) | max 400px | bottom: 2rem, left: 2rem |
+
+### Accessibility
+
+- `role="dialog"` pentru screen readers
+- `aria-labelledby` și `aria-describedby` pentru context
+- Focus visible pe butoane
+- Reduced motion support
+
+---
+
 ## 🔄 ISTORIC SESIUNI
 
 ### Sesiune Februarie 2026 - Redesign Major
@@ -656,6 +771,14 @@ document.addEventListener('astro:before-preparation', () => {
 - Concept: fluxuri de date care se comprimă și redistribuie
 - Fix TypeScript null checks în closures pentru canvas
 - Documentare completă a specificațiilor pentru animații
+
+### Sesiune Februarie 2026 - ScrollToTop & Cookie Banner Redesign
+- Creare buton ScrollToTop cu brand gradient (cyan→purple)
+- Fix suprapunere ScrollToTop cu CookieBanner pe mobile
+- Implementare comunicare între componente via custom event `cookieBannerHidden`
+- Fix Button.astro pentru a suporta `data-*` attributes
+- Redesign complet CookieBanner: corner popup modern, GDPR compliant
+- Documentare Cookie Banner design guidelines (2025-2026 best practices)
 
 ---
 

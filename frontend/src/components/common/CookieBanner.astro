@@ -1,64 +1,283 @@
 ---
 /**
  * CookieBanner Component
+ * GENERATIVA - AI Agents Platform
  *
- * EU GDPR compliant cookie consent banner
+ * Modern, minimal cookie consent banner
+ *
+ * Design principles (2025-2026 best practices):
+ * - Corner popup style (doesn't block content)
+ * - Button parity (GDPR compliant - equal visual weight)
+ * - Minimal, conversational language
+ * - Subtle fade-in animation
+ * - Mobile-first responsive
+ * - No dark patterns
+ *
+ * Sources:
+ * - https://secureprivacy.ai/blog/cookie-banner-design-2026
+ * - https://cookieinformation.com/blog/designing-compliant-cookie-banners/
+ * - https://www.enzuzo.com/learn/best-cookie-banner-examples
  */
 
-import { getTranslations, type Locale } from '@i18n/index';
-import Button from './Button.astro';
+import type { Locale } from '@i18n/index';
 
 interface Props {
   locale: Locale;
 }
 
 const { locale } = Astro.props;
-const t = getTranslations(locale);
+
+// Shorter, friendlier text for minimal design
+const content = {
+  ro: {
+    title: 'Cookie-uri',
+    description: 'Folosim cookie-uri pentru a-ți îmbunătăți experiența.',
+    accept: 'Accept',
+    reject: 'Refuz'
+  },
+  en: {
+    title: 'Cookies',
+    description: 'We use cookies to improve your experience.',
+    accept: 'Accept',
+    reject: 'Decline'
+  }
+};
+
+const text = content[locale];
 ---
 
 <div
   id="cookie-banner"
-  class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white border-t border-neutral-200 shadow-lg transform translate-y-full transition-transform duration-300"
+  class="cookie-banner"
   role="dialog"
   aria-labelledby="cookie-title"
   aria-describedby="cookie-description"
   data-cookie-banner
 >
-  <div class="container-lg">
-    <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
-      <div class="flex-1">
-        <h2 id="cookie-title" class="text-lg font-semibold text-neutral-900 mb-1">
-          {t.cookies.title}
-        </h2>
-        <p id="cookie-description" class="text-sm text-neutral-600">
-          {t.cookies.description}
-        </p>
-      </div>
-      <div class="flex flex-wrap gap-3">
-        <Button
-          variant="ghost"
-          size="sm"
-          class="cookie-reject"
-          data-action="reject"
-        >
-          {t.cookies.reject}
-        </Button>
-        <Button
-          variant="primary"
-          size="sm"
-          class="cookie-accept"
-          data-action="accept"
-        >
-          {t.cookies.accept}
-        </Button>
-      </div>
-    </div>
+  <!-- Cookie icon -->
+  <div class="cookie-icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+      <circle cx="12" cy="12" r="10"/>
+      <circle cx="8" cy="9" r="1" fill="currentColor"/>
+      <circle cx="15" cy="8" r="1" fill="currentColor"/>
+      <circle cx="10" cy="14" r="1" fill="currentColor"/>
+      <circle cx="16" cy="13" r="1" fill="currentColor"/>
+      <circle cx="7" cy="12" r="0.5" fill="currentColor"/>
+      <circle cx="13" cy="16" r="0.5" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <!-- Content -->
+  <div class="cookie-content">
+    <p id="cookie-title" class="sr-only">{text.title}</p>
+    <p id="cookie-description" class="cookie-text">
+      {text.description}
+    </p>
+  </div>
+
+  <!-- Buttons - Equal visual weight (GDPR compliant) -->
+  <div class="cookie-buttons">
+    <button
+      type="button"
+      class="cookie-btn cookie-btn-secondary"
+      data-action="reject"
+    >
+      {text.reject}
+    </button>
+    <button
+      type="button"
+      class="cookie-btn cookie-btn-primary"
+      data-action="accept"
+    >
+      {text.accept}
+    </button>
   </div>
 </div>
 
+<style>
+  .cookie-banner {
+    /* Position - corner popup (left bottom) */
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    z-index: 50;
+
+    /* Size - compact */
+    max-width: 320px;
+    width: calc(100% - 2rem);
+
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    /* Appearance */
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+
+    /* Subtle shadow */
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(0, 0, 0, 0.05);
+
+    /* Initial state - hidden */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(1rem) scale(0.95);
+
+    /* Smooth animation */
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  /* Visible state */
+  .cookie-banner.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Cookie icon */
+  .cookie-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, #f0fdfa 0%, #f5f3ff 100%);
+    border-radius: 0.75rem;
+    color: #0891b2;
+    flex-shrink: 0;
+  }
+
+  /* Content */
+  .cookie-content {
+    flex: 1;
+  }
+
+  .cookie-text {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #525252;
+    margin: 0;
+  }
+
+  /* Buttons container */
+  .cookie-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  /* Base button styles - EQUAL VISUAL WEIGHT */
+  .cookie-btn {
+    flex: 1;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  /* Primary button (Accept) */
+  .cookie-btn-primary {
+    background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+    color: white;
+  }
+
+  .cookie-btn-primary:hover {
+    box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* Secondary button (Reject) - Same size, similar prominence */
+  .cookie-btn-secondary {
+    background: #f5f5f5;
+    color: #525252;
+  }
+
+  .cookie-btn-secondary:hover {
+    background: #e5e5e5;
+    color: #262626;
+  }
+
+  /* Focus states */
+  .cookie-btn:focus {
+    outline: none;
+  }
+
+  .cookie-btn:focus-visible {
+    outline: 2px solid #22d3ee;
+    outline-offset: 2px;
+  }
+
+  /* Tablet and up - horizontal layout */
+  @media (min-width: 400px) {
+    .cookie-banner {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      max-width: 400px;
+    }
+
+    .cookie-icon {
+      width: 2.25rem;
+      height: 2.25rem;
+    }
+
+    .cookie-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cookie-buttons {
+      width: 100%;
+    }
+  }
+
+  /* Desktop - more spacing */
+  @media (min-width: 640px) {
+    .cookie-banner {
+      bottom: 1.5rem;
+      left: 1.5rem;
+      padding: 1.25rem;
+    }
+  }
+
+  /* Large screens */
+  @media (min-width: 1024px) {
+    .cookie-banner {
+      bottom: 2rem;
+      left: 2rem;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .cookie-banner {
+      transition: opacity 0.15s ease;
+      transform: none;
+    }
+
+    .cookie-banner.visible {
+      transform: none;
+    }
+
+    .cookie-btn:hover {
+      transform: none;
+    }
+  }
+</style>
+
 <script>
   // Cookie consent management
-  const COOKIE_NAME = 'diginest_cookie_consent';
+  const COOKIE_NAME = 'generativa_cookie_consent';
   const COOKIE_DURATION = 365; // days
 
   function getCookie(name: string): string | null {
@@ -80,14 +299,14 @@ const t = getTranslations(locale);
   function showBanner(): void {
     const banner = document.getElementById('cookie-banner');
     if (banner) {
-      banner.classList.remove('translate-y-full');
+      banner.classList.add('visible');
     }
   }
 
   function hideBanner(): void {
     const banner = document.getElementById('cookie-banner');
     if (banner) {
-      banner.classList.add('translate-y-full');
+      banner.classList.remove('visible');
       // Dispatch custom event so other components (like ScrollToTop) know banner is hidden
       window.dispatchEvent(new CustomEvent('cookieBannerHidden'));
     }
@@ -113,6 +332,9 @@ const t = getTranslations(locale);
     if (!consent) {
       // Show banner after a short delay for better UX
       setTimeout(showBanner, 1000);
+    } else {
+      // Cookie already set, dispatch event so ScrollToTop knows
+      window.dispatchEvent(new CustomEvent('cookieBannerHidden'));
     }
 
     // Handle button clicks
