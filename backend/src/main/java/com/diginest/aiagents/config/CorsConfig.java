@@ -29,34 +29,25 @@ public class CorsConfig {
         // Parse allowed origins from configuration
         List<String> origins = Arrays.asList(allowedOrigins.split(","));
 
-        // Use allowedOriginPatterns for wildcard support (Vercel preview URLs)
-        // This allows patterns like https://*.vercel.app
-        configuration.setAllowedOriginPatterns(origins);
+        // Allow ALL origins for now (contact form doesn't need credentials)
+        // This is safe because we don't use cookies/sessions for the contact API
+        configuration.addAllowedOrigin("*");
 
         // Allowed HTTP methods
         configuration.setAllowedMethods(Arrays.asList(
             "GET", "POST", "PUT", "DELETE", "OPTIONS"
         ));
 
-        // Allowed headers
-        configuration.setAllowedHeaders(Arrays.asList(
-            "Authorization",
-            "Content-Type",
-            "X-Requested-With",
-            "Accept",
-            "Origin",
-            "Access-Control-Request-Method",
-            "Access-Control-Request-Headers"
-        ));
+        // Allowed headers - allow all
+        configuration.addAllowedHeader("*");
 
         // Exposed headers (can be read by frontend)
         configuration.setExposedHeaders(Arrays.asList(
-            "Access-Control-Allow-Origin",
-            "Access-Control-Allow-Credentials"
+            "Access-Control-Allow-Origin"
         ));
 
-        // Allow credentials (cookies, authorization headers)
-        configuration.setAllowCredentials(true);
+        // Disable credentials - required when using wildcard origin "*"
+        configuration.setAllowCredentials(false);
 
         // Cache preflight response for 1 hour
         configuration.setMaxAge(3600L);
