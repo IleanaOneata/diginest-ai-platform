@@ -899,6 +899,8 @@ Pe mobile (sub 768px), secțiunile cu multiple carduri folosesc **scroll orizont
 | Feb 2026 | Language Switcher returnează 404 când schimbi din EN în RO | Path-urile diferă între limbi (`/en/about/` vs `/ro/despre/`). Simple `replace` nu funcționa. | Creat `buildAlternatePath()` în i18n cu path mappings între limbi |
 | Feb 2026 | Cookie Banner butoane nu funcționau | Button.astro nu trecea `data-*` attributes la HTML element | Adăugat `...rest` spread în Button component |
 | Feb 2026 | ScrollToTop se suprapunea cu CookieBanner pe mobile | Ambele elemente în colțul dreapta-jos | ScrollToTop așteaptă cookie dismiss pe mobile, apare imediat pe desktop |
+| Feb 2026 | Mobile menu (hamburger) nu se deschidea | Event listeners nu se atașau corect, Astro SPA mode | Adăugat DOMContentLoaded + astro:page-load listeners, clonare buton |
+| Feb 2026 | Text invizibil pe secțiuni dark (About page) | Titlurile din secțiunile Mission și Stats nu aveau `text-white` explicit | Adăugat `text-white` la toate titlurile pe fundaluri dark |
 
 ### Link-uri care duc la 404 (Pagini neimplementate) ⚠️
 
@@ -925,6 +927,40 @@ Aceste link-uri există în Header/Footer dar paginile NU sunt create încă:
 6. **Cookie Banner** - Funcționează pe toate dispozitivele
 7. **ScrollToTop** - Apare corect pe mobile și desktop
 8. **Responsive** - Testează pe 375px, 768px, 1024px, 1440px
+9. **Contrast text pe dark sections** - Verifică că textul e vizibil pe fundaluri închise
+
+### ⚠️ REGULI CONTRAST TEXT PE FUNDALURI DARK
+
+> **FOARTE IMPORTANT**: Această greșeală s-a repetat de mai multe ori. AI-ul TREBUIE să verifice automat!
+
+Când creezi sau modifici secțiuni cu fundal dark (`bg-slate-900`, `bg-gradient-to-br from-slate-900`, etc.):
+
+1. **TOATE titlurile** trebuie să aibă `text-white` EXPLICIT
+2. **Paragrafele** trebuie să aibă `text-slate-300` sau `text-slate-400`
+3. **NU te baza** pe `text-white` la nivel de section - nu se moștenește întotdeauna
+
+**Exemplu CORECT:**
+```html
+<section class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950">
+  <h2 class="text-white">Titlu</h2>  <!-- EXPLICIT text-white -->
+  <p class="text-slate-300">Conținut</p>
+</section>
+```
+
+**Exemplu GREȘIT:**
+```html
+<section class="bg-slate-900 text-white">  <!-- text-white la section NU e suficient -->
+  <h2>Titlu</h2>  <!-- poate fi invizibil! -->
+</section>
+```
+
+**Secțiuni afectate (verifică întotdeauna):**
+- IntegrationHub (homepage)
+- ScaleWithConfidence (homepage)
+- Mission section (About page)
+- Stats section (About page)
+- Footer
+- Orice altă secțiune cu gradient dark
 
 ### Path Mappings pentru Language Switcher
 
