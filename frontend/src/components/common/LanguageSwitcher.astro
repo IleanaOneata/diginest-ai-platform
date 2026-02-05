@@ -3,9 +3,10 @@
  * LanguageSwitcher Component
  *
  * Simple dropdown to switch between Romanian and English
+ * Handles path translation between locales (e.g., /en/about/ -> /ro/despre/)
  */
 
-import { type Locale, languageNames, languageFlags, getAlternateLocale } from '@i18n/index';
+import { type Locale, languageNames, languageFlags, getAlternateLocale, buildAlternatePath } from '@i18n/index';
 
 interface Props {
   locale: Locale;
@@ -15,8 +16,8 @@ interface Props {
 const { locale, currentPath } = Astro.props;
 const alternateLocale = getAlternateLocale(locale);
 
-// Build alternate path
-const alternatePath = currentPath.replace(`/${locale}`, `/${alternateLocale}`);
+// Build alternate path with proper translation
+const alternatePath = buildAlternatePath(currentPath, locale, alternateLocale);
 ---
 
 <div class="relative">

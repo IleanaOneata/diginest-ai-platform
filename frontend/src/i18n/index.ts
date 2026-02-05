@@ -109,3 +109,56 @@ export function formatDate(date: Date, locale: Locale): string {
     day: 'numeric',
   }).format(date);
 }
+
+/**
+ * Path mappings between locales
+ * Maps RO paths to EN paths and vice versa
+ */
+const pathMappings: Record<string, Record<Locale, string>> = {
+  // About page
+  'despre': { ro: 'despre', en: 'about' },
+  'about': { ro: 'despre', en: 'about' },
+  // Contact page
+  'contact': { ro: 'contact', en: 'contact' },
+  // Services pages
+  'servicii': { ro: 'servicii', en: 'services' },
+  'services': { ro: 'servicii', en: 'services' },
+  // Blog
+  'blog': { ro: 'blog', en: 'blog' },
+  // Add more mappings as needed
+};
+
+/**
+ * Translate a path segment from one locale to another
+ */
+function translatePathSegment(segment: string, targetLocale: Locale): string {
+  const mapping = pathMappings[segment.toLowerCase()];
+  if (mapping) {
+    return mapping[targetLocale];
+  }
+  return segment; // Return original if no mapping found
+}
+
+/**
+ * Build alternate language path
+ * Handles translation of path segments between locales
+ * e.g., /en/about/ -> /ro/despre/
+ */
+export function buildAlternatePath(currentPath: string, currentLocale: Locale, targetLocale: Locale): string {
+  // Split path into segments
+  const segments = currentPath.split('/').filter(Boolean);
+
+  // If path is just the locale (homepage), return target locale homepage
+  if (segments.length === 0 || (segments.length === 1 && locales.includes(segments[0] as Locale))) {
+    return `/${targetLocale}/`;
+  }
+
+  // Remove current locale prefix if present
+  const pathSegments = segments[0] === currentLocale ? segments.slice(1) : segments;
+
+  // Translate each segment
+  const translatedSegments = pathSegments.map(segment => translatePathSegment(segment, targetLocale));
+
+  // Build final path
+  return `/${targetLocale}/${translatedSegments.join('/')}/`.replace(/\/+/g, '/');
+}

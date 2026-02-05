@@ -766,6 +766,62 @@ Cookie Banner și ScrollToTop sunt coordonate inteligent pe baza dimensiunii ecr
 
 ---
 
+## 🐛 KNOWN BUGS & TESTING LOG
+
+> **Pentru AI**: Această secțiune documentează bug-urile găsite și rezolvate. Verifică întotdeauna aceste elemente când faci modificări.
+
+### Bug-uri Rezolvate ✅
+
+| Data | Bug | Cauză | Soluție |
+|------|-----|-------|---------|
+| Feb 2026 | Language Switcher returnează 404 când schimbi din EN în RO | Path-urile diferă între limbi (`/en/about/` vs `/ro/despre/`). Simple `replace` nu funcționa. | Creat `buildAlternatePath()` în i18n cu path mappings între limbi |
+| Feb 2026 | Cookie Banner butoane nu funcționau | Button.astro nu trecea `data-*` attributes la HTML element | Adăugat `...rest` spread în Button component |
+| Feb 2026 | ScrollToTop se suprapunea cu CookieBanner pe mobile | Ambele elemente în colțul dreapta-jos | ScrollToTop așteaptă cookie dismiss pe mobile, apare imediat pe desktop |
+
+### Link-uri care duc la 404 (Pagini neimplementate) ⚠️
+
+Aceste link-uri există în Header/Footer dar paginile NU sunt create încă:
+
+| Link | Path RO | Path EN | Status |
+|------|---------|---------|--------|
+| **Servicii dropdown** | `/ro/servicii/` | `/en/services/` | ❌ Nu există |
+| Automatizare Procese | `/ro/servicii/automatizare-procese/` | `/en/services/process-automation/` | ❌ Nu există |
+| Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | `/en/services/conversational-agents/` | ❌ Nu există |
+| Integrări AI | `/ro/servicii/integrari-ai/` | `/en/services/ai-integrations/` | ❌ Nu există |
+| **Blog** | `/ro/blog/` | `/en/blog/` | ❌ Nu există |
+| Studii de caz | `/ro/studii-caz/` | `/en/case-studies/` | ❌ Nu există |
+| Politica confidențialitate | `/ro/politica-confidentialitate/` | `/en/privacy-policy/` | ❌ Nu există |
+| Termeni și condiții | `/ro/termeni-conditii/` | `/en/terms-conditions/` | ❌ Nu există |
+
+### Elemente de Verificat la Fiecare Modificare
+
+1. **Language Switcher** - Verifică traducerea path-urilor între limbi
+2. **Header navigation** - Link-urile funcționează corect
+3. **Footer navigation** - Link-urile funcționează corect
+4. **Mobile menu** - Se deschide/închide corect
+5. **CTA buttons** - Duc la paginile corecte
+6. **Cookie Banner** - Funcționează pe toate dispozitivele
+7. **ScrollToTop** - Apare corect pe mobile și desktop
+8. **Responsive** - Testează pe 375px, 768px, 1024px, 1440px
+
+### Path Mappings pentru Language Switcher
+
+Când adaugi o pagină nouă, actualizează `pathMappings` în `src/i18n/index.ts`:
+
+```typescript
+const pathMappings: Record<string, Record<Locale, string>> = {
+  'despre': { ro: 'despre', en: 'about' },
+  'about': { ro: 'despre', en: 'about' },
+  'contact': { ro: 'contact', en: 'contact' },
+  'servicii': { ro: 'servicii', en: 'services' },
+  'services': { ro: 'servicii', en: 'services' },
+  'blog': { ro: 'blog', en: 'blog' },
+  // Adaugă mapări noi aici!
+};
+```
+
+---
+
 ## 🔄 ISTORIC SESIUNI
 
 ### Sesiune Februarie 2026 - Redesign Major
@@ -799,6 +855,20 @@ Cookie Banner și ScrollToTop sunt coordonate inteligent pe baza dimensiunii ecr
 - Hover effects: lift (-2px), shadow glow, icon pulse
 - IntersectionObserver pentru declanșare animație
 - Stagger effect (150ms delay între carduri)
+
+### Sesiune Februarie 2026 - Pagina Despre & Bug Fixes
+- **Pagina Despre** creată (`/ro/despre/`, `/en/about/`)
+  - Conținut original optimizat SEO și marketing
+  - Storytelling compelling despre povestea companiei
+  - Secțiuni: Hero, Story, Mission, Approach, Why Us, Stats, CTA
+  - Design modern cu alternanță light/dark
+- **Bug Fix**: Language Switcher 404
+  - Creat sistem de path mappings în i18n
+  - Funcție `buildAlternatePath()` pentru traducere corectă
+- **Audit de bugs** și documentare în CLAUDE.md
+  - Listat toate link-urile care duc la 404
+  - Checklist pentru verificări la modificări
+  - Secțiune dedicată pentru known bugs
 
 ---
 
