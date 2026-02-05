@@ -235,28 +235,84 @@
   },
 
   "about": {
-    "title": "About GENERATIVA",
-    "subtitle": "Transforming Romanian businesses with artificial intelligence",
-    "mission": {
-      "title": "Our mission",
-      "description": "We make artificial intelligence accessible and practical for Romanian businesses. We don't sell technology for technology's sake - we deliver concrete solutions that generate measurable results."
+    "meta": {
+      "title": "About Us - GENERATIVA | AI Agents for Business",
+      "description": "We're the team behind AI agents that respond to your customers 24/7. Learn our story, values, and why businesses across Europe choose us."
     },
-    "values": {
-      "title": "Our values",
-      "items": {
-        "results": {
-          "title": "Results-oriented",
-          "description": "We measure success in ROI and real impact, not lines of code"
+    "hero": {
+      "eyebrow": "About GENERATIVA",
+      "title": "Building the future of customer communication",
+      "subtitle": "We're not just another AI agency. We're people who saw how businesses lose customers because of an unanswered call at 10 PM. And we decided to fix it."
+    },
+    "story": {
+      "title": "Our Story",
+      "paragraphs": [
+        "It all started with a simple question: Why does a dental clinic lose new patients just because reception closes after 6 PM?",
+        "We saw excellent businesses - dedicated doctors, restaurants with amazing food, trustworthy auto shops - losing customers because they couldn't answer the phone after hours.",
+        "It wasn't their fault. It was a human limitation that technology can solve.",
+        "That's how GENERATIVA was born: from the desire to give every business an assistant that never sleeps, never gets tired, and never forgets to be polite."
+      ]
+    },
+    "mission": {
+      "title": "Our Mission",
+      "content": "We enable every business to give their customers the experience they deserve - fast, professional responses at any hour. Not because AI is cool, but because your customers deserve more than a voicemail."
+    },
+    "approach": {
+      "title": "Our Approach",
+      "subtitle": "Three principles that guide every project",
+      "items": [
+        {
+          "icon": "human",
+          "title": "Technology with Soul",
+          "description": "Our AI agents don't sound like robots. They're trained to be warm, empathetic, and solve real problems. Because a frustrated customer needs help, not an automated menu."
         },
-        "transparency": {
-          "title": "Transparency",
-          "description": "We communicate clearly, honestly and without unnecessary jargon"
+        {
+          "icon": "integration",
+          "title": "Integrates, Doesn't Replace",
+          "description": "We don't come to disrupt what already works. Our agents connect to your existing systems - CRM, calendar, email - and work alongside your team."
         },
-        "partnership": {
-          "title": "Partnership",
-          "description": "We are long-term partners, not project vendors"
+        {
+          "icon": "results",
+          "title": "Results, Not Promises",
+          "description": "We don't sell dreams. We show you exactly how many calls you missed last month and how many you can recover. If we don't see clear ROI, we tell you upfront."
         }
-      }
+      ]
+    },
+    "whyUs": {
+      "title": "Why GENERATIVA?",
+      "subtitle": "In a market full of AI buzzwords, here's what sets us apart",
+      "items": [
+        {
+          "title": "Local Market Focus",
+          "description": "We understand local markets. Our agents speak naturally, know industry specifics, and integrate with popular local systems."
+        },
+        {
+          "title": "Demo Before Promises",
+          "description": "Don't take our word for it. We show you live how an AI agent works for your business, with real scenarios from your industry."
+        },
+        {
+          "title": "Partner, Not Vendor",
+          "description": "We don't disappear after implementation. We monitor performance, continuously optimize, and are just a phone call away when you need us."
+        },
+        {
+          "title": "Transparent Pricing",
+          "description": "No hidden costs, no surprises. You know exactly what you pay and what you get. And if it doesn't work, you don't pay."
+        }
+      ]
+    },
+    "stats": {
+      "title": "The Numbers Speak",
+      "items": [
+        { "value": "50+", "label": "Businesses that trusted us" },
+        { "value": "100K+", "label": "Conversations handled by our agents" },
+        { "value": "4.9", "label": "Average satisfaction rating (out of 5)" },
+        { "value": "< 1s", "label": "Average response time" }
+      ]
+    },
+    "cta": {
+      "title": "Let's see if we can help",
+      "subtitle": "A 15-minute conversation shows us if we're a good fit. No sales pitches, no pressure - just clarity.",
+      "button": "Schedule a call"
     }
   }
 }

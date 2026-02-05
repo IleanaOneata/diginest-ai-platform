@@ -1,0 +1,244 @@
+---
+/**
+ * About Page Component - GENERATIVA
+ *
+ * Full about page with:
+ * - Hero section with story intro
+ * - Company story (narrative style)
+ * - Mission statement
+ * - Approach cards (3 principles)
+ * - Why us section (4 differentiators)
+ * - Stats section
+ * - CTA
+ *
+ * Design: Modern, clean, alternating light/dark sections
+ * Tone: Human, empathetic, confident but not arrogant
+ */
+
+import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
+import Button from '@components/common/Button.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+const about = t.about;
+---
+
+<!-- Hero Section -->
+<section class="relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary-50/30 pt-32 pb-20 lg:pt-40 lg:pb-28">
+  <!-- Background elements -->
+  <div class="absolute inset-0 bg-grid opacity-20"></div>
+  <div class="absolute top-20 right-1/4 w-72 h-72 bg-primary-400/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-10 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+  <div class="container-lg relative">
+    <div class="max-w-3xl mx-auto text-center">
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100/80 text-primary-700 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        {about.hero.eyebrow}
+      </div>
+
+      <!-- Title -->
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 leading-tight">
+        {about.hero.title}
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+        {about.hero.subtitle}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Story Section -->
+<section class="py-20 lg:py-28 bg-white">
+  <div class="container-lg">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-10 text-center">
+        {about.story.title}
+      </h2>
+
+      <div class="space-y-6">
+        {about.story.paragraphs.map((paragraph: string, index: number) => (
+          <p
+            class={`text-lg leading-relaxed ${index === 0 ? 'text-xl text-neutral-800 font-medium' : 'text-neutral-600'}`}
+          >
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission Section - Dark -->
+<section class="py-20 lg:py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white relative overflow-hidden">
+  <!-- Decorative elements -->
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+  <div class="container-lg relative">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8">
+        {about.mission.title}
+      </h2>
+      <p class="text-xl md:text-2xl text-slate-300 leading-relaxed">
+        {about.mission.content}
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Approach Section -->
+<section class="py-20 lg:py-28 bg-neutral-50">
+  <div class="container-lg">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+        {about.approach.title}
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+        {about.approach.subtitle}
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid md:grid-cols-3 gap-8">
+      {about.approach.items.map((item: { icon: string; title: string; description: string }) => (
+        <div class="group bg-white rounded-2xl p-8 shadow-sm border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300">
+          <!-- Icon -->
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-6 group-hover:from-primary-400/30 group-hover:to-accent-500/30 transition-all duration-300">
+            {item.icon === 'human' && (
+              <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            )}
+            {item.icon === 'integration' && (
+              <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+              </svg>
+            )}
+            {item.icon === 'results' && (
+              <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            )}
+          </div>
+
+          <!-- Content -->
+          <h3 class="text-xl font-bold text-neutral-900 mb-3">
+            {item.title}
+          </h3>
+          <p class="text-neutral-600 leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Why Us Section -->
+<section class="py-20 lg:py-28 bg-white">
+  <div class="container-lg">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+        {about.whyUs.title}
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+        {about.whyUs.subtitle}
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      {about.whyUs.items.map((item: { title: string; description: string }, index: number) => (
+        <div class="flex gap-4">
+          <!-- Number badge -->
+          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-accent-500 flex items-center justify-center text-white font-bold text-sm">
+            {index + 1}
+          </div>
+
+          <!-- Content -->
+          <div>
+            <h3 class="text-lg font-bold text-neutral-900 mb-2">
+              {item.title}
+            </h3>
+            <p class="text-neutral-600 leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section - Dark -->
+<section class="py-20 lg:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white relative overflow-hidden">
+  <!-- Decorative -->
+  <div class="absolute inset-0 bg-grid-dark opacity-10"></div>
+
+  <div class="container-lg relative">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+      {about.stats.title}
+    </h2>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      {about.stats.items.map((stat: { value: string; label: string }) => (
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent mb-2">
+            {stat.value}
+          </div>
+          <div class="text-slate-400 text-sm md:text-base">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 lg:py-28 bg-neutral-50">
+  <div class="container-lg">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+        {about.cta.title}
+      </h2>
+      <p class="text-lg text-neutral-600 mb-8">
+        {about.cta.subtitle}
+      </p>
+      <Button
+        href={buildLocalePath('/contact/', locale)}
+        variant="gradient"
+        size="lg"
+      >
+        {about.cta.button}
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bg-grid {
+    background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .bg-grid-dark {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+</style>

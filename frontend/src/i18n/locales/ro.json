@@ -235,28 +235,84 @@
   },
 
   "about": {
-    "title": "Despre GENERATIVA",
-    "subtitle": "Transformăm afacerile din România cu inteligență artificială",
+    "meta": {
+      "title": "Despre Noi - GENERATIVA | Agenți AI pentru Business",
+      "description": "Suntem echipa din spatele agenților AI care răspund clienților tăi 24/7. Află povestea noastră, valorile și de ce afacerile din România ne aleg."
+    },
+    "hero": {
+      "eyebrow": "Despre GENERATIVA",
+      "title": "Construim viitorul comunicării cu clienții",
+      "subtitle": "Nu suntem încă o agenție de AI. Suntem oameni care au văzut cum se pierd clienți din cauza unui telefon nerespondat la ora 22:00. Și am decis să rezolvăm asta."
+    },
+    "story": {
+      "title": "Povestea noastră",
+      "paragraphs": [
+        "Totul a început cu o întrebare simplă: De ce o clinică dentară pierde pacienți noi doar pentru că recepția e închisă după ora 18:00?",
+        "Am văzut afaceri excelente - doctori dedicați, restaurante cu mâncare extraordinară, service-uri auto de încredere - care pierdeau clienți pentru că nu puteau răspunde la telefon în afara programului.",
+        "Nu era vina lor. Era o limitare umană pe care tehnologia o poate rezolva.",
+        "Așa s-a născut GENERATIVA: din dorința de a oferi fiecărei afaceri un asistent care nu doarme, nu obosește și nu uită niciodată să fie politicos."
+      ]
+    },
     "mission": {
       "title": "Misiunea noastră",
-      "description": "Facem inteligența artificială accesibilă și practică pentru afacerile românești. Nu vindem tehnologie de dragul tehnologiei - oferim soluții concrete care generează rezultate măsurabile."
+      "content": "Facem ca fiecare afacere să poată oferi clienților săi experiența pe care o merită - răspunsuri rapide, profesionale, la orice oră. Nu pentru că e cool să ai AI, ci pentru că clienții tăi merită mai mult decât un mesaj vocal."
     },
-    "values": {
-      "title": "Valorile noastre",
-      "items": {
-        "results": {
-          "title": "Orientare pe rezultate",
-          "description": "Măsurăm succesul în ROI și impact real, nu în linii de cod"
+    "approach": {
+      "title": "Abordarea noastră",
+      "subtitle": "Trei principii care ne ghidează fiecare proiect",
+      "items": [
+        {
+          "icon": "human",
+          "title": "Tehnologie cu suflet",
+          "description": "Agenții noștri AI nu sună ca roboții. Sunt antrenați să fie calzi, empatici și să rezolve probleme reale. Pentru că un client frustrat are nevoie de ajutor, nu de un meniu automatizat."
         },
-        "transparency": {
-          "title": "Transparență",
-          "description": "Comunicăm clar, onest și fără jargon inutil"
+        {
+          "icon": "integration",
+          "title": "Se integrează, nu înlocuiește",
+          "description": "Nu venim să dăm peste cap ce funcționează deja. Agenții noștri se conectează la sistemele tale existente - CRM, calendar, email - și lucrează împreună cu echipa ta."
         },
-        "partnership": {
-          "title": "Parteneriat",
-          "description": "Suntem parteneri pe termen lung, nu furnizori de proiecte"
+        {
+          "icon": "results",
+          "title": "Rezultate, nu promisiuni",
+          "description": "Nu îți vindem vise. Îți arătăm exact câte apeluri ai pierdut luna trecută și câte poți recupera. Dacă nu vedem ROI clar, îți spunem din start."
         }
-      }
+      ]
+    },
+    "whyUs": {
+      "title": "De ce GENERATIVA?",
+      "subtitle": "În piața plină de buzzwords despre AI, iată ce ne diferențiază",
+      "items": [
+        {
+          "title": "Focus pe România",
+          "description": "Înțelegem piața locală. Agenții noștri vorbesc română natural, cunosc specificul industriilor locale și se integrează cu sistemele populare în România."
+        },
+        {
+          "title": "Demo înainte de promisiuni",
+          "description": "Nu cerem să ne crezi pe cuvânt. Îți arătăm live cum funcționează un agent AI pentru afacerea ta, cu scenarii reale din industria ta."
+        },
+        {
+          "title": "Partener, nu furnizor",
+          "description": "Nu dispărem după implementare. Monitorizăm performanța, optimizăm continuu și suntem la un telefon distanță când ai nevoie."
+        },
+        {
+          "title": "Preț transparent",
+          "description": "Fără costuri ascunse, fără surprize. Știi exact ce plătești și ce primești. Și dacă nu funcționează, nu plătești."
+        }
+      ]
+    },
+    "stats": {
+      "title": "Numerele vorbesc",
+      "items": [
+        { "value": "50+", "label": "Afaceri care ne-au acordat încrederea" },
+        { "value": "100K+", "label": "Conversații gestionate de agenții noștri" },
+        { "value": "4.9", "label": "Rating mediu de satisfacție (din 5)" },
+        { "value": "< 1s", "label": "Timp mediu de răspuns" }
+      ]
+    },
+    "cta": {
+      "title": "Hai să vedem dacă te putem ajuta",
+      "subtitle": "O conversație de 15 minute ne arată dacă suntem potriviți. Fără pitch-uri de vânzare, fără presiune - doar claritate.",
+      "button": "Programează o discuție"
     }
   }
 }

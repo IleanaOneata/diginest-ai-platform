@@ -1,0 +1,27 @@
+---
+/**
+ * Romanian About Page
+ *
+ * SEO optimized about page for GENERATIVA
+ * Target keywords: agenți AI România, automatizare business, AI pentru afaceri
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import AboutPage from '@components/sections/AboutPage.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'ro';
+const t = getTranslations(locale);
+
+const title = t.about.meta.title;
+const description = t.about.meta.description;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/ro/despre/"
+>
+  <AboutPage locale={locale} />
+</BaseLayout>

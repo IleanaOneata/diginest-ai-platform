@@ -1,0 +1,27 @@
+---
+/**
+ * English About Page
+ *
+ * SEO optimized about page for GENERATIVA
+ * Target keywords: AI agents, business automation, AI for business
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import AboutPage from '@components/sections/AboutPage.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'en';
+const t = getTranslations(locale);
+
+const title = t.about.meta.title;
+const description = t.about.meta.description;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/en/about/"
+>
+  <AboutPage locale={locale} />
+</BaseLayout>

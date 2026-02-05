@@ -26,6 +26,7 @@
 11. ✅ **ScaleWithConfidence** - Animație wave Canvas pentru scalare (vezi secțiunea dedicată)
 12. ✅ **ScrollToTop** - Buton floating pentru navigare rapidă sus
 13. ✅ **CookieBanner** - Redesign modern corner popup (GDPR compliant)
+14. ✅ **Hero Stats Redesign** - Carduri glassmorphism cu counter animation
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -788,6 +789,16 @@ Cookie Banner și ScrollToTop sunt coordonate inteligent pe baza dimensiunii ecr
 - Redesign complet CookieBanner: corner popup modern, GDPR compliant
 - Documentare Cookie Banner design guidelines (2025-2026 best practices)
 - **Optimizare**: ScrollToTop apare imediat pe desktop (≥640px), așteaptă cookie doar pe mobile
+
+### Sesiune Februarie 2026 - Hero Stats Redesign
+- Redesign complet al statisticilor din Hero (0.8s, 24/7, 90%)
+- Carduri cu glassmorphism (bg-white/60, backdrop-blur, border subtil)
+- Iconițe relevante pentru fiecare stat (bolt, clock, check)
+- Separare value/unit pentru ierarhie vizuală
+- Counter animation (numere care "numără" de la 0 când intră în view)
+- Hover effects: lift (-2px), shadow glow, icon pulse
+- IntersectionObserver pentru declanșare animație
+- Stagger effect (150ms delay între carduri)
 
 ---
 
