@@ -109,43 +109,8 @@ const connectionIcons: Record<string, string> = {
       </p>
     </div>
 
-    <!-- Mobile: Simplified horizontal scroll layout -->
-    <div class="md:hidden mb-8">
-      <!-- Center Hub - Mobile -->
-      <div class="flex justify-center mb-6">
-        <div class="relative">
-          <div class="absolute inset-0 bg-gradient-to-br from-primary-400 to-accent-600 rounded-full blur-xl opacity-40 scale-110"></div>
-          <div class="relative w-28 h-28 rounded-full bg-gradient-to-br from-primary-400 via-primary-500 to-accent-600 flex flex-col items-center justify-center shadow-2xl">
-            <span class="font-bold text-sm text-white tracking-wide">{t.centerLabel}</span>
-            <span class="text-[9px] text-white/70 mt-0.5">{t.centerSubtitle}</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Swipe hint -->
-      <div class="flex items-center justify-center gap-2 text-xs text-slate-500 mb-3">
-        <svg class="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-        <span>{locale === 'ro' ? 'Glisează pentru mai multe' : 'Swipe for more'}</span>
-      </div>
-
-      <!-- Connections - Horizontal scroll -->
-      <div class="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-4">
-        {t.connections.map((connection) => (
-          <div class="flex-shrink-0 w-20 snap-start">
-            <div class="flex flex-col items-center p-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-              <svg class="w-5 h-5 text-primary-400 mb-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons[connection.id]} />
-              <span class="text-[10px] text-slate-400 text-center leading-tight">{connection.label}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- Desktop: Original grid layout (hidden on mobile) -->
-    <!-- Integration Grid - Asymmetric Stripe-style layout -->
-    <div class="hidden md:block relative max-w-4xl mx-auto mb-12 lg:mb-16">
+    <!-- Integration Grid - Responsive layout cu linii animate pe toate dimensiunile -->
+    <div class="relative max-w-4xl mx-auto mb-8 md:mb-12 lg:mb-16">
       <!-- SVG Connection Lines -->
       <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
         <defs>
@@ -173,22 +138,22 @@ const connectionIcons: Record<string, string> = {
         <path d="M 400 250 Q 250 220 100 180" fill="none" stroke="url(#line-gradient)" stroke-width="2" stroke-dasharray="8 4" class="animate-dash" style="animation-delay: 3.5s" />
       </svg>
 
-      <!-- Grid Container -->
-      <div class="grid grid-cols-5 gap-4 md:gap-6 min-h-[500px] items-center">
+      <!-- Grid Container - Responsive -->
+      <div class="grid grid-cols-5 gap-2 sm:gap-4 md:gap-6 min-h-[320px] sm:min-h-[400px] md:min-h-[500px] items-center">
 
         <!-- Row 1: Top nodes -->
         <div class="col-start-1"></div>
-        <div class="col-start-2 justify-self-center self-start pt-4">
+        <div class="col-start-2 justify-self-center self-start pt-2 sm:pt-4">
           <div class="integration-card group">
-            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.phone} />
-            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[0].label}</span>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.phone} />
+            <span class="text-[9px] sm:text-[10px] md:text-xs text-slate-400 group-hover:text-slate-300 mt-1 sm:mt-2 text-center hidden sm:block">{t.connections[0].label}</span>
           </div>
         </div>
         <div class="col-start-3"></div>
-        <div class="col-start-4 justify-self-center self-start pt-4">
+        <div class="col-start-4 justify-self-center self-start pt-2 sm:pt-4">
           <div class="integration-card group">
-            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.whatsapp} />
-            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[1].label}</span>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.whatsapp} />
+            <span class="text-[9px] sm:text-[10px] md:text-xs text-slate-400 group-hover:text-slate-300 mt-1 sm:mt-2 text-center hidden sm:block">{t.connections[1].label}</span>
           </div>
         </div>
         <div class="col-start-5"></div>
@@ -196,8 +161,8 @@ const connectionIcons: Record<string, string> = {
         <!-- Row 2: Side nodes -->
         <div class="col-start-1 justify-self-start self-center">
           <div class="integration-card group">
-            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.sms} />
-            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[7].label}</span>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.sms} />
+            <span class="text-[9px] sm:text-[10px] md:text-xs text-slate-400 group-hover:text-slate-300 mt-1 sm:mt-2 text-center hidden sm:block">{t.connections[7].label}</span>
           </div>
         </div>
         <div class="col-start-2"></div>
@@ -208,10 +173,10 @@ const connectionIcons: Record<string, string> = {
             <!-- Glow effect -->
             <div class="absolute inset-0 bg-gradient-to-br from-primary-400 to-accent-600 rounded-full blur-xl opacity-40 scale-110"></div>
 
-            <!-- Main hub -->
-            <div class="relative w-36 h-36 md:w-44 md:h-44 rounded-full bg-gradient-to-br from-primary-400 via-primary-500 to-accent-600 flex flex-col items-center justify-center shadow-2xl">
-              <span class="font-bold text-base md:text-lg text-white tracking-wide">{t.centerLabel}</span>
-              <span class="text-[10px] md:text-xs text-white/70 mt-1">{t.centerSubtitle}</span>
+            <!-- Main hub - Responsive sizing -->
+            <div class="relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full bg-gradient-to-br from-primary-400 via-primary-500 to-accent-600 flex flex-col items-center justify-center shadow-2xl">
+              <span class="font-bold text-[10px] sm:text-xs md:text-base lg:text-lg text-white tracking-wide">{t.centerLabel}</span>
+              <span class="text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs text-white/70 mt-0.5 sm:mt-1">{t.centerSubtitle}</span>
             </div>
           </div>
         </div>
@@ -219,40 +184,40 @@ const connectionIcons: Record<string, string> = {
         <div class="col-start-4"></div>
         <div class="col-start-5 justify-self-end self-center">
           <div class="integration-card group">
-            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.email} />
-            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[2].label}</span>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.email} />
+            <span class="text-[9px] sm:text-[10px] md:text-xs text-slate-400 group-hover:text-slate-300 mt-1 sm:mt-2 text-center hidden sm:block">{t.connections[2].label}</span>
           </div>
         </div>
 
         <!-- Row 3: More side nodes -->
         <div class="col-start-1 justify-self-start self-center">
           <div class="integration-card group">
-            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.software} />
-            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[6].label}</span>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.software} />
+            <span class="text-[9px] sm:text-[10px] md:text-xs text-slate-400 group-hover:text-slate-300 mt-1 sm:mt-2 text-center hidden sm:block">{t.connections[6].label}</span>
           </div>
         </div>
         <div class="col-start-2"></div>
         <div class="col-start-4"></div>
         <div class="col-start-5 justify-self-end self-center">
           <div class="integration-card group">
-            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.crm} />
-            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[3].label}</span>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.crm} />
+            <span class="text-[9px] sm:text-[10px] md:text-xs text-slate-400 group-hover:text-slate-300 mt-1 sm:mt-2 text-center hidden sm:block">{t.connections[3].label}</span>
           </div>
         </div>
 
         <!-- Row 4: Bottom nodes -->
         <div class="col-start-1"></div>
-        <div class="col-start-2 justify-self-center self-end pb-4">
+        <div class="col-start-2 justify-self-center self-end pb-2 sm:pb-4">
           <div class="integration-card group">
-            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.team} />
-            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[5].label}</span>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.team} />
+            <span class="text-[9px] sm:text-[10px] md:text-xs text-slate-400 group-hover:text-slate-300 mt-1 sm:mt-2 text-center hidden sm:block">{t.connections[5].label}</span>
           </div>
         </div>
         <div class="col-start-3"></div>
-        <div class="col-start-4 justify-self-center self-end pb-4">
+        <div class="col-start-4 justify-self-center self-end pb-2 sm:pb-4">
           <div class="integration-card group">
-            <svg class="w-6 h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.calendar} />
-            <span class="text-xs text-slate-400 group-hover:text-slate-300 mt-2 text-center">{t.connections[4].label}</span>
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-400 group-hover:text-primary-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" set:html={connectionIcons.calendar} />
+            <span class="text-[9px] sm:text-[10px] md:text-xs text-slate-400 group-hover:text-slate-300 mt-1 sm:mt-2 text-center hidden sm:block">{t.connections[4].label}</span>
           </div>
         </div>
         <div class="col-start-5"></div>
@@ -278,13 +243,25 @@ const connectionIcons: Record<string, string> = {
 
 <style>
   .integration-card {
-    @apply flex flex-col items-center p-4 rounded-xl
+    @apply flex flex-col items-center p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl
            bg-white/5 border border-white/10
            backdrop-blur-sm
            hover:bg-white/10 hover:border-primary-500/30
            hover:shadow-lg hover:shadow-primary-500/10
            transition-all duration-300 cursor-default;
-    min-width: 90px;
+    min-width: 40px;
+  }
+
+  @media (min-width: 640px) {
+    .integration-card {
+      min-width: 70px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .integration-card {
+      min-width: 90px;
+    }
   }
 
   @keyframes dash {
