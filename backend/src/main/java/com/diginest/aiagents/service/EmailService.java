@@ -20,10 +20,10 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    @Value("${app.email.from:noreply@diginest.ai}")
+    @Value("${app.email.from:contact@generativa.ro}")
     private String fromEmail;
 
-    @Value("${app.email.admin:contact@diginest.ai}")
+    @Value("${app.email.admin:contact@generativa.ro}")
     private String adminEmail;
 
     @Value("${app.email.enabled:false}")
@@ -46,7 +46,7 @@ public class EmailService {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromEmail);
             message.setTo(adminEmail);
-            message.setSubject("[Diginest AI] New Contact Request from " + request.getCompany());
+            message.setSubject("[GENERATIVA] New Contact Request from " + request.getCompany());
             message.setText(buildAdminNotificationText(request));
 
             mailSender.send(message);
@@ -114,8 +114,8 @@ public class EmailService {
 
     private String getConfirmationSubject(String locale) {
         return "en".equals(locale)
-            ? "Thank you for contacting Diginest AI"
-            : "Mulțumim pentru mesaj - Diginest AI";
+            ? "Thank you for contacting GENERATIVA"
+            : "Mulțumim pentru mesaj - GENERATIVA";
     }
 
     private String buildConfirmationText(ContactRequest request) {
@@ -125,7 +125,7 @@ public class EmailService {
             return String.format("""
                 Hello %s,
 
-                Thank you for contacting Diginest AI!
+                Thank you for contacting GENERATIVA!
 
                 We have received your message and will get back to you within 24 hours.
 
@@ -133,11 +133,11 @@ public class EmailService {
                 "%s"
 
                 Best regards,
-                The Diginest AI Team
+                The GENERATIVA Team
 
                 ---
-                Website: https://diginest.ai
-                Email: contact@diginest.ai
+                Website: https://generativa.ro
+                Email: contact@generativa.ro
                 """,
                 request.getName(),
                 request.getMessage().substring(0, Math.min(200, request.getMessage().length())) + "..."
@@ -154,11 +154,11 @@ public class EmailService {
                 "%s"
 
                 Cu drag,
-                Echipa Diginest AI
+                Echipa GENERATIVA
 
                 ---
-                Website: https://diginest.ai
-                Email: contact@diginest.ai
+                Website: https://generativa.ro
+                Email: contact@generativa.ro
                 """,
                 request.getName(),
                 request.getMessage().substring(0, Math.min(200, request.getMessage().length())) + "..."

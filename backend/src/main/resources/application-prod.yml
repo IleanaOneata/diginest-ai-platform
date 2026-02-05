@@ -34,12 +34,12 @@ spring:
 # =============================================================================
 app:
   cors:
-    allowed-origins: ${CORS_ORIGINS:https://diginest.ai,https://www.diginest.ai}
+    allowed-origins: ${CORS_ORIGINS:https://generativa.ro,https://www.generativa.ro}
 
   email:
     enabled: true
-    from: ${EMAIL_FROM}
-    admin: ${EMAIL_ADMIN}
+    from: ${EMAIL_FROM:contact@generativa.ro}
+    admin: ${EMAIL_ADMIN:contact@generativa.ro}
 
 # =============================================================================
 # Logging - Less verbose in production

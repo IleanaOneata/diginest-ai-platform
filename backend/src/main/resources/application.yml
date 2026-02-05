@@ -1,10 +1,10 @@
 # =============================================================================
-# Diginest AI Agents API - Main Configuration
+# GENERATIVA AI Agents API - Main Configuration
 # =============================================================================
 
 spring:
   application:
-    name: diginest-ai-api
+    name: generativa-ai-api
 
   # Profile-based configuration
   profiles:
@@ -35,9 +35,9 @@ spring:
 
   # Mail Configuration
   mail:
-    host: ${MAIL_HOST:smtp.example.com}
+    host: ${MAIL_HOST:mail.generativa.ro}
     port: ${MAIL_PORT:587}
-    username: ${MAIL_USERNAME:}
+    username: ${MAIL_USERNAME:contact@generativa.ro}
     password: ${MAIL_PASSWORD:}
     properties:
       mail:
@@ -45,6 +45,8 @@ spring:
           auth: true
           starttls:
             enable: true
+          ssl:
+            trust: ${MAIL_HOST:mail.generativa.ro}
 
 # =============================================================================
 # Server Configuration
@@ -61,13 +63,13 @@ server:
 app:
   # CORS settings
   cors:
-    allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:4321,https://diginest.ai}
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:4321,https://generativa.ro,https://www.generativa.ro}
 
   # Email settings
   email:
     enabled: ${EMAIL_ENABLED:false}
-    from: ${EMAIL_FROM:noreply@diginest.ai}
-    admin: ${EMAIL_ADMIN:contact@diginest.ai}
+    from: ${EMAIL_FROM:contact@generativa.ro}
+    admin: ${EMAIL_ADMIN:contact@generativa.ro}
 
 # =============================================================================
 # Actuator Configuration
