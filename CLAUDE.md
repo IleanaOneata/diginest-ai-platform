@@ -27,12 +27,11 @@
 12. ✅ **ScrollToTop** - Buton floating pentru navigare rapidă sus
 13. ✅ **CookieBanner** - Redesign modern corner popup (GDPR compliant)
 14. ✅ **Hero Stats Redesign** - Carduri glassmorphism cu counter animation
+15. ✅ **Mobile Optimization** - Scroll orizontal pentru carduri (vezi secțiunea dedicată)
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
 - [ ] Test complet pe staging
-- [ ] Mobile responsive fine-tuning
-- [ ] Optimizare animații pentru toate dispozitivele
 
 ### Următorii pași:
 1. [ ] Verificare staging URL după deploy
@@ -766,6 +765,129 @@ Cookie Banner și ScrollToTop sunt coordonate inteligent pe baza dimensiunii ecr
 
 ---
 
+## 📱 MOBILE OPTIMIZATION - HORIZONTAL SCROLL (Februarie 2026)
+
+> **Pentru AI**: Această secțiune documentează optimizările pentru mobile care reduc scroll-ul vertical prin scroll orizontal pentru carduri.
+
+### Principiul de Bază
+
+Pe mobile (sub 768px), secțiunile cu multiple carduri folosesc **scroll orizontal** în loc de grid vertical pentru a reduce cantitatea de scroll necesară până la finalul paginii.
+
+### Componente Optimizate
+
+| Component | Optimizare | Breakpoint |
+|-----------|-----------|------------|
+| **UseCases** | 6 carduri → scroll orizontal cu dots | `md:` (768px) |
+| **BenefitsStrip** | 6 beneficii → scroll orizontal compact | `md:` (768px) |
+| **AboutPage Approach** | 4 carduri → scroll orizontal | `md:` (768px) |
+| **AboutPage WhyUs** | 4 carduri → scroll orizontal | `md:` (768px) |
+| **IntegrationHub** | Layout simplificat + scroll orizontal | `md:` (768px) |
+| **IntegrationHub Benefits** | 4 beneficii → scroll orizontal | `md:` (768px) |
+
+### Pattern-uri CSS Folosite
+
+```css
+/* Container scroll orizontal */
+.scroll-container {
+  display: flex;
+  gap: 0.75rem;              /* gap-3 */
+  overflow-x: auto;
+  padding-bottom: 1rem;      /* pb-4 pentru scrollbar */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;  /* iOS smooth scroll */
+}
+
+/* Card în scroll */
+.scroll-card {
+  flex-shrink: 0;
+  width: 280px;              /* sau w-[85vw] pentru full-width */
+  scroll-snap-align: start;
+}
+
+/* Ascunde scrollbar dar păstrează funcționalitatea */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Extend scroll area pentru edge-to-edge */
+.extend-scroll {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+```
+
+### Tailwind Classes Standard
+
+```html
+<!-- Container -->
+<div class="flex md:grid md:grid-cols-3 gap-4 overflow-x-auto md:overflow-visible
+            pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+
+  <!-- Card -->
+  <div class="flex-shrink-0 w-[280px] md:w-auto snap-start">
+    <!-- content -->
+  </div>
+</div>
+```
+
+### Swipe Hint (Indicator vizual)
+
+```html
+<!-- Afișat doar pe mobile -->
+<div class="flex md:hidden items-center justify-center gap-2 text-xs text-slate-500 mb-3">
+  <svg class="w-4 h-4 animate-pulse"><!-- arrow icon --></svg>
+  <span>Glisează pentru mai multe</span>
+</div>
+```
+
+### Dot Indicators (UseCases)
+
+```html
+<!-- Indicatori pentru poziția curentă -->
+<div class="flex md:hidden justify-center gap-2 mt-4">
+  {items.map((_, index) => (
+    <div class="scroll-indicator w-2 h-2 rounded-full bg-slate-300
+                transition-colors duration-300 [&.active]:bg-primary-500" />
+  ))}
+</div>
+
+<script>
+  // Update indicators on scroll
+  container.addEventListener('scroll', () => {
+    const activeIndex = Math.round(scrollLeft / cardWidth);
+    indicators.forEach((el, i) => el.classList.toggle('active', i === activeIndex));
+  });
+</script>
+```
+
+### Mobile-Specific Layouts
+
+**IntegrationHub pe Mobile:**
+- Hub central mic (w-28 h-28) în loc de w-44 h-44
+- Conexiuni în scroll orizontal (carduri mici w-20)
+- Grid complex ascuns (`hidden md:block`)
+
+**BenefitsStrip pe Mobile:**
+- Descrierile ascunse (`hidden md:block`)
+- Iconuri mai mici (w-8 h-8 vs w-10 h-10)
+- Text mai mic (text-xs vs text-sm)
+
+### Reguli OBLIGATORII
+
+1. **Adaugă `.scrollbar-hide`** la fiecare container cu scroll orizontal
+2. **Folosește `snap-x snap-mandatory`** pentru snapping la carduri
+3. **Extinde cu `-mx-4 px-4`** pentru edge-to-edge scroll pe mobile
+4. **Resetează pe desktop** cu `md:overflow-visible md:mx-0 md:px-0`
+5. **Testează pe iOS** - folosește `-webkit-overflow-scrolling: touch`
+
+---
+
 ## 🐛 KNOWN BUGS & TESTING LOG
 
 > **Pentru AI**: Această secțiune documentează bug-urile găsite și rezolvate. Verifică întotdeauna aceste elemente când faci modificări.
@@ -869,6 +991,19 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   - Listat toate link-urile care duc la 404
   - Checklist pentru verificări la modificări
   - Secțiune dedicată pentru known bugs
+
+### Sesiune Februarie 2026 - Mobile Optimization (Scroll Orizontal)
+- **Problema**: Pe mobile, scroll-ul vertical era prea lung până la finalul paginii
+- **Soluția**: Cardurile din secțiuni se derulează orizontal pe mobile
+- **Componente optimizate**:
+  - UseCases: scroll orizontal cu dots indicators și swipe hint
+  - BenefitsStrip: compact pe mobile, descrieri ascunse, iconuri mici
+  - AboutPage Approach: carduri în scroll orizontal
+  - AboutPage WhyUs: carduri în scroll orizontal
+  - IntegrationHub: layout simplificat cu hub central mic + conexiuni scroll
+  - IntegrationHub Benefits: scroll orizontal pe mobile
+- **Pattern CSS**: `flex md:grid overflow-x-auto md:overflow-visible snap-x scrollbar-hide`
+- **Fix TypeScript**: `container` null check în UseCases scroll handler
 
 ---
 
