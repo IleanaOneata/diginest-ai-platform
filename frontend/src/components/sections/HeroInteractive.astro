@@ -34,9 +34,9 @@ const heroTexts = {
     cta_primary: 'Vreau și eu așa ceva',
     cta_secondary: 'Cum funcționează?',
     stats: [
-      { value: '0.8s', label: 'timp răspuns' },
-      { value: '24/7', label: 'disponibilitate' },
-      { value: '90%', label: 'întrebări rezolvate automat' },
+      { value: '0.8', unit: 's', label: 'timp răspuns', icon: 'bolt' },
+      { value: '24', unit: '/7', label: 'disponibilitate', icon: 'clock' },
+      { value: '90', unit: '%', label: 'rezolvate automat', icon: 'check' },
     ],
   },
   en: {
@@ -47,9 +47,9 @@ const heroTexts = {
     cta_primary: 'I want this too',
     cta_secondary: 'How does it work?',
     stats: [
-      { value: '0.8s', label: 'response time' },
-      { value: '24/7', label: 'availability' },
-      { value: '90%', label: 'queries auto-resolved' },
+      { value: '0.8', unit: 's', label: 'response time', icon: 'bolt' },
+      { value: '24', unit: '/7', label: 'availability', icon: 'clock' },
+      { value: '90', unit: '%', label: 'auto-resolved', icon: 'check' },
     ],
   },
 };
@@ -113,14 +113,47 @@ const hero = heroTexts[locale] || heroTexts.ro;
           </Button>
         </div>
 
-        <!-- Mini Stats -->
-        <div class="flex flex-wrap gap-6 animate-fade-in" style="animation-delay: 400ms;">
+        <!-- Stats Cards - Glassmorphism Style -->
+        <div class="flex flex-wrap gap-3 sm:gap-4 animate-fade-in" style="animation-delay: 400ms;">
           {hero.stats.map((stat) => (
-            <div class="flex items-center gap-2">
-              <span class="text-2xl font-bold bg-gradient-to-r from-primary-500 to-accent-600 bg-clip-text text-transparent">
-                {stat.value}
-              </span>
-              <span class="text-sm text-neutral-500">{stat.label}</span>
+            <div class="stat-card group relative flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 bg-white/60 backdrop-blur-sm border border-neutral-200/60 rounded-xl hover:border-primary-300/60 hover:bg-white/80 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 cursor-default">
+              <!-- Icon -->
+              <div class="stat-icon flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center group-hover:from-primary-400/30 group-hover:to-accent-500/30 transition-all duration-300">
+                {stat.icon === 'bolt' && (
+                  <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                )}
+                {stat.icon === 'clock' && (
+                  <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                )}
+                {stat.icon === 'check' && (
+                  <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+              </div>
+
+              <!-- Value + Label -->
+              <div class="flex flex-col">
+                <div class="flex items-baseline gap-0.5">
+                  <span class="stat-value text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary-500 via-primary-600 to-accent-600 bg-clip-text text-transparent">
+                    {stat.value}
+                  </span>
+                  <span class="text-lg sm:text-xl font-semibold text-neutral-700">
+                    {stat.unit}
+                  </span>
+                </div>
+                <span class="text-xs sm:text-sm text-neutral-500 font-medium -mt-0.5">
+                  {stat.label}
+                </span>
+              </div>
+
+              <!-- Subtle glow on hover -->
+              <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-400/0 via-primary-400/0 to-accent-500/0 group-hover:from-primary-400/5 group-hover:via-transparent group-hover:to-accent-500/5 transition-all duration-500 pointer-events-none"></div>
             </div>
           ))}
         </div>
@@ -156,4 +189,129 @@ const hero = heroTexts[locale] || heroTexts.ro;
     background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
     background-size: 24px 24px;
   }
+
+  /* Stat cards hover lift effect */
+  .stat-card {
+    transform: translateY(0);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Counter animation for stat values */
+  .stat-value {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Subtle pulse on icon when card is hovered */
+  .stat-card:hover .stat-icon {
+    animation: icon-pulse 0.6s ease-out;
+  }
+
+  @keyframes icon-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
 </style>
+
+<script>
+  /**
+   * Counter Animation for Hero Stats
+   * Animates numbers from 0 to their final value when they come into view
+   */
+  (function() {
+    'use strict';
+
+    const statValues = document.querySelectorAll('.stat-value');
+    if (!statValues.length) return;
+
+    // Store original values and mark as not yet animated
+    const statsData: { el: Element; target: string; animated: boolean }[] = [];
+
+    statValues.forEach((el) => {
+      const target = el.textContent || '';
+      statsData.push({ el, target, animated: false });
+    });
+
+    /**
+     * Animate a number from 0 to target
+     */
+    function animateValue(el: Element, targetStr: string, duration: number = 1500): void {
+      // Parse the target - handle decimals like "0.8"
+      const targetNum = parseFloat(targetStr);
+      if (isNaN(targetNum)) {
+        el.textContent = targetStr;
+        return;
+      }
+
+      const isDecimal = targetStr.includes('.');
+      const decimalPlaces = isDecimal ? (targetStr.split('.')[1]?.length || 1) : 0;
+      const startTime = performance.now();
+
+      function update(currentTime: number): void {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Ease out cubic for smooth deceleration
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentValue = targetNum * easeOut;
+
+        if (isDecimal) {
+          el.textContent = currentValue.toFixed(decimalPlaces);
+        } else {
+          el.textContent = Math.round(currentValue).toString();
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          // Ensure final value is exact
+          el.textContent = targetStr;
+        }
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    /**
+     * IntersectionObserver to trigger animation when stats come into view
+     */
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Find which stat this is and animate if not already done
+            const statCard = entry.target.closest('.stat-card');
+            if (!statCard) return;
+
+            const valueEl = statCard.querySelector('.stat-value');
+            if (!valueEl) return;
+
+            const statData = statsData.find((s) => s.el === valueEl);
+            if (statData && !statData.animated) {
+              statData.animated = true;
+              // Stagger animation based on index
+              const index = statsData.indexOf(statData);
+              setTimeout(() => {
+                animateValue(statData.el, statData.target, 1200);
+              }, index * 150);
+            }
+          }
+        });
+      },
+      { threshold: 0.5, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    // Observe each stat card
+    document.querySelectorAll('.stat-card').forEach((card) => {
+      observer.observe(card);
+    });
+
+    // Cleanup for SPA navigation
+    document.addEventListener('astro:before-preparation', () => {
+      observer.disconnect();
+    });
+  })();
+</script>
