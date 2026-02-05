@@ -190,10 +190,20 @@ const ariaLabel = labels[locale];
 
     const SCROLL_THRESHOLD = 400; // px before button appears
     const COOKIE_NAME = 'generativa_cookie_consent';
+    const MOBILE_BREAKPOINT = 640; // px - below this, wait for cookie banner
 
     let isVisible = false;
     let ticking = false;
     let cookieBannerDismissed = false;
+
+    /**
+     * Check if we're on a mobile device (narrow screen)
+     * On mobile, we need to wait for cookie banner to avoid overlap
+     * On desktop/tablet, elements don't overlap so we can show immediately
+     */
+    function isMobileView(): boolean {
+      return window.innerWidth < MOBILE_BREAKPOINT;
+    }
 
     /**
      * Check if cookie consent has been given (banner is dismissed)
@@ -208,12 +218,17 @@ const ariaLabel = labels[locale];
     }
 
     /**
-     * Update button visibility based on scroll position AND cookie banner state
+     * Update button visibility based on scroll position
+     * On mobile: also check if cookie banner is dismissed (to avoid overlap)
+     * On desktop/tablet: show immediately when scrolled (no overlap issue)
      */
     function updateButtonVisibility(): void {
       const scrollY = window.scrollY || window.pageYOffset;
-      // Show button only if: scrolled enough AND cookie banner is dismissed
-      const shouldBeVisible = scrollY > SCROLL_THRESHOLD && cookieBannerDismissed;
+      const scrolledEnough = scrollY > SCROLL_THRESHOLD;
+
+      // On mobile, wait for cookie banner. On desktop, show immediately.
+      const canShow = isMobileView() ? cookieBannerDismissed : true;
+      const shouldBeVisible = scrolledEnough && canShow;
 
       if (shouldBeVisible !== isVisible) {
         isVisible = shouldBeVisible;
@@ -253,8 +268,17 @@ const ariaLabel = labels[locale];
       }
     }
 
+    /**
+     * Handle window resize - recheck visibility
+     * (in case user resizes from mobile to desktop or vice versa)
+     */
+    function onResize(): void {
+      updateButtonVisibility();
+    }
+
     // Event listeners
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
     button.addEventListener('click', scrollToTop);
 
     // Listen for cookie banner being dismissed
@@ -270,6 +294,7 @@ const ariaLabel = labels[locale];
     // Cleanup for SPA navigation (Astro)
     document.addEventListener('astro:before-preparation', () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
       button.removeEventListener('click', scrollToTop);
     });
   })();
