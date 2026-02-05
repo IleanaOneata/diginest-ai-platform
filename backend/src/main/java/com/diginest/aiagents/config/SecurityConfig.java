@@ -2,6 +2,7 @@ package com.diginest.aiagents.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -12,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
  * Security configuration for the API.
  *
  * Configures:
- * - CORS settings
+ * - CORS settings (using CorsConfig bean)
  * - CSRF protection (disabled for stateless API)
  * - Endpoint security rules
  * - Session management (stateless)
@@ -24,6 +25,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+            // Enable CORS using the CorsConfigurationSource bean
+            .cors(Customizer.withDefaults())
+
             // Disable CSRF for stateless API
             .csrf(AbstractHttpConfigurer::disable)
 
