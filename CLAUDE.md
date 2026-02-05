@@ -734,10 +734,18 @@ window.dispatchEvent(new CustomEvent('cookieBannerHidden'));
 
 ### Integrare cu ScrollToTop
 
-Cookie Banner și ScrollToTop sunt coordonate:
-- ScrollToTop așteaptă până când Cookie Banner este închis
-- Se folosește custom event `cookieBannerHidden`
-- Evită suprapunerea pe mobile
+Cookie Banner și ScrollToTop sunt coordonate inteligent pe baza dimensiunii ecranului:
+
+| Dispozitiv | Comportament ScrollToTop |
+|------------|--------------------------|
+| **Mobile (<640px)** | Așteaptă cookie banner dismiss (evită suprapunere) |
+| **Desktop/Tablet (≥640px)** | Apare imediat când scrollezi 400px (nu se suprapun) |
+
+**Logica**:
+- Pe mobile, spațiul e limitat → ambele elemente pot să se suprapună
+- Pe desktop, cookie banner e în stânga-jos, ScrollToTop în dreapta-jos → nu se suprapun
+- Se folosește custom event `cookieBannerHidden` pentru comunicare
+- Resize listener actualizează comportamentul la schimbarea viewport-ului
 
 ### Responsive Breakpoints
 
@@ -779,6 +787,7 @@ Cookie Banner și ScrollToTop sunt coordonate:
 - Fix Button.astro pentru a suporta `data-*` attributes
 - Redesign complet CookieBanner: corner popup modern, GDPR compliant
 - Documentare Cookie Banner design guidelines (2025-2026 best practices)
+- **Optimizare**: ScrollToTop apare imediat pe desktop (≥640px), așteaptă cookie doar pe mobile
 
 ---
 
