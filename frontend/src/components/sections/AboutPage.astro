@@ -28,29 +28,29 @@ const about = t.about;
 ---
 
 <!-- Hero Section -->
-<section class="relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary-50/30 pt-32 pb-20 lg:pt-40 lg:pb-28">
+<section class="relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary-50/30 pt-24 pb-12 md:pt-32 md:pb-20 lg:pt-40 lg:pb-28">
   <!-- Background elements -->
   <div class="absolute inset-0 bg-grid opacity-20"></div>
   <div class="absolute top-20 right-1/4 w-72 h-72 bg-primary-400/10 rounded-full blur-3xl"></div>
   <div class="absolute bottom-10 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
 
   <div class="container-lg relative">
-    <div class="max-w-3xl mx-auto text-center">
+    <div class="max-w-3xl mx-auto text-center px-4 md:px-0">
       <!-- Eyebrow -->
-      <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-100/80 text-primary-700 rounded-full text-sm font-medium mb-6 backdrop-blur-sm">
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-primary-100/80 text-primary-700 rounded-full text-xs md:text-sm font-medium mb-4 md:mb-6 backdrop-blur-sm">
+        <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
         {about.hero.eyebrow}
       </div>
 
       <!-- Title -->
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6 leading-tight">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-900 mb-4 md:mb-6 leading-tight">
         {about.hero.title}
       </h1>
 
       <!-- Subtitle -->
-      <p class="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+      <p class="text-base md:text-lg lg:text-xl text-neutral-600 leading-relaxed max-w-2xl mx-auto">
         {about.hero.subtitle}
       </p>
     </div>
@@ -58,17 +58,17 @@ const about = t.about;
 </section>
 
 <!-- Story Section -->
-<section class="py-20 lg:py-28 bg-white">
+<section class="py-12 md:py-20 lg:py-28 bg-white">
   <div class="container-lg">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-10 text-center">
+    <div class="max-w-3xl mx-auto px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-6 md:mb-10 text-center">
         {about.story.title}
       </h2>
 
-      <div class="space-y-6">
+      <div class="space-y-4 md:space-y-6">
         {about.story.paragraphs.map((paragraph: string, index: number) => (
           <p
-            class={`text-lg leading-relaxed ${index === 0 ? 'text-xl text-neutral-800 font-medium' : 'text-neutral-600'}`}
+            class={`text-base md:text-lg leading-relaxed ${index === 0 ? 'md:text-xl text-neutral-800 font-medium' : 'text-neutral-600'}`}
           >
             {paragraph}
           </p>
@@ -79,17 +79,17 @@ const about = t.about;
 </section>
 
 <!-- Mission Section - Dark -->
-<section class="py-20 lg:py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white relative overflow-hidden">
+<section class="py-12 md:py-20 lg:py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white relative overflow-hidden">
   <!-- Decorative elements -->
   <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
   <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
 
   <div class="container-lg relative">
-    <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold mb-8">
+    <div class="max-w-3xl mx-auto text-center px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-8">
         {about.mission.title}
       </h2>
-      <p class="text-xl md:text-2xl text-slate-300 leading-relaxed">
+      <p class="text-base md:text-xl lg:text-2xl text-slate-300 leading-relaxed">
         {about.mission.content}
       </p>
     </div>
@@ -97,46 +97,46 @@ const about = t.about;
 </section>
 
 <!-- Approach Section -->
-<section class="py-20 lg:py-28 bg-neutral-50">
+<section class="py-12 md:py-20 lg:py-28 bg-neutral-50">
   <div class="container-lg">
     <!-- Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+    <div class="text-center mb-8 md:mb-16">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 md:mb-4">
         {about.approach.title}
       </h2>
-      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+      <p class="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto">
         {about.approach.subtitle}
       </p>
     </div>
 
-    <!-- Cards -->
-    <div class="grid md:grid-cols-3 gap-8">
+    <!-- Cards - horizontal scroll on mobile -->
+    <div class="flex md:grid md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
       {about.approach.items.map((item: { icon: string; title: string; description: string }) => (
-        <div class="group bg-white rounded-2xl p-8 shadow-sm border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300">
+        <div class="group flex-shrink-0 w-[280px] sm:w-[300px] md:w-auto bg-white rounded-2xl p-5 md:p-6 lg:p-8 shadow-sm border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-start">
           <!-- Icon -->
-          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-6 group-hover:from-primary-400/30 group-hover:to-accent-500/30 transition-all duration-300">
+          <div class="w-11 h-11 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-4 md:mb-6 group-hover:from-primary-400/30 group-hover:to-accent-500/30 transition-all duration-300">
             {item.icon === 'human' && (
-              <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
             )}
             {item.icon === 'integration' && (
-              <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
               </svg>
             )}
             {item.icon === 'results' && (
-              <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
               </svg>
             )}
           </div>
 
           <!-- Content -->
-          <h3 class="text-xl font-bold text-neutral-900 mb-3">
+          <h3 class="text-lg md:text-xl font-bold text-neutral-900 mb-2 md:mb-3">
             {item.title}
           </h3>
-          <p class="text-neutral-600 leading-relaxed">
+          <p class="text-sm md:text-base text-neutral-600 leading-relaxed">
             {item.description}
           </p>
         </div>
@@ -146,33 +146,33 @@ const about = t.about;
 </section>
 
 <!-- Why Us Section -->
-<section class="py-20 lg:py-28 bg-white">
+<section class="py-12 md:py-20 lg:py-28 bg-white">
   <div class="container-lg">
     <!-- Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+    <div class="text-center mb-8 md:mb-16">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 md:mb-4">
         {about.whyUs.title}
       </h2>
-      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+      <p class="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto">
         {about.whyUs.subtitle}
       </p>
     </div>
 
-    <!-- Grid -->
-    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+    <!-- Horizontal scroll on mobile, grid on tablet+ -->
+    <div class="flex md:grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 max-w-4xl mx-auto overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
       {about.whyUs.items.map((item: { title: string; description: string }, index: number) => (
-        <div class="flex gap-4">
+        <div class="flex-shrink-0 w-[280px] sm:w-[300px] md:w-auto flex gap-3 md:gap-4 bg-neutral-50 md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none snap-start">
           <!-- Number badge -->
-          <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-accent-500 flex items-center justify-center text-white font-bold text-sm">
+          <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary-400 to-accent-500 flex items-center justify-center text-white font-bold text-xs md:text-sm">
             {index + 1}
           </div>
 
           <!-- Content -->
           <div>
-            <h3 class="text-lg font-bold text-neutral-900 mb-2">
+            <h3 class="text-base md:text-lg font-bold text-neutral-900 mb-1 md:mb-2">
               {item.title}
             </h3>
-            <p class="text-neutral-600 leading-relaxed">
+            <p class="text-sm md:text-base text-neutral-600 leading-relaxed">
               {item.description}
             </p>
           </div>
@@ -183,22 +183,22 @@ const about = t.about;
 </section>
 
 <!-- Stats Section - Dark -->
-<section class="py-20 lg:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white relative overflow-hidden">
+<section class="py-12 md:py-20 lg:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white relative overflow-hidden">
   <!-- Decorative -->
   <div class="absolute inset-0 bg-grid-dark opacity-10"></div>
 
   <div class="container-lg relative">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-16">
       {about.stats.title}
     </h2>
 
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
       {about.stats.items.map((stat: { value: string; label: string }) => (
         <div class="text-center">
-          <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent mb-2">
+          <div class="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent mb-1 md:mb-2">
             {stat.value}
           </div>
-          <div class="text-slate-400 text-sm md:text-base">
+          <div class="text-slate-400 text-xs md:text-sm lg:text-base">
             {stat.label}
           </div>
         </div>
@@ -208,13 +208,13 @@ const about = t.about;
 </section>
 
 <!-- CTA Section -->
-<section class="py-20 lg:py-28 bg-neutral-50">
+<section class="py-12 md:py-20 lg:py-28 bg-neutral-50">
   <div class="container-lg">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+    <div class="max-w-2xl mx-auto text-center px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 md:mb-4">
         {about.cta.title}
       </h2>
-      <p class="text-lg text-neutral-600 mb-8">
+      <p class="text-base md:text-lg text-neutral-600 mb-6 md:mb-8">
         {about.cta.subtitle}
       </p>
       <Button
@@ -240,5 +240,14 @@ const about = t.about;
   .bg-grid-dark {
     background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 </style>
