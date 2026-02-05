@@ -14,6 +14,7 @@ import java.util.List;
  * CORS configuration for cross-origin requests.
  *
  * Allows the frontend to communicate with the API.
+ * Supports wildcards for Vercel preview URLs.
  */
 @Configuration
 public class CorsConfig {
@@ -27,7 +28,10 @@ public class CorsConfig {
 
         // Parse allowed origins from configuration
         List<String> origins = Arrays.asList(allowedOrigins.split(","));
-        configuration.setAllowedOrigins(origins);
+
+        // Use allowedOriginPatterns for wildcard support (Vercel preview URLs)
+        // This allows patterns like https://*.vercel.app
+        configuration.setAllowedOriginPatterns(origins);
 
         // Allowed HTTP methods
         configuration.setAllowedMethods(Arrays.asList(

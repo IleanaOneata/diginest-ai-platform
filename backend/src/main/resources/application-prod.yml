@@ -34,7 +34,9 @@ spring:
 # =============================================================================
 app:
   cors:
-    allowed-origins: ${CORS_ORIGINS:https://generativa.ro,https://www.generativa.ro}
+    # Supports wildcard patterns for Vercel preview URLs
+    # Pattern *.vercel.app allows all Vercel subdomains
+    allowed-origins: ${CORS_ORIGINS:https://generativa.ro,https://www.generativa.ro,https://*.vercel.app,http://localhost:4321,http://localhost:3000}
 
   email:
     enabled: true
