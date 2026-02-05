@@ -34,19 +34,21 @@ spring:
       path: /h2-console
 
   # Mail Configuration
+  # SMTP Settings from cPanel: mail.generativa.ro, Port 465 (SSL)
   mail:
     host: ${MAIL_HOST:mail.generativa.ro}
-    port: ${MAIL_PORT:587}
+    port: ${MAIL_PORT:465}
     username: ${MAIL_USERNAME:contact@generativa.ro}
     password: ${MAIL_PASSWORD:}
     properties:
       mail:
         smtp:
           auth: true
-          starttls:
-            enable: true
           ssl:
-            trust: ${MAIL_HOST:mail.generativa.ro}
+            enable: true
+          starttls:
+            enable: false
+    protocol: smtps
 
 # =============================================================================
 # Server Configuration
