@@ -194,40 +194,55 @@ const ctaHref = buildLocalePath('/contact/', locale);
 <div class="h-16 lg:h-20"></div>
 
 <script>
-  // Header scroll effect
-  const header = document.getElementById('site-header');
+  function initHeader() {
+    // Header scroll effect
+    const header = document.getElementById('site-header');
 
-  if (header) {
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
+    if (header) {
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
 
-      if (currentScroll > 100) {
-        header.classList.add('shadow-soft');
-      } else {
-        header.classList.remove('shadow-soft');
-      }
-    });
-  }
-
-  // Mobile menu toggle
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-      const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-      mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
-      mobileMenu.classList.toggle('hidden');
-
-      // Toggle icon between hamburger and X
-      const icon = mobileMenuButton.querySelector('svg');
-      if (icon) {
-        if (isExpanded) {
-          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+        if (currentScroll > 100) {
+          header.classList.add('shadow-soft');
         } else {
-          icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+          header.classList.remove('shadow-soft');
         }
-      }
-    });
+      });
+    }
+
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button') as HTMLButtonElement | null;
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuButton && mobileMenu) {
+      // Remove old listener by cloning
+      const newButton = mobileMenuButton.cloneNode(true) as HTMLButtonElement;
+      mobileMenuButton.parentNode?.replaceChild(newButton, mobileMenuButton);
+
+      newButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const isExpanded = newButton.getAttribute('aria-expanded') === 'true';
+        newButton.setAttribute('aria-expanded', (!isExpanded).toString());
+        mobileMenu.classList.toggle('hidden');
+
+        // Toggle icon between hamburger and X
+        const icon = newButton.querySelector('svg');
+        if (icon) {
+          if (isExpanded) {
+            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+          } else {
+            icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+          }
+        }
+      });
+    }
   }
+
+  // Run on initial load
+  document.addEventListener('DOMContentLoaded', initHeader);
+
+  // Also run on Astro page transitions (SPA mode)
+  document.addEventListener('astro:page-load', initHeader);
 </script>
