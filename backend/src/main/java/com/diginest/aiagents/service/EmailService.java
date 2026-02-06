@@ -1,6 +1,7 @@
 package com.diginest.aiagents.service;
 
 import com.diginest.aiagents.model.entity.ContactRequest;
+import com.diginest.aiagents.repository.ContactRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +10,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +22,7 @@ import java.util.Map;
  * HTTPS port 443 is always available.
  *
  * All email methods are @Async so the contact form responds immediately.
+ * After both emails are sent, marks the contact request as processed in DB.
  */
 @Service
 public class EmailService {
@@ -28,6 +31,7 @@ public class EmailService {
     private static final String RESEND_API_URL = "https://api.resend.com/emails";
 
     private final RestTemplate restTemplate;
+    private final ContactRepository contactRepository;
 
     @Value("${app.email.from:contact@generativa.ro}")
     private String fromEmail;
@@ -41,54 +45,68 @@ public class EmailService {
     @Value("${MAIL_PASSWORD:}")
     private String resendApiKey;
 
-    public EmailService() {
+    public EmailService(ContactRepository contactRepository) {
         this.restTemplate = new RestTemplate();
+        this.contactRepository = contactRepository;
     }
 
     /**
-     * Send notification to admin about new contact request.
+     * Send both notification and confirmation emails, then mark as processed.
+     * Runs asynchronously - does not block the HTTP response.
      */
     @Async
-    public void sendContactNotification(ContactRequest request) {
+    public void sendAllEmails(ContactRequest request) {
         log.info("Email enabled status: {}", emailEnabled);
         if (!emailEnabled) {
-            log.info("Email disabled - skipping admin notification for contact request {}", request.getId());
+            log.info("Email disabled - skipping all emails for contact request {}", request.getId());
             return;
         }
 
+        boolean adminSent = false;
+        boolean confirmSent = false;
+
+        // Send admin notification
         try {
             sendViaResend(
                 adminEmail,
                 "[GENERATIVA] New Contact Request from " + request.getCompany(),
                 buildAdminNotificationText(request)
             );
+            adminSent = true;
             log.info("Admin notification sent for contact request {}", request.getId());
         } catch (Exception e) {
             log.error("Failed to send admin notification for contact request {}: {}",
                 request.getId(), e.getMessage());
         }
-    }
 
-    /**
-     * Send confirmation email to the user who submitted the contact form.
-     */
-    @Async
-    public void sendContactConfirmation(ContactRequest request) {
-        if (!emailEnabled) {
-            log.info("Email disabled - skipping confirmation for contact request {}", request.getId());
-            return;
-        }
-
+        // Send confirmation to user
         try {
             sendViaResend(
                 request.getEmail(),
                 getConfirmationSubject(request.getLocale()),
                 buildConfirmationText(request)
             );
+            confirmSent = true;
             log.info("Confirmation email sent to {} for contact request {}",
                 request.getEmail(), request.getId());
         } catch (Exception e) {
             log.error("Failed to send confirmation email for contact request {}: {}",
+                request.getId(), e.getMessage());
+        }
+
+        // Update processed status in database
+        try {
+            request.setProcessed(adminSent && confirmSent);
+            request.setProcessedAt(Instant.now());
+            if (!adminSent || !confirmSent) {
+                request.setNotes(String.format("admin=%s, confirm=%s",
+                    adminSent ? "sent" : "failed",
+                    confirmSent ? "sent" : "failed"));
+            }
+            contactRepository.save(request);
+            log.info("Contact request {} marked as processed={}", request.getId(), request.isProcessed());
+        } catch (Exception e) {
+            log.error("Failed to update processed status for contact request {}: {}",
                 request.getId(), e.getMessage());
         }
     }

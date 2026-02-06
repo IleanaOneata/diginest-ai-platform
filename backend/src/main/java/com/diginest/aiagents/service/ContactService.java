@@ -55,11 +55,10 @@ public class ContactService {
         ContactRequest saved = contactRepository.save(request);
         log.info("Contact request saved with ID: {}", saved.getId());
 
-        // Fire async emails - these run in background threads
-        // and do NOT block the HTTP response.
+        // Fire async emails + mark as processed - runs in background thread
+        // and does NOT block the HTTP response.
         // Errors are handled inside EmailService (logged, not propagated).
-        emailService.sendContactNotification(saved);
-        emailService.sendContactConfirmation(saved);
+        emailService.sendAllEmails(saved);
 
         return saved;
     }
