@@ -31,6 +31,8 @@
 16. ✅ **Backend Email Funcțional** - Resend HTTP API, PostgreSQL, async emails (vezi secțiunea dedicată)
 17. ✅ **Contact Form UX** - Mesaj succes auto-hide după 5s, processed tracking în DB
 18. ✅ **Automatizare Procese Page** - Prima pagină de serviciu cu SEO/AEO, Schema.org @graph (Service + FAQPage + BreadcrumbList + HowTo), FAQ accordion, question-based H2s
+19. ✅ **Site-wide SEO/AEO Audit** - Schema.org pe toate paginile (Homepage, About, Contact), fix domain URLs, BreadcrumbList universal
+20. ✅ **Agenți Conversaționali Page** - A doua pagină de serviciu cu 7 secțiuni, SEO/AEO, Schema.org @graph, 8 FAQ items, 6 industrii cu problem→solution
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -290,6 +292,7 @@ AI Agents Platform/
 │   │   │       ├── UseCases.astro        # 🆕 Auto-identificare industrii
 │   │   │       ├── IntegrationHub.astro  # 🆕 Hub conexiuni (stil Stripe)
 │   │   │       ├── ProcessAutomationPage.astro # 🆕 Pagina serviciu automatizare (SEO/AEO)
+│   │   │       ├── ConversationalAgentsPage.astro # 🆕 Pagina serviciu agenți conversaționali (SEO/AEO)
 │   │   │       ├── Services.astro        # Servicii
 │   │   │       ├── Benefits.astro        # Rezultate
 │   │   │       ├── Process.astro         # Cum funcționăm
@@ -914,7 +917,7 @@ Aceste link-uri există în Header/Footer dar paginile NU sunt create încă:
 |------|---------|---------|--------|
 | **Servicii dropdown** | `/ro/servicii/` | `/en/services/` | ❌ Nu există |
 | Automatizare Procese | `/ro/servicii/automatizare-procese/` | `/en/services/process-automation/` | ✅ Implementat |
-| Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | `/en/services/conversational-agents/` | ❌ Nu există |
+| Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | `/en/services/conversational-agents/` | ✅ Implementat |
 | Integrări AI | `/ro/servicii/integrari-ai/` | `/en/services/ai-integrations/` | ❌ Nu există |
 | **Blog** | `/ro/blog/` | `/en/blog/` | ❌ Nu există |
 | Studii de caz | `/ro/studii-caz/` | `/en/case-studies/` | ❌ Nu există |
@@ -981,6 +984,8 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   // Service sub-pages
   'automatizare-procese': { ro: 'automatizare-procese', en: 'process-automation' },
   'process-automation': { ro: 'automatizare-procese', en: 'process-automation' },
+  'agenti-conversationali': { ro: 'agenti-conversationali', en: 'conversational-agents' },
+  'conversational-agents': { ro: 'agenti-conversationali', en: 'conversational-agents' },
   // Adaugă mapări noi aici!
 };
 ```
@@ -1086,6 +1091,25 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 - **Pattern**: Urmează exact AboutPage.astro (locale prop, alternating light/dark, mobile scroll)
 - **Path mappings**: `automatizare-procese` ↔ `process-automation` pentru Language Switcher
 - **Fișiere**: 4 create, 3 modificate (ro.json, en.json, i18n/index.ts)
+
+### Sesiune Februarie 2026 - Site-wide SEO/AEO Audit & Agenți Conversaționali Page
+- **Audit SEO complet** pe toate paginile existente
+  - Homepage RO/EN: Fix domain URLs (`diginest.ai` → `diginest-ai-platform.vercel.app`), upgrade la `@graph` cu WebSite + WebPage + BreadcrumbList
+  - About RO/EN: Adăugat schema AboutPage + Organization (foundingDate, knowsAbout) + BreadcrumbList
+  - Contact RO/EN: Adăugat schema ContactPage + ContactPoint (email, languages) + BreadcrumbList
+  - FAQ inline schema verificat — fără duplicare (homepage și service pages au FAQ-uri separate)
+- **A doua pagină de serviciu** creată (`/ro/servicii/agenti-conversationali/`, `/en/services/conversational-agents/`)
+- **7 secțiuni** (una în plus față de Automatizare): Hero, Capabilități (6 carduri), Cum funcționează (timeline 4 pași), Industrii (6 carduri cu problem→solution), Beneficii (5 metric cards), FAQ (8 Q&A accordion), CTA
+- **SEO/AEO optimizat**:
+  - Question-based H2 headings targetând People Also Ask RO/EN
+  - Answer-first lead paragraphs (40-60 words) pentru Featured Snippets & AI Overviews
+  - Schema.org `@graph` cu 4 scheme: Service (cu hasOfferCatalog Voice/Chat/Email), FAQPage (8 items), BreadcrumbList, HowTo
+  - Meta tags optimizate (RO title 66 chars, EN title 70 chars)
+  - 8 FAQ items targetând întrebări reale (cost vs receptioner, limba română, integrări, înlocuire angajați, escalare, durată, industrii, GDPR)
+- **FAQ selector unic**: `data-conv-faq-trigger` (diferit de `data-faq-trigger` homepage și `data-service-faq-trigger` automatizare)
+- **Industrii cu problem→solution**: Call Center, Clinici Medicale, Hospitality, Utilities/Telecom, Beauty/SPA, Service Auto
+- **Path mappings**: `agenti-conversationali` ↔ `conversational-agents` pentru Language Switcher
+- **Fișiere**: 4 create, 5 modificate (ro.json, en.json, i18n/index.ts, + 6 page shells pentru SEO audit)
 
 ---
 

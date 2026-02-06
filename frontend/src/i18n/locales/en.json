@@ -467,5 +467,205 @@
       "subtitle": "Schedule a free process audit. In 30 minutes, we'll show you exactly where you're losing time and how AI can solve it.",
       "button": "Request a free audit"
     }
+  },
+
+  "serviceConversational": {
+    "meta": {
+      "title": "Conversational AI Agents | Voice & Chat Assistants 24/7 | GENERATIVA",
+      "description": "AI agents that answer calls, WhatsApp and email 24/7 in Romanian. Automatic appointments, CRM integration, zero missed calls. Request a free demo.",
+      "schemaName": "Conversational AI Agents",
+      "schemaDescription": "Conversational virtual assistants that handle customer calls and messages 24/7, identify intent, collect data and execute operational actions in CRM, calendar and internal systems.",
+      "schemaOffer": "Free demo and personalized consultation",
+      "breadcrumbName": "Conversational Agents"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "services": "Services",
+      "current": "Conversational Agents"
+    },
+    "hero": {
+      "eyebrow": "Conversational AI Agents",
+      "title": "Conversational AI Virtual Assistants",
+      "subtitle": "We build, integrate and operate virtual assistants that handle your customers' requests through to resolution. They answer phone calls, WhatsApp and email — 24/7, in Romanian, with natural voice and concrete actions in your systems.",
+      "cta": "Request a free demo"
+    },
+    "capabilities": {
+      "title": "What can a conversational AI agent do for your business?",
+      "lead": "A conversational AI agent answers phone calls, WhatsApp, email and chat instead of your team — 24/7, without breaks. It collects customer data, books appointments in your calendar, updates your CRM and transfers to a human operator when needed. The result: zero missed calls and satisfied customers.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "phone",
+          "title": "Phone call handling",
+          "description": "The AI agent answers calls in Romanian, carries natural conversations and understands conversation context. The customer can't tell the difference from a human operator."
+        },
+        {
+          "icon": "intent",
+          "title": "Customer intent identification",
+          "description": "Automatically recognizes what the customer needs: appointment, question, technical issue, data change or complaint. Intelligently routes each request."
+        },
+        {
+          "icon": "collect",
+          "title": "Information collection & validation",
+          "description": "Gathers all data needed to resolve the request: name, ID, order number, preferences. Validates information in real-time, without errors."
+        },
+        {
+          "icon": "actions",
+          "title": "Automated operational actions",
+          "description": "Creates and updates CRM records, handles bookings and rescheduling, opens support tickets, sends confirmation emails and SMS messages."
+        },
+        {
+          "icon": "multichannel",
+          "title": "Multichannel communication",
+          "description": "Works across phone, WhatsApp, email, SMS and web chat. Same consistent experience on whatever channel your customer prefers."
+        },
+        {
+          "icon": "escalation",
+          "title": "Intelligent handoff to operators",
+          "description": "Requests that can't be resolved automatically are transferred to your team in under 2 seconds, along with all context already collected. The customer never repeats themselves."
+        }
+      ]
+    },
+    "approach": {
+      "title": "How does an AI voice agent work in practice?",
+      "lead": "The AI agent takes incoming calls, understands the customer's intent using natural language processing, responds with a human-like voice and executes concrete actions: confirms an appointment, sends information via WhatsApp or escalates to your team in under 2 seconds.",
+      "schemaName": "Conversational AI Agent Implementation",
+      "schemaDescription": "The complete process for implementing a conversational virtual assistant, from analysis to launch and multichannel scaling.",
+      "steps": [
+        {
+          "title": "Existing flow analysis",
+          "description": "We map your customer communication flows: how many calls you receive, what customers ask, how long each conversation takes, where opportunities are lost."
+        },
+        {
+          "title": "AI configuration & training",
+          "description": "We configure the AI agent based on your real scenarios. We train it with your industry vocabulary, internal procedures and your brand's communication tone."
+        },
+        {
+          "title": "Testing & pilot",
+          "description": "We launch the agent on a single channel (phone or chat) and monitor every conversation. We adjust in real-time based on feedback and results. Duration: 2-4 weeks."
+        },
+        {
+          "title": "Launch & multichannel scaling",
+          "description": "After pilot validation, we expand to all channels: phone, WhatsApp, email, web chat. We integrate with your CRM and existing systems for complete automation."
+        }
+      ]
+    },
+    "industries": {
+      "title": "Which industries benefit most from conversational AI agents?",
+      "lead": "Dental clinics, medical offices, beauty salons, auto service centers and restaurants with reservations are the industries that see the fastest ROI. The reason: high volume of repetitive calls, frequent appointments and the need for 24/7 availability that small teams can't sustain.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "headset",
+          "title": "Call Center & Customer Support",
+          "problem": "High volume of repetitive calls, long wait times, high cost per interaction",
+          "solution": "AI handles 70% of repetitive calls, reduces wait time to zero and frees operators for complex cases."
+        },
+        {
+          "icon": "medical",
+          "title": "Clinics & Medical Networks",
+          "problem": "Missed appointments, overwhelmed reception, patients who can't call outside hours",
+          "solution": "The AI agent confirms, reschedules and manages appointments 24/7. Reduces no-shows by 40% through automatic reminders."
+        },
+        {
+          "icon": "hotel",
+          "title": "Hospitality & Travel",
+          "problem": "Reservations lost outside working hours, repetitive questions about amenities and prices",
+          "solution": "Instant answers about availability, prices and amenities. Reservations confirmed automatically on any channel."
+        },
+        {
+          "icon": "signal",
+          "title": "Utilities & Telecom",
+          "problem": "Hundreds of daily calls about bills, subscription changes and standard complaints",
+          "solution": "Complete automation for balance checks, data changes, issue reporting and resolution confirmation."
+        },
+        {
+          "icon": "beauty",
+          "title": "Beauty Salons & SPA",
+          "problem": "Phone bookings during treatments, frequent no-shows, losing new clients",
+          "solution": "24/7 automatic bookings via phone and WhatsApp. 60% no-show reduction through smart confirmations and reminders."
+        },
+        {
+          "icon": "car",
+          "title": "Auto Service & Fleet Management",
+          "problem": "Customers wanting car status, service bookings, price estimates — all by phone",
+          "solution": "Automatic repair status, service scheduling, instant estimates and proactive notifications when the car is ready."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "What results does a conversational AI agent deliver?",
+      "lead": "Companies that implement conversational AI agents see concrete results in the first month: zero missed calls, 90% of frequent questions resolved automatically, 15-20 hours saved per week and consistent customer experience across all channels.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "24/7",
+          "label": "Non-stop availability for customers"
+        },
+        {
+          "icon": "trending",
+          "value": "70%",
+          "label": "Reduction in repetitive call volume"
+        },
+        {
+          "icon": "wallet",
+          "value": "60%",
+          "label": "Lower cost per interaction"
+        },
+        {
+          "icon": "star",
+          "value": "100%",
+          "label": "Consistent experience across all channels"
+        },
+        {
+          "icon": "scale",
+          "value": "10x",
+          "label": "Operational scaling without headcount"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions about conversational AI agents",
+      "lead": "We've answered the most common questions we receive from companies interested in conversational virtual assistants.",
+      "items": [
+        {
+          "question": "How much does a conversational AI agent cost?",
+          "answer": "The cost depends on the number of channels, interaction volume and integration complexity. As a reference, an AI agent costs significantly less than a full-time receptionist (€1,500-2,500/month). We offer a free demo and a personalized ROI calculation for your business."
+        },
+        {
+          "question": "Does the AI agent understand and speak Romanian?",
+          "answer": "Yes. Our agents are specifically trained for the Romanian language, with natural pronunciation and understanding of regional expressions. They also support English for international customers. Conversations sound natural, not robotic."
+        },
+        {
+          "question": "What systems does the AI agent integrate with?",
+          "answer": "It integrates with CRMs (HubSpot, Salesforce, etc.), Google Calendar, Outlook, WhatsApp Business API, existing phone systems and your proprietary software via API. You don't need to change any current tools."
+        },
+        {
+          "question": "Will the AI agent replace my employees?",
+          "answer": "No. The AI agent handles repetitive calls and messages (directions, hours, appointment confirmations) so your team can focus on complex, high-value interactions. Most of our clients keep the same staff, but productivity increases by 40-60%."
+        },
+        {
+          "question": "What happens when the AI doesn't know the answer?",
+          "answer": "Instant transfer to a team member in under 2 seconds. The AI collects context before transferring so the customer never has to repeat themselves. You set the escalation rules."
+        },
+        {
+          "question": "How long until the AI agent is operational?",
+          "answer": "The first channel (phone or chat) goes live in 2-4 weeks. Full multichannel deployment takes 6-8 weeks. This includes analysis, configuration, testing and gradual rollout — without affecting your current operations."
+        },
+        {
+          "question": "Does the AI agent work for my type of business?",
+          "answer": "It works best for businesses with high call volume, recurring appointments or the need for 24/7 availability: dental clinics, medical offices, beauty salons, auto services, restaurants, multi-location networks. We offer a free assessment."
+        },
+        {
+          "question": "Is my customer data safe?",
+          "answer": "Absolutely. We are GDPR compliant, data is encrypted in transit and at rest, hosted in EU data centers. We don't share data with third parties. Regular security audits. Clients retain full data ownership."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Let us show you how your AI sounds",
+      "subtitle": "Request a free personalized demo. In 15 minutes, hear how the AI agent trained for your business sounds — with real scenarios from your industry.",
+      "button": "Request a free demo"
+    }
   }
 }

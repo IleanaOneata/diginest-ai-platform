@@ -1,0 +1,144 @@
+---
+/**
+ * English Conversational Agents Service Page
+ *
+ * SEO optimized service page for GENERATIVA
+ * Target keywords: conversational AI agents, virtual assistants, AI voice agent, business chatbot
+ *
+ * Schema.org: Service + FAQPage + BreadcrumbList + HowTo (@graph pattern)
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ConversationalAgentsPage from '@components/sections/ConversationalAgentsPage.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'en';
+const t = getTranslations(locale);
+const sc = t.serviceConversational;
+
+const title = sc.meta.title;
+const description = sc.meta.description;
+
+// Site URL for schema references
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Schema.org @graph with Service + FAQPage + BreadcrumbList + HowTo
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // 1. Service schema
+    {
+      '@type': 'Service',
+      '@id': `${siteUrl}/en/services/conversational-agents/#service`,
+      name: sc.meta.schemaName,
+      description: sc.meta.schemaDescription,
+      provider: {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'GENERATIVA',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Romania',
+      },
+      serviceType: 'Conversational AI Agents',
+      audience: {
+        '@type': 'BusinessAudience',
+        audienceType: 'Small and Medium Enterprises',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Communication Channels',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'AI Voice Agent (Phone)',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'AI Chat Agent (WhatsApp, Web Chat)',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'AI Email Agent',
+            },
+          },
+        ],
+      },
+      offers: {
+        '@type': 'Offer',
+        description: sc.meta.schemaOffer,
+        priceCurrency: 'EUR',
+      },
+    },
+    // 2. FAQPage schema
+    {
+      '@type': 'FAQPage',
+      '@id': `${siteUrl}/en/services/conversational-agents/#faq`,
+      mainEntity: sc.faq.items.map((item: { question: string; answer: string }) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    // 3. BreadcrumbList schema
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/en/services/conversational-agents/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/en/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Services',
+          item: `${siteUrl}/en/services/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: sc.meta.breadcrumbName,
+        },
+      ],
+    },
+    // 4. HowTo schema (implementation steps)
+    {
+      '@type': 'HowTo',
+      '@id': `${siteUrl}/en/services/conversational-agents/#howto`,
+      name: sc.approach.schemaName,
+      description: sc.approach.schemaDescription,
+      step: sc.approach.steps.map((step: { title: string; description: string }, index: number) => ({
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: step.title,
+        text: step.description,
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/en/services/conversational-agents/"
+  schema={schema}
+>
+  <ConversationalAgentsPage locale={locale} />
+</BaseLayout>

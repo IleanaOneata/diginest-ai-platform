@@ -467,5 +467,205 @@
       "subtitle": "Programează un audit gratuit de procese. În 30 de minute, îți arătăm exact unde pierzi timp și cum AI-ul poate rezolva asta.",
       "button": "Solicită un audit gratuit"
     }
+  },
+
+  "serviceConversational": {
+    "meta": {
+      "title": "Agenți Conversaționali AI | Asistenți Vocali & Chat 24/7 | GENERATIVA",
+      "description": "Agenți AI care răspund la telefon, WhatsApp și email 24/7 în limba română. Programări automate, integrare CRM, zero apeluri pierdute. Solicită un demo gratuit.",
+      "schemaName": "Agenți Conversaționali AI",
+      "schemaDescription": "Asistenți virtuali conversaționali care preiau apelurile și mesajele clienților 24/7, identifică intenția, colectează date și execută acțiuni operaționale în CRM, calendar și sisteme interne.",
+      "schemaOffer": "Demo gratuit și consultanță personalizată",
+      "breadcrumbName": "Agenți Conversaționali"
+    },
+    "breadcrumb": {
+      "home": "Acasă",
+      "services": "Servicii",
+      "current": "Agenți Conversaționali"
+    },
+    "hero": {
+      "eyebrow": "Agenți Conversaționali AI",
+      "title": "Asistenți Virtuali Conversaționali AI",
+      "subtitle": "Construim, integrăm și operăm asistenți virtuali care preiau solicitările clienților tăi și le duc până la rezolvare. Răspund la telefon, WhatsApp și email — 24/7, în limba română, cu voce naturală și acțiuni concrete în sistemele tale.",
+      "cta": "Solicită un demo gratuit"
+    },
+    "capabilities": {
+      "title": "Ce face un agent conversational AI pentru afacerea ta?",
+      "lead": "Un agent conversational AI răspunde la telefon, WhatsApp, email și chat în locul echipei tale — 24/7, fără pauze. Colectează date de la clienți, face programări în calendar, actualizează CRM-ul și transferă la operator uman când e nevoie. Rezultatul: zero apeluri pierdute și clienți mulțumiți.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "phone",
+          "title": "Preluare apeluri telefonice",
+          "description": "Agentul AI răspunde la telefon în limba română, poartă conversații naturale și înțelege contextul discuției. Clientul nu simte diferența față de un operator uman."
+        },
+        {
+          "icon": "intent",
+          "title": "Identificare intenție client",
+          "description": "Recunoaște automat ce vrea clientul: programare, întrebare, problemă tehnică, modificare date sau reclamație. Routează inteligent fiecare solicitare."
+        },
+        {
+          "icon": "collect",
+          "title": "Colectare și validare informații",
+          "description": "Adună toate datele necesare pentru rezolvarea cererii: nume, CNP, număr comandă, preferințe. Validează informațiile în timp real, fără erori."
+        },
+        {
+          "icon": "actions",
+          "title": "Acțiuni operaționale automate",
+          "description": "Creează și actualizează date în CRM, face programări și reprogramări, deschide tichete de suport, trimite email-uri și SMS-uri de confirmare."
+        },
+        {
+          "icon": "multichannel",
+          "title": "Comunicare multicanal",
+          "description": "Funcționează pe telefon, WhatsApp, email, SMS și chat web. Aceeași experiență consistentă pe orice canal preferă clientul tău."
+        },
+        {
+          "icon": "escalation",
+          "title": "Transfer inteligent la operatori",
+          "description": "Solicitările care nu pot fi rezolvate automat sunt transferate către echipa ta în sub 2 secunde, împreună cu tot contextul deja colectat. Clientul nu repetă nimic."
+        }
+      ]
+    },
+    "approach": {
+      "title": "Cum funcționează un agent vocal AI în practică?",
+      "lead": "Agentul AI preia apelurile telefonice, înțelege intenția clientului folosind procesare de limbaj natural, răspunde cu voce umană și execută acțiuni concrete: confirmă o programare, trimite informații pe WhatsApp sau escalează la echipa ta în sub 2 secunde.",
+      "schemaName": "Implementarea unui agent conversational AI",
+      "schemaDescription": "Procesul complet de implementare a unui asistent virtual conversational, de la analiză la lansare și scalare multicanal.",
+      "steps": [
+        {
+          "title": "Analiză fluxuri existente",
+          "description": "Cartografiem fluxurile tale de comunicare cu clienții: câte apeluri primești, ce întreabă clienții, cât durează fiecare conversație, unde se pierd oportunități."
+        },
+        {
+          "title": "Configurare și training AI",
+          "description": "Configurăm agentul AI pe baza scenariilor tale reale. Îl antrenăm cu vocabularul industriei tale, procedurile interne și tonul de comunicare al brandului tău."
+        },
+        {
+          "title": "Testare și pilot",
+          "description": "Lansăm agentul pe un singur canal (telefon sau chat) și monitorizăm fiecare conversație. Ajustăm în timp real pe baza feedback-ului și a rezultatelor. Durată: 2-4 săptămâni."
+        },
+        {
+          "title": "Lansare și scalare multicanal",
+          "description": "După validarea pilotului, extindem pe toate canalele: telefon, WhatsApp, email, chat web. Integrăm cu CRM-ul și sistemele existente pentru automatizare completă."
+        }
+      ]
+    },
+    "industries": {
+      "title": "Ce industrii beneficiază cel mai mult de agenți conversaționali AI?",
+      "lead": "Clinicile dentare, cabinetele medicale, saloanele de beauty, service-urile auto și restaurantele cu rezervări sunt industriile care văd cel mai rapid ROI. Motivul: volum mare de apeluri repetitive, programări frecvente și nevoia de disponibilitate 24/7 pe care echipele mici nu o pot susține.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "headset",
+          "title": "Call Center & Customer Support",
+          "problem": "Volum mare de apeluri repetitive, timpi lungi de așteptare, costuri ridicate per interacțiune",
+          "solution": "AI-ul preia 70% din apelurile repetitive, reduce timpul de așteptare la zero și eliberează operatorii pentru cazuri complexe."
+        },
+        {
+          "icon": "medical",
+          "title": "Clinici și Rețele Medicale",
+          "problem": "Programări pierdute, recepție copleșită, pacienți care nu pot suna în afara programului",
+          "solution": "Agentul AI confirmă, reprogramează și gestionează programări 24/7. Reduce no-show-urile cu 40% prin remindere automate."
+        },
+        {
+          "icon": "hotel",
+          "title": "Hospitality & Travel",
+          "problem": "Rezervări pierdute în afara programului, întrebări repetitive despre facilități și prețuri",
+          "solution": "Răspunsuri instant la întrebări despre disponibilitate, prețuri și facilități. Rezervări confirmate automat pe orice canal."
+        },
+        {
+          "icon": "signal",
+          "title": "Utilities & Telecom",
+          "problem": "Sute de apeluri zilnice pentru facturi, modificări abonament și reclamații standard",
+          "solution": "Automatizare completă pentru verificare solduri, modificări de date, raportare probleme și confirmare rezolvare."
+        },
+        {
+          "icon": "beauty",
+          "title": "Saloane Beauty & SPA",
+          "problem": "Programări prin telefon în timpul tratamentelor, no-show-uri frecvente, pierdere clienți noi",
+          "solution": "Programări automate 24/7 pe telefon și WhatsApp. Reducere no-show cu 60% prin confirmări și remindere inteligente."
+        },
+        {
+          "icon": "car",
+          "title": "Service Auto & Fleet Management",
+          "problem": "Clienți care vor status mașină, programări service, estimări de preț — toate prin telefon",
+          "solution": "Status automat al reparației, programări service, estimări instant și notificări proactive când mașina e gata."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Ce rezultate aduce un agent conversational AI?",
+      "lead": "Companiile care implementează agenți conversaționali AI văd rezultate concrete în prima lună: zero apeluri pierdute, 90% din întrebările frecvente rezolvate automat, 15-20 ore economie pe săptămână și o experiență consistentă a clienților pe toate canalele.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "24/7",
+          "label": "Disponibilitate non-stop pentru clienți"
+        },
+        {
+          "icon": "trending",
+          "value": "70%",
+          "label": "Reducere volum apeluri repetitive"
+        },
+        {
+          "icon": "wallet",
+          "value": "60%",
+          "label": "Cost mai mic per interacțiune"
+        },
+        {
+          "icon": "star",
+          "value": "100%",
+          "label": "Experiență consecventă pe toate canalele"
+        },
+        {
+          "icon": "scale",
+          "value": "10x",
+          "label": "Scalare operațională fără headcount"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Întrebări frecvente despre agenții conversaționali AI",
+      "lead": "Am răspuns la cele mai frecvente întrebări pe care le primim de la companii interesate de asistenți virtuali conversaționali.",
+      "items": [
+        {
+          "question": "Cât costă un agent conversational AI?",
+          "answer": "Costul depinde de numărul de canale, volumul de interacțiuni și complexitatea integrărilor. Ca referință, un agent AI costă semnificativ mai puțin decât un receptioner full-time (1.500-2.500 EUR/lună). Oferim un demo gratuit și un calcul personalizat de ROI pentru afacerea ta."
+        },
+        {
+          "question": "Agentul AI înțelege și vorbește în limba română?",
+          "answer": "Da. Agenții noștri sunt antrenați specific pentru limba română, cu pronunție naturală și înțelegere a expresiilor regionale. Suportă și limba engleză pentru clienții internaționali. Conversațiile sună natural, nu robotizat."
+        },
+        {
+          "question": "Cu ce sisteme se integrează agentul AI?",
+          "answer": "Se integrează cu CRM-uri (HubSpot, Salesforce, etc.), Google Calendar, Outlook, WhatsApp Business API, sisteme de telefonie existente și software-ul tău proprietar via API. Nu trebuie să schimbi niciun tool curent."
+        },
+        {
+          "question": "Agentul AI va înlocui angajații mei?",
+          "answer": "Nu. Agentul AI preia apelurile și mesajele repetitive (indicații, program, confirmări programări) pentru ca echipa ta să se concentreze pe interacțiuni complexe, cu valoare mare. Majoritatea clienților noștri păstrează același staff, dar productivitatea crește cu 40-60%."
+        },
+        {
+          "question": "Ce se întâmplă dacă AI-ul nu știe răspunsul?",
+          "answer": "Transfer instant la un membru al echipei tale, în sub 2 secunde. AI-ul colectează contextul înainte de transfer, astfel încât clientul nu trebuie să repete nimic. Tu stabilești regulile de escalare."
+        },
+        {
+          "question": "Cât durează până când agentul AI este funcțional?",
+          "answer": "Primul canal (telefon sau chat) este funcțional în 2-4 săptămâni. Implementarea multicanal completă durează 6-8 săptămâni. Include analiză, configurare, testare și lansare treptată — fără să afecteze operațiunile curente."
+        },
+        {
+          "question": "Funcționează agentul AI pentru tipul meu de afacere?",
+          "answer": "Funcționează cel mai bine pentru afaceri cu volum mare de apeluri, programări recurente sau nevoie de disponibilitate 24/7: clinici dentare, cabinete medicale, saloane beauty, service-uri auto, restaurante, rețele multi-locație. Oferim o evaluare gratuită."
+        },
+        {
+          "question": "Sunt datele clienților mei în siguranță?",
+          "answer": "Absolut. Suntem conformi GDPR, datele sunt criptate în tranzit și la stocare, hosting în centre de date din UE. Nu partajăm date cu terți. Audituri regulate de securitate. Clienții păstrează proprietatea completă asupra datelor."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Hai să-ți arătăm cum sună AI-ul tău",
+      "subtitle": "Solicită un demo gratuit personalizat. În 15 minute, auzi cum sună agentul AI antrenat pentru afacerea ta — cu scenarii reale din industria ta.",
+      "button": "Solicită un demo gratuit"
+    }
   }
 }
