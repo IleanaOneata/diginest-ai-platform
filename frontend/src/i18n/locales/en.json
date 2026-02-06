@@ -892,5 +892,202 @@
       "subtitle": "Request a free technical audit. We analyze your existing systems and show you exactly how we connect them with artificial intelligence — no obligations.",
       "button": "Request free technical audit"
     }
+  },
+
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy | GENERATIVA",
+      "description": "GENERATIVA privacy policy. Learn how we collect, use and protect your personal data in compliance with GDPR and Romanian legislation."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Privacy Policy"
+    },
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: February 2026",
+    "sections": [
+      {
+        "title": "1. Who we are",
+        "content": "This website is operated by DIGITAL LEADERSHIP SRL, a company registered in Romania, with its registered office at Dezmir, Apahida Commune, Viorelelor Street, no. 17A, Cluj County, Romania, Tax ID (CUI) 38585123, Trade Registry No. J12/6715/2017 (hereinafter referred to as \"GENERATIVA\", \"we\", \"our\").\n\nContact email: contact@generativa.ro\nWebsite: https://generativa.ro"
+      },
+      {
+        "title": "2. What personal data we collect",
+        "content": "We collect the following categories of personal data:",
+        "items": [
+          "Through the contact form: Full name, email address, phone number (optional), company name, industry, service of interest, message.",
+          "Through browsing: IP address, browser type, operating system, pages visited, session duration, traffic source. This data is collected through technical and analytics cookies.",
+          "Through direct communication: Data you voluntarily provide via email, phone or other communication channels."
+        ]
+      },
+      {
+        "title": "3. Legal bases for data processing",
+        "content": "We process your personal data based on the following legal grounds, in accordance with Art. 6 of the General Data Protection Regulation (GDPR):",
+        "items": [
+          "Consent (Art. 6(1)(a) GDPR) — for sending marketing communications and using non-essential cookies.",
+          "Legitimate interest (Art. 6(1)(f) GDPR) — for improving our services, analyzing website traffic and preventing fraud.",
+          "Performance of a contract or pre-contractual measures (Art. 6(1)(b) GDPR) — to respond to your inquiries through the contact form and to provide requested services.",
+          "Legal obligation (Art. 6(1)(c) GDPR) — to fulfill tax and accounting obligations."
+        ]
+      },
+      {
+        "title": "4. How we use your data",
+        "content": "Your personal data is used to:",
+        "items": [
+          "Respond to messages and inquiries sent through the contact form.",
+          "Provide information about our services.",
+          "Improve the browsing experience on the website.",
+          "Analyze traffic and visitor behavior (anonymized data).",
+          "Comply with applicable legal obligations."
+        ]
+      },
+      {
+        "title": "5. Who we share your data with",
+        "content": "We do not sell, rent or share your personal data with third parties for marketing purposes.",
+        "items": [
+          "Vercel Inc. — website hosting (EU servers).",
+          "Railway — backend API hosting.",
+          "Resend — transactional email delivery service.",
+          "Supabase — PostgreSQL database (EU servers).",
+          "Public authorities — only when legally required."
+        ],
+        "extra": "All our service providers are carefully selected and contractually obligated to comply with GDPR and ensure an adequate level of data protection."
+      },
+      {
+        "title": "6. Data transfers outside the EU/EEA",
+        "content": "In principle, your data is stored and processed on servers located in the European Union. Where certain third-party services involve data transfers outside the EU/EEA (e.g., Vercel for global CDN), we ensure adequate safeguards are in place in accordance with GDPR, including Standard Contractual Clauses (SCCs) approved by the European Commission or Adequacy Decisions."
+      },
+      {
+        "title": "7. How long we retain data",
+        "content": "We retain your personal data only for as long as necessary for the purposes for which it was collected:",
+        "items": [
+          "Contact form data: maximum 12 months from the last interaction, unless a contractual relationship is established.",
+          "Analytics cookies: as specified in the Cookie Policy (session or max. 12 months).",
+          "Accounting/tax data: 10 years in accordance with Romanian legislation (Law 82/1991 — Accounting Law)."
+        ]
+      },
+      {
+        "title": "8. Your rights under GDPR",
+        "content": "Under the General Data Protection Regulation (GDPR), you have the following rights:",
+        "items": [
+          "Right of access — you can request a copy of your personal data.",
+          "Right to rectification — you can request correction of inaccurate data.",
+          "Right to erasure (\"right to be forgotten\") — you can request deletion of your data under certain conditions.",
+          "Right to restriction of processing — you can limit how we process your data.",
+          "Right to data portability — you can receive your data in a structured, commonly used format.",
+          "Right to object — you can object to the processing of your data in certain situations.",
+          "Right not to be subject to automated decision-making — including profiling."
+        ],
+        "extra": "To exercise any of these rights, contact us at contact@generativa.ro. We will respond within 30 days."
+      },
+      {
+        "title": "9. Data security",
+        "content": "We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, loss, destruction or alteration. These include:\n\n• Encryption in transit (TLS/HTTPS) for all communications.\n• Encryption at rest (AES-256) for sensitive data.\n• Role-based data access restrictions.\n• Regular security audits.\n• Hosting in certified EU data centers."
+      },
+      {
+        "title": "10. Complaints",
+        "content": "If you believe that the processing of your personal data violates GDPR, you have the right to file a complaint with:\n\nThe National Supervisory Authority for Personal Data Processing (ANSPDCP)\nAddress: B-dul G-ral. Gheorghe Magheru 28-30, Sector 1, postal code 010336, Bucharest, Romania\nWebsite: www.dataprotection.ro\nEmail: anspdcp@dataprotection.ro"
+      },
+      {
+        "title": "11. Changes to this policy",
+        "content": "We reserve the right to update this Privacy Policy to reflect changes in our practices or applicable legislation. Any changes will be published on this page with the update date. We recommend periodically checking this page."
+      },
+      {
+        "title": "12. Contact",
+        "content": "For any questions regarding privacy or personal data protection:\n\nDIGITAL LEADERSHIP SRL\nAddress: Dezmir, Apahida Commune, Viorelelor Street, no. 17A, Cluj County, Romania\nEmail: contact@generativa.ro\nTax ID (CUI): 38585123 | Trade Registry: J12/6715/2017"
+      }
+    ],
+    "cookiePolicy": {
+      "title": "Cookie Policy",
+      "sections": [
+        {
+          "title": "What are cookies",
+          "content": "Cookies are small text files stored on your device when you visit a website. They are widely used to make websites work more efficiently and to provide information to site owners."
+        },
+        {
+          "title": "What cookies we use",
+          "content": "We use the following categories of cookies:",
+          "items": [
+            "Strictly necessary cookies — Essential for the website to function (e.g., cookie preference, session). Cannot be disabled. Duration: session.",
+            "Analytics cookies — Help us understand how the website is used (pages visited, visit duration, traffic sources). Data is anonymized. Duration: max. 12 months.",
+            "Functional cookies — Remember your preferences (selected language, display preferences). Duration: max. 12 months."
+          ]
+        },
+        {
+          "title": "How to control cookies",
+          "content": "On your first visit to the website, we ask for your consent for non-essential cookies via the cookie banner. You can:\n\n• Accept all cookies.\n• Reject non-essential cookies.\n• Modify your browser settings to block or delete cookies.\n\nNote: Disabling certain cookies may affect website functionality."
+        },
+        {
+          "title": "Third-party cookies",
+          "content": "Currently, we do NOT use third-party cookies for advertising or tracking. If we implement analytics services (e.g., Plausible Analytics, Umami), they will be configured for GDPR compliance, with anonymized data and EU storage."
+        },
+        {
+          "title": "Cookie Policy updates",
+          "content": "This policy may be updated periodically. Last update: February 2026."
+        }
+      ]
+    }
+  },
+
+  "terms": {
+    "meta": {
+      "title": "Terms & Conditions | GENERATIVA",
+      "description": "Terms and conditions of use for the GENERATIVA website. Information about services, intellectual property, liability limitations and applicable legislation."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Terms & Conditions"
+    },
+    "title": "Terms & Conditions",
+    "lastUpdated": "Last updated: February 2026",
+    "sections": [
+      {
+        "title": "1. General information",
+        "content": "This website is operated by DIGITAL LEADERSHIP SRL, a company registered in Romania, with its registered office at Dezmir, Apahida Commune, Viorelelor Street, no. 17A, Cluj County, Romania, Tax ID (CUI) 38585123, Trade Registry No. J12/6715/2017.\n\nWebsite: https://generativa.ro\nEmail: contact@generativa.ro\nCommercial brand: GENERATIVA\n\nBy accessing and using this website, you accept these Terms and Conditions in their entirety. If you disagree with any of the provisions below, please do not use this website."
+      },
+      {
+        "title": "2. Description of services",
+        "content": "GENERATIVA offers artificial intelligence services for businesses, including:\n\n• Business process automation with AI agents.\n• Conversational virtual assistants (voice, chat, email).\n• AI integrations with existing systems (CRM, ERP, booking, ticketing).\n• Process audit and consulting for AI implementation.\n\nThe information presented on the website is for informational purposes and does not constitute a binding offer. Specific service terms will be established through individual contracts."
+      },
+      {
+        "title": "3. Intellectual property",
+        "content": "All elements of this website — including but not limited to: design, texts, graphics, logos, images, source code, animations and database structure — are the property of DIGITAL LEADERSHIP SRL or are used under license and are protected by Romanian and international copyright and intellectual property law.\n\nReproduction, distribution, modification or use of the content without prior written consent from DIGITAL LEADERSHIP SRL is prohibited."
+      },
+      {
+        "title": "4. Website usage",
+        "content": "You agree to use this website in accordance with applicable laws and these Terms and Conditions. The following is prohibited:",
+        "items": [
+          "Using the website for illegal or unauthorized purposes.",
+          "Attempting unauthorized access to systems, servers or databases.",
+          "Transmitting content containing viruses, malware or other harmful programs.",
+          "Collecting personal data of other users without their consent.",
+          "Interfering with the normal operation of the website.",
+          "Reproducing, copying or distributing website content without written consent."
+        ]
+      },
+      {
+        "title": "5. Contact form",
+        "content": "By submitting a message through the contact form, you confirm that:\n\n• The information provided is true and accurate.\n• You are at least 18 years old or have the consent of a legal guardian.\n• You agree to the processing of your data in accordance with our Privacy Policy.\n\nWe reserve the right not to respond to messages containing offensive content, spam or irrelevant requests."
+      },
+      {
+        "title": "6. Limitation of liability",
+        "content": "The website is provided \"as is\", without warranties of any kind, express or implied.\n\nDIGITAL LEADERSHIP SRL is not responsible for:\n\n• Temporary interruptions in website operation.\n• Data loss caused by technical issues.\n• Content of external websites we reference (external links).\n• Decisions made based on information presented on the website.\n• Indirect, incidental or consequential damages resulting from website use.\n\nOur total liability shall in no case exceed the amount paid by the user for contracted services (if any)."
+      },
+      {
+        "title": "7. External links",
+        "content": "The website may contain links to third-party websites. We have no control over the content or privacy practices of these sites and assume no responsibility for them. We recommend reading the privacy policies of each site you visit."
+      },
+      {
+        "title": "8. Applicable law and jurisdiction",
+        "content": "These Terms and Conditions are governed by the laws of Romania.\n\nAny dispute will be resolved amicably. If an agreement cannot be reached, the dispute will be submitted for resolution to the competent courts in Cluj-Napoca, Romania.\n\nApplicable legislation:\n• Regulation (EU) 2016/679 — GDPR\n• Law no. 190/2018 — Romanian GDPR implementation law\n• Law no. 365/2002 — Electronic commerce law\n• Government Emergency Ordinance no. 34/2014 — Consumer rights\n• Romanian Civil Code"
+      },
+      {
+        "title": "9. Changes to Terms and Conditions",
+        "content": "We reserve the right to modify these Terms and Conditions at any time. Changes take effect from the date of publication on the website. Continued use of the website after publication of changes constitutes acceptance of the new terms.\n\nWe recommend periodically checking this page."
+      },
+      {
+        "title": "10. Contact",
+        "content": "For any questions regarding these Terms and Conditions:\n\nDIGITAL LEADERSHIP SRL\nAddress: Dezmir, Apahida Commune, Viorelelor Street, no. 17A, Cluj County, Romania\nEmail: contact@generativa.ro\nTax ID (CUI): 38585123 | Trade Registry: J12/6715/2017"
+      }
+    ]
   }
 }

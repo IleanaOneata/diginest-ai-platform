@@ -130,6 +130,11 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   'conversational-agents': { ro: 'agenti-conversationali', en: 'conversational-agents' },
   'integrari-ai': { ro: 'integrari-ai', en: 'ai-integrations' },
   'ai-integrations': { ro: 'integrari-ai', en: 'ai-integrations' },
+  // Legal pages
+  'politica-confidentialitate': { ro: 'politica-confidentialitate', en: 'privacy-policy' },
+  'privacy-policy': { ro: 'politica-confidentialitate', en: 'privacy-policy' },
+  'termeni-conditii': { ro: 'termeni-conditii', en: 'terms-conditions' },
+  'terms-conditions': { ro: 'termeni-conditii', en: 'terms-conditions' },
   // Blog
   'blog': { ro: 'blog', en: 'blog' },
   // Add more mappings as needed

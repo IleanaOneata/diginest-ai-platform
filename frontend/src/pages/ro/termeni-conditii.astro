@@ -1,0 +1,71 @@
+---
+/**
+ * Romanian Terms & Conditions Page
+ *
+ * Legal terms and conditions for GENERATIVA website
+ *
+ * Schema.org: WebPage + BreadcrumbList (@graph pattern)
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import TermsConditionsPage from '@components/sections/TermsConditionsPage.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'ro';
+const t = getTranslations(locale);
+
+const title = t.terms.meta.title;
+const description = t.terms.meta.description;
+
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Schema.org @graph with WebPage + BreadcrumbList
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // WebPage schema
+    {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/ro/termeni-conditii/#webpage`,
+      url: `${siteUrl}/ro/termeni-conditii/`,
+      name: title,
+      description: description,
+      inLanguage: 'ro-RO',
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // BreadcrumbList
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/ro/termeni-conditii/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Acasă',
+          item: `${siteUrl}/ro/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Termeni și Condiții',
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/ro/termeni-conditii/"
+  schema={schema}
+>
+  <TermsConditionsPage locale={locale} />
+</BaseLayout>

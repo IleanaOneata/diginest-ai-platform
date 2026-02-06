@@ -35,6 +35,13 @@
 20. ✅ **Agenți Conversaționali Page** - A doua pagină de serviciu cu 7 secțiuni, SEO/AEO, Schema.org @graph, 8 FAQ items, 6 industrii cu problem→solution
 21. ✅ **Integrări AI Page** - A treia pagină de serviciu cu 7 secțiuni (Systems, Approach, Capabilities, Benefits, FAQ, CTA), SEO/AEO, Schema.org @graph, 8 FAQ items, hasOfferCatalog (CRM/Booking/Ticketing/ERP)
 22. ✅ **Fix 404 Servicii** - Link-ul "Servicii" din header/breadcrumb duce la homepage `/#services` (scroll), nu la pagină separată
+23. ✅ **Blog & Resources Cleanup** - Eliminat Blog din Header și secțiunea Resurse din Footer (pagini goale dăunează SEO la business nou)
+24. ✅ **Custom Form Validation** - Validare inline locale-aware (`novalidate` + JS custom), mesaje de eroare în limba paginii, regex email + E.164 phone (7-15 cifre)
+25. ✅ **Contact Form Lead Qualification** - Dropdown-uri Industry (8 opțiuni) și Interest (4 opțiuni) pentru calificarea lead-urilor înainte de primul contact
+26. ✅ **Unificare ScaleWithConfidence + Benefits** - Eliminat secțiunea Benefits separată, cardurile (70%, 24/7, 10x, 300%) integrate sub animația wave într-o singură secțiune dark coerentă
+27. ✅ **Politica de Confidențialitate** - Pagină legală GDPR-compliant cu 12 secțiuni + Politica de Cookies (5 secțiuni), Schema.org WebPage + BreadcrumbList, RO + EN
+28. ✅ **Termeni și Condiții** - Pagină legală cu 10 secțiuni (servicii, proprietate intelectuală, limitarea răspunderii, legislație), Schema.org WebPage + BreadcrumbList, RO + EN
+29. ✅ **Footer Update** - Înlocuit placeholder company info cu datele reale DIGITAL LEADERSHIP SRL (CUI: 38585123, J12/6715/2017)
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -130,7 +137,7 @@
 3. Services            → Ce oferim (existent)
 4. UseCases            → "Ți se pare familiar?" (auto-identificare)
 5. IntegrationHub      → Vizualizare conexiuni (stil Stripe)
-6. Benefits            → Rezultate concrete (existent)
+6. ScaleWithConfidence → Animație wave + metrici business (unificate)
 7. Process             → Cum funcționează (existent)
 8. FAQ                 → Întrebări frecvente (existent)
 9. CTA                 → Contact (existent)
@@ -212,11 +219,10 @@ Secțiuni în ordine:
 3. <Services />             - Ce oferim (3 servicii)
 4. <UseCases />             - 6 industrii cu problemă→soluție
 5. <IntegrationHub />       - Hub central + 8 conexiuni
-6. <ScaleWithConfidence />  - Animație wave + statistici scalare
-7. <Benefits />             - Rezultate cu numere
-8. <Process />              - 4 pași cum funcționăm
-9. <FAQ />                  - Întrebări frecvente
-10. <CTA />                 - Contact final
+6. <ScaleWithConfidence />  - Animație wave + metrici business (unificate)
+7. <Process />              - 4 pași cum funcționăm
+8. <FAQ />                  - Întrebări frecvente
+9. <CTA />                  - Contact final
 ```
 
 ### Conținut Cheie per Secțiune
@@ -296,6 +302,8 @@ AI Agents Platform/
 │   │   │       ├── ProcessAutomationPage.astro # 🆕 Pagina serviciu automatizare (SEO/AEO)
 │   │   │       ├── ConversationalAgentsPage.astro # 🆕 Pagina serviciu agenți conversaționali (SEO/AEO)
 │   │   │       ├── AiIntegrationsPage.astro # 🆕 Pagina serviciu integrări AI (SEO/AEO)
+│   │   │       ├── PrivacyPolicyPage.astro  # 🆕 Politica de confidențialitate + Cookie Policy
+│   │   │       ├── TermsConditionsPage.astro # 🆕 Termeni și condiții
 │   │   │       ├── Services.astro        # Servicii
 │   │   │       ├── Benefits.astro        # Rezultate
 │   │   │       ├── Process.astro         # Cum funcționăm
@@ -983,10 +991,10 @@ Aceste link-uri există în Header/Footer dar paginile NU sunt create încă:
 | Automatizare Procese | `/ro/servicii/automatizare-procese/` | `/en/services/process-automation/` | ✅ Implementat |
 | Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | `/en/services/conversational-agents/` | ✅ Implementat |
 | Integrări AI | `/ro/servicii/integrari-ai/` | `/en/services/ai-integrations/` | ✅ Implementat |
-| **Blog** | `/ro/blog/` | `/en/blog/` | ❌ Nu există |
-| Studii de caz | `/ro/studii-caz/` | `/en/case-studies/` | ❌ Nu există |
-| Politica confidențialitate | `/ro/politica-confidentialitate/` | `/en/privacy-policy/` | ❌ Nu există |
-| Termeni și condiții | `/ro/termeni-conditii/` | `/en/terms-conditions/` | ❌ Nu există |
+| ~~Blog~~ | ~~`/ro/blog/`~~ | ~~`/en/blog/`~~ | ✅ Eliminat din Header (pagini goale = SEO negativ) |
+| Studii de caz | `/ro/studii-caz/` | `/en/case-studies/` | ❌ Nu există (nu e linkuit nicăieri) |
+| Politica confidențialitate | `/ro/politica-confidentialitate/` | `/en/privacy-policy/` | ✅ Implementat |
+| Termeni și condiții | `/ro/termeni-conditii/` | `/en/terms-conditions/` | ✅ Implementat |
 
 ### Elemente de Verificat la Fiecare Modificare
 
@@ -1177,6 +1185,52 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 - **Path mappings**: `agenti-conversationali` ↔ `conversational-agents` pentru Language Switcher
 - **Fișiere**: 4 create, 5 modificate (ro.json, en.json, i18n/index.ts, + 6 page shells pentru SEO audit)
 
+### Sesiune Februarie 2026 - UX Cleanup, Form Validation & Lead Qualification
+- **Fix 404 Servicii**: Link-ul "Servicii" din Header dropdown + breadcrumb-urile service pages redirect la homepage `/#services` (scroll) în loc de pagină separată. Eliminat `ServicesPage.astro` (redundantă cu Services section de pe homepage). Actualizat breadcrumb Schema.org în toate 6 page shells.
+- **Eliminat Blog & Resources**:
+  - Scos link Blog din Header navigation
+  - Scos secțiunea Resurse din Footer (grid ajustat 5→4 coloane)
+  - Motivație documentată: paginile goale dăunează SEO la business nou (crawl budget waste, bounce rate, thin content signals)
+- **Custom Form Validation** (ContactForm.astro rewrite):
+  - `novalidate` pe form + validare JS completă cu mesaje locale-aware (RO/EN)
+  - Inline error messages per câmp cu stil vizual (border roșu, mesaj sub input)
+  - Validare email: regex comprehensive
+  - Validare telefon: E.164 standard (7-15 cifre), caractere permise: `+`, cifre, spații, `-`, `.`, `(`, `)`
+  - Validare pe `input`/`change` events (real-time clear) + `blur` (validate on leave)
+  - Mesaje traduse în `contact.form.validation` din ro.json/en.json
+- **Lead Qualification Dropdowns** (Industry + Interest):
+  - **Industry** (8 opțiuni): Clinică dentară, Cabinet medical, Salon beauty/SPA, Service auto, HoReCa, Retail/E-commerce, Rețea multi-locații, Altele
+  - **Interest** (4 opțiuni): Automatizare procese, Agenți conversaționali, Integrări AI, Nu sunt sigur
+  - Dropdown-uri required cu validare custom
+  - **Backend compatibility fără modificări**: Industry label + Interest label se prepend la mesaj
+    ```
+    [Industrie: Clinică dentară]
+    [Interes: Automatizare procese]
+
+    <mesajul utilizatorului>
+    ```
+  - Backend DTO/entity/DB **nemodificate** — evitat deploy backend
+- **Commits**: `7ccbf32`, `f661340`, `75fdc42`, `5f36a1b` (toate pe staging)
+
+### Sesiune Februarie 2026 - Unificare ScaleWithConfidence + Benefits
+- **Problema**: Două secțiuni dark consecutive pe homepage (ScaleWithConfidence + Benefits) comunicau redundant metrici de performanță (`24/7` apărea în ambele)
+- **Soluția**: Eliminat secțiunea Benefits separată, cardurile business (70%, 24/7, 10x, 300%) integrate direct sub animația wave în ScaleWithConfidence
+- **Fișiere modificate**: `ScaleWithConfidence.astro` (adăugat i18n + benefits cards, eliminat stats mici), `ro/index.astro` + `en/index.astro` (eliminat `<Benefits />`)
+- **Benefits.astro** păstrat în codebase (nefolosit pe homepage) — poate fi reutilizat dacă e nevoie
+- Homepage: 9 secțiuni (anterior 10)
+
+### Sesiune Februarie 2026 - Pagini Legale (Privacy Policy + Terms & Conditions)
+- **Două pagini legale** create, GDPR-compliant:
+  - Politica de Confidențialitate (`/ro/politica-confidentialitate/`, `/en/privacy-policy/`) — 12 secțiuni + Cookie Policy (5 secțiuni)
+  - Termeni și Condiții (`/ro/termeni-conditii/`, `/en/terms-conditions/`) — 10 secțiuni
+- **Companie**: DIGITAL LEADERSHIP SRL, CUI 38585123, J12/6715/2017, Dezmir, Cluj
+- **Conținut legal acoperă**: colectare date, temeiuri GDPR (art. 6), drepturi utilizator, securitate date, transfer UE/SEE, ANSPDCP, proprietate intelectuală, limitarea răspunderii, legislație română aplicabilă
+- **Schema.org**: WebPage + BreadcrumbList per pagină (pattern @graph)
+- **Path mappings**: `politica-confidentialitate` ↔ `privacy-policy`, `termeni-conditii` ↔ `terms-conditions`
+- **Footer actualizat**: Înlocuit placeholder company info cu datele reale DIGITAL LEADERSHIP SRL
+- **Fișiere create**: 4 page shells + 2 componente (`PrivacyPolicyPage.astro`, `TermsConditionsPage.astro`)
+- **Fișiere modificate**: `ro.json`, `en.json` (traduceri legale), `i18n/index.ts` (path mappings), `Footer.astro` (company info)
+
 ---
 
 ## 📧 EMAIL SYSTEM - RESEND HTTP API (DETALII TEHNICE)
@@ -1284,6 +1338,80 @@ EMAIL_FROM=contact@generativa.ro
 EMAIL_ADMIN=contact@generativa.ro
 EMAIL_ENABLED=true
 ```
+
+---
+
+## 📝 CONTACT FORM - DETALII TEHNICE
+
+> **Pentru AI**: Această secțiune conține specificațiile formularului de contact. Citește înainte de orice modificare la ContactForm.astro.
+
+### Câmpuri Formular
+
+| Câmp | Tip | Required | Validare |
+|------|-----|----------|----------|
+| **Nume** | `text` | ✅ | Min 2 caractere, max 100 |
+| **Email** | `email` | ✅ | Regex comprehensive |
+| **Companie** | `text` | ✅ | Min 2 caractere, max 100 |
+| **Industrie** | `select` | ✅ | Must select a non-empty option |
+| **Interes** | `select` | ✅ | Must select a non-empty option |
+| **Telefon** | `tel` | ❌ | Dacă completat: doar caractere valide + 7-15 cifre (E.164) |
+| **Mesaj** | `textarea` | ✅ | Min 10 caractere |
+
+### Opțiuni Industry (8)
+
+| Key | RO | EN |
+|-----|----|----|
+| `dental` | Clinică dentară | Dental clinic |
+| `medical` | Cabinet medical | Medical practice |
+| `beauty` | Salon beauty / SPA | Beauty salon / SPA |
+| `auto` | Service auto | Auto service |
+| `horeca` | HoReCa (restaurant, hotel) | HoReCa (restaurant, hotel) |
+| `retail` | Retail / E-commerce | Retail / E-commerce |
+| `network` | Rețea multi-locații | Multi-location network |
+| `other` | Altă industrie | Other industry |
+
+### Opțiuni Interest (4)
+
+| Key | RO | EN |
+|-----|----|----|
+| `automation` | Automatizare procese | Process automation |
+| `conversational` | Agenți conversaționali (voice/chat) | Conversational agents (voice/chat) |
+| `integrations` | Integrări AI cu sisteme existente | AI integrations with existing systems |
+| `unsure` | Nu sunt sigur(ă) încă | Not sure yet |
+
+### Validare — Abordare Tehnică
+
+- `novalidate` pe `<form>` — dezactivează validarea nativă browser
+- Validare custom în JS via `validateField(fieldName, value)` → returnează mesaj eroare sau `''`
+- `define:vars={{ validationMessages: v }}` — Astro trece mesajele traduse (server → client)
+- Erori afișate inline sub fiecare câmp (`<p class="field-error">`)
+- Stil error: `border-color: #dc2626` + text roșu sub input
+- Events: `input` pentru text fields, `change` pentru selects, `blur` pentru validare la pierdere focus
+
+### Backend Compatibility — Industry/Interest Prepend
+
+Backend-ul DTO (`ContactRequestDTO.java`) NU are câmpuri `industry`/`interest`. În loc de a modifica backend-ul (care ar necesita deploy), dropdown-urile se adaugă la începutul mesajului:
+
+```
+[Industrie: Clinică dentară]
+[Interes: Automatizare procese]
+
+Mesajul original al utilizatorului...
+```
+
+**Dacă în viitor** se adaugă câmpuri `industry` + `interest` la backend:
+1. Adaugă în `ContactRequestDTO.java`
+2. Adaugă în `ContactRequest.java` (entity)
+3. Adaugă coloane în DB (auto via `ddl-auto: update`)
+4. Trimite separat în `requestBody` din ContactForm.astro
+5. Elimină prepend-ul la mesaj
+
+### Traduceri
+
+Mesajele de validare sunt în `contact.form.validation` din `ro.json`/`en.json`:
+- `nameRequired`, `nameMin`, `emailRequired`, `emailInvalid`
+- `companyRequired`, `companyMin`, `industryRequired`, `interestRequired`
+- `phoneInvalid`, `messageRequired`, `messageMin`
 
 ---
 

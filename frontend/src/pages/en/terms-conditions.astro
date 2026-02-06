@@ -1,0 +1,71 @@
+---
+/**
+ * English Terms & Conditions Page
+ *
+ * Legal terms and conditions for GENERATIVA website
+ *
+ * Schema.org: WebPage + BreadcrumbList (@graph pattern)
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import TermsConditionsPage from '@components/sections/TermsConditionsPage.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'en';
+const t = getTranslations(locale);
+
+const title = t.terms.meta.title;
+const description = t.terms.meta.description;
+
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Schema.org @graph with WebPage + BreadcrumbList
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // WebPage schema
+    {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/en/terms-conditions/#webpage`,
+      url: `${siteUrl}/en/terms-conditions/`,
+      name: title,
+      description: description,
+      inLanguage: 'en-US',
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // BreadcrumbList
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/en/terms-conditions/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/en/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Terms & Conditions',
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/en/terms-conditions/"
+  schema={schema}
+>
+  <TermsConditionsPage locale={locale} />
+</BaseLayout>
