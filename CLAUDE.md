@@ -34,6 +34,7 @@
 19. ✅ **Site-wide SEO/AEO Audit** - Schema.org pe toate paginile (Homepage, About, Contact), fix domain URLs, BreadcrumbList universal
 20. ✅ **Agenți Conversaționali Page** - A doua pagină de serviciu cu 7 secțiuni, SEO/AEO, Schema.org @graph, 8 FAQ items, 6 industrii cu problem→solution
 21. ✅ **Integrări AI Page** - A treia pagină de serviciu cu 7 secțiuni (Systems, Approach, Capabilities, Benefits, FAQ, CTA), SEO/AEO, Schema.org @graph, 8 FAQ items, hasOfferCatalog (CRM/Booking/Ticketing/ERP)
+22. ✅ **Fix 404 Servicii** - Link-ul "Servicii" din header/breadcrumb duce la homepage `/#services` (scroll), nu la pagină separată
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -978,7 +979,7 @@ Aceste link-uri există în Header/Footer dar paginile NU sunt create încă:
 
 | Link | Path RO | Path EN | Status |
 |------|---------|---------|--------|
-| **Servicii dropdown** | `/ro/servicii/` | `/en/services/` | ❌ Nu există |
+| **Servicii dropdown** | `/ro/servicii/` | `/en/services/` | ✅ Redirect la homepage /#services |
 | Automatizare Procese | `/ro/servicii/automatizare-procese/` | `/en/services/process-automation/` | ✅ Implementat |
 | Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | `/en/services/conversational-agents/` | ✅ Implementat |
 | Integrări AI | `/ro/servicii/integrari-ai/` | `/en/services/ai-integrations/` | ✅ Implementat |

@@ -27,7 +27,7 @@ const t = getTranslations(locale);
 const navItems = [
   {
     label: t.nav.services,
-    href: buildLocalePath('/servicii/', locale),
+    href: buildLocalePath('/', locale) + '#services',
     hasDropdown: true,
     items: [
       { label: t.services.automation.title, href: buildLocalePath('/servicii/automatizare-procese/', locale) },
