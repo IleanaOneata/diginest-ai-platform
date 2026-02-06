@@ -79,19 +79,23 @@ public class EmailService {
                 request.getId(), e.getMessage());
         }
 
-        // Send confirmation to user
-        try {
-            sendViaResend(
-                request.getEmail(),
-                getConfirmationSubject(request.getLocale()),
-                buildConfirmationText(request)
-            );
-            confirmSent = true;
-            log.info("Confirmation email sent to {} for contact request {}",
-                request.getEmail(), request.getId());
-        } catch (Exception e) {
-            log.error("Failed to send confirmation email for contact request {}: {}",
-                request.getId(), e.getMessage());
+        // Send confirmation to user only if admin notification succeeded
+        if (adminSent) {
+            try {
+                sendViaResend(
+                    request.getEmail(),
+                    getConfirmationSubject(request.getLocale()),
+                    buildConfirmationText(request)
+                );
+                confirmSent = true;
+                log.info("Confirmation email sent to {} for contact request {}",
+                    request.getEmail(), request.getId());
+            } catch (Exception e) {
+                log.error("Failed to send confirmation email for contact request {}: {}",
+                    request.getId(), e.getMessage());
+            }
+        } else {
+            log.warn("Skipping confirmation email - admin notification failed for request {}", request.getId());
         }
 
         // Update processed status in database
