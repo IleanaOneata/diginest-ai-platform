@@ -6,10 +6,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
- * Service for sending emails.
+ * Service for sending emails asynchronously.
+ *
+ * All email methods are @Async so the contact form responds immediately
+ * without waiting for SMTP operations (which can timeout after 10+ seconds).
  *
  * TODO: In production, use HTML templates with Thymeleaf or similar.
  */
@@ -26,7 +30,6 @@ public class EmailService {
     @Value("${app.email.admin:contact@generativa.ro}")
     private String adminEmail;
 
-    // Hardcoded default to true since config wasn't being read
     @Value("${app.email.enabled:true}")
     private boolean emailEnabled;
 
@@ -36,7 +39,9 @@ public class EmailService {
 
     /**
      * Send notification to admin about new contact request.
+     * Runs asynchronously - does not block the HTTP response.
      */
+    @Async
     public void sendContactNotification(ContactRequest request) {
         log.info("Email enabled status: {}", emailEnabled);
         if (!emailEnabled) {
@@ -54,14 +59,17 @@ public class EmailService {
             mailSender.send(message);
             log.info("Admin notification sent for contact request {}", request.getId());
         } catch (Exception e) {
-            log.error("Failed to send admin notification: {}", e.getMessage());
-            throw e;
+            log.error("Failed to send admin notification for contact request {}: {}",
+                request.getId(), e.getMessage());
+            // Async method - exception is logged but doesn't propagate to caller
         }
     }
 
     /**
      * Send confirmation email to the user who submitted the contact form.
+     * Runs asynchronously - does not block the HTTP response.
      */
+    @Async
     public void sendContactConfirmation(ContactRequest request) {
         if (!emailEnabled) {
             log.info("Email disabled - skipping confirmation for contact request {}", request.getId());
@@ -79,8 +87,9 @@ public class EmailService {
             log.info("Confirmation email sent to {} for contact request {}",
                 request.getEmail(), request.getId());
         } catch (Exception e) {
-            log.error("Failed to send confirmation email: {}", e.getMessage());
-            throw e;
+            log.error("Failed to send confirmation email for contact request {}: {}",
+                request.getId(), e.getMessage());
+            // Async method - exception is logged but doesn't propagate to caller
         }
     }
 

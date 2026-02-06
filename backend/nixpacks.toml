@@ -1,0 +1,13 @@
+# =============================================================================
+# Nixpacks Configuration for Railway Deployment
+# =============================================================================
+# This file helps Railway/Nixpacks detect the Java/Maven project correctly.
+
+[phases.setup]
+nixPkgs = ["jdk-headless"]
+
+[phases.build]
+cmds = ["mvn clean package -DskipTests"]
+
+[start]
+cmd = "java -jar -Dserver.port=$PORT -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE:-prod} target/*.jar"

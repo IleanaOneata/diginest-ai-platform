@@ -34,7 +34,9 @@ app:
     allowed-origins: http://localhost:3000,http://localhost:4321
 
   email:
-    enabled: true  # Disable emails in development
+    enabled: true
+    from: ${EMAIL_FROM:contact@generativa.ro}
+    admin: ${EMAIL_ADMIN:contact@generativa.ro}
 
 # =============================================================================
 # Logging - More verbose in development

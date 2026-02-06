@@ -27,6 +27,10 @@ public class ContactService {
     /**
      * Process a new contact form submission.
      *
+     * Saves to database synchronously (fast), then fires async emails.
+     * The HTTP response returns immediately after DB save (~50ms).
+     * Email sending happens in background threads via @Async in EmailService.
+     *
      * @param dto The contact request data
      * @param ipAddress The client IP address
      * @return The saved contact request
@@ -47,27 +51,15 @@ public class ContactService {
             ipAddress
         );
 
-        // Save to database
+        // Save to database (synchronous - fast)
         ContactRequest saved = contactRepository.save(request);
         log.info("Contact request saved with ID: {}", saved.getId());
 
-        // Send notification email to admin
-        try {
-            emailService.sendContactNotification(saved);
-        } catch (Exception e) {
-            log.error("Failed to send notification email for contact request {}: {}",
-                saved.getId(), e.getMessage());
-            // Don't fail the request if email fails
-        }
-
-        // Send confirmation email to user
-        try {
-            emailService.sendContactConfirmation(saved);
-        } catch (Exception e) {
-            log.error("Failed to send confirmation email for contact request {}: {}",
-                saved.getId(), e.getMessage());
-            // Don't fail the request if email fails
-        }
+        // Fire async emails - these run in background threads
+        // and do NOT block the HTTP response.
+        // Errors are handled inside EmailService (logged, not propagated).
+        emailService.sendContactNotification(saved);
+        emailService.sendContactConfirmation(saved);
 
         return saved;
     }

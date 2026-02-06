@@ -34,7 +34,9 @@ spring:
       path: /h2-console
 
   # Mail Configuration
-  # SMTP Settings from cPanel: mail.generativa.ro, Port 465 (SSL)
+  # SMTP settings - fully configurable via environment variables.
+  # Default: cPanel mail.generativa.ro on port 465 (SMTPS/SSL)
+  # Can override with Resend (smtp.resend.com:587) or any SMTP provider.
   mail:
     host: ${MAIL_HOST:mail.generativa.ro}
     port: ${MAIL_PORT:465}
@@ -45,10 +47,19 @@ spring:
         smtp:
           auth: true
           ssl:
-            enable: true
+            enable: ${MAIL_SSL_ENABLE:true}
           starttls:
-            enable: false
-    protocol: smtps
+            enable: ${MAIL_STARTTLS_ENABLE:false}
+          # Timeouts in milliseconds - prevents infinite waits
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+        smtps:
+          # Same timeouts for SMTPS protocol
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+    protocol: ${MAIL_PROTOCOL:smtps}
 
 # =============================================================================
 # Server Configuration

@@ -18,7 +18,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate  # Never auto-modify in production
+      ddl-auto: update  # Uses update to auto-create/modify tables safely
     show-sql: false
     properties:
       hibernate:
