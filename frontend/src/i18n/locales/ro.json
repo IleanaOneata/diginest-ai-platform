@@ -174,6 +174,26 @@
       "name": "Nume complet",
       "email": "Email",
       "company": "Companie",
+      "industry": "Industrie",
+      "industryPlaceholder": "Selectează industria",
+      "industryOptions": {
+        "dental": "Clinică dentară",
+        "medical": "Cabinet medical",
+        "beauty": "Salon beauty / SPA",
+        "auto": "Service auto",
+        "horeca": "Restaurant / HoReCa",
+        "retail": "Retail / E-commerce",
+        "network": "Rețea de locații",
+        "other": "Altă industrie"
+      },
+      "interest": "Ce te interesează?",
+      "interestPlaceholder": "Selectează serviciul",
+      "interestOptions": {
+        "automation": "Automatizare procese",
+        "conversational": "Agenți conversaționali (chatbot / voce)",
+        "integrations": "Integrări AI cu sisteme existente",
+        "unsure": "Nu sunt sigur — vreau o consultanță"
+      },
       "phone": "Telefon (opțional)",
       "message": "Mesaj",
       "submit": "Trimite mesajul",
@@ -186,6 +206,8 @@
         "emailInvalid": "Te rugăm să introduci o adresă de email validă",
         "companyRequired": "Te rugăm să introduci numele companiei",
         "companyMin": "Numele companiei trebuie să aibă cel puțin 2 caractere",
+        "industryRequired": "Te rugăm să selectezi industria",
+        "interestRequired": "Te rugăm să selectezi ce te interesează",
         "phoneInvalid": "Te rugăm să introduci un număr de telefon valid (ex: +40 712 345 678)",
         "messageRequired": "Te rugăm să descrii proiectul sau întrebarea ta",
         "messageMin": "Mesajul trebuie să aibă cel puțin 10 caractere"
