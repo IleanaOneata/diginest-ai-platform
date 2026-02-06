@@ -4,25 +4,30 @@ import com.diginest.aiagents.model.entity.ContactRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+import java.util.Map;
 
 /**
- * Service for sending emails asynchronously.
+ * Service for sending emails via Resend HTTP API.
  *
- * All email methods are @Async so the contact form responds immediately
- * without waiting for SMTP operations (which can timeout after 10+ seconds).
+ * Uses Resend's REST API (https://api.resend.com/emails) instead of SMTP
+ * because Railway blocks outbound SMTP ports (25, 465, 587).
+ * HTTPS port 443 is always available.
  *
- * TODO: In production, use HTML templates with Thymeleaf or similar.
+ * All email methods are @Async so the contact form responds immediately.
  */
 @Service
 public class EmailService {
 
     private static final Logger log = LoggerFactory.getLogger(EmailService.class);
+    private static final String RESEND_API_URL = "https://api.resend.com/emails";
 
-    private final JavaMailSender mailSender;
+    private final RestTemplate restTemplate;
 
     @Value("${app.email.from:contact@generativa.ro}")
     private String fromEmail;
@@ -33,13 +38,15 @@ public class EmailService {
     @Value("${app.email.enabled:true}")
     private boolean emailEnabled;
 
-    public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
+    @Value("${MAIL_PASSWORD:}")
+    private String resendApiKey;
+
+    public EmailService() {
+        this.restTemplate = new RestTemplate();
     }
 
     /**
      * Send notification to admin about new contact request.
-     * Runs asynchronously - does not block the HTTP response.
      */
     @Async
     public void sendContactNotification(ContactRequest request) {
@@ -50,24 +57,20 @@ public class EmailService {
         }
 
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(fromEmail);
-            message.setTo(adminEmail);
-            message.setSubject("[GENERATIVA] New Contact Request from " + request.getCompany());
-            message.setText(buildAdminNotificationText(request));
-
-            mailSender.send(message);
+            sendViaResend(
+                adminEmail,
+                "[GENERATIVA] New Contact Request from " + request.getCompany(),
+                buildAdminNotificationText(request)
+            );
             log.info("Admin notification sent for contact request {}", request.getId());
         } catch (Exception e) {
             log.error("Failed to send admin notification for contact request {}: {}",
                 request.getId(), e.getMessage());
-            // Async method - exception is logged but doesn't propagate to caller
         }
     }
 
     /**
      * Send confirmation email to the user who submitted the contact form.
-     * Runs asynchronously - does not block the HTTP response.
      */
     @Async
     public void sendContactConfirmation(ContactRequest request) {
@@ -77,20 +80,43 @@ public class EmailService {
         }
 
         try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(fromEmail);
-            message.setTo(request.getEmail());
-            message.setSubject(getConfirmationSubject(request.getLocale()));
-            message.setText(buildConfirmationText(request));
-
-            mailSender.send(message);
+            sendViaResend(
+                request.getEmail(),
+                getConfirmationSubject(request.getLocale()),
+                buildConfirmationText(request)
+            );
             log.info("Confirmation email sent to {} for contact request {}",
                 request.getEmail(), request.getId());
         } catch (Exception e) {
             log.error("Failed to send confirmation email for contact request {}: {}",
                 request.getId(), e.getMessage());
-            // Async method - exception is logged but doesn't propagate to caller
         }
+    }
+
+    /**
+     * Send email via Resend HTTP API (port 443 - always available on cloud).
+     */
+    private void sendViaResend(String to, String subject, String text) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(resendApiKey);
+
+        Map<String, Object> body = Map.of(
+            "from", fromEmail,
+            "to", List.of(to),
+            "subject", subject,
+            "text", text
+        );
+
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(RESEND_API_URL, entity, String.class);
+
+        if (!response.getStatusCode().is2xxSuccessful()) {
+            throw new RuntimeException("Resend API error: " + response.getStatusCode() + " - " + response.getBody());
+        }
+
+        log.debug("Resend API response: {}", response.getBody());
     }
 
     private String buildAdminNotificationText(ContactRequest request) {
