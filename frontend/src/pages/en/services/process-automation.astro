@@ -1,0 +1,113 @@
+---
+/**
+ * English Process Automation Service Page
+ *
+ * SEO/AEO optimized service detail page for GENERATIVA
+ * Target keywords: AI process automation, business automation
+ *
+ * Schema.org: Service + FAQPage + BreadcrumbList + HowTo (@graph pattern)
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProcessAutomationPage from '@components/sections/ProcessAutomationPage.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'en';
+const t = getTranslations(locale);
+const sa = t.serviceAutomation;
+
+const title = sa.meta.title;
+const description = sa.meta.description;
+
+// Site URL for schema references
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Combined Schema.org using @graph pattern
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // 1. Service schema
+    {
+      '@type': 'Service',
+      '@id': `${siteUrl}/en/services/process-automation/#service`,
+      name: sa.meta.schemaName,
+      description: sa.meta.schemaDescription,
+      provider: {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'GENERATIVA',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Romania',
+      },
+      serviceType: 'Process Automation with AI',
+      offers: {
+        '@type': 'Offer',
+        description: sa.meta.schemaOffer,
+        priceCurrency: 'EUR',
+      },
+    },
+    // 2. FAQPage schema
+    {
+      '@type': 'FAQPage',
+      '@id': `${siteUrl}/en/services/process-automation/#faq`,
+      mainEntity: sa.faq.items.map((item: { question: string; answer: string }) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    // 3. BreadcrumbList schema
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/en/services/process-automation/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/en/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Services',
+          item: `${siteUrl}/en/services/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: sa.meta.breadcrumbName,
+        },
+      ],
+    },
+    // 4. HowTo schema (5-step implementation process)
+    {
+      '@type': 'HowTo',
+      '@id': `${siteUrl}/en/services/process-automation/#howto`,
+      name: sa.approach.schemaName,
+      description: sa.approach.schemaDescription,
+      step: sa.approach.steps.map((step: { title: string; description: string }, index: number) => ({
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: step.title,
+        text: step.description,
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/en/services/process-automation/"
+  schema={schema}
+>
+  <ProcessAutomationPage locale={locale} />
+</BaseLayout>

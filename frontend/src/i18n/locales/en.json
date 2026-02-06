@@ -314,5 +314,158 @@
       "subtitle": "A 15-minute conversation shows us if we're a good fit. No sales pitches, no pressure - just clarity.",
       "button": "Schedule a call"
     }
+  },
+
+  "serviceAutomation": {
+    "meta": {
+      "title": "AI Process Automation | GENERATIVA",
+      "description": "Eliminate repetitive work from your business with AI agents. 60-80% time reduction, zero errors, positive ROI in 3 months. Request a free audit.",
+      "schemaName": "AI Process Automation",
+      "schemaDescription": "Business process automation service using intelligent AI agents. We eliminate repetitive work, reduce errors and free your team for strategic activities.",
+      "schemaOffer": "Free process audit and personalized consultation",
+      "breadcrumbName": "Process Automation"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "services": "Services",
+      "current": "Process Automation"
+    },
+    "hero": {
+      "eyebrow": "Process Automation",
+      "title": "AI Process Automation",
+      "subtitle": "We eliminate repetitive work from your business. Our AI agents take over manual tasks, reduce errors and free your team for what truly matters. Implementation in weeks, not months, with measurable results from the first month.",
+      "cta": "Request a free audit"
+    },
+    "processTypes": {
+      "title": "What business processes can be automated with AI?",
+      "lead": "Nearly any repetitive, rule-based process can be automated with AI. From document processing to customer communication, AI agents take over tasks that consume time and resources, allowing your team to focus on strategic activities.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "document",
+          "title": "Document & data processing",
+          "description": "Automatic extraction of information from invoices, contracts, forms and emails. Classification, validation and entry into existing systems without manual intervention."
+        },
+        {
+          "icon": "communication",
+          "title": "Customer communication",
+          "description": "Automated responses to frequently asked questions, appointment confirmations, notifications and request follow-ups across all channels: phone, email, WhatsApp, chat."
+        },
+        {
+          "icon": "approval",
+          "title": "Approval & decision workflows",
+          "description": "Automate leave requests, budget approvals, order validation and document routing to responsible parties with automatic notifications and escalations."
+        },
+        {
+          "icon": "reporting",
+          "title": "Reporting & analytics",
+          "description": "Automatic generation of daily, weekly or monthly reports. Data aggregation from multiple sources, anomaly detection and insight delivery to management teams."
+        },
+        {
+          "icon": "onboarding",
+          "title": "Client/employee onboarding",
+          "description": "Automated registration, document verification, account creation, initial training and follow-up processes. Consistent experience for every new person."
+        },
+        {
+          "icon": "monitoring",
+          "title": "Monitoring & alerts",
+          "description": "Continuous monitoring of KPIs, stock levels, deadlines and team performance. Automatic alerts when something deviates from normal parameters."
+        }
+      ]
+    },
+    "approach": {
+      "title": "How does AI automation implementation work?",
+      "lead": "Implementing AI automation doesn't mean replacing everything overnight. Our 5-step process ensures each automation is tested, validated and gradually adopted by your team, with visible results even during the pilot phase.",
+      "schemaName": "AI Process Automation Implementation",
+      "schemaDescription": "The complete process for automating business processes, from initial audit to continuous optimization.",
+      "steps": [
+        {
+          "title": "Process audit",
+          "description": "We analyze your current processes, identify the most time-consuming ones and calculate automation potential. You receive a clear report with prioritized recommendations."
+        },
+        {
+          "title": "Solution design",
+          "description": "We architect the AI solution tailored to your needs. We define integrations, data flows and success metrics before writing the first line of code."
+        },
+        {
+          "title": "Key process pilot",
+          "description": "We implement automation on a single critical process to demonstrate value. Your team tests, provides feedback and we see real results in 2-4 weeks."
+        },
+        {
+          "title": "Gradual scaling",
+          "description": "After pilot validation, we extend automation to the other identified processes. Each extension follows the same cycle: implementation, testing, validation."
+        },
+        {
+          "title": "Continuous optimization",
+          "description": "We monitor performance, adjust based on real data and add new capabilities as the AI learns from accumulated interactions."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "What results does AI process automation deliver?",
+      "lead": "Companies that implement AI automation see concrete results in the first months: time recovered, errors eliminated and costs reduced. Here's what you can expect from working with GENERATIVA.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "60-80%",
+          "label": "Time reduction on repetitive processes"
+        },
+        {
+          "icon": "shield",
+          "value": "Zero",
+          "label": "Human errors in standardized tasks"
+        },
+        {
+          "icon": "trending",
+          "value": "< 3 months",
+          "label": "Positive ROI after implementation"
+        },
+        {
+          "icon": "scale",
+          "value": "10x",
+          "label": "Scalability without additional hires"
+        },
+        {
+          "icon": "focus",
+          "value": "100%",
+          "label": "Team focused on strategic work"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions about process automation",
+      "lead": "We've answered the most common questions we receive from companies interested in AI process automation.",
+      "items": [
+        {
+          "question": "How much does AI process automation cost?",
+          "answer": "The cost depends on process complexity and the number of required integrations. We offer a free audit where we evaluate your processes and propose a solution with transparent pricing. Generally, the investment pays for itself within the first 3 months through saved time and resources."
+        },
+        {
+          "question": "How long does automation implementation take?",
+          "answer": "The pilot on a single process takes 2-4 weeks. Scaling to additional processes adds 2-3 weeks per process. A complete implementation for 3-5 processes fits within 2-3 months."
+        },
+        {
+          "question": "What processes can be automated with AI?",
+          "answer": "Any repetitive, rule-based process: document processing, customer communication, approvals, reporting, onboarding and monitoring. If your team repeats the same actions daily, there's a good chance the process can be automated."
+        },
+        {
+          "question": "Will AI replace my employees?",
+          "answer": "No. The purpose of automation is to eliminate repetitive tasks that consume time, not to replace people. Your employees will be freed to focus on strategic, creative and relational activities that require human judgment."
+        },
+        {
+          "question": "What ROI can I expect from automation?",
+          "answer": "Our clients see an average 60-80% reduction in time spent on automated processes and near-complete elimination of errors. Positive ROI typically appears within the first 3 months, with savings growing as new processes are added."
+        },
+        {
+          "question": "Does automation work for small companies?",
+          "answer": "Absolutely. Small companies benefit the most from automation because resources are limited and every hour counts. Our solutions are scalable and adapt to the budget and needs of any company, from 5 to 500 employees."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Let's identify the processes draining your time",
+      "subtitle": "Schedule a free process audit. In 30 minutes, we'll show you exactly where you're losing time and how AI can solve it.",
+      "button": "Request a free audit"
+    }
   }
 }

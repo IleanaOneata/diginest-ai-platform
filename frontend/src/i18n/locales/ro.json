@@ -314,5 +314,158 @@
       "subtitle": "O conversație de 15 minute ne arată dacă suntem potriviți. Fără pitch-uri de vânzare, fără presiune - doar claritate.",
       "button": "Programează o discuție"
     }
+  },
+
+  "serviceAutomation": {
+    "meta": {
+      "title": "Automatizare Procese cu AI | GENERATIVA",
+      "description": "Eliminăm munca repetitivă din afacerea ta cu agenți AI. Reducere 60-80% timp, zero erori, ROI pozitiv în 3 luni. Solicită un audit gratuit.",
+      "schemaName": "Automatizare Procese cu AI",
+      "schemaDescription": "Serviciu de automatizare a proceselor de business folosind agenți AI inteligenți. Eliminăm munca repetitivă, reducem erorile și eliberăm echipa pentru activități strategice.",
+      "schemaOffer": "Audit gratuit de procese și consultanță personalizată",
+      "breadcrumbName": "Automatizare Procese"
+    },
+    "breadcrumb": {
+      "home": "Acasă",
+      "services": "Servicii",
+      "current": "Automatizare Procese"
+    },
+    "hero": {
+      "eyebrow": "Automatizare Procese",
+      "title": "Automatizare Procese cu AI",
+      "subtitle": "Eliminăm munca repetitivă din afacerea ta. Agenții noștri AI preiau sarcinile manuale, reduc erorile și eliberează echipa ta pentru ce contează cu adevărat. Implementare în săptămâni, nu luni, cu rezultate măsurabile din prima lună.",
+      "cta": "Solicită un audit gratuit"
+    },
+    "processTypes": {
+      "title": "Ce procese de business pot fi automatizate cu AI?",
+      "lead": "Aproape orice proces repetitiv și bazat pe reguli poate fi automatizat cu AI. De la procesarea documentelor la comunicarea cu clienții, agenții AI preiau sarcinile care consumă timp și resurse, permițând echipei tale să se concentreze pe activități strategice.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "document",
+          "title": "Procesare documente & date",
+          "description": "Extragere automată de informații din facturi, contracte, formulare și email-uri. Clasificare, validare și introducere în sistemele existente fără intervenție manuală."
+        },
+        {
+          "icon": "communication",
+          "title": "Comunicare cu clienții",
+          "description": "Răspunsuri automate la întrebări frecvente, confirmare programări, trimitere notificări și urmărire solicitări pe toate canalele: telefon, email, WhatsApp, chat."
+        },
+        {
+          "icon": "approval",
+          "title": "Fluxuri de aprobare & decizii",
+          "description": "Automatizare cereri de concediu, aprobări bugetare, validare comenzi și routing documente către persoanele responsabile cu notificări și escaladări automate."
+        },
+        {
+          "icon": "reporting",
+          "title": "Raportare & analiză",
+          "description": "Generare automată de rapoarte zilnice, săptămânale sau lunare. Agregare date din surse multiple, identificare anomalii și trimitere insight-uri echipei de management."
+        },
+        {
+          "icon": "onboarding",
+          "title": "Onboarding clienți/angajați",
+          "description": "Automatizarea proceselor de înregistrare, verificare documente, creare conturi, training inițial și follow-up. Experiență consistentă pentru fiecare persoană nouă."
+        },
+        {
+          "icon": "monitoring",
+          "title": "Monitorizare & alerte",
+          "description": "Supraveghere continuă a KPI-urilor, nivelurilor de stoc, termenelor limită și performanței echipei. Alerte automate când ceva deviază de la normal."
+        }
+      ]
+    },
+    "approach": {
+      "title": "Cum funcționează implementarea automatizării cu AI?",
+      "lead": "Implementarea automatizării AI nu înseamnă să înlocuiești totul peste noapte. Procesul nostru în 5 pași asigură că fiecare automatizare e testată, validată și adoptată treptat de echipa ta, cu rezultate vizibile încă din faza pilot.",
+      "schemaName": "Implementarea automatizării proceselor cu AI",
+      "schemaDescription": "Procesul complet de automatizare a proceselor de business, de la audit inițial până la optimizare continuă.",
+      "steps": [
+        {
+          "title": "Audit de procese",
+          "description": "Analizăm procesele tale actuale, identificăm cele mai consumatoare de timp și calculăm potențialul de automatizare. Primești un raport clar cu recomandări prioritizate."
+        },
+        {
+          "title": "Design soluție",
+          "description": "Proiectăm arhitectura soluției AI adaptată nevoilor tale. Definim integrări, fluxuri de date și metrici de succes înainte de a scrie prima linie de cod."
+        },
+        {
+          "title": "Pilot pe proces cheie",
+          "description": "Implementăm automatizarea pe un singur proces critic pentru a demonstra valoarea. Echipa ta testează, oferă feedback și vedem rezultatele reale în 2-4 săptămâni."
+        },
+        {
+          "title": "Scalare treptată",
+          "description": "După validarea pilotului, extindem automatizarea la celelalte procese identificate. Fiecare extindere urmează același ciclu: implementare, testare, validare."
+        },
+        {
+          "title": "Optimizare continuă",
+          "description": "Monitorizăm performanța, ajustăm pe baza datelor reale și adăugăm capabilități noi pe măsură ce AI-ul învață din interacțiunile acumulate."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Ce rezultate aduce automatizarea proceselor cu AI?",
+      "lead": "Companiile care implementează automatizare AI văd rezultate concrete în primele luni: timp recuperat, erori eliminate și costuri reduse. Iată ce poți aștepta și tu de la colaborarea cu GENERATIVA.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "60-80%",
+          "label": "Reducere timp pe procese repetitive"
+        },
+        {
+          "icon": "shield",
+          "value": "Zero",
+          "label": "Erori umane în task-uri standardizate"
+        },
+        {
+          "icon": "trending",
+          "value": "< 3 luni",
+          "label": "ROI pozitiv după implementare"
+        },
+        {
+          "icon": "scale",
+          "value": "10x",
+          "label": "Scalabilitate fără angajări suplimentare"
+        },
+        {
+          "icon": "focus",
+          "value": "100%",
+          "label": "Echipă focusată pe muncă strategică"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Întrebări frecvente despre automatizarea proceselor",
+      "lead": "Am răspuns la cele mai frecvente întrebări pe care le primim de la companii interesate de automatizarea proceselor cu AI.",
+      "items": [
+        {
+          "question": "Cât costă automatizarea proceselor cu AI?",
+          "answer": "Costul depinde de complexitatea proceselor și numărul de integrări necesare. Oferim un audit gratuit în care evaluăm procesele tale și propunem o soluție cu buget transparent. În general, investiția se recuperează în primele 3 luni prin timpul și resursele economisite."
+        },
+        {
+          "question": "Cât durează implementarea automatizării?",
+          "answer": "Pilotul pe un singur proces durează 2-4 săptămâni. Scalarea la procesele suplimentare adaugă 2-3 săptămâni per proces. O implementare completă pentru 3-5 procese se încadrează în 2-3 luni."
+        },
+        {
+          "question": "Ce procese pot fi automatizate cu AI?",
+          "answer": "Orice proces repetitiv și bazat pe reguli: procesare documente, comunicare cu clienții, aprobări, raportare, onboarding și monitorizare. Dacă echipa ta repetă aceleași acțiuni zilnic, există șanse mari că procesul poate fi automatizat."
+        },
+        {
+          "question": "AI-ul va înlocui angajații mei?",
+          "answer": "Nu. Scopul automatizării este să elimine sarcinile repetitive care consumă timp, nu să înlocuiască oamenii. Angajații tăi vor fi eliberați să se concentreze pe activități strategice, creative și relaționale care necesită judecată umană."
+        },
+        {
+          "question": "Ce ROI pot aștepta de la automatizare?",
+          "answer": "Clienții noștri văd în medie o reducere de 60-80% a timpului petrecut pe procesele automatizate și o eliminare aproape completă a erorilor. ROI-ul pozitiv apare de obicei în primele 3 luni, cu economii care cresc pe măsură ce se adaugă noi procese."
+        },
+        {
+          "question": "Funcționează automatizarea pentru companii mici?",
+          "answer": "Absolut. Companiile mici beneficiază cel mai mult de automatizare, deoarece resursele sunt limitate și fiecare oră contează. Soluțiile noastre sunt scalabile și se adaptează la bugetul și nevoile oricărei companii, de la 5 la 500 de angajați."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Hai să identificăm procesele care îți consumă timpul",
+      "subtitle": "Programează un audit gratuit de procese. În 30 de minute, îți arătăm exact unde pierzi timp și cum AI-ul poate rezolva asta.",
+      "button": "Solicită un audit gratuit"
+    }
   }
 }

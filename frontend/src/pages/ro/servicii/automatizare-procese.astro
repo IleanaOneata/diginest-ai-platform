@@ -1,0 +1,114 @@
+---
+/**
+ * Romanian Process Automation Service Page
+ *
+ * SEO/AEO optimized service detail page for GENERATIVA
+ * Target keywords: automatizare procese AI, automatizare business Romania
+ *
+ * Schema.org: Service + FAQPage + BreadcrumbList + HowTo (@graph pattern)
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProcessAutomationPage from '@components/sections/ProcessAutomationPage.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'ro';
+const t = getTranslations(locale);
+const sa = t.serviceAutomation;
+
+const title = sa.meta.title;
+const description = sa.meta.description;
+
+// Site URL for schema references
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Combined Schema.org using @graph pattern
+// BaseLayout wraps this as [organizationSchema, schema] -> 2 JSON-LD script tags
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // 1. Service schema
+    {
+      '@type': 'Service',
+      '@id': `${siteUrl}/ro/servicii/automatizare-procese/#service`,
+      name: sa.meta.schemaName,
+      description: sa.meta.schemaDescription,
+      provider: {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'GENERATIVA',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Romania',
+      },
+      serviceType: 'Process Automation with AI',
+      offers: {
+        '@type': 'Offer',
+        description: sa.meta.schemaOffer,
+        priceCurrency: 'EUR',
+      },
+    },
+    // 2. FAQPage schema
+    {
+      '@type': 'FAQPage',
+      '@id': `${siteUrl}/ro/servicii/automatizare-procese/#faq`,
+      mainEntity: sa.faq.items.map((item: { question: string; answer: string }) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    // 3. BreadcrumbList schema
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/ro/servicii/automatizare-procese/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Acasa',
+          item: `${siteUrl}/ro/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Servicii',
+          item: `${siteUrl}/ro/servicii/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: sa.meta.breadcrumbName,
+        },
+      ],
+    },
+    // 4. HowTo schema (5-step implementation process)
+    {
+      '@type': 'HowTo',
+      '@id': `${siteUrl}/ro/servicii/automatizare-procese/#howto`,
+      name: sa.approach.schemaName,
+      description: sa.approach.schemaDescription,
+      step: sa.approach.steps.map((step: { title: string; description: string }, index: number) => ({
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: step.title,
+        text: step.description,
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/ro/servicii/automatizare-procese/"
+  schema={schema}
+>
+  <ProcessAutomationPage locale={locale} />
+</BaseLayout>
