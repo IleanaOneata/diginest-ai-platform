@@ -178,7 +178,18 @@
       "message": "Message",
       "submit": "Send message",
       "success": "Message sent successfully! We'll contact you soon.",
-      "error": "An error occurred. Please try again."
+      "error": "An error occurred. Please try again.",
+      "validation": {
+        "nameRequired": "Please enter your full name",
+        "nameMin": "Name must be at least 2 characters",
+        "emailRequired": "Please enter your email address",
+        "emailInvalid": "Please enter a valid email address",
+        "companyRequired": "Please enter your company name",
+        "companyMin": "Company name must be at least 2 characters",
+        "phoneInvalid": "Please enter a valid phone number (e.g. +40 712 345 678)",
+        "messageRequired": "Please describe your project or question",
+        "messageMin": "Message must be at least 10 characters"
+      }
     },
     "info": {
       "email": "contact@generativa.ro",
