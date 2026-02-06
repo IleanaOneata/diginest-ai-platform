@@ -1,0 +1,151 @@
+---
+/**
+ * English AI Integrations Service Page
+ *
+ * SEO/AEO optimized service page for GENERATIVA
+ * Target keywords: AI integration services, AI CRM integration, AI system integration, connect AI to business systems
+ *
+ * Schema.org: Service + FAQPage + BreadcrumbList + HowTo (@graph pattern)
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import AiIntegrationsPage from '@components/sections/AiIntegrationsPage.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'en';
+const t = getTranslations(locale);
+const si = t.serviceIntegrations;
+
+const title = si.meta.title;
+const description = si.meta.description;
+
+// Site URL for schema references
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Schema.org @graph with Service + FAQPage + BreadcrumbList + HowTo
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // 1. Service schema
+    {
+      '@type': 'Service',
+      '@id': `${siteUrl}/en/services/ai-integrations/#service`,
+      name: si.meta.schemaName,
+      description: si.meta.schemaDescription,
+      provider: {
+        '@type': 'Organization',
+        '@id': `${siteUrl}/#organization`,
+        name: 'GENERATIVA',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Romania',
+      },
+      serviceType: 'AI Integration Service',
+      audience: {
+        '@type': 'BusinessAudience',
+        audienceType: 'Small and Medium Enterprises',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'AI Integration Types',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'AI CRM Integration',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'AI Booking System Integration',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'AI Ticketing Platform Integration',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'AI ERP and Internal Systems Integration',
+            },
+          },
+        ],
+      },
+      offers: {
+        '@type': 'Offer',
+        description: si.meta.schemaOffer,
+        priceCurrency: 'EUR',
+      },
+    },
+    // 2. FAQPage schema
+    {
+      '@type': 'FAQPage',
+      '@id': `${siteUrl}/en/services/ai-integrations/#faq`,
+      mainEntity: si.faq.items.map((item: { question: string; answer: string }) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+    // 3. BreadcrumbList schema
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/en/services/ai-integrations/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/en/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Services',
+          item: `${siteUrl}/en/services/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: si.meta.breadcrumbName,
+        },
+      ],
+    },
+    // 4. HowTo schema (integration process steps)
+    {
+      '@type': 'HowTo',
+      '@id': `${siteUrl}/en/services/ai-integrations/#howto`,
+      name: si.approach.schemaName,
+      description: si.approach.schemaDescription,
+      step: si.approach.steps.map((step: { title: string; description: string }, index: number) => ({
+        '@type': 'HowToStep',
+        position: index + 1,
+        name: step.title,
+        text: step.description,
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/en/services/ai-integrations/"
+  schema={schema}
+>
+  <AiIntegrationsPage locale={locale} />
+</BaseLayout>

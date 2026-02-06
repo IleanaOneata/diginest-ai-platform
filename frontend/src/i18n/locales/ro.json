@@ -667,5 +667,197 @@
       "subtitle": "Solicită un demo gratuit personalizat. În 15 minute, auzi cum sună agentul AI antrenat pentru afacerea ta — cu scenarii reale din industria ta.",
       "button": "Solicită un demo gratuit"
     }
+  },
+  "serviceIntegrations": {
+    "meta": {
+      "title": "Integrări AI pentru Sisteme Business | CRM, Booking, ERP | GENERATIVA",
+      "description": "Integrăm agenți AI cu CRM-ul, sistemul de programări, ticketing și aplicațiile tale existente. Date corecte, fluxuri automate, zero muncă manuală. Consultanță gratuită.",
+      "schemaName": "Integrări AI pentru Sisteme Business",
+      "schemaDescription": "Servicii de integrare a inteligenței artificiale cu sistemele existente ale companiei — CRM, booking, ticketing, ERP, canale de comunicare — pentru automatizare completă și date corecte.",
+      "schemaOffer": "Consultanță gratuită și audit tehnic pentru integrarea AI cu sistemele companiei",
+      "breadcrumbName": "Integrări AI"
+    },
+    "breadcrumb": {
+      "home": "Acasă",
+      "services": "Servicii",
+      "current": "Integrări AI"
+    },
+    "hero": {
+      "eyebrow": "Conectare inteligentă",
+      "title": "Integrări AI care conectează automatizarea cu sistemele companiei",
+      "subtitle": "GENERATIVA realizează integrări AI care permit asistenților virtuali și automatizărilor să opereze direct în sistemele existente ale organizației. Inteligența artificială este integrată în aplicațiile interne, astfel încât acțiunile să fie executate automat, controlat și în deplină coerență cu procesele operaționale.",
+      "cta": "Solicită o consultanță gratuită"
+    },
+    "systems": {
+      "title": "Ce sisteme și aplicații se pot conecta cu un agent AI?",
+      "lead": "Agenții AI GENERATIVA se conectează cu orice sistem care expune un API sau acceptă integrări: CRM-uri, platforme de booking, ticketing, ERP-uri și canale de comunicare. Realizăm și conectori custom pentru aplicații interne sau software fără API standard.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "database",
+          "title": "CRM și customer support",
+          "description": "Conectăm agenții AI cu Salesforce, HubSpot, Zoho sau CRM-ul tău custom. Datele clienților se actualizează automat, interacțiunile sunt logate, și echipa de suport vede totul centralizat."
+        },
+        {
+          "icon": "calendar",
+          "title": "Sisteme de programări și booking",
+          "description": "Integrare cu Calendly, Google Calendar, sisteme de programări medicale sau de beauty. Agentul AI creează, modifică și confirmă programări automat, fără intervenție umană."
+        },
+        {
+          "icon": "ticket",
+          "title": "Platforme de ticketing",
+          "description": "Conexiune directă cu Zendesk, Freshdesk, Jira Service Management. Tichetele sunt create, clasificate și ruteaze automat pe baza conversației cu clientul."
+        },
+        {
+          "icon": "code",
+          "title": "Sisteme interne și aplicații custom",
+          "description": "Dezvoltăm conectori dedicați pentru aplicații interne, ERP-uri sau software legacy. Folosim API-uri REST, webhooks, middleware — orice e necesar pentru a conecta AI-ul cu procesele tale."
+        },
+        {
+          "icon": "channel",
+          "title": "Canale de comunicare",
+          "description": "Integrare cu telefonie VoIP, WhatsApp Business API, email (IMAP/SMTP), SMS și live chat. Toată comunicarea ajunge într-un singur loc, procesată de AI."
+        },
+        {
+          "icon": "erp",
+          "title": "ERP și software de gestiune",
+          "description": "Conectăm cu SAP, Oracle, Saga sau alte sisteme de gestiune. Comenzile, facturile și stocurile sunt sincronizate automat cu informațiile colectate de agentul AI."
+        }
+      ]
+    },
+    "approach": {
+      "title": "Cum funcționează procesul de integrare AI pas cu pas?",
+      "lead": "Procesul de integrare durează între 2 și 12 săptămâni, în funcție de complexitate. Începem cu un audit tehnic gratuit al sistemelor existente, definim strategia de conectare, dezvoltăm și testăm conectorii, apoi lansăm cu monitorizare activă.",
+      "schemaName": "Procesul de integrare AI cu sistemele existente",
+      "schemaDescription": "Metodologie în 5 pași pentru integrarea inteligenței artificiale cu CRM, booking, ticketing și alte sisteme business existente.",
+      "steps": [
+        {
+          "title": "Descoperire și audit tehnic",
+          "description": "Analizăm sistemele existente, documentăm API-urile disponibile, identificăm punctele de integrare și evaluăm complexitatea. Rezultat: raport tehnic cu recomandări clare."
+        },
+        {
+          "title": "Strategie de integrare",
+          "description": "Definim arhitectura de conectare: ce sisteme se integrează, în ce ordine, ce date circulă între ele. Prioritizăm pe baza impactului operațional."
+        },
+        {
+          "title": "Dezvoltare conectori și API",
+          "description": "Construim conectorii necesari: API-uri REST, webhooks, middleware custom. Folosim conectori pre-construiți acolo unde e posibil, dezvoltăm custom unde e nevoie."
+        },
+        {
+          "title": "Testare și validare",
+          "description": "Testăm fiecare integrare cu date reale în mediu de staging. Verificăm acuratețea datelor, viteza de sincronizare, gestionarea erorilor și scenariile edge-case."
+        },
+        {
+          "title": "Lansare și monitorizare",
+          "description": "Lansăm în producție cu monitorizare activă. Dashboard-ul de integrare arată în timp real statusul fiecărei conexiuni, volumele procesate și eventualele erori."
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Ce automatizări devin posibile prin integrarea AI?",
+      "lead": "Prin integrare directă cu sistemele companiei, agenții AI pot executa acțiuni reale — nu doar răspund la întrebări. Colectează date, actualizează înregistrări, declanșează fluxuri și raportează rezultate, totul fără intervenție manuală.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "collect",
+          "title": "Colectare și validare automată de date",
+          "description": "Agentul AI extrage informații din conversații — nume, CNP, preferințe, detalii comandă — le validează în timp real și le scrie direct în sistemele conectate."
+        },
+        {
+          "icon": "sync",
+          "title": "Actualizare informațiilor în timp real",
+          "description": "Când un client schimbă o programare sau actualizează datele de contact, modificarea se propagă instant în CRM, calendar și toate sistemele relevante."
+        },
+        {
+          "icon": "workflow",
+          "title": "Declanșare de fluxuri operaționale",
+          "description": "Agentul AI poate iniția procese automate: crearea unui tichet de suport, trimiterea unei confirmări SMS, generarea unei facturi proforma sau escalarea către un manager."
+        },
+        {
+          "icon": "transfer",
+          "title": "Transfer controlat către operatori umani",
+          "description": "Când conversația necesită intervenție umană, agentul AI transferă cu context complet: istoricul discuției, datele colectate și motivul escalării."
+        },
+        {
+          "icon": "reporting",
+          "title": "Raportare și monitorizare",
+          "description": "Dashboard centralizat cu volumele procesate, ratele de rezolvare, timpii de răspuns și statusul fiecărei integrări. Exporturi automate pentru management."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Cât costă și cât durează o integrare AI?",
+      "lead": "Investiția variază în funcție de complexitate — de la integrări simple în 2-4 săptămâni, la proiecte multi-sistem în 6-12 săptămâni. Rezultatele sunt măsurabile: date mai precise, costuri operaționale mai mici și sisteme complet conectate.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "2-4 săpt.",
+          "label": "Timp implementare integrare simplă"
+        },
+        {
+          "icon": "trending",
+          "value": "85%",
+          "label": "Acuratețe date automate vs. manual"
+        },
+        {
+          "icon": "wallet",
+          "value": "-40%",
+          "label": "Reducere costuri operaționale"
+        },
+        {
+          "icon": "link",
+          "value": "100%",
+          "label": "Sisteme conectate end-to-end"
+        },
+        {
+          "icon": "scale",
+          "value": "∞",
+          "label": "Scalare fără reproiectare"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Întrebări frecvente despre integrările AI",
+      "lead": "Răspunsuri directe la cele mai frecvente întrebări despre cum funcționează integrarea AI cu sistemele existente ale companiei.",
+      "items": [
+        {
+          "question": "Funcționează integrarea AI cu softul pe care îl folosim deja?",
+          "answer": "Da. Realizăm integrări cu orice sistem care expune un API sau acceptă conexiuni externe: CRM-uri (Salesforce, HubSpot, Zoho), sisteme de booking (Calendly, Google Calendar), ticketing (Zendesk, Freshdesk), ERP-uri și aplicații custom. Folosim conectori pre-construiți și dezvoltăm custom unde e necesar."
+        },
+        {
+          "question": "Cât costă o integrare AI pentru o companie mică sau medie?",
+          "answer": "O integrare simplă (1-2 sisteme, conectori standard) costă între 2.000-4.000 EUR. Proiectele complexe multi-sistem cu conectori custom variază între 10.000-25.000 EUR. Oferim consultanță gratuită pentru evaluarea costurilor exacte."
+        },
+        {
+          "question": "Cât durează implementarea unei integrări AI?",
+          "answer": "Integrările simple (CRM sau calendar) durează 2-4 săptămâni. Proiectele complexe cu multiple sisteme și conectori custom durează 6-12 săptămâni. Întotdeauna începem cu o fază de descoperire de 1-2 săptămâni."
+        },
+        {
+          "question": "Sunt datele clienților mei în siguranță?",
+          "answer": "Absolut. Toate integrările respectă GDPR, datele sunt criptate în tranzit (TLS) și la stocare (AES-256), hosting în centre de date din UE. Nu folosim datele pentru antrenarea AI-ului. Audituri regulate de securitate."
+        },
+        {
+          "question": "Am nevoie de cunoștințe tehnice pentru a folosi integrările AI?",
+          "answer": "Nu. Echipa noastră se ocupă de toată configurarea tehnică. Primești un dashboard intuitiv unde vezi statusul integrărilor, volumele procesate și eventualele erori. Includem training pentru echipa ta."
+        },
+        {
+          "question": "Ce se întâmplă dacă agentul AI nu știe să răspundă?",
+          "answer": "Agentul AI are reguli de escalare configurabile. Când detectează o situație pe care nu o poate gestiona, transferă automat conversația către un operator uman, cu tot contextul discuției și datele colectate."
+        },
+        {
+          "question": "Integrarea AI funcționează și cu sisteme mai vechi (legacy)?",
+          "answer": "Da. Pentru sistemele fără API modern, folosim tehnici alternative: middleware custom, RPA (robotic process automation), screen scraping sau webhooks. Evaluăm compatibilitatea în faza gratuită de descoperire."
+        },
+        {
+          "question": "Pot să adaug mai multe integrări ulterior?",
+          "answer": "Da, arhitectura este modulară. Poți începe cu o singură integrare (de exemplu, CRM) și adăugi treptat alte sisteme (calendar, ticketing, ERP) fără a afecta integrările existente. Fiecare conexiune nouă se adaugă independent."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Hai să conectăm AI-ul la sistemele tale",
+      "subtitle": "Solicită un audit tehnic gratuit. Analizăm sistemele tale existente și îți arătăm exact cum le conectăm cu inteligența artificială — fără obligații.",
+      "button": "Solicită audit tehnic gratuit"
+    }
   }
 }

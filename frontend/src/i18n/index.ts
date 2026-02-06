@@ -128,6 +128,8 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   'process-automation': { ro: 'automatizare-procese', en: 'process-automation' },
   'agenti-conversationali': { ro: 'agenti-conversationali', en: 'conversational-agents' },
   'conversational-agents': { ro: 'agenti-conversationali', en: 'conversational-agents' },
+  'integrari-ai': { ro: 'integrari-ai', en: 'ai-integrations' },
+  'ai-integrations': { ro: 'integrari-ai', en: 'ai-integrations' },
   // Blog
   'blog': { ro: 'blog', en: 'blog' },
   // Add more mappings as needed

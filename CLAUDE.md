@@ -33,6 +33,7 @@
 18. ✅ **Automatizare Procese Page** - Prima pagină de serviciu cu SEO/AEO, Schema.org @graph (Service + FAQPage + BreadcrumbList + HowTo), FAQ accordion, question-based H2s
 19. ✅ **Site-wide SEO/AEO Audit** - Schema.org pe toate paginile (Homepage, About, Contact), fix domain URLs, BreadcrumbList universal
 20. ✅ **Agenți Conversaționali Page** - A doua pagină de serviciu cu 7 secțiuni, SEO/AEO, Schema.org @graph, 8 FAQ items, 6 industrii cu problem→solution
+21. ✅ **Integrări AI Page** - A treia pagină de serviciu cu 7 secțiuni (Systems, Approach, Capabilities, Benefits, FAQ, CTA), SEO/AEO, Schema.org @graph, 8 FAQ items, hasOfferCatalog (CRM/Booking/Ticketing/ERP)
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -293,6 +294,7 @@ AI Agents Platform/
 │   │   │       ├── IntegrationHub.astro  # 🆕 Hub conexiuni (stil Stripe)
 │   │   │       ├── ProcessAutomationPage.astro # 🆕 Pagina serviciu automatizare (SEO/AEO)
 │   │   │       ├── ConversationalAgentsPage.astro # 🆕 Pagina serviciu agenți conversaționali (SEO/AEO)
+│   │   │       ├── AiIntegrationsPage.astro # 🆕 Pagina serviciu integrări AI (SEO/AEO)
 │   │   │       ├── Services.astro        # Servicii
 │   │   │       ├── Benefits.astro        # Rezultate
 │   │   │       ├── Process.astro         # Cum funcționăm
@@ -443,6 +445,7 @@ Fiecare pagină este optimizată **dual**: SEO (Google clasic) + AEO (AI Overvie
 | Homepage | `data-faq-trigger` | (inline) |
 | Automatizare Procese | `data-service-faq-trigger` | `initServiceFaqAccordion` |
 | Agenți Conversaționali | `data-conv-faq-trigger` | `initConvFaqAccordion` |
+| Integrări AI | `data-integ-faq-trigger` | `initIntegFaqAccordion` |
 | **Pagină Nouă** | `data-[prefix]-faq-trigger` | `init[Prefix]FaqAccordion` |
 
 **Convenție**: Prefix scurt din slug pagină. NICIODATĂ reutiliza selector existent!
@@ -978,7 +981,7 @@ Aceste link-uri există în Header/Footer dar paginile NU sunt create încă:
 | **Servicii dropdown** | `/ro/servicii/` | `/en/services/` | ❌ Nu există |
 | Automatizare Procese | `/ro/servicii/automatizare-procese/` | `/en/services/process-automation/` | ✅ Implementat |
 | Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | `/en/services/conversational-agents/` | ✅ Implementat |
-| Integrări AI | `/ro/servicii/integrari-ai/` | `/en/services/ai-integrations/` | ❌ Nu există |
+| Integrări AI | `/ro/servicii/integrari-ai/` | `/en/services/ai-integrations/` | ✅ Implementat |
 | **Blog** | `/ro/blog/` | `/en/blog/` | ❌ Nu există |
 | Studii de caz | `/ro/studii-caz/` | `/en/case-studies/` | ❌ Nu există |
 | Politica confidențialitate | `/ro/politica-confidentialitate/` | `/en/privacy-policy/` | ❌ Nu există |
@@ -1046,6 +1049,8 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   'process-automation': { ro: 'automatizare-procese', en: 'process-automation' },
   'agenti-conversationali': { ro: 'agenti-conversationali', en: 'conversational-agents' },
   'conversational-agents': { ro: 'agenti-conversationali', en: 'conversational-agents' },
+  'integrari-ai': { ro: 'integrari-ai', en: 'ai-integrations' },
+  'ai-integrations': { ro: 'integrari-ai', en: 'ai-integrations' },
   // Adaugă mapări noi aici!
 };
 ```
