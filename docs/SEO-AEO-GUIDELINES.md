@@ -270,7 +270,7 @@ Imediat după fiecare H2, trebuie un **paragraf lead** care **răspunde direct l
       '@type': 'ListItem',
       position: 2,
       name: 'Servicii',    // sau 'Services'
-      item: `${siteUrl}/${locale}/servicii/`,  // Cu URL pentru paginile intermediare
+      item: `${siteUrl}/${locale}/#services`,  // Scroll la secțiunea Services de pe homepage
     },
     {
       '@type': 'ListItem',
@@ -375,10 +375,11 @@ Când un serviciu are **sub-servicii distincte**, folosește `hasOfferCatalog`:
 | Homepage | `data-faq-trigger` | `faq-icon-plus`, `faq-icon-minus` | (inline DOMContentLoaded) |
 | Automatizare Procese | `data-service-faq-trigger` | `service-faq-icon-plus`, `service-faq-icon-minus` | `initServiceFaqAccordion` |
 | Agenți Conversaționali | `data-conv-faq-trigger` | `conv-faq-icon-plus`, `conv-faq-icon-minus` | `initConvFaqAccordion` |
+| Integrări AI | `data-integ-faq-trigger` | `integ-faq-icon-plus`, `integ-faq-icon-minus` | `initIntegFaqAccordion` |
 | [Pagină Nouă] | `data-[prefix]-faq-trigger` | `[prefix]-faq-icon-plus`, `[prefix]-faq-icon-minus` | `init[Prefix]FaqAccordion` |
 
 **Convenție de Naming:**
-- Prefix scurt derivat din slug-ul paginii: `conv` (conversational), `service` (automation), `integ` (integrations)
+- Prefix scurt derivat din slug-ul paginii: `service` (automatizare-procese), `conv` (agenti-conversationali), `integ` (integrari-ai)
 - NICIODATĂ nu reutiliza un selector existent!
 
 ### 5.3 FAQ Schema Duplicare
@@ -640,6 +641,7 @@ interacțiune cu 60% mai mic față de operatorii umani.</p>
 | Contact | `/ro/contact/` | ContactPage + Organization (ContactPoint) + BreadcrumbList | ✅ |
 | Automatizare Procese | `/ro/servicii/automatizare-procese/` | Service + FAQPage + BreadcrumbList + HowTo | ✅ |
 | Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | Service + FAQPage + BreadcrumbList + HowTo | ✅ |
+| Integrări AI | `/ro/servicii/integrari-ai/` | Service + FAQPage + BreadcrumbList + HowTo | ✅ |
 
 ### siteUrl Standard
 

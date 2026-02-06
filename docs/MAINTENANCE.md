@@ -64,27 +64,9 @@ frontend/src/i18n/locales/en.json  # Engleză
 }
 ```
 
-### Adăugarea unui Articol de Blog
+### Blog & Studii de Caz
 
-1. Creează fișierul în `frontend/src/content/blog/ro/`:
-
-```markdown
----
-title: "Titlul articolului"
-description: "Descriere scurtă pentru SEO"
-pubDate: 2025-02-01
-author: "Nume Autor"
-tags: ["AI", "automatizare"]
----
-
-Conținutul articolului aici...
-```
-
-2. Build și deploy automat via GitHub Actions
-
-### Adăugarea unui Case Study
-
-Similar cu blog-ul, în `frontend/src/content/case-studies/ro/`
+> **Status (Februarie 2026)**: Blog-ul și secțiunea de studii de caz au fost **eliminate** din navigare (Header + Footer). Paginile goale dăunează SEO la un business nou (crawl budget waste, bounce rate, thin content). Se vor reimplementa când există conținut real de publicat.
 
 ---
 
@@ -325,7 +307,9 @@ Urmează checklist-ul complet din `docs/SEO-AEO-GUIDELINES.md` secțiunea 8 (Pag
 
 ### Faza 2: Backend Enhancement (Lună 2-3)
 
-- [ ] Integrare completă contact form cu API
+- [x] Integrare completă contact form cu API (Resend HTTP API, async emails)
+- [x] Contact form cu validare custom locale-aware + lead qualification (Industry/Interest dropdowns)
+- [ ] Câmpuri `industry` + `interest` dedicate în backend DTO/entity/DB (acum se prepend la mesaj)
 - [ ] Newsletter subscription
 - [ ] Admin dashboard simplu pentru leads
 - [ ] Email templates HTML
@@ -339,7 +323,7 @@ Urmează checklist-ul complet din `docs/SEO-AEO-GUIDELINES.md` secțiunea 8 (Pag
 
 ### Faza 4: Scale (Lună 5+)
 
-- [ ] Blog CMS (poate Decap CMS)
+- [ ] Blog CMS (poate Decap CMS) — reimplementare când există conținut real
 - [ ] Multi-language content auto-generate
 - [ ] A/B testing pentru CTA
 - [ ] Advanced analytics
@@ -375,4 +359,4 @@ Urmează checklist-ul complet din `docs/SEO-AEO-GUIDELINES.md` secțiunea 8 (Pag
 
 ---
 
-*Ultima actualizare: Februarie 2026 — Adăugat proceduri SEO/AEO audit*
+*Ultima actualizare: Februarie 2026 — Blog/Resources eliminat, form validation & lead qualification adăugat*
