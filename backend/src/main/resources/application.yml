@@ -68,8 +68,9 @@ app:
     allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:4321,https://generativa.ro,https://www.generativa.ro}
 
   # Email settings
+  # NOTE: Hardcoded to true - Railway env var EMAIL_ENABLED wasn't being read
   email:
-    enabled: ${EMAIL_ENABLED:false}
+    enabled: true
     from: ${EMAIL_FROM:contact@generativa.ro}
     admin: ${EMAIL_ADMIN:contact@generativa.ro}
 
