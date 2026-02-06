@@ -26,7 +26,8 @@ public class EmailService {
     @Value("${app.email.admin:contact@generativa.ro}")
     private String adminEmail;
 
-    @Value("${app.email.enabled:false}")
+    // Hardcoded default to true since config wasn't being read
+    @Value("${app.email.enabled:true}")
     private boolean emailEnabled;
 
     public EmailService(JavaMailSender mailSender) {
