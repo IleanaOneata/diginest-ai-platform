@@ -1,11 +1,15 @@
 ---
 /**
  * Romanian Contact Page
+ *
+ * SEO optimized contact page for GENERATIVA
+ * Target keywords: contact agenți AI, consultanță AI gratuită, automatizare business România
+ *
+ * Schema.org: ContactPage + ContactPoint + BreadcrumbList (@graph pattern)
  */
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ContactForm from '@components/sections/ContactForm.astro';
-import CTA from '@components/sections/CTA.astro';
 import { getTranslations } from '@i18n/index';
 
 const locale = 'ro';
@@ -13,6 +17,65 @@ const t = getTranslations(locale);
 
 const title = `Contact - ${t.site.name}`;
 const description = 'Contactează-ne pentru o consultanță gratuită despre cum agenții AI pot transforma afacerea ta. Răspundem în maxim 24 de ore.';
+
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Schema.org @graph with ContactPage + ContactPoint + BreadcrumbList
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // ContactPage schema
+    {
+      '@type': 'ContactPage',
+      '@id': `${siteUrl}/ro/contact/#webpage`,
+      url: `${siteUrl}/ro/contact/`,
+      name: title,
+      description: description,
+      inLanguage: 'ro-RO',
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // ContactPoint — enables Google rich results for contact info
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization-contact`,
+      name: 'GENERATIVA',
+      url: siteUrl,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'contact@generativa.ro',
+        availableLanguage: ['Romanian', 'English'],
+        areaServed: [
+          { '@type': 'Country', name: 'Romania' },
+          { '@type': 'Country', name: 'European Union' },
+        ],
+      },
+    },
+    // BreadcrumbList
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/ro/contact/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Acasa',
+          item: `${siteUrl}/ro/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Contact',
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <BaseLayout
@@ -20,6 +83,7 @@ const description = 'Contactează-ne pentru o consultanță gratuită despre cum
   description={description}
   locale={locale}
   canonicalUrl="/ro/contact/"
+  schema={schema}
 >
   <ContactForm locale={locale} />
 </BaseLayout>

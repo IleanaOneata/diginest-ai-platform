@@ -37,21 +37,54 @@ const t = getTranslations(locale);
 const title = `${t.site.name} - ${t.site.tagline}`;
 const description = t.site.description;
 
-// WebPage schema
+// Site URL (matches BaseLayout)
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Combined schema using @graph pattern
 const pageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': 'https://diginest.ai/ro/#webpage',
-  url: 'https://diginest.ai/ro/',
-  name: title,
-  description: description,
-  inLanguage: 'ro-RO',
-  isPartOf: {
-    '@id': 'https://diginest.ai/#website',
-  },
-  about: {
-    '@id': 'https://diginest.ai/#organization',
-  },
+  '@graph': [
+    // WebSite schema (helps Google Search)
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'GENERATIVA',
+      description: t.site.description,
+      inLanguage: ['ro-RO', 'en-US'],
+      publisher: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // WebPage schema
+    {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/ro/#webpage`,
+      url: `${siteUrl}/ro/`,
+      name: title,
+      description: description,
+      inLanguage: 'ro-RO',
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // BreadcrumbList (homepage = single item)
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/ro/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Acasa',
+          item: `${siteUrl}/ro/`,
+        },
+      ],
+    },
+  ],
 };
 ---
 
