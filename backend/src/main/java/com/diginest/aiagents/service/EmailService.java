@@ -37,6 +37,7 @@ public class EmailService {
      * Send notification to admin about new contact request.
      */
     public void sendContactNotification(ContactRequest request) {
+        log.info("Email enabled status: {}", emailEnabled);
         if (!emailEnabled) {
             log.info("Email disabled - skipping admin notification for contact request {}", request.getId());
             return;
