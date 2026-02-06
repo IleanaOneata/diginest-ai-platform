@@ -1,4 +1,4 @@
-# Ghid de Mentenanță și Evoluție - Diginest AI Platform
+# Ghid de Mentenanță și Evoluție - GENERATIVA AI Platform
 
 ## 📋 Cuprins
 
@@ -37,7 +37,7 @@ cd backend
 
 1. **Major version updates** - Astro, Spring Boot
 2. **Performance audit** - Lighthouse, Core Web Vitals
-3. **SEO audit** - Verifică rankings și indexare
+3. **SEO/AEO audit complet** - Vezi secțiunea dedicată mai jos
 4. **UX review** - Analizează comportamentul utilizatorilor
 
 ---
@@ -208,6 +208,119 @@ Configurează alerte pentru:
 
 ---
 
+## 🔍 SEO & AEO Audit (Proceduri Trimestriale)
+
+> **Document de referință complet**: `docs/SEO-AEO-GUIDELINES.md`
+
+### Audit Trimestrial — Checklist Complet
+
+Rulează acest checklist la fiecare 3 luni sau la adăugarea unei pagini noi.
+
+#### 1. Schema.org Validation
+
+```
+Pentru FIECARE pagină de pe site:
+```
+
+- [ ] View source → verifică 2× `<script type="application/ld+json">`
+- [ ] Organization schema prezent (adăugat de BaseLayout)
+- [ ] Page-specific @graph prezent cu tipurile corecte
+- [ ] Testează cu [Rich Results Test](https://search.google.com/test/rich-results)
+- [ ] Testează cu [Schema Validator](https://validator.schema.org/)
+- [ ] Verifică `@id` unic per pagină/tip
+
+**Schema.org așteptate per pagină:**
+
+| Pagină | Scheme Obligatorii |
+|--------|-------------------|
+| Homepage | WebSite + WebPage + BreadcrumbList |
+| About | AboutPage (cu Organization) + BreadcrumbList |
+| Contact | ContactPage + ContactPoint + BreadcrumbList |
+| Service pages | Service + FAQPage + BreadcrumbList + HowTo |
+
+#### 2. Meta Tags Audit
+
+- [ ] Fiecare pagină: `<title>` unic, 50-70 caractere
+- [ ] Fiecare pagină: `<meta name="description">` unic, 140-160 caractere
+- [ ] Fiecare pagină: `<link rel="canonical">` cu trailing slash
+- [ ] Keywords la începutul title-ului
+- [ ] CTA implicit în meta description
+- [ ] `noindex` prezent pe staging, ABSENT pe producție
+
+#### 3. Heading Structure Audit
+
+- [ ] Exact 1× `<h1>` per pagină
+- [ ] H2-uri question-based pe paginile de serviciu
+- [ ] Ierarhie corectă: H1 → H2 → H3 (niciodată skip)
+- [ ] Lead paragraph (40-60 cuvinte) imediat după fiecare H2 pe service pages
+
+#### 4. FAQ Audit
+
+- [ ] Minim 6 FAQ items pe fiecare pagină de serviciu
+- [ ] Întrebările targetează People Also Ask reale
+- [ ] Selectori FAQ unici per pagină (verifică JS console pentru coliziuni)
+- [ ] FAQPage schema se sincronizează cu conținutul vizual
+- [ ] Răspunsurile sunt concise (2-4 propoziții) și factuale
+
+#### 5. Breadcrumb Audit
+
+- [ ] BreadcrumbList schema pe fiecare pagină
+- [ ] Breadcrumb vizual renderizat corect
+- [ ] Ultimul element fără `item` URL (pagina curentă)
+- [ ] Nivelurile intermediare au `item` cu URL corect
+
+#### 6. Language Switcher Audit
+
+- [ ] Path mappings în `i18n/index.ts` pentru TOATE paginile
+- [ ] RO → EN și EN → RO funcționează pe fiecare pagină
+- [ ] URL-urile generate sunt corecte (nu 404)
+
+#### 7. Performance & Core Web Vitals
+
+- [ ] [PageSpeed Insights](https://pagespeed.web.dev/) score ≥ 90 pe fiecare pagină
+- [ ] LCP < 2.5s, FID < 100ms, CLS < 0.1
+- [ ] Mobile performance OK
+
+#### 8. Content Freshness
+
+- [ ] FAQ items sunt relevante și actuale
+- [ ] Numerele/statisticile din content sunt actuale
+- [ ] Link-uri externe funcționează
+- [ ] People Also Ask — verifică dacă au apărut întrebări noi de targetat
+
+### Audit Lunar — Quick Check
+
+- [ ] `npm run build` — zero erori
+- [ ] Rich Results Test pe URL-urile principale (homepage, service pages)
+- [ ] Google Search Console — verifică erori indexare (dacă configurat)
+- [ ] Verifică 404-uri noi (pagini șterse/mutate)
+
+### Tools Necesare
+
+| Tool | URL | Scop | Cost |
+|------|-----|------|------|
+| Rich Results Test | https://search.google.com/test/rich-results | Validare schema pentru rich results | Gratuit |
+| Schema Validator | https://validator.schema.org/ | Validare sintaxă JSON-LD | Gratuit |
+| PageSpeed Insights | https://pagespeed.web.dev/ | Core Web Vitals + SEO score | Gratuit |
+| Google Search Console | https://search.google.com/search-console | Indexare, erori, ranking | Gratuit |
+| Ahrefs Webmaster | https://ahrefs.com/webmaster-tools | SEO audit complet, backlinks | Gratuit (basic) |
+| Screaming Frog | https://www.screamingfrog.co.uk/seo-spider/ | Crawl complet site | Gratuit (<500 URLs) |
+
+### Când Se Adaugă O Pagină Nouă
+
+Urmează checklist-ul complet din `docs/SEO-AEO-GUIDELINES.md` secțiunea 8 (Page Shell Template) și secțiunea 13 (Checklist Rapid).
+
+**Sumar acțiuni la pagină nouă:**
+1. Traduceri `ro.json` + `en.json`
+2. Path mappings `i18n/index.ts`
+3. Component `.astro` cu H2 question-based + lead paragraphs
+4. Page shells RO + EN cu Schema.org @graph
+5. FAQ accordion cu selector unic
+6. Update `CLAUDE.md` (implementat list, 404 table, session history)
+7. Build + push + verificare Rich Results Test
+
+---
+
 ## 🗺️ Roadmap Tehnic
 
 ### Faza 2: Backend Enhancement (Lună 2-3)
@@ -262,4 +375,4 @@ Configurează alerte pentru:
 
 ---
 
-*Ultima actualizare: Ianuarie 2025*
+*Ultima actualizare: Februarie 2026 — Adăugat proceduri SEO/AEO audit*

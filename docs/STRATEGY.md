@@ -678,11 +678,17 @@ Animație de tip "flow/wave" care transmite vizual:
 - [ ] Verificare consistență ton
 - [ ] Verificare CTA-uri funcționale
 
-### SEO
-- [ ] Meta tags corecte
+### SEO & AEO
+- [ ] Meta tags corecte (title 50-70 chars, description 140-160 chars)
 - [ ] OG images pentru social
-- [ ] Schema.org markup
+- [ ] Schema.org @graph pe FIECARE pagină (vezi `docs/SEO-AEO-GUIDELINES.md`)
 - [ ] noindex pe staging confirmat
+- [ ] H2 question-based pe toate paginile de serviciu
+- [ ] Lead paragraphs 40-60 cuvinte (answer-first) după fiecare H2
+- [ ] FAQ minim 6 întrebări per pagină de serviciu
+- [ ] BreadcrumbList pe fiecare pagină
+- [ ] Canonical URLs cu trailing slash
+- [ ] Rich Results Test pass pe Google
 
 ### Analytics
 - [ ] Setup Plausible/Umami
@@ -691,5 +697,86 @@ Animație de tip "flow/wave" care transmite vizual:
 
 ---
 
+## 13. Strategie SEO & AEO
+
+> **Document complet**: `docs/SEO-AEO-GUIDELINES.md` — conține TOATE regulile, template-urile și checklist-urile obligatorii.
+
+### 13.1 Filosofia Noastră SEO/AEO
+
+GENERATIVA optimizează **dual** fiecare pagină:
+
+| Dimensiune | Target | Mecanism |
+|-----------|--------|----------|
+| **SEO clasic** | Google Search rankings | Schema.org, meta tags, heading structure, keywords |
+| **AEO** | AI Overviews, Featured Snippets | Question-based H2, answer-first paragraphs, FAQ structurate |
+
+### 13.2 Ce Am Implementat
+
+| Pagină | Schema.org | H2 Q&A | FAQ | Lead Paragraphs |
+|--------|-----------|--------|-----|-----------------|
+| Homepage | WebSite + WebPage + BreadcrumbList | — | ✅ (6 items) | — |
+| About | AboutPage + Organization + BreadcrumbList | — | — | — |
+| Contact | ContactPage + ContactPoint + BreadcrumbList | — | — | — |
+| Automatizare Procese | Service + FAQPage + BreadcrumbList + HowTo | ✅ 4 H2s | ✅ 6 items | ✅ |
+| Agenți Conversaționali | Service + FAQPage + BreadcrumbList + HowTo | ✅ 4 H2s | ✅ 8 items | ✅ |
+
+### 13.3 Abordarea Question-Based H2
+
+Fiecare H2 pe paginile de serviciu este formulat ca **o întrebare reală** pe care potențialii clienți o caută pe Google. Sursele pentru întrebări:
+- **People Also Ask** (PAA) din Google
+- **Google Autocomplete**
+- **AnswerThePublic.com**
+
+**De ce funcționează**: Google AI Overviews extrage răspunsuri din pagini care au heading = întrebare + paragraf = răspuns direct. Acesta e formatul ideal pentru a fi selectat ca sursă AI.
+
+### 13.4 Answer-First Lead Paragraphs
+
+Imediat după fiecare H2, un paragraf de **40-60 cuvinte** care răspunde DIRECT la întrebare. Acesta e paragraful pe care Google îl extrage pentru Featured Snippets.
+
+**Exemplu** (de pe pagina Agenți Conversaționali):
+```
+H2: "Ce face un agent conversational AI pentru afacerea ta?"
+Lead: "Un agent conversational AI preia apelurile telefonice, mesajele pe
+WhatsApp și emailurile clienților tăi, 24 de ore din 24. Identifică automat
+intenția fiecărui contact — programare, întrebare, reclamație — și execută
+acțiuni concrete: creează programări, actualizează CRM-ul, trimite confirmări."
+```
+
+### 13.5 Schema.org Strategy
+
+Folosim pattern-ul `@graph` care grupează multiple scheme JSON-LD:
+- **BaseLayout** adaugă automat `Organization` schema (global)
+- **Fiecare page shell** adaugă `@graph` specific tipului de pagină
+- **Rezultat**: 2 `<script type="application/ld+json">` per pagină
+
+Tipuri de scheme pe care le targetăm pentru **rich results**:
+- `FAQPage` → FAQ rich results în Google
+- `BreadcrumbList` → Breadcrumb trail în SERP
+- `HowTo` → How-to rich results
+- `Service` → Business info panel
+- `ContactPoint` → Contact rich results
+
+### 13.6 Keyword Strategy
+
+| Nivel | Exemplu | Unde Apare |
+|-------|---------|------------|
+| Primary (1) | "automatizare procese AI" | H1, title, meta description |
+| Secondary (2-3) | "automatizare business România" | H2s, lead paragraphs |
+| Long-tail (5-8) | "cât costă automatizarea cu AI" | FAQ, body text |
+| LSI (semantic) | "eficiență operațională", "digitalizare" | Natural în text |
+
+### 13.7 Pagini Viitoare — Ce Trebuie Implementat
+
+Fiecare pagină nouă de serviciu (Integrări AI, etc.) TREBUIE să urmeze exact pattern-ul stabilit:
+1. Traduceri în `ro.json` + `en.json` (bloc `serviceNume`)
+2. Path mappings în `i18n/index.ts`
+3. Component cu secțiuni (Hero, Capabilities, Approach, Benefits, FAQ, CTA)
+4. Page shells RO + EN cu Schema.org @graph complet
+5. H2 question-based + lead paragraphs 40-60 cuvinte
+6. FAQ cu minim 6 întrebări din People Also Ask
+7. FAQ accordion cu selector UNIC
+
+---
+
 *Document de lucru - se actualizează pe măsură ce implementăm*
-*Ultima actualizare: Februarie 2026 - Documentație completă pentru sesiuni AI noi*
+*Ultima actualizare: Februarie 2026 - Adăugat secțiunea SEO/AEO Strategy*

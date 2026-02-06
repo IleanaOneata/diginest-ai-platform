@@ -401,6 +401,65 @@ git push origin main
 3. **Vercel auto-deploy** → orice push pe main merge INSTANT în producție
 4. **noindex automat** → toate preview URLs sunt protejate de indexare Google
 5. **Documentează în .md** → orice decizie importantă trebuie documentată pentru sesiuni viitoare
+6. **SEO/AEO obligatoriu** → orice pagină nouă TREBUIE să respecte regulile din `docs/SEO-AEO-GUIDELINES.md`
+
+---
+
+## 🔍 SEO & AEO — REGULI OBLIGATORII
+
+> **CITEȘTE `docs/SEO-AEO-GUIDELINES.md`** pentru documentul complet cu template-uri și exemple. Această secțiune conține regulile CRITICE pe scurt.
+
+### De Ce Contează
+
+Fiecare pagină este optimizată **dual**: SEO (Google clasic) + AEO (AI Overviews, Featured Snippets). Tehnicile se completează reciproc.
+
+### Reguli Critice (Sumar)
+
+| # | Regulă | Specificație |
+|---|--------|--------------|
+| 1 | **Title** | 50-70 chars, keyword la ÎNCEPUT, `GENERATIVA` la final |
+| 2 | **Description** | 140-160 chars, include CTA ("Solicită demo", "Consultanță gratuită") |
+| 3 | **H1** | Exact 1 per pagină, cuvântul cheie principal |
+| 4 | **H2** | Question-based ("Ce face X?", "Cum funcționează X?") — OBLIGATORIU |
+| 5 | **Lead paragraph** | 40-60 cuvinte imediat după H2, răspuns DIRECT la întrebare |
+| 6 | **Schema.org** | Pattern `@graph` cu tipurile corecte per pagină (vezi mai jos) |
+| 7 | **FAQ** | Minim 6 întrebări din People Also Ask, selector UNIC per pagină |
+| 8 | **Canonical URL** | Cu trailing slash, pe FIECARE pagină |
+| 9 | **i18n paths** | Adaugă mapări în `i18n/index.ts` pentru Language Switcher |
+
+### Schema.org per Tip de Pagină
+
+| Tip Pagină | Scheme în `@graph` |
+|------------|-------------------|
+| Homepage | WebSite + WebPage + BreadcrumbList |
+| About | AboutPage (cu Organization) + BreadcrumbList |
+| Contact | ContactPage + Organization (ContactPoint) + BreadcrumbList |
+| Service | Service + FAQPage + BreadcrumbList + HowTo |
+
+### FAQ Accordion — Naming Convention
+
+| Pagina | Data Attribute | Function Name |
+|--------|---------------|---------------|
+| Homepage | `data-faq-trigger` | (inline) |
+| Automatizare Procese | `data-service-faq-trigger` | `initServiceFaqAccordion` |
+| Agenți Conversaționali | `data-conv-faq-trigger` | `initConvFaqAccordion` |
+| **Pagină Nouă** | `data-[prefix]-faq-trigger` | `init[Prefix]FaqAccordion` |
+
+**Convenție**: Prefix scurt din slug pagină. NICIODATĂ reutiliza selector existent!
+
+### Checklist Rapid — Pagină Nouă de Serviciu
+
+- [ ] `ro.json` + `en.json` — bloc `serviceNume` complet
+- [ ] `i18n/index.ts` — path mappings ambele direcții
+- [ ] Component `.astro` — secțiuni cu H2 question-based + lead paragraphs
+- [ ] Page shell RO — Schema.org @graph (Service + FAQPage + BreadcrumbList + HowTo)
+- [ ] Page shell EN — Mirror cu locale='en'
+- [ ] FAQ selector unic (`data-[prefix]-faq-trigger`)
+- [ ] `CLAUDE.md` — update: Ce s-a implementat, 404 table, structura, session history
+- [ ] `npm run build` — zero erori
+- [ ] Language Switcher — RO ↔ EN funcționează
+
+> **Document complet**: `docs/SEO-AEO-GUIDELINES.md` — conține template-uri, exemple concrete, și checklist detaliat.
 
 ---
 
@@ -471,9 +530,10 @@ right: 1.5rem;
 | Document | Conține |
 |----------|---------|
 | `docs/STRATEGY.md` | Analiză competitivă detaliată, strategie diferențiere, design system Stripe |
+| `docs/SEO-AEO-GUIDELINES.md` | **🔍 Reguli SEO & AEO obligatorii** — template-uri, Schema.org, checklist-uri |
 | `docs/branding/BRANDING-NOTES.md` | Detalii logo, culori, tipografie |
 | `docs/DEPLOYMENT.md` | Ghid deployment Vercel + Railway |
-| `docs/MAINTENANCE.md` | Ghid mentenanță și actualizări |
+| `docs/MAINTENANCE.md` | Ghid mentenanță și actualizări, proceduri SEO audit |
 
 ---
 
