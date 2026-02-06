@@ -1,192 +1,213 @@
-# Ghid de Deployment - Diginest AI Platform
+# Ghid de Deployment - GENERATIVA AI Platform
 
 ## 📋 Prezentare Generală
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   GitHub        │────▶│   CI/CD         │────▶│   Production    │
-│   Repository    │     │   (Actions)     │     │   Environment   │
+│   GitHub        │────▶│   Auto-Deploy   │────▶│   Production    │
+│   Repository    │     │   (push-based)  │     │   Environment   │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
                                                        │
                               ┌────────────────────────┼────────────────────────┐
                               │                        │                        │
                               ▼                        ▼                        ▼
                         ┌─────────┐              ┌─────────┐              ┌─────────┐
-                        │ Vercel  │              │ Railway │              │Cloudflare│
-                        │Frontend │              │ Backend │              │   DNS   │
+                        │ Vercel  │              │ Railway │              │ Resend  │
+                        │Frontend │              │ Backend │              │  Email  │
+                        │         │              │+Postgres│              │  API    │
                         └─────────┘              └─────────┘              └─────────┘
 ```
 
-## 🚀 Prima Configurare
+## 🚀 Arhitectura Curentă (Februarie 2026)
 
-### 1. GitHub Repository
+### Branch Strategy
+
+| Branch | Deploy Target | URL |
+|--------|--------------|-----|
+| `main` | Vercel Prod + Railway Prod | https://diginest-ai-platform.vercel.app |
+| `staging` | Vercel Preview | Preview URL generat automat |
+
+> **Regula**: Frontend nou (GENERATIVA) se dezvoltă pe `staging`. Backend merge pe `main` (Railway ascultă doar `main`).
+
+### Services
+
+| Service | Platform | URL | Auto-Deploy |
+|---------|----------|-----|-------------|
+| Frontend | Vercel | https://diginest-ai-platform.vercel.app | ✅ push pe main |
+| Frontend Preview | Vercel | *generat la push* | ✅ push pe staging |
+| Backend API | Railway | https://diginest-backend-production.up.railway.app | ✅ push pe main |
+| Database | Railway (PostgreSQL) | Private + metro.proxy.rlwy.net:32252 | N/A |
+| Email | Resend HTTP API | https://api.resend.com/emails | N/A |
+| Hosting/DNS | Hosterion (cPanel) | generativa.ro | Manual |
+
+## 🔧 Vercel Setup (Frontend)
+
+### Configurare
+
+```
+Framework Preset: Astro
+Root Directory: frontend
+Build Command: npm run build
+Output Directory: dist
+Install Command: npm install
+```
+
+### Environment Variables
+
+```
+PUBLIC_SITE_URL=https://generativa.ro
+PUBLIC_API_URL=https://diginest-backend-production.up.railway.app
+```
+
+## 🚂 Railway Setup (Backend)
+
+### Configurare
+
+```
+Root Directory: /backend
+Builder: Nixpacks (auto-detectează Java 21 + Maven)
+Branch: main
+Source: IleanaOneata/diginest-ai-platform
+```
+
+### PostgreSQL
+
+Adăugat ca addon în Railway project. Conectat automat.
+
+### Environment Variables (Complet - Februarie 2026)
 
 ```bash
-# Inițializează repository-ul
-cd "AI Agents Platform"
-git init
-git add .
-git commit -m "Initial commit: Diginest AI Platform MVP"
-git branch -M main
-git remote add origin https://github.com/your-org/diginest-ai-platform.git
-git push -u origin main
+# Spring Boot
+SPRING_PROFILES_ACTIVE=prod
+
+# Database (PostgreSQL pe Railway)
+DATABASE_URL=jdbc:postgresql://metro.proxy.rlwy.net:32252/railway
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=RHiVbAXqsXtuIoqvsEMXPopcYjcvSARB
+
+# Email - Resend HTTP API (SMTP blocat de Railway!)
+# MAIL_PASSWORD este reutilizat ca Resend API key
+MAIL_HOST=smtp.resend.com
+MAIL_PORT=465
+MAIL_USERNAME=resend
+MAIL_PASSWORD=re_SSiJmdXw_MUuf9eTTqgmWjoUDJPDmwFzo
+MAIL_PROTOCOL=smtps
+MAIL_SSL_ENABLE=true
+MAIL_STARTTLS_ENABLE=false
+
+# App email settings
+EMAIL_FROM=contact@generativa.ro
+EMAIL_ADMIN=contact@generativa.ro
+EMAIL_ENABLED=true
 ```
 
-### 2. Vercel Setup (Frontend)
+### ⚠️ Railway Constraints
 
-1. **Conectare la Vercel:**
-   - Du-te la [vercel.com](https://vercel.com)
-   - Sign in cu GitHub
-   - "Add New" → "Project"
-   - Selectează repository-ul `diginest-ai-platform`
+1. **SMTP blocat** — Railway blochează porturile 25, 465, 587 outbound. Email-ul funcționează DOAR prin Resend HTTP API (port 443).
+2. **Private networking** — `*.railway.internal` NU funcționează cu `railway up` CLI deploys. Folosește URL-uri publice.
+3. **DATABASE_URL** — Trebuie prefix `jdbc:postgresql://`. URL public: `metro.proxy.rlwy.net:32252`.
+4. **NO Maven wrapper** — Nu adăuga `mvnw`. Nixpacks folosește `mise` care gestionează Java/Maven.
+5. **Build time** — ~2-3 minute (Maven build + JVM start).
 
-2. **Configurare:**
-   ```
-   Framework Preset: Astro
-   Root Directory: frontend
-   Build Command: npm run build
-   Output Directory: dist
-   Install Command: npm install
-   ```
+### Railway CLI
 
-3. **Environment Variables:**
-   ```
-   PUBLIC_SITE_URL=https://diginest.ai
-   PUBLIC_API_URL=https://api.diginest.ai  # Când backend-ul e gata
-   ```
+```bash
+# Install
+npm install -g @railway/cli
 
-4. **Domain Setup:**
-   - Settings → Domains → Add `diginest.ai`
-   - Follow DNS instructions
+# Login
+railway login
 
-### 3. Railway Setup (Backend)
+# Link project (din folderul backend)
+cd backend
+railway link
 
-1. **Conectare la Railway:**
-   - Du-te la [railway.app](https://railway.app)
-   - Sign in cu GitHub
-   - "New Project" → "Deploy from GitHub repo"
-
-2. **Configurare:**
-   ```
-   Root Directory: backend
-   Builder: Nixpacks (auto-detectează Maven)
-   ```
-
-3. **Add PostgreSQL:**
-   - În proiect → "New" → "Database" → "PostgreSQL"
-   - Railway va crea `DATABASE_URL` automat
-
-4. **Environment Variables:**
-   ```
-   SPRING_PROFILES_ACTIVE=prod
-   DATABASE_URL=${{Postgres.DATABASE_URL}}
-   DATABASE_USERNAME=${{Postgres.PGUSER}}
-   DATABASE_PASSWORD=${{Postgres.PGPASSWORD}}
-   CORS_ORIGINS=https://diginest.ai
-   EMAIL_ENABLED=true
-   EMAIL_FROM=noreply@diginest.ai
-   EMAIL_ADMIN=contact@diginest.ai
-   MAIL_HOST=smtp.resend.com
-   MAIL_PORT=587
-   MAIL_USERNAME=resend
-   MAIL_PASSWORD=re_xxxxx  # Get from Resend
-   ```
-
-5. **Custom Domain:**
-   - Settings → Domains → Add `api.diginest.ai`
-
-### 4. Cloudflare DNS Setup
-
-1. **Add Domain:**
-   - DNS → Add record
-
-2. **Records:**
-   ```
-   Type: CNAME
-   Name: @
-   Content: cname.vercel-dns.com  # From Vercel
-   Proxy: DNS only (grey cloud)
-
-   Type: CNAME
-   Name: www
-   Content: cname.vercel-dns.com
-   Proxy: DNS only
-
-   Type: CNAME
-   Name: api
-   Content: your-app.up.railway.app  # From Railway
-   Proxy: DNS only
-   ```
-
-3. **SSL/TLS:**
-   - SSL/TLS → Full (strict)
-
-### 5. GitHub Secrets
-
-În GitHub repo → Settings → Secrets → Actions:
-
+# Manage variables
+railway variables                           # List all
+railway variables set KEY=VALUE             # Set one
+railway logs --lines 20                     # View logs
+railway status                              # Check status
 ```
-VERCEL_TOKEN=xxx
-VERCEL_ORG_ID=xxx
-VERCEL_PROJECT_ID=xxx
-RAILWAY_TOKEN=xxx
-```
+
+## 📧 Resend Email Setup
+
+### Cont
+
+- **Provider**: Resend.com (free tier, 3000 emails/lună)
+- **Login**: GitHub OAuth (IleanaOneata)
+- **Regiune**: Ireland (eu-west-1)
+
+### Domeniu Verificat: generativa.ro
+
+DNS records adăugate în **cPanel → Zone Editor**:
+
+| Type | Name | Value | TTL |
+|------|------|-------|-----|
+| TXT | `resend._domainkey.generativa.ro` | DKIM key | 14400 |
+| MX | `send.generativa.ro` | `feedback-smtp.eu-west-1.amazonses.com` | 14400 (priority 10) |
+| TXT | `send.generativa.ro` | `v=spf1 include:amazonses.com ~all` | 14400 |
+
+### Cum Funcționează
+
+EmailService trimite email-uri prin POST la `https://api.resend.com/emails` cu Bearer token (API key stocat în `MAIL_PASSWORD`).
 
 ## 🔄 Deployment Flow
 
-### Automatic (Recommended)
+### Automatic (Standard)
 
-1. Push to `main` branch
-2. GitHub Actions triggered
-3. Build & test
-4. Deploy to Vercel/Railway
+1. Push pe `main` → Railway auto-deploy backend + Vercel auto-deploy frontend prod
+2. Push pe `staging` → Vercel auto-deploy frontend preview
 
 ### Manual (Emergency)
 
-**Frontend:**
 ```bash
+# Frontend
 cd frontend
-npm install -g vercel
-vercel --prod
-```
+npx vercel --prod
 
-**Backend:**
-```bash
+# Backend
 cd backend
 railway up
+# ⚠️ railway up folosește URL-uri publice, nu private networking
 ```
 
 ## ✅ Verification Checklist
 
 După deployment, verifică:
 
+- [ ] Health endpoint: `curl https://diginest-backend-production.up.railway.app/actuator/health` → `{"status":"UP"}`
+- [ ] Contact form: trimite test, verifică email primit
+- [ ] Railway logs: `railway logs --lines 20` — fără erori
 - [ ] Homepage loads (RO & EN)
 - [ ] Language switch works
-- [ ] All pages accessible
-- [ ] Contact form shows (no backend yet = simulated)
 - [ ] Mobile responsive
-- [ ] SSL certificate valid
-- [ ] Lighthouse score > 90
+- [ ] Mesajul de succes dispare după 5 secunde
 
 ## 🐛 Troubleshooting
 
-### Frontend nu se încarcă
+### Email-urile nu se trimit
 
-1. Check Vercel deployment logs
-2. Verify environment variables
-3. Check build output
+1. Verifică Railway logs: `railway logs --lines 20`
+2. Verifică Resend dashboard → Emails (delivery status)
+3. Verifică că `EMAIL_ENABLED=true` și `MAIL_PASSWORD` e setat
+4. **NU încerca SMTP** — e blocat de Railway
 
-### Backend 500 errors
+### Railway deploy eșuează
 
-1. Check Railway logs
-2. Verify DATABASE_URL
-3. Check environment variables
+1. Verifică Root Directory: trebuie `/backend`
+2. Verifică branch: trebuie `main`
+3. Verifică logs de build în Railway dashboard
+
+### Health endpoint DOWN
+
+1. Verifică `management.health.mail.enabled=false` în application.yml
+2. Verifică DATABASE_URL (prefix `jdbc:postgresql://`)
+3. Verifică PostgreSQL addon e activ
 
 ### CORS errors
 
-1. Verify `CORS_ORIGINS` includes frontend domain
+1. Verifică `CORS_ORIGINS` include frontend domain
 2. Check browser console for exact error
-3. Restart backend after env change
 
 ## 📊 Costs Estimate
 
@@ -194,10 +215,11 @@ După deployment, verifică:
 |---------|-----------|------------------|
 | Vercel | 100GB bandwidth | $20/mo Pro |
 | Railway | $5 credit/mo | ~$5-10/mo |
-| Cloudflare | Unlimited | - |
-| Domain | - | ~$10/year |
-| **Total** | **~$0-5/mo** | **~$35-40/mo** |
+| Resend | 3000 emails/mo | $20/mo (50k emails) |
+| Domain (generativa.ro) | - | ~$10/year |
+| Hosterion Hosting | Current plan | Current plan |
+| **Total** | **~$0-5/mo** | **~$55-60/mo** |
 
 ---
 
-*Ultima actualizare: Ianuarie 2025*
+*Ultima actualizare: Februarie 2026*

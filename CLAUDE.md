@@ -28,6 +28,8 @@
 13. ✅ **CookieBanner** - Redesign modern corner popup (GDPR compliant)
 14. ✅ **Hero Stats Redesign** - Carduri glassmorphism cu counter animation
 15. ✅ **Mobile Optimization** - Scroll orizontal pentru carduri (vezi secțiunea dedicată)
+16. ✅ **Backend Email Funcțional** - Resend HTTP API, PostgreSQL, async emails (vezi secțiunea dedicată)
+17. ✅ **Contact Form UX** - Mesaj succes auto-hide după 5s, processed tracking în DB
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -901,6 +903,13 @@ Pe mobile (sub 768px), secțiunile cu multiple carduri folosesc **scroll orizont
 | Feb 2026 | ScrollToTop se suprapunea cu CookieBanner pe mobile | Ambele elemente în colțul dreapta-jos | ScrollToTop așteaptă cookie dismiss pe mobile, apare imediat pe desktop |
 | Feb 2026 | Mobile menu (hamburger) nu se deschidea | Event listeners nu se atașau corect, Astro SPA mode | Adăugat DOMContentLoaded + astro:page-load listeners, clonare buton |
 | Feb 2026 | Text invizibil pe secțiuni dark (About page) | Titlurile din secțiunile Mission și Stats nu aveau `text-white` explicit | Adăugat `text-white` la toate titlurile pe fundaluri dark |
+| Feb 2026 | Email-urile nu se trimiteau din Railway | Railway blochează toate porturile SMTP outbound (25, 465, 587) | Migrat de la JavaMailSender/SMTP la Resend HTTP API (port 443) |
+| Feb 2026 | Formularul de contact bloca pagina 4+ minute | Email se trimitea sincron pe thread-ul HTTP request | Adăugat `@Async` + `@EnableAsync` pentru trimitere în background |
+| Feb 2026 | Health endpoint raporta DOWN | Spring Boot MailHealthIndicator încerca SMTP și timeout-a | Dezactivat `management.health.mail.enabled=false` |
+| Feb 2026 | `processed`/`processed_at` mereu false/NULL în DB | ContactService nu actualiza câmpurile după trimiterea emailurilor | EmailService actualizează DB după trimitere cu succes/eșec |
+| Feb 2026 | Railway deploy eșua — "Could not find root directory" | Lipsea configurație build | Creat `nixpacks.toml` și `Procfile` |
+| Feb 2026 | Baza de date se pierdea la restart | App-ul rula pe H2 in-memory în producție | Adăugat PostgreSQL addon pe Railway, setat `SPRING_PROFILES_ACTIVE=prod` |
+| Feb 2026 | Mesajul de succes din contact form rămânea permanent | Nu exista auto-hide | Adăugat `setTimeout` 5 secunde pentru auto-hide |
 
 ### Link-uri care duc la 404 (Pagini neimplementate) ⚠️
 
@@ -1040,6 +1049,140 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   - IntegrationHub Benefits: scroll orizontal pe mobile
 - **Pattern CSS**: `flex md:grid overflow-x-auto md:overflow-visible snap-x scrollbar-hide`
 - **Fix TypeScript**: `container` null check în UseCases scroll handler
+
+### Sesiune Februarie 2026 - Backend Email & Infrastructure Fix
+- **Problema principală**: Emailurile din formularul de contact nu se trimiteau
+- **Cauze identificate** (multiple):
+  1. Railway blochează SMTP outbound (porturi 25, 465, 587) — testat cu mail.generativa.ro și smtp.resend.com
+  2. Email se trimitea sincron → pagina bloca 4+ minute
+  3. Lipsea PostgreSQL — app-ul rula pe H2 in-memory (date pierdute la restart)
+  4. Railway deploy-uri eșuau (lipsea configurație build)
+  5. Health endpoint DOWN din cauza MailHealthIndicator
+- **Soluții implementate**:
+  1. **Resend HTTP API** în loc de SMTP (port 443 HTTPS, mereu disponibil) — vezi secțiunea dedicată
+  2. **@Async + @EnableAsync** pentru trimitere email în background (~0.5s response)
+  3. **PostgreSQL addon** pe Railway + `SPRING_PROFILES_ACTIVE=prod`
+  4. **nixpacks.toml** + **Procfile** pentru build configuration
+  5. **Mail health indicator dezactivat** (`management.health.mail.enabled=false`)
+  6. **processed/processed_at** se actualizează după trimiterea emailurilor
+  7. **Confirmarea user** se trimite doar dacă notificarea admin a reușit
+  8. **Mesaj succes auto-hide** după 5 secunde în formularul de contact
+- **Resend.com setup**:
+  - Cont creat cu GitHub OAuth
+  - Domeniu `generativa.ro` verificat (DKIM + SPF)
+  - DNS records adăugate în cPanel Zone Editor (Hosterion)
+  - API Key stocat ca `MAIL_PASSWORD` pe Railway
+- **Railway CLI** instalat (`@railway/cli` via npm) pentru management variabile
+- **Commits pe main**: 7 commits (`0319b7f` → `cf0490e`)
+- **Merge main → staging** efectuat pentru sincronizare
+
+---
+
+## 📧 EMAIL SYSTEM - RESEND HTTP API (DETALII TEHNICE)
+
+> **Pentru AI**: Această secțiune conține specificațiile complete pentru sistemul de email. Citește înainte de orice modificare la EmailService.
+
+### De Ce NU SMTP
+
+Railway (și multe cloud platforms) **blochează porturile SMTP outbound** (25, 465, 587) pentru a preveni spam-ul. Asta afectează ORICE provider SMTP (cPanel, Gmail SMTP, Resend SMTP, etc.).
+
+**Soluția**: Folosim Resend HTTP API pe port 443 (HTTPS) care e mereu disponibil.
+
+### Resend Configuration
+
+| Aspect | Valoare |
+|--------|---------|
+| **Provider** | Resend.com (cont GitHub OAuth) |
+| **Plan** | Free (3000 emails/lună) |
+| **API Endpoint** | `https://api.resend.com/emails` |
+| **Autentificare** | Bearer token (API key) |
+| **Domeniu verificat** | `generativa.ro` (DKIM + SPF) |
+| **Regiune** | Ireland (eu-west-1) |
+| **From address** | `contact@generativa.ro` |
+
+### DNS Records Adăugate (cPanel Zone Editor)
+
+| Type | Name | Value |
+|------|------|-------|
+| TXT | `resend._domainkey.generativa.ro` | DKIM public key (`p=MIGfMA0GCSq...`) |
+| MX | `send.generativa.ro` | `feedback-smtp.eu-west-1.amazonses.com` (priority 10) |
+| TXT | `send.generativa.ro` | `v=spf1 include:amazonses.com ~all` |
+
+### Railway Environment Variables (Email)
+
+```
+MAIL_HOST=smtp.resend.com        # Nu se mai folosește (SMTP blocat), dar păstrat
+MAIL_PORT=465                    # Nu se mai folosește
+MAIL_USERNAME=resend             # Nu se mai folosește
+MAIL_PASSWORD=re_SSiJmdXw_...   # API key Resend — FOLOSIT de HTTP API
+MAIL_PROTOCOL=smtps              # Nu se mai folosește
+MAIL_SSL_ENABLE=true             # Nu se mai folosește
+MAIL_STARTTLS_ENABLE=false       # Nu se mai folosește
+EMAIL_FROM=contact@generativa.ro # Adresa expeditor
+EMAIL_ADMIN=contact@generativa.ro # Adresa notificări admin
+EMAIL_ENABLED=true               # Toggle global email
+```
+
+> **Notă**: Variabilele `MAIL_*` vechi rămân setate dar NU mai sunt folosite de EmailService (care acum folosește HTTP API). `MAIL_PASSWORD` e reutilizat ca Resend API key.
+
+### Arhitectura Email Flow
+
+```
+User submit form → ContactController (HTTP thread)
+    │
+    ├─ Save to DB (sync, ~50ms) → Return 201 instant
+    │
+    └─ @Async → EmailService.sendAllEmails() (background thread)
+         │
+         ├─ POST https://api.resend.com/emails (admin notification)
+         │   ├─ Success → continuă
+         │   └─ Fail → log error, skip confirmation
+         │
+         ├─ POST https://api.resend.com/emails (user confirmation)
+         │   └─ Doar dacă admin notification a reușit
+         │
+         └─ Update DB: processed=true/false, processed_at, notes
+```
+
+### Fișiere Modificate
+
+| Fișier | Modificare |
+|--------|-----------|
+| `EmailService.java` | Rescris complet — Resend HTTP API în loc de JavaMailSender/SMTP |
+| `ContactService.java` | Apelează `sendAllEmails()` (metodă unificată) |
+| `AiAgentsApplication.java` | Adăugat `@EnableAsync` |
+| `application.yml` | SMTP timeouts, env var parametrizare, mail health disabled |
+| `application-prod.yml` | `ddl-auto: update` (era `validate`) |
+| `nixpacks.toml` | Creat — start command pentru Railway |
+| `Procfile` | Creat — alternativă start command |
+| `ContactForm.astro` | Mesaj succes auto-hide după 5s |
+
+### ⚠️ IMPORTANT — Railway Constraints
+
+1. **SMTP blocat** — NU încerca să folosești SMTP de pe Railway, indiferent de provider
+2. **Private networking** — `*.railway.internal` hostnames NU funcționează cu `railway up` (CLI deploy), doar cu GitHub auto-deploy
+3. **DATABASE_URL** — trebuie prefix `jdbc:postgresql://` și URL public (`metro.proxy.rlwy.net`) pentru CLI deploys
+4. **Maven wrapper** — NU adăuga `mvnw` — Nixpacks folosește `mise` care gestionează Java/Maven direct
+5. **Build time** — ~2-3 min (Maven build + app start). Prima cerere după deploy poate fi mai lentă (JVM warmup)
+
+### Railway All Variables (February 2026)
+
+```
+SPRING_PROFILES_ACTIVE=prod
+DATABASE_URL=jdbc:postgresql://metro.proxy.rlwy.net:32252/railway
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=RHiVbAXqsXtuIoqvsEMXPopcYjcvSARB
+MAIL_HOST=smtp.resend.com
+MAIL_PORT=465
+MAIL_USERNAME=resend
+MAIL_PASSWORD=re_SSiJmdXw_MUuf9eTTqgmWjoUDJPDmwFzo
+MAIL_PROTOCOL=smtps
+MAIL_SSL_ENABLE=true
+MAIL_STARTTLS_ENABLE=false
+EMAIL_FROM=contact@generativa.ro
+EMAIL_ADMIN=contact@generativa.ro
+EMAIL_ENABLED=true
+```
 
 ---
 
