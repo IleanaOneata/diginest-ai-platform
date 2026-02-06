@@ -34,7 +34,7 @@ app:
     allowed-origins: http://localhost:3000,http://localhost:4321
 
   email:
-    enabled: false  # Disable emails in development
+    enabled: true  # Disable emails in development
 
 # =============================================================================
 # Logging - More verbose in development
