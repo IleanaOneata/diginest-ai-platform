@@ -136,7 +136,7 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
     <!-- 6 Cards - Mobile scroll / Desktop grid -->
     <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
       {si.systems.items.map((item: { icon: string; title: string; description: string }) => (
-        <div class="group flex-shrink-0 w-[280px] sm:w-[300px] md:w-auto bg-neutral-50 rounded-2xl p-5 md:p-6 lg:p-8 border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-start">
+        <div class="group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto bg-neutral-50 rounded-2xl p-5 md:p-6 lg:p-8 border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-center">
           <!-- Icon -->
           <div class="w-11 h-11 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-4 md:mb-6 group-hover:from-primary-400/30 group-hover:to-accent-500/30 transition-all duration-300">
             {item.icon === 'database' && (
@@ -262,7 +262,7 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
     <!-- 5 Capability Cards - Mobile scroll / Desktop grid -->
     <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
       {si.capabilities.items.map((item: { icon: string; title: string; description: string }) => (
-        <div class="group flex-shrink-0 w-[280px] sm:w-[300px] md:w-auto bg-white rounded-2xl p-5 md:p-6 lg:p-8 border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-start">
+        <div class="group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto bg-white rounded-2xl p-5 md:p-6 lg:p-8 border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-center">
           <!-- Icon -->
           <div class="w-11 h-11 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-4 md:mb-6 group-hover:from-primary-400/30 group-hover:to-accent-500/30 transition-all duration-300">
             {item.icon === 'collect' && (
@@ -323,7 +323,7 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
     <!-- 5 Benefit Cards - Mobile scroll / Desktop grid -->
     <div class="flex md:grid md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
       {si.benefits.items.map((item: { icon: string; value: string; label: string }) => (
-        <div class="flex-shrink-0 w-[200px] sm:w-[220px] md:w-auto bg-neutral-50 rounded-2xl p-5 md:p-6 border border-neutral-100 shadow-sm hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-start text-center">
+        <div class="flex-shrink-0 w-[200px] sm:w-[220px] md:w-auto bg-neutral-50 rounded-2xl p-5 md:p-6 border border-neutral-100 shadow-sm hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-center text-center">
           <!-- Icon -->
           <div class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-4">
             {item.icon === 'clock' && (

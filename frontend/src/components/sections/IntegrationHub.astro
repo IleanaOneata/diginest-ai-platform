@@ -227,7 +227,7 @@ const connectionIcons: Record<string, string> = {
     <!-- Benefits row - Horizontal scroll on mobile, grid on desktop -->
     <div class="flex md:grid md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-auto md:px-0">
       {t.benefits.map((benefit, index) => (
-        <div class="flex-shrink-0 w-[140px] md:w-auto text-center group snap-start" style={`animation-delay: ${index * 100}ms`}>
+        <div class="flex-shrink-0 w-[140px] md:w-auto text-center group snap-center" style={`animation-delay: ${index * 100}ms`}>
           <div class="w-9 h-9 md:w-10 md:h-10 mx-auto mb-2 md:mb-3 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary-500/30 group-hover:bg-primary-500/10 transition-all duration-300">
             <svg class="w-4 h-4 md:w-5 md:h-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
