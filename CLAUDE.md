@@ -44,10 +44,16 @@
 29. ✅ **Footer Update** - Înlocuit placeholder company info cu datele reale DIGITAL LEADERSHIP SRL (CUI: 38585123, J12/6715/2017)
 30. ✅ **Hreflang Fix** - Corectare hreflang tags în BaseLayout: `buildAlternatePath()` pentru traducere corectă path-uri, `x-default` → RO (piață principală), Organization schema cu adresă reală
 31. ✅ **Language Switcher Redesign** - Toggle pill compact (RO | EN) cu gradient brand, fără emoji flags (best practice 2025: flags = țări, nu limbi), accessibility complet (aria-current, lang attributes)
+32. ✅ **Services Mobile Scroll** - Carduri servicii scroll orizontal pe mobile (flex md:grid pattern)
+33. ✅ **Logo Redesign PNG** - Înlocuit SVG logo cu 3D G letter PNG (transparent background), imagine AI-generated, Logo.astro rescris complet
+34. ✅ **Header Gradient** - Fundal header cu gradient subtil cyan→white→lavender (`from-primary-50/80 via-white/80 to-accent-50/60`) + ambient color blobs în BaseLayout
+35. ✅ **IntegrationHub Mobile Labels** - Afișare label-uri sub iconițe pe toate dimensiunile (nu doar pe sm:+)
+36. ✅ **Favicon PNG Update** - Favicon-ul din tab-ul Chrome actualizat de la SVG vechi la PNG-uri generate din noul logo 3D (32x32, 16x16, apple-touch-icon 180x180)
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
 - [ ] Test complet pe staging
+- [ ] Verificare vizuală pe cel mai recent preview URL Vercel
 
 ### Următorii pași:
 1. [ ] Verificare staging URL după deploy
@@ -189,8 +195,12 @@ background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
 
 ### Logo
 - **Component**: `frontend/src/components/common/Logo.astro`
-- **Design**: Litera "G" cu gradient + noduri orbitale animate
-- **Variante**: `default` (pe light), `white` (pe dark)
+- **Design**: 3D G letter PNG cu transparent background (AI-generated, glossy cyan-blue 3D effect)
+- **Fișier imagine**: `/images/generativa-g-512.png` (512x512, transparent PNG)
+- **Favicon**: `/favicon-32.png`, `/favicon-16.png`, `/apple-touch-icon.png` (generate din logo-ul PNG cu Sharp)
+- **Variante**: `default` (pe light, text gradient), `white` (pe dark, text alb), `dark` (text dark)
+- **Sizes**: `sm` (w-9), `md` (w-11), `lg` (w-14), `xl` (w-20)
+- **IMPORTANT**: Nu mai folosim SVG logo. `favicon.svg` vechi există încă în repo dar NU e referit nicăieri.
 
 ---
 
@@ -323,8 +333,13 @@ AI Agents Platform/
 │   │   └── styles/
 │   │       └── global.css                # Stiluri globale
 │   ├── public/
-│   │   ├── favicon.svg
+│   │   ├── favicon-32.png              # Favicon 32x32 (3D G logo PNG)
+│   │   ├── favicon-16.png              # Favicon 16x16
+│   │   ├── apple-touch-icon.png        # iOS icon 180x180
+│   │   ├── favicon.svg                 # ⚠️ VECHI - nu mai e referit, păstrat în repo
 │   │   └── images/
+│   │       ├── generativa-g-512.png    # 🆕 Logo principal (3D G, transparent)
+│   │       └── generativa-g-200.png    # 🆕 Logo mic
 │   ├── tailwind.config.mjs               # Culori brand
 │   └── package.json
 │
@@ -984,6 +999,9 @@ Pe mobile (sub 768px), secțiunile cu multiple carduri folosesc **scroll orizont
 | Feb 2026 | ScrollToTop se suprapunea cu CookieBanner pe mobile | Ambele elemente în colțul dreapta-jos | ScrollToTop așteaptă cookie dismiss pe mobile, apare imediat pe desktop |
 | Feb 2026 | Mobile menu (hamburger) nu se deschidea | Event listeners nu se atașau corect, Astro SPA mode | Adăugat DOMContentLoaded + astro:page-load listeners, clonare buton |
 | Feb 2026 | Text invizibil pe secțiuni dark (About page) | Titlurile din secțiunile Mission și Stats nu aveau `text-white` explicit | Adăugat `text-white` la toate titlurile pe fundaluri dark |
+| Feb 2026 | Favicon în tab Chrome arăta vechiul logo SVG | Commit `1080d32` a revenit favicon.svg la SVG vechi, dar `3cf64f3` nu l-a restaurat | Generate PNG favicons (32x32, 16x16) din noul logo, actualizat BaseLayout |
+| Feb 2026 | IntegrationHub labels invizibile pe mobile | Label-urile aveau `hidden sm:block` — ascunse pe mobile | Schimbat la `block` pe toate dimensiunile |
+| Feb 2026 | Logo rollback greșit — revenit TOTAL la SVG | La "rollback" s-a presupus revert total, dar utilizatoarea voia doar eliminarea cercului gri | Restaurat PNG logo din commit anterior (`d86a3cd`) |
 
 ### Link-uri care duc la 404 (Pagini neimplementate) ⚠️
 
@@ -1256,6 +1274,62 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   - Labels: "RO" / "EN" — fără emoji flags (best practice 2025: flags = țări, nu limbi)
 - **Accessibility**: `role="navigation"`, `aria-label`, `aria-current="true"` pe limba activă, `lang` attribute pe fiecare label
 - **Fișiere modificate**: `LanguageSwitcher.astro` (rewrite complet)
+
+### Sesiune Februarie 2026 - Services Mobile Scroll
+- **Problema**: Cardurile servicii ocupau prea mult spațiu vertical pe mobile
+- **Soluția**: Scroll orizontal pe mobile cu snap-to-card
+- **Pattern CSS**: `flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0`
+- **Carduri**: `flex-shrink-0 w-[280px] md:w-auto snap-start`
+- **Swipe hint**: Vizibil doar pe mobile (`flex md:hidden`)
+- **Commit**: `3d94aa1`
+
+### Sesiune Februarie 2026 - Logo Redesign (SVG → PNG 3D)
+- **Context**: Utilizatoarea nu a fost mulțumită de logo-ul SVG vechi și a vrut să folosească o imagine AI-generated
+- **Proces** (multiple iterații):
+  1. Prima încercare SVG recreation → respins ("departe de ceea ce vreau eu")
+  2. PNG cu text complet → respins (prea mic, text duplicat, noduri invizibile pe alb)
+  3. Cropped doar G-ul → utilizatoarea a oferit altă imagine mai bună
+  4. `Image (5).jpg` — G 3D glossy cyan-blue pe fundal gri → procesat cu Sharp
+  5. Background removal: pixel-by-pixel (RGB > 210, channels within 15) → alpha=0
+  6. Gray circle behind logo → respins ("rollback nu imi place")
+  7. **GREȘEALĂ CRITICĂ**: Am făcut rollback TOTAL la SVG (commit `1080d32`) când utilizatoarea voia doar eliminarea cercului gri
+  8. Restaurare PNG fără cerc (commit `3cf64f3`)
+- **Fișiere finale**:
+  - `public/images/generativa-g-512.png` — logo principal (512x512, transparent)
+  - `public/images/generativa-g-200.png` — versiune mică
+  - `Logo.astro` — rescris complet pentru PNG (`<img>` în loc de inline SVG)
+- **Lecție învățată**: La "rollback" clarifică EXACT ce se dorește revertat, nu presupune
+- **Commits**: `4376f0c`, `5f454a8`, `d86a3cd`, `55066a2`, `1080d32` (greșit), `3cf64f3` (fix)
+
+### Sesiune Februarie 2026 - Header Gradient & Ambient Color Tones
+- **Problema**: Header-ul era `bg-white/80` — complet alb, fără nuanțe de brand
+- **Ce dorea utilizatoarea**: Nuanțe subtile de cyan/lavender vizibile în header (ca pe mobile cu blur)
+- **Soluție în 2 pași**:
+  1. **Ambient blobs** în `BaseLayout.astro` — `pointer-events-none fixed inset-0 z-0`:
+     - `w-[500px] h-[500px] bg-primary-200/25 blur-3xl` (stânga-sus)
+     - `w-[450px] h-[450px] bg-accent-200/20 blur-3xl` (dreapta-sus)
+     - `w-96 h-96 bg-primary-100/25 blur-3xl` (mijloc)
+  2. **Header gradient** în `Header.astro`:
+     - `bg-gradient-to-r from-primary-50/80 via-white/80 to-accent-50/60` (înlocuiește `bg-white/80`)
+     - Păstrat `backdrop-blur-lg border-b border-neutral-200/50`
+- **Main** content are `relative z-10` pentru a fi deasupra blob-urilor
+- **Commits**: `6216a87` (blobs), `f112d34` (header gradient + blobs mari)
+
+### Sesiune Februarie 2026 - IntegrationHub Mobile Labels + Favicon PNG
+- **IntegrationHub**: Label-urile conexiunilor (Apeluri telefonice, WhatsApp, etc.) erau `hidden sm:block` → schimbate la `block` pentru vizibilitate pe toate dimensiunile. Text `9px` pe mobile, `10px` pe sm, `12px` pe md+
+- **Favicon**: Tab-ul Chrome arăta încă vechiul SVG logo. Generate PNG favicons cu Sharp din logo-ul 3D:
+  - `favicon-32.png` (32x32) — favicon principal
+  - `favicon-16.png` (16x16) — favicon mic
+  - `apple-touch-icon.png` (180x180) — iOS
+  - `BaseLayout.astro` actualizat: eliminat `<link rel="icon" type="image/svg+xml" href="/favicon.svg">`
+- **Commits**: `61cf091` (labels), `0b42564` (favicon)
+
+### ⚠️ Lecții din Sesiunea Logo Redesign
+1. **Rollback parțial vs total**: Când utilizatorul zice "rollback", clarifică CE anume. Nu presupune.
+2. **Browser cache**: Favicon-urile și imaginile sunt puternic cached. Recomandă Ctrl+Shift+R.
+3. **Vercel preview URLs**: Fiecare push creează un URL unic. URL-uri vechi NU se actualizează automat — trebuie accesat cel mai recent din dashboard.
+4. **Sharp pentru imagini**: Astro include Sharp ca dependență. Poate fi folosit cu `node -e "require('sharp')..."` pentru crop, resize, background removal.
+5. **PNG transparent background**: Tehnica pixel-by-pixel — verifică dacă RGB > threshold și channels similare (near-gray), apoi setează alpha=0.
 
 ---
 
