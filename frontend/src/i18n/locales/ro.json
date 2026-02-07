@@ -815,6 +815,11 @@
           "icon": "reporting",
           "title": "Raportare și monitorizare",
           "description": "Dashboard centralizat cu volumele procesate, ratele de rezolvare, timpii de răspuns și statusul fiecărei integrări. Exporturi automate pentru management."
+        },
+        {
+          "icon": "notifications",
+          "title": "Notificări și alerte inteligente",
+          "description": "Agentul AI trimite automat notificări contextuale: reminder-e de programare, confirmări de plată, alerte de stoc sau actualizări de status — prin SMS, email sau WhatsApp, la momentul potrivit."
         }
       ]
     },

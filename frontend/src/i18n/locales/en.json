@@ -815,6 +815,11 @@
           "icon": "reporting",
           "title": "Reporting and monitoring",
           "description": "Centralized dashboard with processed volumes, resolution rates, response times and status of each integration. Automatic exports for management."
+        },
+        {
+          "icon": "notifications",
+          "title": "Smart notifications and alerts",
+          "description": "The AI agent automatically sends contextual notifications: appointment reminders, payment confirmations, stock alerts or status updates — via SMS, email or WhatsApp, at the right moment."
         }
       ]
     },
