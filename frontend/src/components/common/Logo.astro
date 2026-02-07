@@ -2,13 +2,13 @@
 /**
  * Logo Component - GENERATIVA
  *
- * Uses the cropped PNG logo (just the G letter with network nodes,
- * no text underneath). Text "GENERATIVA" is rendered by the component.
+ * Uses the 3D G letter PNG with transparent background.
+ * A subtle gradient circle behind the icon adds depth and brand feel.
  *
  * Variants:
- * - default: Logo G + gradient text (for light backgrounds)
- * - white: Logo G + white text (for dark backgrounds)
- * - dark: Logo G + dark text
+ * - default: G icon with subtle bg circle + gradient text (light backgrounds)
+ * - white: G icon + white text (dark backgrounds)
+ * - dark: G icon + dark text
  */
 
 interface Props {
@@ -25,12 +25,12 @@ const {
   class: className = ''
 } = Astro.props;
 
-// Size configurations — icons are bigger now for visibility
+// Size configurations
 const sizes = {
-  sm: { icon: 'w-9 h-9', text: 'text-lg', gap: 'gap-2' },
-  md: { icon: 'w-11 h-11', text: 'text-xl', gap: 'gap-2.5' },
-  lg: { icon: 'w-14 h-14', text: 'text-2xl', gap: 'gap-3' },
-  xl: { icon: 'w-20 h-20', text: 'text-3xl', gap: 'gap-4' },
+  sm: { wrapper: 'w-9 h-9', icon: 'w-8 h-8', text: 'text-lg', gap: 'gap-2' },
+  md: { wrapper: 'w-11 h-11', icon: 'w-10 h-10', text: 'text-xl', gap: 'gap-2.5' },
+  lg: { wrapper: 'w-14 h-14', icon: 'w-13 h-13', text: 'text-2xl', gap: 'gap-3' },
+  xl: { wrapper: 'w-20 h-20', icon: 'w-18 h-18', text: 'text-3xl', gap: 'gap-4' },
 };
 
 const textColors = {
@@ -44,19 +44,24 @@ const textColor = textColors[variant];
 ---
 
 <div class:list={["flex items-center", config.gap, className]}>
-  <!-- Logo Icon - Cropped G letter PNG -->
-  <img
-    src="/images/generativa-g-512.png"
-    alt="GENERATIVA"
-    class:list={[
-      config.icon,
-      "object-contain"
-    ]}
-    width="512"
-    height="512"
-    loading="eager"
-    decoding="async"
-  />
+  <!-- Logo Icon - 3D G letter with subtle background circle -->
+  <div class:list={[
+    config.wrapper,
+    "relative flex items-center justify-center flex-shrink-0"
+  ]}>
+    <img
+      src="/images/generativa-g-512.png"
+      alt="GENERATIVA"
+      class:list={[
+        config.icon,
+        "object-contain relative z-10"
+      ]}
+      width="512"
+      height="512"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 
   <!-- Text: GENERATIVA -->
   {showText && (
