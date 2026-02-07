@@ -43,6 +43,7 @@
 28. ✅ **Termeni și Condiții** - Pagină legală cu 10 secțiuni (servicii, proprietate intelectuală, limitarea răspunderii, legislație), Schema.org WebPage + BreadcrumbList, RO + EN
 29. ✅ **Footer Update** - Înlocuit placeholder company info cu datele reale DIGITAL LEADERSHIP SRL (CUI: 38585123, J12/6715/2017)
 30. ✅ **Hreflang Fix** - Corectare hreflang tags în BaseLayout: `buildAlternatePath()` pentru traducere corectă path-uri, `x-default` → RO (piață principală), Organization schema cu adresă reală
+31. ✅ **Language Switcher Redesign** - Toggle pill compact (RO | EN) cu gradient brand, fără emoji flags (best practice 2025: flags = țări, nu limbi), accessibility complet (aria-current, lang attributes)
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -1244,6 +1245,17 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   3. Organization schema actualizat: adresă reală (Dezmir, Cluj), `legalName: DIGITAL LEADERSHIP SRL`, `taxID: 38585123`
 - **Verificare**: Build HTML confirmat — hreflang generat corect pentru toate paginile (`/ro/despre/` ↔ `/en/about/`, `/ro/politica-confidentialitate/` ↔ `/en/privacy-policy/`)
 - **Fișiere modificate**: `BaseLayout.astro`, `SEO-AEO-GUIDELINES.md`, `CLAUDE.md`
+
+### Sesiune Februarie 2026 - Language Switcher Redesign
+- **Problema**: LanguageSwitcher arăta ca un link simplu cu emoji flag + text — nu se integra vizual cu brandul
+- **Soluția**: Toggle pill compact cu gradient brand (RO | EN)
+- **Design**:
+  - Container: `rounded-full bg-neutral-100 border border-neutral-200/80 p-0.5`
+  - Limba activă: `bg-gradient-to-r from-primary-500 to-accent-600 text-white rounded-full shadow-sm`
+  - Limba inactivă: `text-neutral-500 hover:text-neutral-700` — link clickable
+  - Labels: "RO" / "EN" — fără emoji flags (best practice 2025: flags = țări, nu limbi)
+- **Accessibility**: `role="navigation"`, `aria-label`, `aria-current="true"` pe limba activă, `lang` attribute pe fiecare label
+- **Fișiere modificate**: `LanguageSwitcher.astro` (rewrite complet)
 
 ---
 

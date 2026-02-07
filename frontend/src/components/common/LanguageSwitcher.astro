@@ -2,11 +2,12 @@
 /**
  * LanguageSwitcher Component
  *
- * Simple dropdown to switch between Romanian and English
+ * Toggle pill compact for switching between Romanian and English.
+ * Active language has brand gradient, inactive is a clickable link.
  * Handles path translation between locales (e.g., /en/about/ -> /ro/despre/)
  */
 
-import { type Locale, languageNames, languageFlags, getAlternateLocale, buildAlternatePath } from '@i18n/index';
+import { type Locale, getAlternateLocale, buildAlternatePath } from '@i18n/index';
 
 interface Props {
   locale: Locale;
@@ -15,18 +16,39 @@ interface Props {
 
 const { locale, currentPath } = Astro.props;
 const alternateLocale = getAlternateLocale(locale);
-
-// Build alternate path with proper translation
 const alternatePath = buildAlternatePath(currentPath, locale, alternateLocale);
 ---
 
-<div class="relative">
-  <a
-    href={alternatePath}
-    class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors"
-    aria-label={`Switch to ${languageNames[alternateLocale]}`}
-  >
-    <span class="text-base">{languageFlags[alternateLocale]}</span>
-    <span class="hidden sm:inline">{languageNames[alternateLocale]}</span>
-  </a>
-</div>
+<nav class="flex items-center bg-neutral-100 rounded-full p-0.5 border border-neutral-200/80"
+     role="navigation"
+     aria-label="Language switcher">
+  {locale === 'ro' ? (
+    <>
+      <span class="px-3 py-1 text-xs font-semibold tracking-wide text-white
+                    bg-gradient-to-r from-primary-500 to-accent-600
+                    rounded-full shadow-sm" lang="ro" aria-current="true">
+        RO
+      </span>
+      <a href={alternatePath}
+         class="px-3 py-1 text-xs font-semibold tracking-wide text-neutral-500
+                hover:text-neutral-700 rounded-full transition-colors duration-200"
+         lang="en" aria-label="Switch to English">
+        EN
+      </a>
+    </>
+  ) : (
+    <>
+      <a href={alternatePath}
+         class="px-3 py-1 text-xs font-semibold tracking-wide text-neutral-500
+                hover:text-neutral-700 rounded-full transition-colors duration-200"
+         lang="ro" aria-label="Schimb&#259; &#238;n Rom&#226;n&#259;">
+        RO
+      </a>
+      <span class="px-3 py-1 text-xs font-semibold tracking-wide text-white
+                    bg-gradient-to-r from-primary-500 to-accent-600
+                    rounded-full shadow-sm" lang="en" aria-current="true">
+        EN
+      </span>
+    </>
+  )}
+</nav>
