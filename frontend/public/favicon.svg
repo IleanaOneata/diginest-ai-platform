@@ -1,35 +1,46 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="favicon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="fav-grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#22d3ee" />
-      <stop offset="50%" stop-color="#6366f1" />
+      <stop offset="35%" stop-color="#3b82f6" />
+      <stop offset="70%" stop-color="#6366f1" />
       <stop offset="100%" stop-color="#8b5cf6" />
     </linearGradient>
   </defs>
 
-  <!-- Background -->
-  <rect width="32" height="32" rx="8" fill="#18181b"/>
+  <!-- Dark rounded background -->
+  <rect width="32" height="32" rx="8" fill="#0f172a"/>
 
-  <!-- G letter -->
+  <!-- Bold G letter -->
   <path
-    d="M16 5C10.477 5 6 9.477 6 15s4.477 10 10 10c4.142 0 7.713-2.52 9.231-6.115"
-    stroke="url(#favicon-grad)"
-    stroke-width="3"
+    d="M16 4C9.37 4 4 9.37 4 16s5.37 12 12 12c4.74 0 8.8-2.75 10.75-6.74L27 20.5H17.5c-.55 0-1-.45-1-1v-3.5c0-.55.45-1 1-1H27c.55 0 1 .45 1 1v2"
+    stroke="url(#fav-grad)"
+    stroke-width="3.5"
     stroke-linecap="round"
+    stroke-linejoin="round"
     fill="none"
   />
 
-  <!-- Horizontal bar -->
-  <path
-    d="M16 15h8.5"
-    stroke="url(#favicon-grad)"
-    stroke-width="3"
-    stroke-linecap="round"
-  />
+  <!-- Network connection lines -->
+  <g opacity="0.2" stroke="url(#fav-grad)" stroke-width="0.5">
+    <line x1="8" y1="6" x2="16" y2="4" />
+    <line x1="16" y1="4" x2="24" y2="6" />
+    <line x1="24" y1="6" x2="28" y2="14" />
+    <line x1="8" y1="6" x2="4" y2="14" />
+    <line x1="4" y1="14" x2="8" y2="24" />
+    <line x1="8" y1="24" x2="16" y2="28" />
+    <line x1="16" y1="28" x2="24" y2="24" />
+    <line x1="8" y1="6" x2="24" y2="24" />
+    <line x1="24" y1="6" x2="8" y2="24" />
+  </g>
 
-  <!-- Nodes -->
-  <circle cx="16" cy="5" r="2.5" fill="#22d3ee"/>
-  <circle cx="24.5" cy="15" r="2.5" fill="#8b5cf6"/>
-  <circle cx="16" cy="25" r="2.5" fill="#6366f1"/>
-  <circle cx="6" cy="15" r="2.5" fill="#22d3ee"/>
+  <!-- Network nodes -->
+  <circle cx="16" cy="4" r="1.8" fill="#22d3ee"/>
+  <circle cx="8" cy="6" r="1.5" fill="#38bdf8"/>
+  <circle cx="24" cy="6" r="1.5" fill="#818cf8"/>
+  <circle cx="4" cy="14" r="1.5" fill="#22d3ee"/>
+  <circle cx="28" cy="14" r="1.8" fill="#8b5cf6"/>
+  <circle cx="8" cy="24" r="1.2" fill="#6366f1"/>
+  <circle cx="16" cy="28" r="1.8" fill="#a78bfa"/>
+  <circle cx="24" cy="24" r="1.2" fill="#c084fc"/>
 </svg>
