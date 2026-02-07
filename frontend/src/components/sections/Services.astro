@@ -72,28 +72,39 @@ const icons = {
       </p>
     </div>
 
-    <!-- Services grid -->
-    <div class="grid md:grid-cols-3 gap-8">
+    <!-- Swipe hint (mobile only) -->
+    <div class="flex md:hidden items-center justify-center gap-2 text-xs text-neutral-400 mb-3">
+      <svg class="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+      <span>{locale === 'ro' ? 'Glisează pentru mai multe' : 'Swipe for more'}</span>
+    </div>
+
+    <!-- Services grid (desktop) / horizontal scroll (mobile) -->
+    <div class="flex md:grid md:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-visible
+                pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide
+                -mx-4 px-4 md:mx-0 md:px-0">
       {services.map((service, index) => (
         <article
-          class="group card-interactive p-8 flex flex-col"
+          class="group card-interactive p-6 md:p-8 flex flex-col
+                 flex-shrink-0 w-[280px] md:w-auto snap-start"
           style={`animation-delay: ${index * 100}ms`}
         >
           <!-- Icon -->
-          <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center text-primary-600 mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+          <div class="w-14 h-14 md:w-16 md:h-16 bg-primary-100 rounded-2xl flex items-center justify-center text-primary-600 mb-4 md:mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors">
             <Fragment set:html={icons[service.icon as keyof typeof icons]} />
           </div>
 
           <!-- Content -->
-          <h3 class="text-heading-sm text-neutral-900 mb-3">
+          <h3 class="text-heading-sm text-neutral-900 mb-2 md:mb-3">
             {service.title}
           </h3>
-          <p class="text-neutral-600 mb-6 flex-1">
+          <p class="text-sm md:text-base text-neutral-600 mb-4 md:mb-6 flex-1">
             {service.description}
           </p>
 
           <!-- Features list -->
-          <ul class="space-y-2 mb-6">
+          <ul class="space-y-2 mb-4 md:mb-6">
             {service.features.map((feature) => (
               <li class="flex items-center gap-2 text-sm text-neutral-600">
                 <svg class="w-4 h-4 text-primary-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
