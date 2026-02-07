@@ -53,6 +53,8 @@
 38. ✅ **Section Spacing Optimization** - Reducere spațiere între secțiuni (Services pt-10/md:pt-14, UseCases pt-10/md:pt-14), normalizare IntegrationHub mobile (py-12→py-16), reducere CTA (py-20/28/36→py-16/24/28)
 39. ✅ **Mobile Card Centering** - Carduri centrate pe mobile (`w-[85vw]` + `snap-center`) pe toate paginile: 3 service pages, About, Homepage (Services, UseCases, BenefitsStrip, IntegrationHub)
 40. ✅ **Dynamic Scroll Arrows** - Săgeți de direcție dinamice pe mobile: arată doar direcția disponibilă (dreapta la start, ambele la mijloc, stânga la final). Pattern `data-scroll-hint` + `data-scroll-container` cu JS pe scroll event
+41. ✅ **AI Integrations 6th Capability** - Adăugat "Notificări și alerte inteligente" (Smart notifications & alerts) pe pagina Integrări AI pentru grid complet 3+3 pe desktop
+42. ✅ **Language Switcher Scroll Preservation** - La schimbarea limbii (RO↔EN), utilizatorul rămâne în aceeași poziție pe pagină. Scroll position salvat ca procent în `sessionStorage`, restaurat instant (`behavior: 'instant'`) pe pagina nouă
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -1384,6 +1386,20 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   - JavaScript: `scrollLeft`, `scrollWidth`, `clientWidth` pe event `scroll` (passive: true)
   - Aplicat pe: Services, UseCases (homepage), ProcessAutomation, ConversationalAgents (2x), AiIntegrations (2x)
 - **Commits**: `18e7af6` (spacing + CTA cleanup), `d4ac6c9` (card centering), `a505d09` (dynamic arrows)
+
+### Sesiune Februarie 2026 - AI Integrations 6th Card + Language Switcher Scroll
+- **6th Capability Card** pe AiIntegrationsPage — grid incomplet (3+2) completat la 3+3:
+  - **RO**: "Notificări și alerte inteligente" — reminder-e programare, confirmări plată, alerte stoc, actualizări status prin SMS/email/WhatsApp
+  - **EN**: "Smart notifications and alerts"
+  - Icon: `notifications` (bell icon, Heroicons)
+  - Fișiere: `ro.json`, `en.json` (item adăugat în `serviceIntegrations.capabilities.items`), `AiIntegrationsPage.astro` (icon rendering)
+- **Language Switcher Scroll Preservation** — la schimbarea limbii utilizatorul rămâne în aceeași poziție:
+  - **Problema**: Click pe RO/EN ducea la începutul paginii (navigare completă `<a href>`)
+  - **Soluția**: `sessionStorage` cu scroll position ca procent (nu pixeli — paginile traduse pot avea înălțimi diferite)
+  - **Flow**: click → salvează `window.scrollY / maxScroll` → navigare → `requestAnimationFrame` → `scrollTo({ behavior: 'instant' })` → ștergere din storage
+  - CSS class `lang-switch-link` pe link-urile de limbă pentru targeting JS
+  - Events: `DOMContentLoaded` + `astro:page-load` (SPA compatibility)
+- **Commits**: `e5d2b61` (6th capability), `9051fc0` (scroll preservation), `060f48a` (instant scroll)
 
 ### ⚠️ Lecții din Sesiunea Logo Redesign
 1. **Rollback parțial vs total**: Când utilizatorul zice "rollback", clarifică CE anume. Nu presupune.
