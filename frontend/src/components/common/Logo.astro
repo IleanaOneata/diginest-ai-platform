@@ -2,17 +2,13 @@
 /**
  * Logo Component - GENERATIVA
  *
- * Uses the PNG logo image (AI-generated concept with 3D G letter,
- * gradient cyan→purple, network nodes overlay).
+ * Uses the cropped PNG logo (just the G letter with network nodes,
+ * no text underneath). Text "GENERATIVA" is rendered by the component.
  *
  * Variants:
- * - default: Logo image + gradient text (for light backgrounds)
- * - white: Logo image + white text (for dark backgrounds)
- * - dark: Logo image + dark text
- *
- * The PNG logo is on white background, so on dark sections we rely
- * on the image being small enough that the white blends naturally,
- * or we use CSS mix-blend-mode for better integration.
+ * - default: Logo G + gradient text (for light backgrounds)
+ * - white: Logo G + white text (for dark backgrounds)
+ * - dark: Logo G + dark text
  */
 
 interface Props {
@@ -29,12 +25,12 @@ const {
   class: className = ''
 } = Astro.props;
 
-// Size configurations - icon sizes and responsive image sources
+// Size configurations — icons are bigger now for visibility
 const sizes = {
-  sm: { icon: 'w-8 h-8', text: 'text-lg', gap: 'gap-2', img: '/images/generativa-logo-200.png' },
-  md: { icon: 'w-10 h-10', text: 'text-xl', gap: 'gap-2.5', img: '/images/generativa-logo-200.png' },
-  lg: { icon: 'w-12 h-12', text: 'text-2xl', gap: 'gap-3', img: '/images/generativa-logo-512.png' },
-  xl: { icon: 'w-16 h-16', text: 'text-3xl', gap: 'gap-4', img: '/images/generativa-logo-512.png' },
+  sm: { icon: 'w-9 h-9', text: 'text-lg', gap: 'gap-2' },
+  md: { icon: 'w-11 h-11', text: 'text-xl', gap: 'gap-2.5' },
+  lg: { icon: 'w-14 h-14', text: 'text-2xl', gap: 'gap-3' },
+  xl: { icon: 'w-20 h-20', text: 'text-3xl', gap: 'gap-4' },
 };
 
 const textColors = {
@@ -48,17 +44,16 @@ const textColor = textColors[variant];
 ---
 
 <div class:list={["flex items-center", config.gap, className]}>
-  <!-- Logo Icon - PNG image -->
+  <!-- Logo Icon - Cropped G letter PNG -->
   <img
-    src={config.img}
-    alt="GENERATIVA logo"
+    src="/images/generativa-g-512.png"
+    alt="GENERATIVA"
     class:list={[
       config.icon,
-      "object-contain rounded-lg",
-      variant === 'white' ? 'brightness-110' : ''
+      "object-contain"
     ]}
-    width="200"
-    height="200"
+    width="512"
+    height="512"
     loading="eager"
     decoding="async"
   />
