@@ -1,12 +1,13 @@
 ---
 /**
- * CTA Section Component
+ * CTA Section Component — Stripe-inspired redesign
  *
- * Call-to-action section for conversions
+ * Dark gradient background with subtle mesh gradient overlay,
+ * gradient orbs, and premium content layout.
+ * Consistent with IntegrationHub & ScaleWithConfidence dark sections.
  */
 
 import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
-import Button from '@components/common/Button.astro';
 
 interface Props {
   locale: Locale;
@@ -16,30 +17,95 @@ const { locale } = Astro.props;
 const t = getTranslations(locale);
 ---
 
-<section class="section bg-primary-600 relative overflow-hidden">
-  <!-- Background decorations -->
-  <div class="absolute inset-0 opacity-10">
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-400 rounded-full blur-3xl"></div>
+<section class="relative py-20 md:py-28 lg:py-36 overflow-hidden">
+  <!-- Dark gradient background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0f172a] to-[#1e1b4b]"></div>
+
+  <!-- Dot pattern overlay -->
+  <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+  <!-- Mesh gradient overlay for color depth -->
+  <div class="absolute inset-0 opacity-30"
+       style="background:
+         radial-gradient(ellipse at 20% 50%, rgba(34, 211, 238, 0.08) 0%, transparent 50%),
+         radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+         radial-gradient(ellipse at 50% 0%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);">
   </div>
 
-  <div class="container-md relative text-center">
-    <h2 class="text-heading-lg md:text-display text-white mb-4">
+  <!-- Gradient orbs -->
+  <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary-500/15 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-accent-500/15 rounded-full blur-3xl"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary-400/10 rounded-full blur-3xl"></div>
+
+  <!-- Content -->
+  <div class="container-md relative z-10 text-center">
+    <!-- Eyebrow badge -->
+    <span class="inline-block px-4 py-1.5 bg-white/5 text-primary-300 rounded-full text-sm font-medium mb-6 border border-white/10 backdrop-blur-sm">
+      {locale === 'ro' ? '✨ Consultanță gratuită' : '✨ Free consultation'}
+    </span>
+
+    <h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
       {t.cta.title}
     </h2>
-    <p class="text-lg text-primary-100 mb-8 max-w-xl mx-auto">
+
+    <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
       {t.cta.subtitle}
     </p>
-    <Button
-      href={buildLocalePath('/contact/', locale)}
-      variant="secondary"
-      size="lg"
-      class="bg-white text-primary-600 hover:bg-primary-50"
-    >
-      {t.cta.button}
-      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-      </svg>
-    </Button>
+
+    <!-- Buttons row -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <!-- Primary CTA - Gradient button with glow -->
+      <a
+        href={buildLocalePath('/contact/', locale)}
+        class="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-white text-lg
+               bg-gradient-to-r from-primary-500 to-accent-600
+               hover:from-primary-400 hover:to-accent-500
+               shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/40
+               transition-all duration-300 hover:-translate-y-0.5"
+      >
+        {t.cta.button}
+        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+        <!-- Glow effect behind button -->
+        <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500 to-accent-600 blur-xl opacity-40 group-hover:opacity-60 transition-opacity -z-10"></div>
+      </a>
+
+      <!-- Secondary CTA - Ghost style -->
+      <a
+        href={locale === 'ro' ? '/#process' : '/en/#process'}
+        class="inline-flex items-center gap-2 px-6 py-4 rounded-xl font-medium text-slate-300
+               border border-white/10 hover:border-white/25 hover:text-white
+               backdrop-blur-sm hover:bg-white/5
+               transition-all duration-300"
+      >
+        {locale === 'ro' ? 'Cum funcționează?' : 'How does it work?'}
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Trust indicators -->
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+      <span class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        {locale === 'ro' ? 'Fără obligații' : 'No obligations'}
+      </span>
+      <span class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        {locale === 'ro' ? '30 minute' : '30 minutes'}
+      </span>
+      <span class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        {locale === 'ro' ? 'Răspuns în 24h' : 'Response within 24h'}
+      </span>
+    </div>
   </div>
 </section>
