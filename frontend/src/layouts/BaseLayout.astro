@@ -11,7 +11,7 @@
  * - Analytics
  */
 
-import { getTranslations, getHtmlLang, type Locale } from '@i18n/index';
+import { getTranslations, getHtmlLang, buildAlternatePath, type Locale } from '@i18n/index';
 import Header from '@components/common/Header.astro';
 import Footer from '@components/common/Footer.astro';
 import CookieBanner from '@components/common/CookieBanner.astro';
@@ -47,7 +47,8 @@ const t = getTranslations(locale);
 const htmlLang = getHtmlLang(locale);
 const alternateLocale = locale === 'ro' ? 'en' : 'ro';
 const currentPath = Astro.url.pathname;
-const alternatePath = currentPath.replace(`/${locale}`, `/${alternateLocale}`);
+// Use buildAlternatePath for correct path translation (e.g., /ro/despre/ → /en/about/)
+const alternatePath = buildAlternatePath(currentPath, locale, alternateLocale);
 
 // Full URLs - Updated for GENERATIVA
 // TODO: Update to generativa.ro when domain is purchased
@@ -73,8 +74,12 @@ const organizationSchema = {
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'RO',
-    addressLocality: 'București',
+    addressRegion: 'Cluj',
+    addressLocality: 'Dezmir, Comuna Apahida',
+    streetAddress: 'Str. Viorelelor, nr. 17A',
   },
+  legalName: 'DIGITAL LEADERSHIP SRL',
+  taxID: '38585123',
   contactPoint: {
     '@type': 'ContactPoint',
     contactType: 'sales',
@@ -107,11 +112,12 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
       <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     )}
 
-    <!-- Canonical & Hreflang -->
+    <!-- Canonical & Hreflang — correct path translation between locales -->
     <link rel="canonical" href={fullCanonicalUrl} />
     <link rel="alternate" hreflang="ro" href={locale === 'ro' ? fullCanonicalUrl : fullAlternateUrl} />
     <link rel="alternate" hreflang="en" href={locale === 'en' ? fullCanonicalUrl : fullAlternateUrl} />
-    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/en/`} />
+    <!-- x-default → RO (primary audience is Romanian market) -->
+    <link rel="alternate" hreflang="x-default" href={locale === 'ro' ? fullCanonicalUrl : fullAlternateUrl} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

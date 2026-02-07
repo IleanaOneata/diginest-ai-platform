@@ -72,6 +72,32 @@ Fiecare pagină trebuie să fie **optimizată dual** — atât pentru crawlere c
 | **Trailing slash** | ÎNTOTDEAUNA cu `/` la final |
 | **Self-referencing** | Canonical = URL-ul paginii curente |
 
+### 1.4 Hreflang Tags (IMPLEMENTATE AUTOMAT ÎN BaseLayout)
+
+> **IMPORTANT**: Hreflang tags se generează automat în `BaseLayout.astro` folosind `buildAlternatePath()`. NU trebuie adăugate manual în page shells.
+
+| Aspect | Implementare |
+|--------|--------------|
+| **Locație** | `<head>` din BaseLayout.astro (automat pe TOATE paginile) |
+| **Tag-uri** | 3 per pagină: `hreflang="ro"`, `hreflang="en"`, `hreflang="x-default"` |
+| **x-default** | Pointează la **versiunea RO** (piața principală e românească) |
+| **Traducere path** | Folosește `buildAlternatePath()` din `i18n/index.ts` |
+| **Bidirecțional** | Pagina RO referă EN, pagina EN referă RO (obligatoriu Google) |
+
+**De ce contează**:
+- Fără hreflang, Google poate trata `/ro/despre/` și `/en/about/` ca pagini separate concurente
+- Cu hreflang, Google știe că sunt variante lingvistice ale aceleiași pagini → consolidează semnalele SEO
+- `x-default` → RO asigură că vizitatorii fără preferință de limbă văd versiunea română
+
+**Exemplu generat automat** (pentru `/ro/despre/`):
+```html
+<link rel="alternate" hreflang="ro" href="https://generativa.ro/ro/despre/" />
+<link rel="alternate" hreflang="en" href="https://generativa.ro/en/about/" />
+<link rel="alternate" hreflang="x-default" href="https://generativa.ro/ro/despre/" />
+```
+
+**Condiție CRITICĂ**: Când adaugi o pagină nouă, adaugă OBLIGATORIU path mappings în `i18n/index.ts` — altfel hreflang va genera URL-uri greșite!
+
 ---
 
 ## 2. Heading Structure (H1-H6) — Reguli OBLIGATORII

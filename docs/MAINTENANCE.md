@@ -294,12 +294,13 @@ Urmează checklist-ul complet din `docs/SEO-AEO-GUIDELINES.md` secțiunea 8 (Pag
 
 **Sumar acțiuni la pagină nouă:**
 1. Traduceri `ro.json` + `en.json`
-2. Path mappings `i18n/index.ts`
+2. Path mappings `i18n/index.ts` — **CRITIC** pentru hreflang + Language Switcher
 3. Component `.astro` cu H2 question-based + lead paragraphs
 4. Page shells RO + EN cu Schema.org @graph
 5. FAQ accordion cu selector unic
 6. Update `CLAUDE.md` (implementat list, 404 table, session history)
 7. Build + push + verificare Rich Results Test
+8. Verificare hreflang generat corect (build → check HTML)
 
 ---
 

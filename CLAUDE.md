@@ -42,6 +42,7 @@
 27. ✅ **Politica de Confidențialitate** - Pagină legală GDPR-compliant cu 12 secțiuni + Politica de Cookies (5 secțiuni), Schema.org WebPage + BreadcrumbList, RO + EN
 28. ✅ **Termeni și Condiții** - Pagină legală cu 10 secțiuni (servicii, proprietate intelectuală, limitarea răspunderii, legislație), Schema.org WebPage + BreadcrumbList, RO + EN
 29. ✅ **Footer Update** - Înlocuit placeholder company info cu datele reale DIGITAL LEADERSHIP SRL (CUI: 38585123, J12/6715/2017)
+30. ✅ **Hreflang Fix** - Corectare hreflang tags în BaseLayout: `buildAlternatePath()` pentru traducere corectă path-uri, `x-default` → RO (piață principală), Organization schema cu adresă reală
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -436,7 +437,8 @@ Fiecare pagină este optimizată **dual**: SEO (Google clasic) + AEO (AI Overvie
 | 6 | **Schema.org** | Pattern `@graph` cu tipurile corecte per pagină (vezi mai jos) |
 | 7 | **FAQ** | Minim 6 întrebări din People Also Ask, selector UNIC per pagină |
 | 8 | **Canonical URL** | Cu trailing slash, pe FIECARE pagină |
-| 9 | **i18n paths** | Adaugă mapări în `i18n/index.ts` pentru Language Switcher |
+| 9 | **Hreflang** | Automat în BaseLayout (`buildAlternatePath`), x-default → RO |
+| 10 | **i18n paths** | Adaugă mapări în `i18n/index.ts` pentru Language Switcher + hreflang |
 
 ### Schema.org per Tip de Pagină
 
@@ -446,6 +448,7 @@ Fiecare pagină este optimizată **dual**: SEO (Google clasic) + AEO (AI Overvie
 | About | AboutPage (cu Organization) + BreadcrumbList |
 | Contact | ContactPage + Organization (ContactPoint) + BreadcrumbList |
 | Service | Service + FAQPage + BreadcrumbList + HowTo |
+| Legal (Privacy, Terms) | WebPage + BreadcrumbList |
 
 ### FAQ Accordion — Naming Convention
 
@@ -462,7 +465,7 @@ Fiecare pagină este optimizată **dual**: SEO (Google clasic) + AEO (AI Overvie
 ### Checklist Rapid — Pagină Nouă de Serviciu
 
 - [ ] `ro.json` + `en.json` — bloc `serviceNume` complet
-- [ ] `i18n/index.ts` — path mappings ambele direcții
+- [ ] `i18n/index.ts` — path mappings ambele direcții (CRITIC: necesar pentru hreflang + Language Switcher)
 - [ ] Component `.astro` — secțiuni cu H2 question-based + lead paragraphs
 - [ ] Page shell RO — Schema.org @graph (Service + FAQPage + BreadcrumbList + HowTo)
 - [ ] Page shell EN — Mirror cu locale='en'
@@ -1230,6 +1233,53 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 - **Footer actualizat**: Înlocuit placeholder company info cu datele reale DIGITAL LEADERSHIP SRL
 - **Fișiere create**: 4 page shells + 2 componente (`PrivacyPolicyPage.astro`, `TermsConditionsPage.astro`)
 - **Fișiere modificate**: `ro.json`, `en.json` (traduceri legale), `i18n/index.ts` (path mappings), `Footer.astro` (company info)
+
+### Sesiune Februarie 2026 - Hreflang Fix & Organization Schema
+- **Problema 1**: Hreflang tags din `BaseLayout.astro` foloseau `String.replace()` simplu care NU traducea path-urile (ex. `/ro/despre/` → `/en/despre/` în loc de `/en/about/`)
+- **Problema 2**: `x-default` pointea la `/en/` (greșit — publicul principal e românesc)
+- **Problema 3**: Organization schema avea adresă placeholder (București) în loc de adresa reală
+- **Soluții implementate**:
+  1. Înlocuit `currentPath.replace()` cu `buildAlternatePath()` din `i18n/index.ts` — translatează corect path-urile între limbi
+  2. `x-default` → versiunea RO a paginii curente (nu mai e hardcodat la homepage)
+  3. Organization schema actualizat: adresă reală (Dezmir, Cluj), `legalName: DIGITAL LEADERSHIP SRL`, `taxID: 38585123`
+- **Verificare**: Build HTML confirmat — hreflang generat corect pentru toate paginile (`/ro/despre/` ↔ `/en/about/`, `/ro/politica-confidentialitate/` ↔ `/en/privacy-policy/`)
+- **Fișiere modificate**: `BaseLayout.astro`, `SEO-AEO-GUIDELINES.md`, `CLAUDE.md`
+
+---
+
+## 🌐 HREFLANG & MULTILINGV — STRATEGIE SEO
+
+> **Pentru AI**: Această secțiune conține decizii strategice despre versiunea multilingvă a site-ului.
+
+### Decizia: Păstrăm versiunea EN
+
+**Motivație**: Versiunea EN nu afectează negativ SEO-ul. Google tratează limbi separate corect dacă hreflang e implementat. Crawl budget nu e o problemă pentru site-uri mici (~34 pagini).
+
+### Prioritizare
+
+| Aspect | Decizie |
+|--------|---------|
+| **Limba principală** | Română (x-default → RO) |
+| **Conținut nou** | Întotdeauna RO first, apoi EN |
+| **Keyword targeting** | Doar RO activ, EN pasiv (traducere fără SEO targeting) |
+| **Blog viitor** | Începe doar în RO |
+| **x-default** | Pointează la versiunea RO (nu EN) |
+
+### Implementare Hreflang (Automată)
+
+Hreflang se generează automat în `BaseLayout.astro` pentru TOATE paginile:
+- `hreflang="ro"` → URL pagina RO
+- `hreflang="en"` → URL pagina EN
+- `hreflang="x-default"` → URL pagina RO (fallback)
+
+**Condiție CRITICĂ**: Fiecare pagină nouă **TREBUIE** să aibă path mappings în `i18n/index.ts`, altfel hreflang generează URL-uri greșite!
+
+### De ce contează
+
+1. **Fără hreflang**: Google poate vedea `/ro/despre/` și `/en/about/` ca pagini separate care concurează → dilution of authority
+2. **Cu hreflang**: Google consolidează semnalele SEO și servește limba corectă utilizatorului
+3. **31% din români vorbesc engleză** → 69% din audiență nu va folosi niciodată versiunea EN
+4. **Expats & multinationale**: Versiunea EN oferă credibilitate și acces pentru non-români
 
 ---
 
