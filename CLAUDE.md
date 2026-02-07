@@ -49,6 +49,10 @@
 34. ✅ **Header Gradient** - Fundal header cu gradient subtil cyan→white→lavender (`from-primary-50/80 via-white/80 to-accent-50/60`) + ambient color blobs în BaseLayout
 35. ✅ **IntegrationHub Mobile Labels** - Afișare label-uri sub iconițe pe toate dimensiunile (nu doar pe sm:+)
 36. ✅ **Favicon PNG Update** - Favicon-ul din tab-ul Chrome actualizat de la SVG vechi la PNG-uri generate din noul logo 3D (32x32, 16x16, apple-touch-icon 180x180)
+37. ✅ **CTA Redesign (Stripe-inspired)** - Dark gradient, eyebrow badge, gradient button cu glow, trust indicators. Canvas ribbon animation testată și respinsă. Buton secundar "Cum funcționează?" eliminat (link stricat + un singur CTA clar e mai eficient)
+38. ✅ **Section Spacing Optimization** - Reducere spațiere între secțiuni (Services pt-10/md:pt-14, UseCases pt-10/md:pt-14), normalizare IntegrationHub mobile (py-12→py-16), reducere CTA (py-20/28/36→py-16/24/28)
+39. ✅ **Mobile Card Centering** - Carduri centrate pe mobile (`w-[85vw]` + `snap-center`) pe toate paginile: 3 service pages, About, Homepage (Services, UseCases, BenefitsStrip, IntegrationHub)
+40. ✅ **Dynamic Scroll Arrows** - Săgeți de direcție dinamice pe mobile: arată doar direcția disponibilă (dreapta la start, ambele la mijloc, stânga la final). Pattern `data-scroll-hint` + `data-scroll-container` cu JS pe scroll event
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -934,15 +938,47 @@ Pe mobile (sub 768px), secțiunile cu multiple carduri folosesc **scroll orizont
 </div>
 ```
 
-### Swipe Hint (Indicator vizual)
+### Dynamic Scroll Arrows (Pattern Standard)
+
+Săgețile de scroll sunt **dinamice** — arată doar direcția în care se poate scrola:
 
 ```html
-<!-- Afișat doar pe mobile -->
-<div class="flex md:hidden items-center justify-center gap-2 text-xs text-slate-500 mb-3">
-  <svg class="w-4 h-4 animate-pulse"><!-- arrow icon --></svg>
-  <span>Glisează pentru mai multe</span>
+<!-- Indicator dinamic (mobile only) -->
+<div class="flex md:hidden items-center justify-center gap-2 text-xs text-neutral-400 mb-3" data-scroll-hint>
+  <svg class="w-4 h-4 transition-opacity duration-300 opacity-0" data-arrow-left><!-- left chevron --></svg>
+  <span data-hint-text>Glisează pentru mai multe</span>
+  <svg class="w-4 h-4 animate-pulse transition-opacity duration-300" data-arrow-right><!-- right chevron --></svg>
+</div>
+
+<!-- Container cu data-scroll-container -->
+<div class="flex md:grid ... overflow-x-auto ... snap-x snap-mandatory" data-scroll-container>
+  <!-- cards -->
 </div>
 ```
+
+```javascript
+// Script: actualizează săgețile pe scroll
+function updateArrows() {
+  const { scrollLeft, scrollWidth, clientWidth } = container;
+  const atStart = scrollLeft <= 10;
+  const atEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+
+  arrowLeft.style.opacity = atStart ? '0' : '1';
+  arrowLeft.classList.toggle('animate-pulse', !atStart);
+  arrowRight.style.opacity = atEnd ? '0' : '1';
+  arrowRight.classList.toggle('animate-pulse', !atEnd);
+}
+container.addEventListener('scroll', updateArrows, { passive: true });
+```
+
+**Comportament:**
+| Poziție | Săgeata stânga | Săgeata dreapta |
+|---------|----------------|-----------------|
+| La început | Invizibilă | ✅ Pulsează |
+| La mijloc | ✅ Pulsează | ✅ Pulsează |
+| La final | ✅ Pulsează | Invizibilă |
+
+**Pagini cu pattern aplicat**: Services, UseCases (homepage), ProcessAutomation, ConversationalAgents (2x), AiIntegrations (2x)
 
 ### Dot Indicators (UseCases)
 
@@ -1323,6 +1359,31 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   - `apple-touch-icon.png` (180x180) — iOS
   - `BaseLayout.astro` actualizat: eliminat `<link rel="icon" type="image/svg+xml" href="/favicon.svg">`
 - **Commits**: `61cf091` (labels), `0b42564` (favicon)
+
+### Sesiune Februarie 2026 - CTA Redesign, Spacing & Mobile Card UX
+- **CTA Redesign** (3 iterații):
+  1. Dark gradient + Canvas ribbon animation (18 ribbons, brand colors) → respins ("groaznic")
+  2. Rollback greșit la original → utilizatoarea voia doar eliminarea canvas-ului
+  3. Dark gradient + eyebrow badge + gradient button cu glow + trust indicators (fără canvas) → aprobat
+  4. Buton secundar "Cum funcționează?" eliminat (link `/#process` stricat, un singur CTA e mai clar)
+- **Section Spacing** — fix-uri bazate pe screenshot-ul utilizatoarei:
+  - Services: `py-16 md:py-24` → `pt-10 pb-16 md:pt-14 md:pb-24` (reducere gap deasupra)
+  - UseCases: `py-16 md:py-24` → `pt-10 pb-16 md:pt-14 md:pb-24` (reducere gap dedesubt Services)
+  - IntegrationHub: `py-12` → `py-16` pe mobile (normalizare la standard)
+  - CTA: `py-20 md:py-28 lg:py-36` → `py-16 md:py-24 lg:py-28` (reducere disproporție)
+- **Mobile Card Centering** — toate cardurile centrate (`snap-center` + `w-[85vw]`):
+  - ProcessAutomationPage: 2 secțiuni (Process Types, Benefits)
+  - ConversationalAgentsPage: 3 secțiuni (Capabilities, Industries, Benefits)
+  - AiIntegrationsPage: 3 secțiuni (Systems, Capabilities, Benefits)
+  - AboutPage: 2 secțiuni (Approach, WhyUs)
+  - BenefitsStrip + IntegrationHub: `snap-start` → `snap-center`
+- **Dynamic Scroll Arrows** — indicatori de direcție bazați pe scroll position:
+  - Pattern: `data-scroll-hint` (pe div indicator) + `data-scroll-container` (pe scroll container)
+  - `data-arrow-left`: opacity 0 la start, 1 + animate-pulse altfel
+  - `data-arrow-right`: opacity 1 + animate-pulse la start, 0 la end
+  - JavaScript: `scrollLeft`, `scrollWidth`, `clientWidth` pe event `scroll` (passive: true)
+  - Aplicat pe: Services, UseCases (homepage), ProcessAutomation, ConversationalAgents (2x), AiIntegrations (2x)
+- **Commits**: `18e7af6` (spacing + CTA cleanup), `d4ac6c9` (card centering), `a505d09` (dynamic arrows)
 
 ### ⚠️ Lecții din Sesiunea Logo Redesign
 1. **Rollback parțial vs total**: Când utilizatorul zice "rollback", clarifică CE anume. Nu presupune.
