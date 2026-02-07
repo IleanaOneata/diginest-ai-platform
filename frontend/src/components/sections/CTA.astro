@@ -17,7 +17,7 @@ const { locale } = Astro.props;
 const t = getTranslations(locale);
 ---
 
-<section class="relative py-20 md:py-28 lg:py-36 overflow-hidden">
+<section class="relative py-16 md:py-24 lg:py-28 overflow-hidden">
   <!-- Dark gradient background -->
   <div class="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0f172a] to-[#1e1b4b]"></div>
 
@@ -52,9 +52,8 @@ const t = getTranslations(locale);
       {t.cta.subtitle}
     </p>
 
-    <!-- Buttons row -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <!-- Primary CTA - Gradient button with glow -->
+    <!-- CTA Button -->
+    <div class="flex items-center justify-center">
       <a
         href={buildLocalePath('/contact/', locale)}
         class="group relative inline-flex items-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-white text-lg
@@ -69,20 +68,6 @@ const t = getTranslations(locale);
         </svg>
         <!-- Glow effect behind button -->
         <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-500 to-accent-600 blur-xl opacity-40 group-hover:opacity-60 transition-opacity -z-10"></div>
-      </a>
-
-      <!-- Secondary CTA - Ghost style -->
-      <a
-        href={locale === 'ro' ? '/#process' : '/en/#process'}
-        class="inline-flex items-center gap-2 px-6 py-4 rounded-xl font-medium text-slate-300
-               border border-white/10 hover:border-white/25 hover:text-white
-               backdrop-blur-sm hover:bg-white/5
-               transition-all duration-300"
-      >
-        {locale === 'ro' ? 'Cum funcționează?' : 'How does it work?'}
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
       </a>
     </div>
 
