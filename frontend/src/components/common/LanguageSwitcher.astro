@@ -31,7 +31,7 @@ const alternatePath = buildAlternatePath(currentPath, locale, alternateLocale);
       </span>
       <a href={alternatePath}
          class="px-3 py-1 text-xs font-semibold tracking-wide text-neutral-500
-                hover:text-neutral-700 rounded-full transition-colors duration-200"
+                hover:text-neutral-700 rounded-full transition-colors duration-200 lang-switch-link"
          lang="en" aria-label="Switch to English">
         EN
       </a>
@@ -40,7 +40,7 @@ const alternatePath = buildAlternatePath(currentPath, locale, alternateLocale);
     <>
       <a href={alternatePath}
          class="px-3 py-1 text-xs font-semibold tracking-wide text-neutral-500
-                hover:text-neutral-700 rounded-full transition-colors duration-200"
+                hover:text-neutral-700 rounded-full transition-colors duration-200 lang-switch-link"
          lang="ro" aria-label="Schimb&#259; &#238;n Rom&#226;n&#259;">
         RO
       </a>
@@ -52,3 +52,35 @@ const alternatePath = buildAlternatePath(currentPath, locale, alternateLocale);
     </>
   )}
 </nav>
+
+<script>
+  // Preserve scroll position when switching language
+  (function() {
+    function init() {
+      // On page load: restore scroll position if coming from a language switch
+      const savedScroll = sessionStorage.getItem('langSwitchScroll');
+      if (savedScroll) {
+        sessionStorage.removeItem('langSwitchScroll');
+        const scrollPercent = parseFloat(savedScroll);
+        // Wait for page to fully render before restoring position
+        requestAnimationFrame(() => {
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          const targetY = Math.round(scrollPercent * maxScroll);
+          window.scrollTo(0, targetY);
+        });
+      }
+
+      // On click: save scroll position before navigating
+      document.querySelectorAll('.lang-switch-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          const scrollPercent = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+          sessionStorage.setItem('langSwitchScroll', String(scrollPercent));
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>
