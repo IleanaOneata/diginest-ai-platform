@@ -138,16 +138,19 @@ const industryIcons: Record<string, string> = {
 
     <!-- Use Cases - Horizontal scroll on mobile, grid on desktop -->
     <div class="relative">
-      <!-- Scroll hint for mobile -->
-      <div class="md:hidden flex items-center justify-center gap-2 text-sm text-neutral-500 mb-4">
-        <svg class="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      <!-- Dynamic swipe indicator (mobile only) -->
+      <div class="flex md:hidden items-center justify-center gap-2 text-sm text-neutral-500 mb-4" data-scroll-hint>
+        <svg class="w-4 h-4 transition-opacity duration-300 opacity-0" data-arrow-left fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
-        <span>{locale === 'ro' ? 'Glisează pentru mai multe' : 'Swipe for more'}</span>
+        <span data-hint-text>{locale === 'ro' ? 'Glisează pentru mai multe' : 'Swipe for more'}</span>
+        <svg class="w-4 h-4 animate-pulse transition-opacity duration-300" data-arrow-right fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
       </div>
 
       <!-- Scrollable container on mobile, grid on desktop -->
-      <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+      <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0" data-scroll-container>
         {t.useCases.map((useCase, index) => (
           <div
             class="group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto bg-white rounded-2xl p-5 md:p-6 shadow-soft hover:shadow-medium transition-all duration-300 border border-neutral-100 hover:border-primary-200 snap-center"
@@ -224,28 +227,49 @@ const industryIcons: Record<string, string> = {
 </style>
 
 <script>
-  // Update scroll indicators based on scroll position
+  // Update scroll indicators and dynamic arrows based on scroll position
   (function() {
-    const container = document.querySelector('.snap-x');
-    const indicators = document.querySelectorAll('.scroll-indicator');
+    function init() {
+      const container = document.querySelector('[data-scroll-container]') as HTMLElement | null;
+      const indicators = document.querySelectorAll('.scroll-indicator');
+      const hint = document.querySelector('[data-scroll-hint]') as HTMLElement | null;
 
-    if (!container || !indicators.length) return;
+      if (!container) return;
 
-    // Store reference to satisfy TypeScript
-    const scrollContainer = container;
+      const arrowLeft = hint?.querySelector('[data-arrow-left]') as HTMLElement | null;
+      const arrowRight = hint?.querySelector('[data-arrow-right]') as HTMLElement | null;
 
-    function updateIndicators() {
-      const scrollLeft = scrollContainer.scrollLeft;
-      const cardWidth = scrollContainer.querySelector('div')?.offsetWidth || 300;
-      const gap = 16; // gap-4
-      const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
+      function updateState() {
+        if (!container) return;
+        const { scrollLeft, scrollWidth, clientWidth } = container;
+        const cardWidth = container.querySelector('div')?.offsetWidth || 300;
+        const gap = 16;
+        const activeIndex = Math.round(scrollLeft / (cardWidth + gap));
 
-      indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === activeIndex);
-      });
+        // Update dot indicators
+        indicators.forEach((indicator, index) => {
+          indicator.classList.toggle('active', index === activeIndex);
+        });
+
+        // Update arrows
+        if (arrowLeft && arrowRight) {
+          const threshold = 10;
+          const atStart = scrollLeft <= threshold;
+          const atEnd = scrollLeft + clientWidth >= scrollWidth - threshold;
+
+          arrowLeft.style.opacity = atStart ? '0' : '1';
+          arrowLeft.classList.toggle('animate-pulse', !atStart);
+          arrowRight.style.opacity = atEnd ? '0' : '1';
+          arrowRight.classList.toggle('animate-pulse', !atEnd);
+        }
+      }
+
+      container.addEventListener('scroll', updateState, { passive: true });
+      updateState();
+      window.addEventListener('load', updateState);
     }
 
-    container.addEventListener('scroll', updateIndicators, { passive: true });
-    updateIndicators(); // Initial state
+    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('astro:page-load', init);
   })();
 </script>

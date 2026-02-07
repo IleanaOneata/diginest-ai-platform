@@ -72,18 +72,21 @@ const icons = {
       </p>
     </div>
 
-    <!-- Swipe hint (mobile only) -->
-    <div class="flex md:hidden items-center justify-center gap-2 text-xs text-neutral-400 mb-3">
-      <svg class="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Dynamic swipe indicator (mobile only) -->
+    <div class="flex md:hidden items-center justify-center gap-2 text-xs text-neutral-400 mb-3" data-scroll-hint>
+      <svg class="w-4 h-4 transition-opacity duration-300 opacity-0" data-arrow-left fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span data-hint-text>{locale === 'ro' ? 'Glisează pentru mai multe' : 'Swipe for more'}</span>
+      <svg class="w-4 h-4 animate-pulse transition-opacity duration-300" data-arrow-right fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
-      <span>{locale === 'ro' ? 'Glisează pentru mai multe' : 'Swipe for more'}</span>
     </div>
 
     <!-- Services grid (desktop) / horizontal scroll (mobile) -->
     <div class="flex md:grid md:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-visible
                 pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide
-                -mx-4 px-4 md:mx-0 md:px-0">
+                -mx-4 px-4 md:mx-0 md:px-0" data-scroll-container>
       {services.map((service, index) => (
         <article
           class="group card-interactive p-6 md:p-8 flex flex-col
@@ -130,3 +133,39 @@ const icons = {
     </div>
   </div>
 </section>
+
+<script>
+  (function() {
+    function initScrollHints() {
+      const sections = document.querySelectorAll('[data-scroll-hint]');
+      sections.forEach((hint) => {
+        const container = hint.parentElement?.querySelector('[data-scroll-container]') as HTMLElement | null;
+        if (!container) return;
+
+        const arrowLeft = hint.querySelector('[data-arrow-left]') as HTMLElement;
+        const arrowRight = hint.querySelector('[data-arrow-right]') as HTMLElement;
+
+        function updateArrows() {
+          if (!container || !arrowLeft || !arrowRight) return;
+          const { scrollLeft, scrollWidth, clientWidth } = container;
+          const threshold = 10;
+          const atStart = scrollLeft <= threshold;
+          const atEnd = scrollLeft + clientWidth >= scrollWidth - threshold;
+
+          arrowLeft.style.opacity = atStart ? '0' : '1';
+          arrowLeft.classList.toggle('animate-pulse', !atStart);
+          arrowRight.style.opacity = atEnd ? '0' : '1';
+          arrowRight.classList.toggle('animate-pulse', !atEnd);
+        }
+
+        container.addEventListener('scroll', updateArrows, { passive: true });
+        updateArrows();
+        // Re-check after images/fonts load
+        window.addEventListener('load', updateArrows);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initScrollHints);
+    document.addEventListener('astro:page-load', initScrollHints);
+  })();
+</script>
