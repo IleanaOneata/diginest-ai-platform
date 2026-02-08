@@ -15,7 +15,6 @@
 
 import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
 import Button from '@components/common/Button.astro';
-import ChatSimulator from '@components/demo/ChatSimulator.astro';
 import VoiceWidget from '@components/demo/VoiceWidget.astro';
 
 interface Props {
@@ -160,26 +159,13 @@ const hero = heroTexts[locale] || heroTexts.ro;
         </div>
       </div>
 
-      <!-- Right: Voice Widget (DOMINANT) + Chat Simulator (secondary) -->
-      <div class="order-1 lg:order-2 flex flex-col items-center gap-6 lg:gap-8 animate-fade-in" style="animation-delay: 300ms;">
-
-        <!-- HERO Voice Widget — Large, Central, Prominent -->
+      <!-- Right: Voice Widget — Central, Prominent -->
+      <div class="order-1 lg:order-2 flex flex-col items-center justify-center animate-fade-in" style="animation-delay: 300ms;">
         <div class="relative">
           <!-- Decorative glow behind voice widget -->
-          <div class="absolute inset-0 -z-10 scale-125 bg-gradient-to-br from-primary-400/15 to-accent-500/15 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute inset-0 -z-10 scale-150 bg-gradient-to-br from-primary-400/15 to-accent-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
           <VoiceWidget locale={locale} />
-        </div>
-
-        <!-- Chat Simulator — Secondary, Smaller -->
-        <div class="relative w-full max-w-sm lg:max-w-md">
-          <!-- Subtle decorative elements (reduced prominence) -->
-          <div class="absolute -top-2 -left-2 w-full h-full bg-gradient-to-br from-primary-400/10 to-accent-500/10 rounded-2xl transform rotate-2 -z-10"></div>
-          <div class="absolute -bottom-2 -right-2 w-full h-full bg-gradient-to-br from-accent-400/10 to-primary-500/10 rounded-2xl transform -rotate-2 -z-10"></div>
-
-          <div class="relative z-10">
-            <ChatSimulator locale={locale} autoPlay={true} />
-          </div>
         </div>
       </div>
     </div>
