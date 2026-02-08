@@ -55,6 +55,8 @@
 40. ✅ **Dynamic Scroll Arrows** - Săgeți de direcție dinamice pe mobile: arată doar direcția disponibilă (dreapta la start, ambele la mijloc, stânga la final). Pattern `data-scroll-hint` + `data-scroll-container` cu JS pe scroll event
 41. ✅ **AI Integrations 6th Capability** - Adăugat "Notificări și alerte inteligente" (Smart notifications & alerts) pe pagina Integrări AI pentru grid complet 3+3 pe desktop
 42. ✅ **Language Switcher Scroll Preservation** - La schimbarea limbii (RO↔EN), utilizatorul rămâne în aceeași poziție pe pagină. Scroll position salvat ca procent în `sessionStorage`, restaurat instant (`behavior: 'instant'`) pe pagina nouă
+43. ✅ **HTML Email Template** - Email confirmare contact form: Stripe/Linear-inspired, table-based layout, inline CSS only, i18n RO/EN, XSS protection, Resend API suport HTML (`html` field). Fără logo imagine (text fallback "GENERATIVA")
+44. ✅ **UX/UI Audit Document** - Analiză completă psihologie cumpărător B2B AI + audit UX desktop/mobile, salvat în `docs/UX-AUDIT-FEBRUARY-2026.md`
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -1400,6 +1402,25 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   - CSS class `lang-switch-link` pe link-urile de limbă pentru targeting JS
   - Events: `DOMContentLoaded` + `astro:page-load` (SPA compatibility)
 - **Commits**: `e5d2b61` (6th capability), `9051fc0` (scroll preservation), `060f48a` (instant scroll)
+
+### Sesiune Februarie 2026 - HTML Email Template + UX Audit
+- **HTML Email Template** pentru confirmarea formularului de contact:
+  - **Design**: Stripe/Linear-inspired, enterprise B2B, clean și minimal
+  - **Layout**: 100% table-based (email client compatibility), inline CSS only
+  - **i18n**: Un singur template cu texte RO/EN bazate pe `request.getLocale()`
+  - **Secțiuni**: Header (text GENERATIVA cu G cyan), Greeting personalizat (prenume), Body (24h răspuns), Message Box (preview mesaj client), Closing (semnătură echipă), Footer (website + email + trust note)
+  - **Securitate**: `escapeHtml()` pe conținutul user-ului (XSS prevention)
+  - **Resend API**: Adăugat suport HTML — `sendViaResend()` overload cu parametru `isHtml`, trimite `"html"` în loc de `"text"` în request body
+  - **Logo imagine**: Nu se include (Gmail/Outlook blochează imagini externe by default la primul email), fallback text e suficient
+  - **Fix**: `%%` → `%` în text block (nu e `String.format()`, ci `.replace()`)
+  - **Deploy**: Merge staging → main, Railway auto-deploy
+- **UX/UI Audit** — analiză completă salvată în `docs/UX-AUDIT-FEBRUARY-2026.md`:
+  - Psihologia cumpărătorului B2B în AI/tech (5 faze decizie)
+  - Audit UX desktop (flow, ierarhie, conversion path)
+  - Audit UX mobile (responsive, touch, scroll)
+  - 10 recomandări prioritizate (3 critice, 4 importante, 3 nice-to-have)
+  - Scor global: 7.9/10
+- **Commits**: `54cd37c` (UX audit doc), `cac497a` (HTML email template), `595fbc4` (merge to main)
 
 ### ⚠️ Lecții din Sesiunea Logo Redesign
 1. **Rollback parțial vs total**: Când utilizatorul zice "rollback", clarifică CE anume. Nu presupune.
