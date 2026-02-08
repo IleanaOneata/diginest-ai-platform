@@ -174,11 +174,44 @@
       "name": "Nume complet",
       "email": "Email",
       "company": "Companie",
+      "industry": "Industrie",
+      "industryPlaceholder": "Selectează industria",
+      "industryOptions": {
+        "dental": "Clinică dentară",
+        "medical": "Cabinet medical",
+        "beauty": "Salon beauty / SPA",
+        "auto": "Service auto",
+        "horeca": "Restaurant / HoReCa",
+        "retail": "Retail / E-commerce",
+        "network": "Rețea de locații",
+        "other": "Altă industrie"
+      },
+      "interest": "Ce te interesează?",
+      "interestPlaceholder": "Selectează serviciul",
+      "interestOptions": {
+        "automation": "Automatizare procese",
+        "conversational": "Agenți conversaționali (chatbot / voce)",
+        "integrations": "Integrări AI cu sisteme existente",
+        "unsure": "Nu sunt sigur — vreau o consultanță"
+      },
       "phone": "Telefon (opțional)",
       "message": "Mesaj",
       "submit": "Trimite mesajul",
       "success": "Mesajul a fost trimis cu succes! Te vom contacta în curând.",
-      "error": "A apărut o eroare. Te rugăm să încerci din nou."
+      "error": "A apărut o eroare. Te rugăm să încerci din nou.",
+      "validation": {
+        "nameRequired": "Te rugăm să introduci numele complet",
+        "nameMin": "Numele trebuie să aibă cel puțin 2 caractere",
+        "emailRequired": "Te rugăm să introduci adresa de email",
+        "emailInvalid": "Te rugăm să introduci o adresă de email validă",
+        "companyRequired": "Te rugăm să introduci numele companiei",
+        "companyMin": "Numele companiei trebuie să aibă cel puțin 2 caractere",
+        "industryRequired": "Te rugăm să selectezi industria",
+        "interestRequired": "Te rugăm să selectezi ce te interesează",
+        "phoneInvalid": "Te rugăm să introduci un număr de telefon valid (ex: +40 712 345 678)",
+        "messageRequired": "Te rugăm să descrii proiectul sau întrebarea ta",
+        "messageMin": "Mesajul trebuie să aibă cel puțin 10 caractere"
+      }
     },
     "info": {
       "email": "contact@generativa.ro",
@@ -314,5 +347,752 @@
       "subtitle": "O conversație de 15 minute ne arată dacă suntem potriviți. Fără pitch-uri de vânzare, fără presiune - doar claritate.",
       "button": "Programează o discuție"
     }
+  },
+
+  "serviceAutomation": {
+    "meta": {
+      "title": "Automatizare Procese cu AI | GENERATIVA",
+      "description": "Eliminăm munca repetitivă din afacerea ta cu agenți AI. Reducere 60-80% timp, zero erori, ROI pozitiv în 3 luni. Solicită un audit gratuit.",
+      "schemaName": "Automatizare Procese cu AI",
+      "schemaDescription": "Serviciu de automatizare a proceselor de business folosind agenți AI inteligenți. Eliminăm munca repetitivă, reducem erorile și eliberăm echipa pentru activități strategice.",
+      "schemaOffer": "Audit gratuit de procese și consultanță personalizată",
+      "breadcrumbName": "Automatizare Procese"
+    },
+    "breadcrumb": {
+      "home": "Acasă",
+      "services": "Servicii",
+      "current": "Automatizare Procese"
+    },
+    "hero": {
+      "eyebrow": "Automatizare Procese",
+      "title": "Automatizare Procese cu AI",
+      "subtitle": "Eliminăm munca repetitivă din afacerea ta. Agenții noștri AI preiau sarcinile manuale, reduc erorile și eliberează echipa ta pentru ce contează cu adevărat. Implementare în săptămâni, nu luni, cu rezultate măsurabile din prima lună.",
+      "cta": "Solicită un audit gratuit"
+    },
+    "processTypes": {
+      "title": "Ce procese de business pot fi automatizate cu AI?",
+      "lead": "Aproape orice proces repetitiv și bazat pe reguli poate fi automatizat cu AI. De la procesarea documentelor la comunicarea cu clienții, agenții AI preiau sarcinile care consumă timp și resurse, permițând echipei tale să se concentreze pe activități strategice.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "document",
+          "title": "Procesare documente & date",
+          "description": "Extragere automată de informații din facturi, contracte, formulare și email-uri. Clasificare, validare și introducere în sistemele existente fără intervenție manuală."
+        },
+        {
+          "icon": "communication",
+          "title": "Comunicare cu clienții",
+          "description": "Răspunsuri automate la întrebări frecvente, confirmare programări, trimitere notificări și urmărire solicitări pe toate canalele: telefon, email, WhatsApp, chat."
+        },
+        {
+          "icon": "approval",
+          "title": "Fluxuri de aprobare & decizii",
+          "description": "Automatizare cereri de concediu, aprobări bugetare, validare comenzi și routing documente către persoanele responsabile cu notificări și escaladări automate."
+        },
+        {
+          "icon": "reporting",
+          "title": "Raportare & analiză",
+          "description": "Generare automată de rapoarte zilnice, săptămânale sau lunare. Agregare date din surse multiple, identificare anomalii și trimitere insight-uri echipei de management."
+        },
+        {
+          "icon": "onboarding",
+          "title": "Onboarding clienți/angajați",
+          "description": "Automatizarea proceselor de înregistrare, verificare documente, creare conturi, training inițial și follow-up. Experiență consistentă pentru fiecare persoană nouă."
+        },
+        {
+          "icon": "monitoring",
+          "title": "Monitorizare & alerte",
+          "description": "Supraveghere continuă a KPI-urilor, nivelurilor de stoc, termenelor limită și performanței echipei. Alerte automate când ceva deviază de la normal."
+        }
+      ]
+    },
+    "approach": {
+      "title": "Cum funcționează implementarea automatizării cu AI?",
+      "lead": "Implementarea automatizării AI nu înseamnă să înlocuiești totul peste noapte. Procesul nostru în 5 pași asigură că fiecare automatizare e testată, validată și adoptată treptat de echipa ta, cu rezultate vizibile încă din faza pilot.",
+      "schemaName": "Implementarea automatizării proceselor cu AI",
+      "schemaDescription": "Procesul complet de automatizare a proceselor de business, de la audit inițial până la optimizare continuă.",
+      "steps": [
+        {
+          "title": "Audit de procese",
+          "description": "Analizăm procesele tale actuale, identificăm cele mai consumatoare de timp și calculăm potențialul de automatizare. Primești un raport clar cu recomandări prioritizate."
+        },
+        {
+          "title": "Design soluție",
+          "description": "Proiectăm arhitectura soluției AI adaptată nevoilor tale. Definim integrări, fluxuri de date și metrici de succes înainte de a scrie prima linie de cod."
+        },
+        {
+          "title": "Pilot pe proces cheie",
+          "description": "Implementăm automatizarea pe un singur proces critic pentru a demonstra valoarea. Echipa ta testează, oferă feedback și vedem rezultatele reale în 2-4 săptămâni."
+        },
+        {
+          "title": "Scalare treptată",
+          "description": "După validarea pilotului, extindem automatizarea la celelalte procese identificate. Fiecare extindere urmează același ciclu: implementare, testare, validare."
+        },
+        {
+          "title": "Optimizare continuă",
+          "description": "Monitorizăm performanța, ajustăm pe baza datelor reale și adăugăm capabilități noi pe măsură ce AI-ul învață din interacțiunile acumulate."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Ce rezultate aduce automatizarea proceselor cu AI?",
+      "lead": "Companiile care implementează automatizare AI văd rezultate concrete în primele luni: timp recuperat, erori eliminate și costuri reduse. Iată ce poți aștepta și tu de la colaborarea cu GENERATIVA.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "60-80%",
+          "label": "Reducere timp pe procese repetitive"
+        },
+        {
+          "icon": "shield",
+          "value": "Zero",
+          "label": "Erori umane în task-uri standardizate"
+        },
+        {
+          "icon": "trending",
+          "value": "< 3 luni",
+          "label": "ROI pozitiv după implementare"
+        },
+        {
+          "icon": "scale",
+          "value": "10x",
+          "label": "Scalabilitate fără angajări suplimentare"
+        },
+        {
+          "icon": "focus",
+          "value": "100%",
+          "label": "Echipă focusată pe muncă strategică"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Întrebări frecvente despre automatizarea proceselor",
+      "lead": "Am răspuns la cele mai frecvente întrebări pe care le primim de la companii interesate de automatizarea proceselor cu AI.",
+      "items": [
+        {
+          "question": "Cât costă automatizarea proceselor cu AI?",
+          "answer": "Costul depinde de complexitatea proceselor și numărul de integrări necesare. Oferim un audit gratuit în care evaluăm procesele tale și propunem o soluție cu buget transparent. În general, investiția se recuperează în primele 3 luni prin timpul și resursele economisite."
+        },
+        {
+          "question": "Cât durează implementarea automatizării?",
+          "answer": "Pilotul pe un singur proces durează 2-4 săptămâni. Scalarea la procesele suplimentare adaugă 2-3 săptămâni per proces. O implementare completă pentru 3-5 procese se încadrează în 2-3 luni."
+        },
+        {
+          "question": "Ce procese pot fi automatizate cu AI?",
+          "answer": "Orice proces repetitiv și bazat pe reguli: procesare documente, comunicare cu clienții, aprobări, raportare, onboarding și monitorizare. Dacă echipa ta repetă aceleași acțiuni zilnic, există șanse mari că procesul poate fi automatizat."
+        },
+        {
+          "question": "AI-ul va înlocui angajații mei?",
+          "answer": "Nu. Scopul automatizării este să elimine sarcinile repetitive care consumă timp, nu să înlocuiască oamenii. Angajații tăi vor fi eliberați să se concentreze pe activități strategice, creative și relaționale care necesită judecată umană."
+        },
+        {
+          "question": "Ce ROI pot aștepta de la automatizare?",
+          "answer": "Clienții noștri văd în medie o reducere de 60-80% a timpului petrecut pe procesele automatizate și o eliminare aproape completă a erorilor. ROI-ul pozitiv apare de obicei în primele 3 luni, cu economii care cresc pe măsură ce se adaugă noi procese."
+        },
+        {
+          "question": "Funcționează automatizarea pentru companii mici?",
+          "answer": "Absolut. Companiile mici beneficiază cel mai mult de automatizare, deoarece resursele sunt limitate și fiecare oră contează. Soluțiile noastre sunt scalabile și se adaptează la bugetul și nevoile oricărei companii, de la 5 la 500 de angajați."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Hai să identificăm procesele care îți consumă timpul",
+      "subtitle": "Programează un audit gratuit de procese. În 30 de minute, îți arătăm exact unde pierzi timp și cum AI-ul poate rezolva asta.",
+      "button": "Solicită un audit gratuit"
+    }
+  },
+
+  "serviceConversational": {
+    "meta": {
+      "title": "Agenți Conversaționali AI | Asistenți Vocali & Chat 24/7 | GENERATIVA",
+      "description": "Agenți AI care răspund la telefon, WhatsApp și email 24/7 în limba română. Programări automate, integrare CRM, zero apeluri pierdute. Solicită un demo gratuit.",
+      "schemaName": "Agenți Conversaționali AI",
+      "schemaDescription": "Asistenți virtuali conversaționali care preiau apelurile și mesajele clienților 24/7, identifică intenția, colectează date și execută acțiuni operaționale în CRM, calendar și sisteme interne.",
+      "schemaOffer": "Demo gratuit și consultanță personalizată",
+      "breadcrumbName": "Agenți Conversaționali"
+    },
+    "breadcrumb": {
+      "home": "Acasă",
+      "services": "Servicii",
+      "current": "Agenți Conversaționali"
+    },
+    "hero": {
+      "eyebrow": "Agenți Conversaționali AI",
+      "title": "Asistenți Virtuali Conversaționali AI",
+      "subtitle": "Construim, integrăm și operăm asistenți virtuali care preiau solicitările clienților tăi și le duc până la rezolvare. Răspund la telefon, WhatsApp și email — 24/7, în limba română, cu voce naturală și acțiuni concrete în sistemele tale.",
+      "cta": "Solicită un demo gratuit"
+    },
+    "capabilities": {
+      "title": "Ce face un agent conversational AI pentru afacerea ta?",
+      "lead": "Un agent conversational AI răspunde la telefon, WhatsApp, email și chat în locul echipei tale — 24/7, fără pauze. Colectează date de la clienți, face programări în calendar, actualizează CRM-ul și transferă la operator uman când e nevoie. Rezultatul: zero apeluri pierdute și clienți mulțumiți.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "phone",
+          "title": "Preluare apeluri telefonice",
+          "description": "Agentul AI răspunde la telefon în limba română, poartă conversații naturale și înțelege contextul discuției. Clientul nu simte diferența față de un operator uman."
+        },
+        {
+          "icon": "intent",
+          "title": "Identificare intenție client",
+          "description": "Recunoaște automat ce vrea clientul: programare, întrebare, problemă tehnică, modificare date sau reclamație. Routează inteligent fiecare solicitare."
+        },
+        {
+          "icon": "collect",
+          "title": "Colectare și validare informații",
+          "description": "Adună toate datele necesare pentru rezolvarea cererii: nume, CNP, număr comandă, preferințe. Validează informațiile în timp real, fără erori."
+        },
+        {
+          "icon": "actions",
+          "title": "Acțiuni operaționale automate",
+          "description": "Creează și actualizează date în CRM, face programări și reprogramări, deschide tichete de suport, trimite email-uri și SMS-uri de confirmare."
+        },
+        {
+          "icon": "multichannel",
+          "title": "Comunicare multicanal",
+          "description": "Funcționează pe telefon, WhatsApp, email, SMS și chat web. Aceeași experiență consistentă pe orice canal preferă clientul tău."
+        },
+        {
+          "icon": "escalation",
+          "title": "Transfer inteligent la operatori",
+          "description": "Solicitările care nu pot fi rezolvate automat sunt transferate către echipa ta în sub 2 secunde, împreună cu tot contextul deja colectat. Clientul nu repetă nimic."
+        }
+      ]
+    },
+    "approach": {
+      "title": "Cum funcționează un agent vocal AI în practică?",
+      "lead": "Agentul AI preia apelurile telefonice, înțelege intenția clientului folosind procesare de limbaj natural, răspunde cu voce umană și execută acțiuni concrete: confirmă o programare, trimite informații pe WhatsApp sau escalează la echipa ta în sub 2 secunde.",
+      "schemaName": "Implementarea unui agent conversational AI",
+      "schemaDescription": "Procesul complet de implementare a unui asistent virtual conversational, de la analiză la lansare și scalare multicanal.",
+      "steps": [
+        {
+          "title": "Analiză fluxuri existente",
+          "description": "Cartografiem fluxurile tale de comunicare cu clienții: câte apeluri primești, ce întreabă clienții, cât durează fiecare conversație, unde se pierd oportunități."
+        },
+        {
+          "title": "Configurare și training AI",
+          "description": "Configurăm agentul AI pe baza scenariilor tale reale. Îl antrenăm cu vocabularul industriei tale, procedurile interne și tonul de comunicare al brandului tău."
+        },
+        {
+          "title": "Testare și pilot",
+          "description": "Lansăm agentul pe un singur canal (telefon sau chat) și monitorizăm fiecare conversație. Ajustăm în timp real pe baza feedback-ului și a rezultatelor. Durată: 2-4 săptămâni."
+        },
+        {
+          "title": "Lansare și scalare multicanal",
+          "description": "După validarea pilotului, extindem pe toate canalele: telefon, WhatsApp, email, chat web. Integrăm cu CRM-ul și sistemele existente pentru automatizare completă."
+        }
+      ]
+    },
+    "industries": {
+      "title": "Ce industrii beneficiază cel mai mult de agenți conversaționali AI?",
+      "lead": "Clinicile dentare, cabinetele medicale, saloanele de beauty, service-urile auto și restaurantele cu rezervări sunt industriile care văd cel mai rapid ROI. Motivul: volum mare de apeluri repetitive, programări frecvente și nevoia de disponibilitate 24/7 pe care echipele mici nu o pot susține.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "headset",
+          "title": "Call Center & Customer Support",
+          "problem": "Volum mare de apeluri repetitive, timpi lungi de așteptare, costuri ridicate per interacțiune",
+          "solution": "AI-ul preia 70% din apelurile repetitive, reduce timpul de așteptare la zero și eliberează operatorii pentru cazuri complexe."
+        },
+        {
+          "icon": "medical",
+          "title": "Clinici și Rețele Medicale",
+          "problem": "Programări pierdute, recepție copleșită, pacienți care nu pot suna în afara programului",
+          "solution": "Agentul AI confirmă, reprogramează și gestionează programări 24/7. Reduce no-show-urile cu 40% prin remindere automate."
+        },
+        {
+          "icon": "hotel",
+          "title": "Hospitality & Travel",
+          "problem": "Rezervări pierdute în afara programului, întrebări repetitive despre facilități și prețuri",
+          "solution": "Răspunsuri instant la întrebări despre disponibilitate, prețuri și facilități. Rezervări confirmate automat pe orice canal."
+        },
+        {
+          "icon": "signal",
+          "title": "Utilities & Telecom",
+          "problem": "Sute de apeluri zilnice pentru facturi, modificări abonament și reclamații standard",
+          "solution": "Automatizare completă pentru verificare solduri, modificări de date, raportare probleme și confirmare rezolvare."
+        },
+        {
+          "icon": "beauty",
+          "title": "Saloane Beauty & SPA",
+          "problem": "Programări prin telefon în timpul tratamentelor, no-show-uri frecvente, pierdere clienți noi",
+          "solution": "Programări automate 24/7 pe telefon și WhatsApp. Reducere no-show cu 60% prin confirmări și remindere inteligente."
+        },
+        {
+          "icon": "car",
+          "title": "Service Auto & Fleet Management",
+          "problem": "Clienți care vor status mașină, programări service, estimări de preț — toate prin telefon",
+          "solution": "Status automat al reparației, programări service, estimări instant și notificări proactive când mașina e gata."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Ce rezultate aduce un agent conversational AI?",
+      "lead": "Companiile care implementează agenți conversaționali AI văd rezultate concrete în prima lună: zero apeluri pierdute, 90% din întrebările frecvente rezolvate automat, 15-20 ore economie pe săptămână și o experiență consistentă a clienților pe toate canalele.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "24/7",
+          "label": "Disponibilitate non-stop pentru clienți"
+        },
+        {
+          "icon": "trending",
+          "value": "70%",
+          "label": "Reducere volum apeluri repetitive"
+        },
+        {
+          "icon": "wallet",
+          "value": "60%",
+          "label": "Cost mai mic per interacțiune"
+        },
+        {
+          "icon": "star",
+          "value": "100%",
+          "label": "Experiență consecventă pe toate canalele"
+        },
+        {
+          "icon": "scale",
+          "value": "10x",
+          "label": "Scalare operațională fără headcount"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Întrebări frecvente despre agenții conversaționali AI",
+      "lead": "Am răspuns la cele mai frecvente întrebări pe care le primim de la companii interesate de asistenți virtuali conversaționali.",
+      "items": [
+        {
+          "question": "Cât costă un agent conversational AI?",
+          "answer": "Costul depinde de numărul de canale, volumul de interacțiuni și complexitatea integrărilor. Ca referință, un agent AI costă semnificativ mai puțin decât un receptioner full-time (1.500-2.500 EUR/lună). Oferim un demo gratuit și un calcul personalizat de ROI pentru afacerea ta."
+        },
+        {
+          "question": "Agentul AI înțelege și vorbește în limba română?",
+          "answer": "Da. Agenții noștri sunt antrenați specific pentru limba română, cu pronunție naturală și înțelegere a expresiilor regionale. Suportă și limba engleză pentru clienții internaționali. Conversațiile sună natural, nu robotizat."
+        },
+        {
+          "question": "Cu ce sisteme se integrează agentul AI?",
+          "answer": "Se integrează cu CRM-uri (HubSpot, Salesforce, etc.), Google Calendar, Outlook, WhatsApp Business API, sisteme de telefonie existente și software-ul tău proprietar via API. Nu trebuie să schimbi niciun tool curent."
+        },
+        {
+          "question": "Agentul AI va înlocui angajații mei?",
+          "answer": "Nu. Agentul AI preia apelurile și mesajele repetitive (indicații, program, confirmări programări) pentru ca echipa ta să se concentreze pe interacțiuni complexe, cu valoare mare. Majoritatea clienților noștri păstrează același staff, dar productivitatea crește cu 40-60%."
+        },
+        {
+          "question": "Ce se întâmplă dacă AI-ul nu știe răspunsul?",
+          "answer": "Transfer instant la un membru al echipei tale, în sub 2 secunde. AI-ul colectează contextul înainte de transfer, astfel încât clientul nu trebuie să repete nimic. Tu stabilești regulile de escalare."
+        },
+        {
+          "question": "Cât durează până când agentul AI este funcțional?",
+          "answer": "Primul canal (telefon sau chat) este funcțional în 2-4 săptămâni. Implementarea multicanal completă durează 6-8 săptămâni. Include analiză, configurare, testare și lansare treptată — fără să afecteze operațiunile curente."
+        },
+        {
+          "question": "Funcționează agentul AI pentru tipul meu de afacere?",
+          "answer": "Funcționează cel mai bine pentru afaceri cu volum mare de apeluri, programări recurente sau nevoie de disponibilitate 24/7: clinici dentare, cabinete medicale, saloane beauty, service-uri auto, restaurante, rețele multi-locație. Oferim o evaluare gratuită."
+        },
+        {
+          "question": "Sunt datele clienților mei în siguranță?",
+          "answer": "Absolut. Suntem conformi GDPR, datele sunt criptate în tranzit și la stocare, hosting în centre de date din UE. Nu partajăm date cu terți. Audituri regulate de securitate. Clienții păstrează proprietatea completă asupra datelor."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Hai să-ți arătăm cum sună AI-ul tău",
+      "subtitle": "Solicită un demo gratuit personalizat. În 15 minute, auzi cum sună agentul AI antrenat pentru afacerea ta — cu scenarii reale din industria ta.",
+      "button": "Solicită un demo gratuit"
+    }
+  },
+  "serviceIntegrations": {
+    "meta": {
+      "title": "Integrări AI pentru Sisteme Business | CRM, Booking, ERP | GENERATIVA",
+      "description": "Integrăm agenți AI cu CRM-ul, sistemul de programări, ticketing și aplicațiile tale existente. Date corecte, fluxuri automate, zero muncă manuală. Consultanță gratuită.",
+      "schemaName": "Integrări AI pentru Sisteme Business",
+      "schemaDescription": "Servicii de integrare a inteligenței artificiale cu sistemele existente ale companiei — CRM, booking, ticketing, ERP, canale de comunicare — pentru automatizare completă și date corecte.",
+      "schemaOffer": "Consultanță gratuită și audit tehnic pentru integrarea AI cu sistemele companiei",
+      "breadcrumbName": "Integrări AI"
+    },
+    "breadcrumb": {
+      "home": "Acasă",
+      "services": "Servicii",
+      "current": "Integrări AI"
+    },
+    "hero": {
+      "eyebrow": "Conectare inteligentă",
+      "title": "Integrări AI care conectează automatizarea cu sistemele companiei",
+      "subtitle": "GENERATIVA realizează integrări AI care permit asistenților virtuali și automatizărilor să opereze direct în sistemele existente ale organizației. Inteligența artificială este integrată în aplicațiile interne, astfel încât acțiunile să fie executate automat, controlat și în deplină coerență cu procesele operaționale.",
+      "cta": "Solicită o consultanță gratuită"
+    },
+    "systems": {
+      "title": "Ce sisteme și aplicații se pot conecta cu un agent AI?",
+      "lead": "Agenții AI GENERATIVA se conectează cu orice sistem care expune un API sau acceptă integrări: CRM-uri, platforme de booking, ticketing, ERP-uri și canale de comunicare. Realizăm și conectori custom pentru aplicații interne sau software fără API standard.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "database",
+          "title": "CRM și customer support",
+          "description": "Conectăm agenții AI cu Salesforce, HubSpot, Zoho sau CRM-ul tău custom. Datele clienților se actualizează automat, interacțiunile sunt logate, și echipa de suport vede totul centralizat."
+        },
+        {
+          "icon": "calendar",
+          "title": "Sisteme de programări și booking",
+          "description": "Integrare cu Calendly, Google Calendar, sisteme de programări medicale sau de beauty. Agentul AI creează, modifică și confirmă programări automat, fără intervenție umană."
+        },
+        {
+          "icon": "ticket",
+          "title": "Platforme de ticketing",
+          "description": "Conexiune directă cu Zendesk, Freshdesk, Jira Service Management. Tichetele sunt create, clasificate și ruteaze automat pe baza conversației cu clientul."
+        },
+        {
+          "icon": "code",
+          "title": "Sisteme interne și aplicații custom",
+          "description": "Dezvoltăm conectori dedicați pentru aplicații interne, ERP-uri sau software legacy. Folosim API-uri REST, webhooks, middleware — orice e necesar pentru a conecta AI-ul cu procesele tale."
+        },
+        {
+          "icon": "channel",
+          "title": "Canale de comunicare",
+          "description": "Integrare cu telefonie VoIP, WhatsApp Business API, email (IMAP/SMTP), SMS și live chat. Toată comunicarea ajunge într-un singur loc, procesată de AI."
+        },
+        {
+          "icon": "erp",
+          "title": "ERP și software de gestiune",
+          "description": "Conectăm cu SAP, Oracle, Saga sau alte sisteme de gestiune. Comenzile, facturile și stocurile sunt sincronizate automat cu informațiile colectate de agentul AI."
+        }
+      ]
+    },
+    "approach": {
+      "title": "Cum funcționează procesul de integrare AI pas cu pas?",
+      "lead": "Procesul de integrare durează între 2 și 12 săptămâni, în funcție de complexitate. Începem cu un audit tehnic gratuit al sistemelor existente, definim strategia de conectare, dezvoltăm și testăm conectorii, apoi lansăm cu monitorizare activă.",
+      "schemaName": "Procesul de integrare AI cu sistemele existente",
+      "schemaDescription": "Metodologie în 5 pași pentru integrarea inteligenței artificiale cu CRM, booking, ticketing și alte sisteme business existente.",
+      "steps": [
+        {
+          "title": "Descoperire și audit tehnic",
+          "description": "Analizăm sistemele existente, documentăm API-urile disponibile, identificăm punctele de integrare și evaluăm complexitatea. Rezultat: raport tehnic cu recomandări clare."
+        },
+        {
+          "title": "Strategie de integrare",
+          "description": "Definim arhitectura de conectare: ce sisteme se integrează, în ce ordine, ce date circulă între ele. Prioritizăm pe baza impactului operațional."
+        },
+        {
+          "title": "Dezvoltare conectori și API",
+          "description": "Construim conectorii necesari: API-uri REST, webhooks, middleware custom. Folosim conectori pre-construiți acolo unde e posibil, dezvoltăm custom unde e nevoie."
+        },
+        {
+          "title": "Testare și validare",
+          "description": "Testăm fiecare integrare cu date reale în mediu de staging. Verificăm acuratețea datelor, viteza de sincronizare, gestionarea erorilor și scenariile edge-case."
+        },
+        {
+          "title": "Lansare și monitorizare",
+          "description": "Lansăm în producție cu monitorizare activă. Dashboard-ul de integrare arată în timp real statusul fiecărei conexiuni, volumele procesate și eventualele erori."
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "Ce automatizări devin posibile prin integrarea AI?",
+      "lead": "Prin integrare directă cu sistemele companiei, agenții AI pot executa acțiuni reale — nu doar răspund la întrebări. Colectează date, actualizează înregistrări, declanșează fluxuri și raportează rezultate, totul fără intervenție manuală.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "collect",
+          "title": "Colectare și validare automată de date",
+          "description": "Agentul AI extrage informații din conversații — nume, CNP, preferințe, detalii comandă — le validează în timp real și le scrie direct în sistemele conectate."
+        },
+        {
+          "icon": "sync",
+          "title": "Actualizare informațiilor în timp real",
+          "description": "Când un client schimbă o programare sau actualizează datele de contact, modificarea se propagă instant în CRM, calendar și toate sistemele relevante."
+        },
+        {
+          "icon": "workflow",
+          "title": "Declanșare de fluxuri operaționale",
+          "description": "Agentul AI poate iniția procese automate: crearea unui tichet de suport, trimiterea unei confirmări SMS, generarea unei facturi proforma sau escalarea către un manager."
+        },
+        {
+          "icon": "transfer",
+          "title": "Transfer controlat către operatori umani",
+          "description": "Când conversația necesită intervenție umană, agentul AI transferă cu context complet: istoricul discuției, datele colectate și motivul escalării."
+        },
+        {
+          "icon": "reporting",
+          "title": "Raportare și monitorizare",
+          "description": "Dashboard centralizat cu volumele procesate, ratele de rezolvare, timpii de răspuns și statusul fiecărei integrări. Exporturi automate pentru management."
+        },
+        {
+          "icon": "notifications",
+          "title": "Notificări și alerte inteligente",
+          "description": "Agentul AI trimite automat notificări contextuale: reminder-e de programare, confirmări de plată, alerte de stoc sau actualizări de status — prin SMS, email sau WhatsApp, la momentul potrivit."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Cât costă și cât durează o integrare AI?",
+      "lead": "Investiția variază în funcție de complexitate — de la integrări simple în 2-4 săptămâni, la proiecte multi-sistem în 6-12 săptămâni. Rezultatele sunt măsurabile: date mai precise, costuri operaționale mai mici și sisteme complet conectate.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "2-4 săpt.",
+          "label": "Timp implementare integrare simplă"
+        },
+        {
+          "icon": "trending",
+          "value": "85%",
+          "label": "Acuratețe date automate vs. manual"
+        },
+        {
+          "icon": "wallet",
+          "value": "-40%",
+          "label": "Reducere costuri operaționale"
+        },
+        {
+          "icon": "link",
+          "value": "100%",
+          "label": "Sisteme conectate end-to-end"
+        },
+        {
+          "icon": "scale",
+          "value": "∞",
+          "label": "Scalare fără reproiectare"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Întrebări frecvente despre integrările AI",
+      "lead": "Răspunsuri directe la cele mai frecvente întrebări despre cum funcționează integrarea AI cu sistemele existente ale companiei.",
+      "items": [
+        {
+          "question": "Funcționează integrarea AI cu softul pe care îl folosim deja?",
+          "answer": "Da. Realizăm integrări cu orice sistem care expune un API sau acceptă conexiuni externe: CRM-uri (Salesforce, HubSpot, Zoho), sisteme de booking (Calendly, Google Calendar), ticketing (Zendesk, Freshdesk), ERP-uri și aplicații custom. Folosim conectori pre-construiți și dezvoltăm custom unde e necesar."
+        },
+        {
+          "question": "Cât costă o integrare AI pentru o companie mică sau medie?",
+          "answer": "O integrare simplă (1-2 sisteme, conectori standard) costă între 2.000-4.000 EUR. Proiectele complexe multi-sistem cu conectori custom variază între 10.000-25.000 EUR. Oferim consultanță gratuită pentru evaluarea costurilor exacte."
+        },
+        {
+          "question": "Cât durează implementarea unei integrări AI?",
+          "answer": "Integrările simple (CRM sau calendar) durează 2-4 săptămâni. Proiectele complexe cu multiple sisteme și conectori custom durează 6-12 săptămâni. Întotdeauna începem cu o fază de descoperire de 1-2 săptămâni."
+        },
+        {
+          "question": "Sunt datele clienților mei în siguranță?",
+          "answer": "Absolut. Toate integrările respectă GDPR, datele sunt criptate în tranzit (TLS) și la stocare (AES-256), hosting în centre de date din UE. Nu folosim datele pentru antrenarea AI-ului. Audituri regulate de securitate."
+        },
+        {
+          "question": "Am nevoie de cunoștințe tehnice pentru a folosi integrările AI?",
+          "answer": "Nu. Echipa noastră se ocupă de toată configurarea tehnică. Primești un dashboard intuitiv unde vezi statusul integrărilor, volumele procesate și eventualele erori. Includem training pentru echipa ta."
+        },
+        {
+          "question": "Ce se întâmplă dacă agentul AI nu știe să răspundă?",
+          "answer": "Agentul AI are reguli de escalare configurabile. Când detectează o situație pe care nu o poate gestiona, transferă automat conversația către un operator uman, cu tot contextul discuției și datele colectate."
+        },
+        {
+          "question": "Integrarea AI funcționează și cu sisteme mai vechi (legacy)?",
+          "answer": "Da. Pentru sistemele fără API modern, folosim tehnici alternative: middleware custom, RPA (robotic process automation), screen scraping sau webhooks. Evaluăm compatibilitatea în faza gratuită de descoperire."
+        },
+        {
+          "question": "Pot să adaug mai multe integrări ulterior?",
+          "answer": "Da, arhitectura este modulară. Poți începe cu o singură integrare (de exemplu, CRM) și adăugi treptat alte sisteme (calendar, ticketing, ERP) fără a afecta integrările existente. Fiecare conexiune nouă se adaugă independent."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Hai să conectăm AI-ul la sistemele tale",
+      "subtitle": "Solicită un audit tehnic gratuit. Analizăm sistemele tale existente și îți arătăm exact cum le conectăm cu inteligența artificială — fără obligații.",
+      "button": "Solicită audit tehnic gratuit"
+    }
+  },
+
+  "privacy": {
+    "meta": {
+      "title": "Politica de Confidențialitate | GENERATIVA",
+      "description": "Politica de confidențialitate GENERATIVA. Află cum colectăm, utilizăm și protejăm datele tale personale conform GDPR și legislației române."
+    },
+    "breadcrumb": {
+      "home": "Acasă",
+      "current": "Politica de Confidențialitate"
+    },
+    "title": "Politica de Confidențialitate",
+    "lastUpdated": "Ultima actualizare: Februarie 2026",
+    "sections": [
+      {
+        "title": "1. Cine suntem",
+        "content": "Acest website este operat de DIGITAL LEADERSHIP SRL, societate inregistrata in Romania, cu sediul social in Dezmir, Comuna Apahida, Str. Viorelelor, nr. 17A, jud. Cluj, Romania, CUI 38585123, Nr. ONRC J12/6715/2017.\n\nEmail de contact: contact@generativa.ro\nWebsite: https://generativa.ro"
+      },
+      {
+        "title": "2. Ce date personale colectăm",
+        "content": "Colectăm următoarele categorii de date personale:",
+        "items": [
+          "Prin formularul de contact: Nume complet, adresă de email, număr de telefon (opțional), denumire companie, industrie, serviciu de interes, mesaj.",
+          "Prin navigare: Adresă IP, tip browser, sistem de operare, pagini vizitate, durată sesiune, sursa traficului. Aceste date sunt colectate prin cookies tehnice și de analiză.",
+          "Prin comunicare directă: Date pe care ni le furnizezi voluntar prin email, telefon sau alte canale de comunicare."
+        ]
+      },
+      {
+        "title": "3. Temeiurile juridice pentru prelucrarea datelor",
+        "content": "Prelucrăm datele tale personale pe baza următoarelor temeiuri juridice, conform art. 6 din Regulamentul General privind Protecția Datelor (GDPR):",
+        "items": [
+          "Consimțământ (art. 6 alin. 1 lit. a GDPR) — pentru trimiterea de comunicări de marketing și utilizarea cookies-urilor non-esențiale.",
+          "Interes legitim (art. 6 alin. 1 lit. f GDPR) — pentru îmbunătățirea serviciilor noastre, analiza traficului pe website și prevenirea fraudei.",
+          "Executarea unui contract sau măsuri precontractuale (art. 6 alin. 1 lit. b GDPR) — pentru a răspunde la solicitările tale prin formularul de contact și pentru furnizarea serviciilor solicitate.",
+          "Obligație legală (art. 6 alin. 1 lit. c GDPR) — pentru îndeplinirea obligațiilor fiscale și contabile."
+        ]
+      },
+      {
+        "title": "4. Cum utilizăm datele tale",
+        "content": "Datele tale personale sunt utilizate pentru:",
+        "items": [
+          "A răspunde la mesajele și solicitările trimise prin formularul de contact.",
+          "A furniza informații despre serviciile noastre.",
+          "A îmbunătăți experiența de navigare pe website.",
+          "A analiza traficul și comportamentul vizitatorilor (date anonimizate).",
+          "A respecta obligațiile legale aplicabile."
+        ]
+      },
+      {
+        "title": "5. Cui transmitem datele tale",
+        "content": "Nu vindem, nu închiriem și nu partajăm datele tale personale cu terți în scopuri de marketing.",
+        "items": [
+          "Vercel Inc. — hosting website (servere în UE).",
+          "Railway — hosting backend API.",
+          "Resend — serviciu de trimitere email tranzacțional.",
+          "Supabase — bază de date PostgreSQL (servere în UE).",
+          "Autorități publice — doar dacă suntem obligați legal."
+        ],
+        "extra": "Toți furnizorii noștri de servicii sunt selectați cu atenție și sunt obligați contractual să respecte GDPR și să asigure un nivel adecvat de protecție a datelor."
+      },
+      {
+        "title": "6. Transferul datelor în afara UE/SEE",
+        "content": "În principiu, datele tale sunt stocate și prelucrate pe servere situate în Uniunea Europeană. În cazul în care anumite servicii terțe implică transferul de date în afara UE/SEE (ex. Vercel pentru CDN global), ne asigurăm că există garanții adecvate conform GDPR, inclusiv Clauze Contractuale Standard (SCCs) aprobate de Comisia Europeană sau Decizii de Adecvare."
+      },
+      {
+        "title": "7. Cât timp păstrăm datele",
+        "content": "Păstrăm datele tale personale doar atât timp cât este necesar pentru scopurile pentru care au fost colectate:",
+        "items": [
+          "Date din formularul de contact: maximum 12 luni de la ultima interacțiune, cu excepția cazului în care se stabilește o relație contractuală.",
+          "Cookies de analiză: conform duratei specificate în Politica de Cookies (sesiune sau max. 12 luni).",
+          "Date contabile/fiscale: 10 ani conform legislației române (Legea 82/1991 — Legea contabilității)."
+        ]
+      },
+      {
+        "title": "8. Drepturile tale conform GDPR",
+        "content": "Conform Regulamentului General privind Protecția Datelor (GDPR), ai următoarele drepturi:",
+        "items": [
+          "Dreptul de acces — poți solicita o copie a datelor tale personale.",
+          "Dreptul la rectificare — poți cere corectarea datelor inexacte.",
+          "Dreptul la ștergere (\"dreptul de a fi uitat\") — poți cere ștergerea datelor tale în anumite condiții.",
+          "Dreptul la restricționarea prelucrării — poți limita modul în care îți prelucrăm datele.",
+          "Dreptul la portabilitatea datelor — poți primi datele tale într-un format structurat, utilizat frecvent.",
+          "Dreptul de opoziție — poți te opune prelucrării datelor în anumite situații.",
+          "Dreptul de a nu face obiectul unei decizii automate — inclusiv profilarea."
+        ],
+        "extra": "Pentru exercitarea oricăruia dintre aceste drepturi, contactează-ne la contact@generativa.ro. Vom răspunde în termen de 30 de zile."
+      },
+      {
+        "title": "9. Securitatea datelor",
+        "content": "Implementăm măsuri tehnice și organizatorice adecvate pentru a proteja datele tale personale împotriva accesului neautorizat, pierderii, distrugerii sau modificării. Acestea includ:\n\n• Criptare în tranzit (TLS/HTTPS) pentru toate comunicațiile.\n• Criptare la stocare (AES-256) pentru datele sensibile.\n• Acces restricționat la date pe bază de rol.\n• Audituri periodice de securitate.\n• Hosting în centre de date certificate din UE."
+      },
+      {
+        "title": "10. Plângeri",
+        "content": "Dacă consideri că prelucrarea datelor tale personale încalcă GDPR, ai dreptul de a depune o plângere la:\n\nAutoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP)\nAdresă: B-dul G-ral. Gheorghe Magheru 28-30, Sector 1, cod poștal 010336, București, România\nWebsite: www.dataprotection.ro\nEmail: anspdcp@dataprotection.ro"
+      },
+      {
+        "title": "11. Modificări ale acestei politici",
+        "content": "Ne rezervăm dreptul de a actualiza această Politică de Confidențialitate pentru a reflecta schimbări în practicile noastre sau în legislația aplicabilă. Orice modificare va fi publicată pe această pagină cu data actualizării. Recomandăm verificarea periodică a acestei pagini."
+      },
+      {
+        "title": "12. Contact",
+        "content": "Pentru orice întrebări legate de confidențialitate sau protecția datelor personale:\n\nDIGITAL LEADERSHIP SRL\nAdresă: Dezmir, Comuna Apahida, Str. Viorelelor, nr. 17A, jud. Cluj, România\nEmail: contact@generativa.ro\nCUI: 38585123 | Nr. ONRC: J12/6715/2017"
+      }
+    ],
+    "cookiePolicy": {
+      "title": "Politica de Cookies",
+      "sections": [
+        {
+          "title": "Ce sunt cookies",
+          "content": "Cookies sunt fișiere mici de text stocate pe dispozitivul tău atunci când vizitezi un website. Acestea sunt utilizate pe scară largă pentru a face site-urile web să funcționeze mai eficient și pentru a furniza informații proprietarilor site-ului."
+        },
+        {
+          "title": "Ce cookies folosim",
+          "content": "Utilizăm următoarele categorii de cookies:",
+          "items": [
+            "Cookies strict necesare — Esențiale pentru funcționarea website-ului (ex. preferința de cookies, sesiune). Nu pot fi dezactivate. Durata: sesiune.",
+            "Cookies de analiză — Ne ajută să înțelegem cum este utilizat website-ul (pagini vizitate, durată vizită, surse de trafic). Datele sunt anonimizate. Durata: max. 12 luni.",
+            "Cookies funcționale — Memorează preferințele tale (limba selectată, preferințe de afișare). Durata: max. 12 luni."
+          ]
+        },
+        {
+          "title": "Cum controlezi cookies",
+          "content": "La prima vizită pe website, îți cerem consimțământul pentru cookies non-esențiale prin banner-ul de cookies. Poți:\n\n• Accepta toate cookies-urile.\n• Refuza cookies-urile non-esențiale.\n• Modifica setările din browser-ul tău pentru a bloca sau șterge cookies.\n\nNotă: Dezactivarea anumitor cookies poate afecta funcționalitatea website-ului."
+        },
+        {
+          "title": "Cookies terțe părți",
+          "content": "În prezent, NU folosim cookies de la terțe părți pentru publicitate sau tracking. În cazul în care vom implementa servicii de analiză (ex. Plausible Analytics, Umami), acestea vor fi configurate pentru conformitate GDPR, cu date anonimizate și stocare în UE."
+        },
+        {
+          "title": "Actualizarea Politicii de Cookies",
+          "content": "Această politică poate fi actualizată periodic. Ultima actualizare: Februarie 2026."
+        }
+      ]
+    }
+  },
+
+  "terms": {
+    "meta": {
+      "title": "Termeni și Condiții | GENERATIVA",
+      "description": "Termeni și condiții de utilizare a website-ului GENERATIVA. Informații despre servicii, proprietate intelectuală, limitarea răspunderii și legislația aplicabilă."
+    },
+    "breadcrumb": {
+      "home": "Acasă",
+      "current": "Termeni și Condiții"
+    },
+    "title": "Termeni și Condiții",
+    "lastUpdated": "Ultima actualizare: Februarie 2026",
+    "sections": [
+      {
+        "title": "1. Informații generale",
+        "content": "Acest website este operat de DIGITAL LEADERSHIP SRL, societate înregistrată în România, cu sediul social în Dezmir, Comuna Apahida, Str. Viorelelor, nr. 17A, jud. Cluj, România, CUI 38585123, Nr. ONRC J12/6715/2017.\n\nWebsite: https://generativa.ro\nEmail: contact@generativa.ro\nBrand comercial: GENERATIVA\n\nPrin accesarea și utilizarea acestui website, accepti acești Termeni și Condiții în integralitatea lor. Dacă nu ești de acord cu oricare dintre prevederile de mai jos, te rugăm să nu utilizezi acest website."
+      },
+      {
+        "title": "2. Descrierea serviciilor",
+        "content": "GENERATIVA oferă servicii de inteligență artificială pentru afaceri, incluzând:\n\n• Automatizare procese de business cu agenți AI.\n• Asistenți virtuali conversaționali (voce, chat, email).\n• Integrări AI cu sisteme existente (CRM, ERP, booking, ticketing).\n• Consultanță și audit de procese pentru implementarea AI.\n\nInformațiile prezentate pe website au caracter informativ și nu constituie o ofertă fermă. Termenii specifici ai serviciilor vor fi stabiliți prin contracte individuale."
+      },
+      {
+        "title": "3. Proprietate intelectuală",
+        "content": "Toate elementele acestui website — inclusiv, dar fără a se limita la: design, texte, grafică, logo-uri, imagini, cod sursă, animații și structura bazei de date — sunt proprietatea DIGITAL LEADERSHIP SRL sau sunt utilizate cu licență și sunt protejate de legislația română și internațională privind drepturile de autor și proprietatea intelectuală.\n\nEste interzisă reproducerea, distribuirea, modificarea sau utilizarea conținutului fără acordul scris prealabil al DIGITAL LEADERSHIP SRL."
+      },
+      {
+        "title": "4. Utilizarea website-ului",
+        "content": "Te angajezi să utilizezi acest website în conformitate cu legile aplicabile și cu acești Termeni și Condiții. Este interzis:",
+        "items": [
+          "Să utilizezi website-ul în scopuri ilegale sau neautorizate.",
+          "Să încerci accesarea neautorizată a sistemelor, serverelor sau bazelor de date.",
+          "Să transmiți conținut care conține viruși, malware sau alte programe dăunătoare.",
+          "Să colectezi date personale ale altor utilizatori fără consimțământul acestora.",
+          "Să interferezi cu funcționarea normală a website-ului.",
+          "Să reproduci, copiezi sau distribui conținutul website-ului fără acord scris."
+        ]
+      },
+      {
+        "title": "5. Formularul de contact",
+        "content": "Prin trimiterea unui mesaj prin formularul de contact, confirmi că:\n\n• Informațiile furnizate sunt reale și corecte.\n• Ai cel puțin 18 ani sau ai acordul unui tutore legal.\n• Ești de acord cu prelucrarea datelor tale conform Politicii de Confidențialitate.\n\nNe rezervăm dreptul de a nu răspunde la mesaje care conțin conținut ofensator, spam sau solicitări irelevante."
+      },
+      {
+        "title": "6. Limitarea răspunderii",
+        "content": "Website-ul este furnizat ca atare (as is), fara garantii de niciun fel, exprese sau implicite.\n\nDIGITAL LEADERSHIP SRL nu este responsabilă pentru:\n\n• Întreruperi temporare ale funcționării website-ului.\n• Pierderi de date cauzate de probleme tehnice.\n• Conținutul website-urilor externe la care facem referire (link-uri externe).\n• Decizii luate pe baza informațiilor prezentate pe website.\n• Daune indirecte, incidentale sau consecvente rezultate din utilizarea website-ului.\n\nRăspunderea noastră totală nu va depăși, în niciun caz, suma plătită de utilizator pentru serviciile contractate (dacă există)."
+      },
+      {
+        "title": "7. Link-uri externe",
+        "content": "Website-ul poate conține link-uri către site-uri web terțe. Nu avem control asupra conținutului sau practicilor de confidențialitate ale acestor site-uri și nu ne asumăm responsabilitatea pentru ele. Recomandăm citirea politicilor de confidențialitate ale fiecărui site pe care îl vizitezi."
+      },
+      {
+        "title": "8. Legislația aplicabilă și jurisdicția",
+        "content": "Acești Termeni și Condiții sunt guvernați de legislația din România.\n\nOrice litigiu va fi soluționat pe cale amiabilă. În cazul în care nu se ajunge la un acord, litigiul va fi supus spre soluționare instanțelor competente din Cluj-Napoca, România.\n\nLegislație aplicabilă:\n• Regulamentul (UE) 2016/679 — GDPR\n• Legea nr. 190/2018 — Legea de punere în aplicare a GDPR în România\n• Legea nr. 365/2002 — Legea comerțului electronic\n• OUG nr. 34/2014 — Drepturile consumatorului\n• Codul Civil Român"
+      },
+      {
+        "title": "9. Modificări ale Termenilor și Condițiilor",
+        "content": "Ne rezervăm dreptul de a modifica acești Termeni și Condiții în orice moment. Modificările intră în vigoare de la data publicării pe website. Continuarea utilizării website-ului după publicarea modificărilor constituie acceptarea noilor termeni.\n\nRecomandăm verificarea periodică a acestei pagini."
+      },
+      {
+        "title": "10. Contact",
+        "content": "Pentru orice întrebări legate de acești Termeni și Condiții:\n\nDIGITAL LEADERSHIP SRL\nAdresă: Dezmir, Comuna Apahida, Str. Viorelelor, nr. 17A, jud. Cluj, România\nEmail: contact@generativa.ro\nCUI: 38585123 | Nr. ONRC: J12/6715/2017"
+      }
+    ]
   }
 }

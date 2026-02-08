@@ -174,11 +174,44 @@
       "name": "Full name",
       "email": "Email",
       "company": "Company",
+      "industry": "Industry",
+      "industryPlaceholder": "Select your industry",
+      "industryOptions": {
+        "dental": "Dental clinic",
+        "medical": "Medical practice",
+        "beauty": "Beauty salon / SPA",
+        "auto": "Auto service",
+        "horeca": "Restaurant / HoReCa",
+        "retail": "Retail / E-commerce",
+        "network": "Multi-location business",
+        "other": "Other industry"
+      },
+      "interest": "What are you interested in?",
+      "interestPlaceholder": "Select service",
+      "interestOptions": {
+        "automation": "Process automation",
+        "conversational": "Conversational agents (chatbot / voice)",
+        "integrations": "AI integrations with existing systems",
+        "unsure": "Not sure — I'd like a consultation"
+      },
       "phone": "Phone (optional)",
       "message": "Message",
       "submit": "Send message",
       "success": "Message sent successfully! We'll contact you soon.",
-      "error": "An error occurred. Please try again."
+      "error": "An error occurred. Please try again.",
+      "validation": {
+        "nameRequired": "Please enter your full name",
+        "nameMin": "Name must be at least 2 characters",
+        "emailRequired": "Please enter your email address",
+        "emailInvalid": "Please enter a valid email address",
+        "companyRequired": "Please enter your company name",
+        "companyMin": "Company name must be at least 2 characters",
+        "industryRequired": "Please select your industry",
+        "interestRequired": "Please select what you're interested in",
+        "phoneInvalid": "Please enter a valid phone number (e.g. +40 712 345 678)",
+        "messageRequired": "Please describe your project or question",
+        "messageMin": "Message must be at least 10 characters"
+      }
     },
     "info": {
       "email": "contact@generativa.ro",
@@ -314,5 +347,752 @@
       "subtitle": "A 15-minute conversation shows us if we're a good fit. No sales pitches, no pressure - just clarity.",
       "button": "Schedule a call"
     }
+  },
+
+  "serviceAutomation": {
+    "meta": {
+      "title": "AI Process Automation | GENERATIVA",
+      "description": "Eliminate repetitive work from your business with AI agents. 60-80% time reduction, zero errors, positive ROI in 3 months. Request a free audit.",
+      "schemaName": "AI Process Automation",
+      "schemaDescription": "Business process automation service using intelligent AI agents. We eliminate repetitive work, reduce errors and free your team for strategic activities.",
+      "schemaOffer": "Free process audit and personalized consultation",
+      "breadcrumbName": "Process Automation"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "services": "Services",
+      "current": "Process Automation"
+    },
+    "hero": {
+      "eyebrow": "Process Automation",
+      "title": "AI Process Automation",
+      "subtitle": "We eliminate repetitive work from your business. Our AI agents take over manual tasks, reduce errors and free your team for what truly matters. Implementation in weeks, not months, with measurable results from the first month.",
+      "cta": "Request a free audit"
+    },
+    "processTypes": {
+      "title": "What business processes can be automated with AI?",
+      "lead": "Nearly any repetitive, rule-based process can be automated with AI. From document processing to customer communication, AI agents take over tasks that consume time and resources, allowing your team to focus on strategic activities.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "document",
+          "title": "Document & data processing",
+          "description": "Automatic extraction of information from invoices, contracts, forms and emails. Classification, validation and entry into existing systems without manual intervention."
+        },
+        {
+          "icon": "communication",
+          "title": "Customer communication",
+          "description": "Automated responses to frequently asked questions, appointment confirmations, notifications and request follow-ups across all channels: phone, email, WhatsApp, chat."
+        },
+        {
+          "icon": "approval",
+          "title": "Approval & decision workflows",
+          "description": "Automate leave requests, budget approvals, order validation and document routing to responsible parties with automatic notifications and escalations."
+        },
+        {
+          "icon": "reporting",
+          "title": "Reporting & analytics",
+          "description": "Automatic generation of daily, weekly or monthly reports. Data aggregation from multiple sources, anomaly detection and insight delivery to management teams."
+        },
+        {
+          "icon": "onboarding",
+          "title": "Client/employee onboarding",
+          "description": "Automated registration, document verification, account creation, initial training and follow-up processes. Consistent experience for every new person."
+        },
+        {
+          "icon": "monitoring",
+          "title": "Monitoring & alerts",
+          "description": "Continuous monitoring of KPIs, stock levels, deadlines and team performance. Automatic alerts when something deviates from normal parameters."
+        }
+      ]
+    },
+    "approach": {
+      "title": "How does AI automation implementation work?",
+      "lead": "Implementing AI automation doesn't mean replacing everything overnight. Our 5-step process ensures each automation is tested, validated and gradually adopted by your team, with visible results even during the pilot phase.",
+      "schemaName": "AI Process Automation Implementation",
+      "schemaDescription": "The complete process for automating business processes, from initial audit to continuous optimization.",
+      "steps": [
+        {
+          "title": "Process audit",
+          "description": "We analyze your current processes, identify the most time-consuming ones and calculate automation potential. You receive a clear report with prioritized recommendations."
+        },
+        {
+          "title": "Solution design",
+          "description": "We architect the AI solution tailored to your needs. We define integrations, data flows and success metrics before writing the first line of code."
+        },
+        {
+          "title": "Key process pilot",
+          "description": "We implement automation on a single critical process to demonstrate value. Your team tests, provides feedback and we see real results in 2-4 weeks."
+        },
+        {
+          "title": "Gradual scaling",
+          "description": "After pilot validation, we extend automation to the other identified processes. Each extension follows the same cycle: implementation, testing, validation."
+        },
+        {
+          "title": "Continuous optimization",
+          "description": "We monitor performance, adjust based on real data and add new capabilities as the AI learns from accumulated interactions."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "What results does AI process automation deliver?",
+      "lead": "Companies that implement AI automation see concrete results in the first months: time recovered, errors eliminated and costs reduced. Here's what you can expect from working with GENERATIVA.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "60-80%",
+          "label": "Time reduction on repetitive processes"
+        },
+        {
+          "icon": "shield",
+          "value": "Zero",
+          "label": "Human errors in standardized tasks"
+        },
+        {
+          "icon": "trending",
+          "value": "< 3 months",
+          "label": "Positive ROI after implementation"
+        },
+        {
+          "icon": "scale",
+          "value": "10x",
+          "label": "Scalability without additional hires"
+        },
+        {
+          "icon": "focus",
+          "value": "100%",
+          "label": "Team focused on strategic work"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions about process automation",
+      "lead": "We've answered the most common questions we receive from companies interested in AI process automation.",
+      "items": [
+        {
+          "question": "How much does AI process automation cost?",
+          "answer": "The cost depends on process complexity and the number of required integrations. We offer a free audit where we evaluate your processes and propose a solution with transparent pricing. Generally, the investment pays for itself within the first 3 months through saved time and resources."
+        },
+        {
+          "question": "How long does automation implementation take?",
+          "answer": "The pilot on a single process takes 2-4 weeks. Scaling to additional processes adds 2-3 weeks per process. A complete implementation for 3-5 processes fits within 2-3 months."
+        },
+        {
+          "question": "What processes can be automated with AI?",
+          "answer": "Any repetitive, rule-based process: document processing, customer communication, approvals, reporting, onboarding and monitoring. If your team repeats the same actions daily, there's a good chance the process can be automated."
+        },
+        {
+          "question": "Will AI replace my employees?",
+          "answer": "No. The purpose of automation is to eliminate repetitive tasks that consume time, not to replace people. Your employees will be freed to focus on strategic, creative and relational activities that require human judgment."
+        },
+        {
+          "question": "What ROI can I expect from automation?",
+          "answer": "Our clients see an average 60-80% reduction in time spent on automated processes and near-complete elimination of errors. Positive ROI typically appears within the first 3 months, with savings growing as new processes are added."
+        },
+        {
+          "question": "Does automation work for small companies?",
+          "answer": "Absolutely. Small companies benefit the most from automation because resources are limited and every hour counts. Our solutions are scalable and adapt to the budget and needs of any company, from 5 to 500 employees."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Let's identify the processes draining your time",
+      "subtitle": "Schedule a free process audit. In 30 minutes, we'll show you exactly where you're losing time and how AI can solve it.",
+      "button": "Request a free audit"
+    }
+  },
+
+  "serviceConversational": {
+    "meta": {
+      "title": "Conversational AI Agents | Voice & Chat Assistants 24/7 | GENERATIVA",
+      "description": "AI agents that answer calls, WhatsApp and email 24/7 in Romanian. Automatic appointments, CRM integration, zero missed calls. Request a free demo.",
+      "schemaName": "Conversational AI Agents",
+      "schemaDescription": "Conversational virtual assistants that handle customer calls and messages 24/7, identify intent, collect data and execute operational actions in CRM, calendar and internal systems.",
+      "schemaOffer": "Free demo and personalized consultation",
+      "breadcrumbName": "Conversational Agents"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "services": "Services",
+      "current": "Conversational Agents"
+    },
+    "hero": {
+      "eyebrow": "Conversational AI Agents",
+      "title": "Conversational AI Virtual Assistants",
+      "subtitle": "We build, integrate and operate virtual assistants that handle your customers' requests through to resolution. They answer phone calls, WhatsApp and email — 24/7, in Romanian, with natural voice and concrete actions in your systems.",
+      "cta": "Request a free demo"
+    },
+    "capabilities": {
+      "title": "What can a conversational AI agent do for your business?",
+      "lead": "A conversational AI agent answers phone calls, WhatsApp, email and chat instead of your team — 24/7, without breaks. It collects customer data, books appointments in your calendar, updates your CRM and transfers to a human operator when needed. The result: zero missed calls and satisfied customers.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "phone",
+          "title": "Phone call handling",
+          "description": "The AI agent answers calls in Romanian, carries natural conversations and understands conversation context. The customer can't tell the difference from a human operator."
+        },
+        {
+          "icon": "intent",
+          "title": "Customer intent identification",
+          "description": "Automatically recognizes what the customer needs: appointment, question, technical issue, data change or complaint. Intelligently routes each request."
+        },
+        {
+          "icon": "collect",
+          "title": "Information collection & validation",
+          "description": "Gathers all data needed to resolve the request: name, ID, order number, preferences. Validates information in real-time, without errors."
+        },
+        {
+          "icon": "actions",
+          "title": "Automated operational actions",
+          "description": "Creates and updates CRM records, handles bookings and rescheduling, opens support tickets, sends confirmation emails and SMS messages."
+        },
+        {
+          "icon": "multichannel",
+          "title": "Multichannel communication",
+          "description": "Works across phone, WhatsApp, email, SMS and web chat. Same consistent experience on whatever channel your customer prefers."
+        },
+        {
+          "icon": "escalation",
+          "title": "Intelligent handoff to operators",
+          "description": "Requests that can't be resolved automatically are transferred to your team in under 2 seconds, along with all context already collected. The customer never repeats themselves."
+        }
+      ]
+    },
+    "approach": {
+      "title": "How does an AI voice agent work in practice?",
+      "lead": "The AI agent takes incoming calls, understands the customer's intent using natural language processing, responds with a human-like voice and executes concrete actions: confirms an appointment, sends information via WhatsApp or escalates to your team in under 2 seconds.",
+      "schemaName": "Conversational AI Agent Implementation",
+      "schemaDescription": "The complete process for implementing a conversational virtual assistant, from analysis to launch and multichannel scaling.",
+      "steps": [
+        {
+          "title": "Existing flow analysis",
+          "description": "We map your customer communication flows: how many calls you receive, what customers ask, how long each conversation takes, where opportunities are lost."
+        },
+        {
+          "title": "AI configuration & training",
+          "description": "We configure the AI agent based on your real scenarios. We train it with your industry vocabulary, internal procedures and your brand's communication tone."
+        },
+        {
+          "title": "Testing & pilot",
+          "description": "We launch the agent on a single channel (phone or chat) and monitor every conversation. We adjust in real-time based on feedback and results. Duration: 2-4 weeks."
+        },
+        {
+          "title": "Launch & multichannel scaling",
+          "description": "After pilot validation, we expand to all channels: phone, WhatsApp, email, web chat. We integrate with your CRM and existing systems for complete automation."
+        }
+      ]
+    },
+    "industries": {
+      "title": "Which industries benefit most from conversational AI agents?",
+      "lead": "Dental clinics, medical offices, beauty salons, auto service centers and restaurants with reservations are the industries that see the fastest ROI. The reason: high volume of repetitive calls, frequent appointments and the need for 24/7 availability that small teams can't sustain.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "headset",
+          "title": "Call Center & Customer Support",
+          "problem": "High volume of repetitive calls, long wait times, high cost per interaction",
+          "solution": "AI handles 70% of repetitive calls, reduces wait time to zero and frees operators for complex cases."
+        },
+        {
+          "icon": "medical",
+          "title": "Clinics & Medical Networks",
+          "problem": "Missed appointments, overwhelmed reception, patients who can't call outside hours",
+          "solution": "The AI agent confirms, reschedules and manages appointments 24/7. Reduces no-shows by 40% through automatic reminders."
+        },
+        {
+          "icon": "hotel",
+          "title": "Hospitality & Travel",
+          "problem": "Reservations lost outside working hours, repetitive questions about amenities and prices",
+          "solution": "Instant answers about availability, prices and amenities. Reservations confirmed automatically on any channel."
+        },
+        {
+          "icon": "signal",
+          "title": "Utilities & Telecom",
+          "problem": "Hundreds of daily calls about bills, subscription changes and standard complaints",
+          "solution": "Complete automation for balance checks, data changes, issue reporting and resolution confirmation."
+        },
+        {
+          "icon": "beauty",
+          "title": "Beauty Salons & SPA",
+          "problem": "Phone bookings during treatments, frequent no-shows, losing new clients",
+          "solution": "24/7 automatic bookings via phone and WhatsApp. 60% no-show reduction through smart confirmations and reminders."
+        },
+        {
+          "icon": "car",
+          "title": "Auto Service & Fleet Management",
+          "problem": "Customers wanting car status, service bookings, price estimates — all by phone",
+          "solution": "Automatic repair status, service scheduling, instant estimates and proactive notifications when the car is ready."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "What results does a conversational AI agent deliver?",
+      "lead": "Companies that implement conversational AI agents see concrete results in the first month: zero missed calls, 90% of frequent questions resolved automatically, 15-20 hours saved per week and consistent customer experience across all channels.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "24/7",
+          "label": "Non-stop availability for customers"
+        },
+        {
+          "icon": "trending",
+          "value": "70%",
+          "label": "Reduction in repetitive call volume"
+        },
+        {
+          "icon": "wallet",
+          "value": "60%",
+          "label": "Lower cost per interaction"
+        },
+        {
+          "icon": "star",
+          "value": "100%",
+          "label": "Consistent experience across all channels"
+        },
+        {
+          "icon": "scale",
+          "value": "10x",
+          "label": "Operational scaling without headcount"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions about conversational AI agents",
+      "lead": "We've answered the most common questions we receive from companies interested in conversational virtual assistants.",
+      "items": [
+        {
+          "question": "How much does a conversational AI agent cost?",
+          "answer": "The cost depends on the number of channels, interaction volume and integration complexity. As a reference, an AI agent costs significantly less than a full-time receptionist (€1,500-2,500/month). We offer a free demo and a personalized ROI calculation for your business."
+        },
+        {
+          "question": "Does the AI agent understand and speak Romanian?",
+          "answer": "Yes. Our agents are specifically trained for the Romanian language, with natural pronunciation and understanding of regional expressions. They also support English for international customers. Conversations sound natural, not robotic."
+        },
+        {
+          "question": "What systems does the AI agent integrate with?",
+          "answer": "It integrates with CRMs (HubSpot, Salesforce, etc.), Google Calendar, Outlook, WhatsApp Business API, existing phone systems and your proprietary software via API. You don't need to change any current tools."
+        },
+        {
+          "question": "Will the AI agent replace my employees?",
+          "answer": "No. The AI agent handles repetitive calls and messages (directions, hours, appointment confirmations) so your team can focus on complex, high-value interactions. Most of our clients keep the same staff, but productivity increases by 40-60%."
+        },
+        {
+          "question": "What happens when the AI doesn't know the answer?",
+          "answer": "Instant transfer to a team member in under 2 seconds. The AI collects context before transferring so the customer never has to repeat themselves. You set the escalation rules."
+        },
+        {
+          "question": "How long until the AI agent is operational?",
+          "answer": "The first channel (phone or chat) goes live in 2-4 weeks. Full multichannel deployment takes 6-8 weeks. This includes analysis, configuration, testing and gradual rollout — without affecting your current operations."
+        },
+        {
+          "question": "Does the AI agent work for my type of business?",
+          "answer": "It works best for businesses with high call volume, recurring appointments or the need for 24/7 availability: dental clinics, medical offices, beauty salons, auto services, restaurants, multi-location networks. We offer a free assessment."
+        },
+        {
+          "question": "Is my customer data safe?",
+          "answer": "Absolutely. We are GDPR compliant, data is encrypted in transit and at rest, hosted in EU data centers. We don't share data with third parties. Regular security audits. Clients retain full data ownership."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Let us show you how your AI sounds",
+      "subtitle": "Request a free personalized demo. In 15 minutes, hear how the AI agent trained for your business sounds — with real scenarios from your industry.",
+      "button": "Request a free demo"
+    }
+  },
+  "serviceIntegrations": {
+    "meta": {
+      "title": "AI Integration Services for Business Systems | CRM, Booking, ERP | GENERATIVA",
+      "description": "We integrate AI agents with your CRM, booking system, ticketing and existing applications. Accurate data, automated workflows, zero manual work. Free consultation.",
+      "schemaName": "AI Integration Services for Business Systems",
+      "schemaDescription": "AI integration services connecting artificial intelligence with existing business systems — CRM, booking, ticketing, ERP, communication channels — for complete automation and accurate data.",
+      "schemaOffer": "Free consultation and technical audit for AI integration with company systems",
+      "breadcrumbName": "AI Integrations"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "services": "Services",
+      "current": "AI Integrations"
+    },
+    "hero": {
+      "eyebrow": "Intelligent connectivity",
+      "title": "AI integrations that connect automation with your company's systems",
+      "subtitle": "GENERATIVA builds AI integrations that allow virtual assistants and automations to operate directly within your organization's existing systems. Artificial intelligence is embedded into internal applications so actions are executed automatically, with control and in full alignment with operational processes.",
+      "cta": "Request a free consultation"
+    },
+    "systems": {
+      "title": "What systems and applications can connect with an AI agent?",
+      "lead": "GENERATIVA AI agents connect with any system that exposes an API or accepts integrations: CRMs, booking platforms, ticketing, ERPs, and communication channels. We also build custom connectors for internal applications or software without standard APIs.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "database",
+          "title": "CRM and customer support",
+          "description": "We connect AI agents with Salesforce, HubSpot, Zoho or your custom CRM. Customer data is automatically updated, interactions are logged, and the support team sees everything centralized."
+        },
+        {
+          "icon": "calendar",
+          "title": "Booking and scheduling systems",
+          "description": "Integration with Calendly, Google Calendar, medical or beauty scheduling systems. The AI agent creates, modifies and confirms appointments automatically, without human intervention."
+        },
+        {
+          "icon": "ticket",
+          "title": "Ticketing platforms",
+          "description": "Direct connection with Zendesk, Freshdesk, Jira Service Management. Tickets are automatically created, classified and routed based on the customer conversation."
+        },
+        {
+          "icon": "code",
+          "title": "Internal systems and custom applications",
+          "description": "We develop dedicated connectors for internal applications, ERPs or legacy software. We use REST APIs, webhooks, middleware — whatever is needed to connect AI with your processes."
+        },
+        {
+          "icon": "channel",
+          "title": "Communication channels",
+          "description": "Integration with VoIP telephony, WhatsApp Business API, email (IMAP/SMTP), SMS and live chat. All communication arrives in one place, processed by AI."
+        },
+        {
+          "icon": "erp",
+          "title": "ERP and management software",
+          "description": "We connect with SAP, Oracle, or other management systems. Orders, invoices and inventory are automatically synchronized with information collected by the AI agent."
+        }
+      ]
+    },
+    "approach": {
+      "title": "How does the AI integration process work step by step?",
+      "lead": "The integration process takes between 2 and 12 weeks, depending on complexity. We start with a free technical audit of existing systems, define the connection strategy, develop and test connectors, then launch with active monitoring.",
+      "schemaName": "AI integration process with existing systems",
+      "schemaDescription": "5-step methodology for integrating artificial intelligence with CRM, booking, ticketing and other existing business systems.",
+      "steps": [
+        {
+          "title": "Discovery and technical audit",
+          "description": "We analyze existing systems, document available APIs, identify integration points and assess complexity. Result: a technical report with clear recommendations."
+        },
+        {
+          "title": "Integration strategy",
+          "description": "We define the connection architecture: which systems integrate, in what order, what data flows between them. We prioritize based on operational impact."
+        },
+        {
+          "title": "Connector and API development",
+          "description": "We build the necessary connectors: REST APIs, webhooks, custom middleware. We use pre-built connectors where possible, develop custom ones where needed."
+        },
+        {
+          "title": "Testing and validation",
+          "description": "We test each integration with real data in a staging environment. We verify data accuracy, synchronization speed, error handling and edge-case scenarios."
+        },
+        {
+          "title": "Launch and monitoring",
+          "description": "We launch to production with active monitoring. The integration dashboard shows real-time status of each connection, processed volumes and any errors."
+        }
+      ]
+    },
+    "capabilities": {
+      "title": "What automations become possible through AI integration?",
+      "lead": "Through direct integration with company systems, AI agents can execute real actions — not just answer questions. They collect data, update records, trigger workflows and report results, all without manual intervention.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "collect",
+          "title": "Automatic data collection and validation",
+          "description": "The AI agent extracts information from conversations — names, IDs, preferences, order details — validates them in real time and writes them directly to connected systems."
+        },
+        {
+          "icon": "sync",
+          "title": "Real-time information updates",
+          "description": "When a customer changes an appointment or updates contact details, the change propagates instantly to the CRM, calendar and all relevant systems."
+        },
+        {
+          "icon": "workflow",
+          "title": "Operational workflow triggers",
+          "description": "The AI agent can initiate automated processes: creating a support ticket, sending an SMS confirmation, generating a proforma invoice or escalating to a manager."
+        },
+        {
+          "icon": "transfer",
+          "title": "Controlled transfer to human operators",
+          "description": "When a conversation requires human intervention, the AI agent transfers with full context: conversation history, collected data and the reason for escalation."
+        },
+        {
+          "icon": "reporting",
+          "title": "Reporting and monitoring",
+          "description": "Centralized dashboard with processed volumes, resolution rates, response times and status of each integration. Automatic exports for management."
+        },
+        {
+          "icon": "notifications",
+          "title": "Smart notifications and alerts",
+          "description": "The AI agent automatically sends contextual notifications: appointment reminders, payment confirmations, stock alerts or status updates — via SMS, email or WhatsApp, at the right moment."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "How much does AI integration cost and how long does it take?",
+      "lead": "Investment varies by complexity — from simple integrations in 2-4 weeks to multi-system projects in 6-12 weeks. Results are measurable: more accurate data, lower operational costs and fully connected systems.",
+      "items": [
+        {
+          "icon": "clock",
+          "value": "2-4 wks",
+          "label": "Simple integration implementation time"
+        },
+        {
+          "icon": "trending",
+          "value": "85%",
+          "label": "Automated data accuracy vs. manual"
+        },
+        {
+          "icon": "wallet",
+          "value": "-40%",
+          "label": "Operational cost reduction"
+        },
+        {
+          "icon": "link",
+          "value": "100%",
+          "label": "Systems connected end-to-end"
+        },
+        {
+          "icon": "scale",
+          "value": "∞",
+          "label": "Scale without redesign"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions about AI integrations",
+      "lead": "Direct answers to the most common questions about how AI integration works with your company's existing systems.",
+      "items": [
+        {
+          "question": "Does AI integration work with the software we already use?",
+          "answer": "Yes. We integrate with any system that exposes an API or accepts external connections: CRMs (Salesforce, HubSpot, Zoho), booking systems (Calendly, Google Calendar), ticketing (Zendesk, Freshdesk), ERPs and custom applications. We use pre-built connectors and develop custom ones where needed."
+        },
+        {
+          "question": "How much does AI integration cost for a small or medium business?",
+          "answer": "A simple integration (1-2 systems, standard connectors) costs between €2,000-4,000. Complex multi-system projects with custom connectors range from €10,000-25,000. We offer free consultation for exact cost evaluation."
+        },
+        {
+          "question": "How long does AI integration implementation take?",
+          "answer": "Simple integrations (CRM or calendar) take 2-4 weeks. Complex projects with multiple systems and custom connectors take 6-12 weeks. We always start with a 1-2 week discovery phase."
+        },
+        {
+          "question": "Is my customer data safe?",
+          "answer": "Absolutely. All integrations comply with GDPR, data is encrypted in transit (TLS) and at rest (AES-256), hosted in EU data centers. We don't use data for AI training. Regular security audits."
+        },
+        {
+          "question": "Do I need technical knowledge to use AI integrations?",
+          "answer": "No. Our team handles all technical configuration. You get an intuitive dashboard where you can see integration status, processed volumes and any errors. Training for your team is included."
+        },
+        {
+          "question": "What happens if the AI agent doesn't know how to answer?",
+          "answer": "The AI agent has configurable escalation rules. When it detects a situation it cannot handle, it automatically transfers the conversation to a human operator, with full conversation context and collected data."
+        },
+        {
+          "question": "Does AI integration work with older (legacy) systems?",
+          "answer": "Yes. For systems without modern APIs, we use alternative techniques: custom middleware, RPA (robotic process automation), screen scraping or webhooks. We assess compatibility in the free discovery phase."
+        },
+        {
+          "question": "Can I add more integrations later as my business grows?",
+          "answer": "Yes, the architecture is modular. You can start with a single integration (e.g., CRM) and gradually add other systems (calendar, ticketing, ERP) without affecting existing integrations. Each new connection is added independently."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Let's connect AI to your systems",
+      "subtitle": "Request a free technical audit. We analyze your existing systems and show you exactly how we connect them with artificial intelligence — no obligations.",
+      "button": "Request free technical audit"
+    }
+  },
+
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy | GENERATIVA",
+      "description": "GENERATIVA privacy policy. Learn how we collect, use and protect your personal data in compliance with GDPR and Romanian legislation."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Privacy Policy"
+    },
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: February 2026",
+    "sections": [
+      {
+        "title": "1. Who we are",
+        "content": "This website is operated by DIGITAL LEADERSHIP SRL, a company registered in Romania, with its registered office at Dezmir, Apahida Commune, Viorelelor Street, no. 17A, Cluj County, Romania, Tax ID (CUI) 38585123, Trade Registry No. J12/6715/2017 (hereinafter referred to as \"GENERATIVA\", \"we\", \"our\").\n\nContact email: contact@generativa.ro\nWebsite: https://generativa.ro"
+      },
+      {
+        "title": "2. What personal data we collect",
+        "content": "We collect the following categories of personal data:",
+        "items": [
+          "Through the contact form: Full name, email address, phone number (optional), company name, industry, service of interest, message.",
+          "Through browsing: IP address, browser type, operating system, pages visited, session duration, traffic source. This data is collected through technical and analytics cookies.",
+          "Through direct communication: Data you voluntarily provide via email, phone or other communication channels."
+        ]
+      },
+      {
+        "title": "3. Legal bases for data processing",
+        "content": "We process your personal data based on the following legal grounds, in accordance with Art. 6 of the General Data Protection Regulation (GDPR):",
+        "items": [
+          "Consent (Art. 6(1)(a) GDPR) — for sending marketing communications and using non-essential cookies.",
+          "Legitimate interest (Art. 6(1)(f) GDPR) — for improving our services, analyzing website traffic and preventing fraud.",
+          "Performance of a contract or pre-contractual measures (Art. 6(1)(b) GDPR) — to respond to your inquiries through the contact form and to provide requested services.",
+          "Legal obligation (Art. 6(1)(c) GDPR) — to fulfill tax and accounting obligations."
+        ]
+      },
+      {
+        "title": "4. How we use your data",
+        "content": "Your personal data is used to:",
+        "items": [
+          "Respond to messages and inquiries sent through the contact form.",
+          "Provide information about our services.",
+          "Improve the browsing experience on the website.",
+          "Analyze traffic and visitor behavior (anonymized data).",
+          "Comply with applicable legal obligations."
+        ]
+      },
+      {
+        "title": "5. Who we share your data with",
+        "content": "We do not sell, rent or share your personal data with third parties for marketing purposes.",
+        "items": [
+          "Vercel Inc. — website hosting (EU servers).",
+          "Railway — backend API hosting.",
+          "Resend — transactional email delivery service.",
+          "Supabase — PostgreSQL database (EU servers).",
+          "Public authorities — only when legally required."
+        ],
+        "extra": "All our service providers are carefully selected and contractually obligated to comply with GDPR and ensure an adequate level of data protection."
+      },
+      {
+        "title": "6. Data transfers outside the EU/EEA",
+        "content": "In principle, your data is stored and processed on servers located in the European Union. Where certain third-party services involve data transfers outside the EU/EEA (e.g., Vercel for global CDN), we ensure adequate safeguards are in place in accordance with GDPR, including Standard Contractual Clauses (SCCs) approved by the European Commission or Adequacy Decisions."
+      },
+      {
+        "title": "7. How long we retain data",
+        "content": "We retain your personal data only for as long as necessary for the purposes for which it was collected:",
+        "items": [
+          "Contact form data: maximum 12 months from the last interaction, unless a contractual relationship is established.",
+          "Analytics cookies: as specified in the Cookie Policy (session or max. 12 months).",
+          "Accounting/tax data: 10 years in accordance with Romanian legislation (Law 82/1991 — Accounting Law)."
+        ]
+      },
+      {
+        "title": "8. Your rights under GDPR",
+        "content": "Under the General Data Protection Regulation (GDPR), you have the following rights:",
+        "items": [
+          "Right of access — you can request a copy of your personal data.",
+          "Right to rectification — you can request correction of inaccurate data.",
+          "Right to erasure (\"right to be forgotten\") — you can request deletion of your data under certain conditions.",
+          "Right to restriction of processing — you can limit how we process your data.",
+          "Right to data portability — you can receive your data in a structured, commonly used format.",
+          "Right to object — you can object to the processing of your data in certain situations.",
+          "Right not to be subject to automated decision-making — including profiling."
+        ],
+        "extra": "To exercise any of these rights, contact us at contact@generativa.ro. We will respond within 30 days."
+      },
+      {
+        "title": "9. Data security",
+        "content": "We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, loss, destruction or alteration. These include:\n\n• Encryption in transit (TLS/HTTPS) for all communications.\n• Encryption at rest (AES-256) for sensitive data.\n• Role-based data access restrictions.\n• Regular security audits.\n• Hosting in certified EU data centers."
+      },
+      {
+        "title": "10. Complaints",
+        "content": "If you believe that the processing of your personal data violates GDPR, you have the right to file a complaint with:\n\nThe National Supervisory Authority for Personal Data Processing (ANSPDCP)\nAddress: B-dul G-ral. Gheorghe Magheru 28-30, Sector 1, postal code 010336, Bucharest, Romania\nWebsite: www.dataprotection.ro\nEmail: anspdcp@dataprotection.ro"
+      },
+      {
+        "title": "11. Changes to this policy",
+        "content": "We reserve the right to update this Privacy Policy to reflect changes in our practices or applicable legislation. Any changes will be published on this page with the update date. We recommend periodically checking this page."
+      },
+      {
+        "title": "12. Contact",
+        "content": "For any questions regarding privacy or personal data protection:\n\nDIGITAL LEADERSHIP SRL\nAddress: Dezmir, Apahida Commune, Viorelelor Street, no. 17A, Cluj County, Romania\nEmail: contact@generativa.ro\nTax ID (CUI): 38585123 | Trade Registry: J12/6715/2017"
+      }
+    ],
+    "cookiePolicy": {
+      "title": "Cookie Policy",
+      "sections": [
+        {
+          "title": "What are cookies",
+          "content": "Cookies are small text files stored on your device when you visit a website. They are widely used to make websites work more efficiently and to provide information to site owners."
+        },
+        {
+          "title": "What cookies we use",
+          "content": "We use the following categories of cookies:",
+          "items": [
+            "Strictly necessary cookies — Essential for the website to function (e.g., cookie preference, session). Cannot be disabled. Duration: session.",
+            "Analytics cookies — Help us understand how the website is used (pages visited, visit duration, traffic sources). Data is anonymized. Duration: max. 12 months.",
+            "Functional cookies — Remember your preferences (selected language, display preferences). Duration: max. 12 months."
+          ]
+        },
+        {
+          "title": "How to control cookies",
+          "content": "On your first visit to the website, we ask for your consent for non-essential cookies via the cookie banner. You can:\n\n• Accept all cookies.\n• Reject non-essential cookies.\n• Modify your browser settings to block or delete cookies.\n\nNote: Disabling certain cookies may affect website functionality."
+        },
+        {
+          "title": "Third-party cookies",
+          "content": "Currently, we do NOT use third-party cookies for advertising or tracking. If we implement analytics services (e.g., Plausible Analytics, Umami), they will be configured for GDPR compliance, with anonymized data and EU storage."
+        },
+        {
+          "title": "Cookie Policy updates",
+          "content": "This policy may be updated periodically. Last update: February 2026."
+        }
+      ]
+    }
+  },
+
+  "terms": {
+    "meta": {
+      "title": "Terms & Conditions | GENERATIVA",
+      "description": "Terms and conditions of use for the GENERATIVA website. Information about services, intellectual property, liability limitations and applicable legislation."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Terms & Conditions"
+    },
+    "title": "Terms & Conditions",
+    "lastUpdated": "Last updated: February 2026",
+    "sections": [
+      {
+        "title": "1. General information",
+        "content": "This website is operated by DIGITAL LEADERSHIP SRL, a company registered in Romania, with its registered office at Dezmir, Apahida Commune, Viorelelor Street, no. 17A, Cluj County, Romania, Tax ID (CUI) 38585123, Trade Registry No. J12/6715/2017.\n\nWebsite: https://generativa.ro\nEmail: contact@generativa.ro\nCommercial brand: GENERATIVA\n\nBy accessing and using this website, you accept these Terms and Conditions in their entirety. If you disagree with any of the provisions below, please do not use this website."
+      },
+      {
+        "title": "2. Description of services",
+        "content": "GENERATIVA offers artificial intelligence services for businesses, including:\n\n• Business process automation with AI agents.\n• Conversational virtual assistants (voice, chat, email).\n• AI integrations with existing systems (CRM, ERP, booking, ticketing).\n• Process audit and consulting for AI implementation.\n\nThe information presented on the website is for informational purposes and does not constitute a binding offer. Specific service terms will be established through individual contracts."
+      },
+      {
+        "title": "3. Intellectual property",
+        "content": "All elements of this website — including but not limited to: design, texts, graphics, logos, images, source code, animations and database structure — are the property of DIGITAL LEADERSHIP SRL or are used under license and are protected by Romanian and international copyright and intellectual property law.\n\nReproduction, distribution, modification or use of the content without prior written consent from DIGITAL LEADERSHIP SRL is prohibited."
+      },
+      {
+        "title": "4. Website usage",
+        "content": "You agree to use this website in accordance with applicable laws and these Terms and Conditions. The following is prohibited:",
+        "items": [
+          "Using the website for illegal or unauthorized purposes.",
+          "Attempting unauthorized access to systems, servers or databases.",
+          "Transmitting content containing viruses, malware or other harmful programs.",
+          "Collecting personal data of other users without their consent.",
+          "Interfering with the normal operation of the website.",
+          "Reproducing, copying or distributing website content without written consent."
+        ]
+      },
+      {
+        "title": "5. Contact form",
+        "content": "By submitting a message through the contact form, you confirm that:\n\n• The information provided is true and accurate.\n• You are at least 18 years old or have the consent of a legal guardian.\n• You agree to the processing of your data in accordance with our Privacy Policy.\n\nWe reserve the right not to respond to messages containing offensive content, spam or irrelevant requests."
+      },
+      {
+        "title": "6. Limitation of liability",
+        "content": "The website is provided \"as is\", without warranties of any kind, express or implied.\n\nDIGITAL LEADERSHIP SRL is not responsible for:\n\n• Temporary interruptions in website operation.\n• Data loss caused by technical issues.\n• Content of external websites we reference (external links).\n• Decisions made based on information presented on the website.\n• Indirect, incidental or consequential damages resulting from website use.\n\nOur total liability shall in no case exceed the amount paid by the user for contracted services (if any)."
+      },
+      {
+        "title": "7. External links",
+        "content": "The website may contain links to third-party websites. We have no control over the content or privacy practices of these sites and assume no responsibility for them. We recommend reading the privacy policies of each site you visit."
+      },
+      {
+        "title": "8. Applicable law and jurisdiction",
+        "content": "These Terms and Conditions are governed by the laws of Romania.\n\nAny dispute will be resolved amicably. If an agreement cannot be reached, the dispute will be submitted for resolution to the competent courts in Cluj-Napoca, Romania.\n\nApplicable legislation:\n• Regulation (EU) 2016/679 — GDPR\n• Law no. 190/2018 — Romanian GDPR implementation law\n• Law no. 365/2002 — Electronic commerce law\n• Government Emergency Ordinance no. 34/2014 — Consumer rights\n• Romanian Civil Code"
+      },
+      {
+        "title": "9. Changes to Terms and Conditions",
+        "content": "We reserve the right to modify these Terms and Conditions at any time. Changes take effect from the date of publication on the website. Continued use of the website after publication of changes constitutes acceptance of the new terms.\n\nWe recommend periodically checking this page."
+      },
+      {
+        "title": "10. Contact",
+        "content": "For any questions regarding these Terms and Conditions:\n\nDIGITAL LEADERSHIP SRL\nAddress: Dezmir, Apahida Commune, Viorelelor Street, no. 17A, Cluj County, Romania\nEmail: contact@generativa.ro\nTax ID (CUI): 38585123 | Trade Registry: J12/6715/2017"
+      }
+    ]
   }
 }

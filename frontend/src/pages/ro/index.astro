@@ -10,11 +10,10 @@
  * 3. Services - Ce oferim
  * 4. UseCases - "Ți se pare familiar?" (auto-identificare)
  * 5. IntegrationHub - "Ce se întâmplă în spate" (vizual)
- * 6. ScaleWithConfidence - Statistici cu animație wave (stil Stripe)
- * 7. Benefits - Rezultate concrete
- * 8. Process - Cum funcționează
- * 9. FAQ - Întrebări frecvente
- * 10. CTA - Contact
+ * 6. ScaleWithConfidence - Animație wave + metrici business (unificate)
+ * 7. Process - Cum funcționează
+ * 8. FAQ - Întrebări frecvente
+ * 9. CTA - Contact
  */
 
 import BaseLayout from '@layouts/BaseLayout.astro';
@@ -24,7 +23,6 @@ import Services from '@components/sections/Services.astro';
 import UseCases from '@components/sections/UseCases.astro';
 import IntegrationHub from '@components/sections/IntegrationHub.astro';
 import ScaleWithConfidence from '@components/sections/ScaleWithConfidence.astro';
-import Benefits from '@components/sections/Benefits.astro';
 import Process from '@components/sections/Process.astro';
 import FAQ from '@components/sections/FAQ.astro';
 import CTA from '@components/sections/CTA.astro';
@@ -37,21 +35,54 @@ const t = getTranslations(locale);
 const title = `${t.site.name} - ${t.site.tagline}`;
 const description = t.site.description;
 
-// WebPage schema
+// Site URL (matches BaseLayout)
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Combined schema using @graph pattern
 const pageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': 'https://diginest.ai/ro/#webpage',
-  url: 'https://diginest.ai/ro/',
-  name: title,
-  description: description,
-  inLanguage: 'ro-RO',
-  isPartOf: {
-    '@id': 'https://diginest.ai/#website',
-  },
-  about: {
-    '@id': 'https://diginest.ai/#organization',
-  },
+  '@graph': [
+    // WebSite schema (helps Google Search)
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'GENERATIVA',
+      description: t.site.description,
+      inLanguage: ['ro-RO', 'en-US'],
+      publisher: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // WebPage schema
+    {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/ro/#webpage`,
+      url: `${siteUrl}/ro/`,
+      name: title,
+      description: description,
+      inLanguage: 'ro-RO',
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // BreadcrumbList (homepage = single item)
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/ro/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Acasa',
+          item: `${siteUrl}/ro/`,
+        },
+      ],
+    },
+  ],
 };
 ---
 
@@ -68,7 +99,6 @@ const pageSchema = {
   <UseCases locale={locale} />
   <IntegrationHub locale={locale} />
   <ScaleWithConfidence locale={locale} />
-  <Benefits locale={locale} />
   <Process locale={locale} />
   <FAQ locale={locale} />
   <CTA locale={locale} />

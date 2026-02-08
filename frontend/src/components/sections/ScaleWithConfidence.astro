@@ -12,36 +12,54 @@
  * - Fluxuri de date pornesc din stânga (input mare)
  * - Se comprimă într-un punct central (orchestrare/load balancing)
  * - Se redistribuie spre dreapta (output stabil)
+ *
+ * Include Benefits cards sub animație (unificate din secțiunea Benefits separată)
  */
 
+import { getTranslations, type Locale } from '@i18n/index';
+
 interface Props {
-  locale: 'ro' | 'en';
+  locale: Locale;
 }
 
 const { locale } = Astro.props;
+const t = getTranslations(locale);
 
 const content = {
   ro: {
     headline: 'Scalează cu încredere.',
     subheadline: 'Gestionează sute de conversații simultan cu aceeași calitate și viteză, chiar și în perioadele de vârf.',
-    stats: [
-      { value: '24/7', label: 'disponibilitate' },
-      { value: '<1s', label: 'timp de răspuns' },
-      { value: '100%', label: 'mesaje procesate' }
-    ]
   },
   en: {
     headline: 'Scale with confidence.',
     subheadline: 'Handle hundreds of conversations simultaneously with consistent quality and speed, even during peak periods.',
-    stats: [
-      { value: '24/7', label: 'availability' },
-      { value: '<1s', label: 'response time' },
-      { value: '100%', label: 'messages processed' }
-    ]
   }
 };
 
-const t = content[locale];
+const c = content[locale];
+
+const benefits = [
+  {
+    value: t.benefits.items.cost.value,
+    label: t.benefits.items.cost.label,
+    description: t.benefits.items.cost.description,
+  },
+  {
+    value: t.benefits.items.availability.value,
+    label: t.benefits.items.availability.label,
+    description: t.benefits.items.availability.description,
+  },
+  {
+    value: t.benefits.items.speed.value,
+    label: t.benefits.items.speed.label,
+    description: t.benefits.items.speed.description,
+  },
+  {
+    value: t.benefits.items.roi.value,
+    label: t.benefits.items.roi.label,
+    description: t.benefits.items.roi.description,
+  },
+];
 ---
 
 <section class="scale-section relative overflow-hidden">
@@ -52,8 +70,8 @@ const t = content[locale];
     <!-- Text content -->
     <div class="max-w-xl mb-8 lg:mb-12">
       <h2 class="text-xl lg:text-2xl leading-relaxed">
-        <span class="text-white font-semibold">{t.headline}</span>
-        <span class="text-slate-400 font-normal"> {t.subheadline}</span>
+        <span class="text-white font-semibold">{c.headline}</span>
+        <span class="text-slate-400 font-normal"> {c.subheadline}</span>
       </h2>
     </div>
 
@@ -62,18 +80,35 @@ const t = content[locale];
       <canvas id="waveCanvas"></canvas>
     </div>
 
-    <!-- Stats -->
-    <div class="stats-container flex justify-between max-w-4xl mt-8 lg:mt-12">
-      {t.stats.map((stat, index) => (
-        <div class="stat-item" style={`--stat-delay: ${index * 0.15}s`}>
-          <div class="stat-value text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight">
-            {stat.value}
+    <!-- Benefits cards -->
+    <div class="mt-12 lg:mt-16">
+      <div class="text-center mb-8 lg:mb-12">
+        <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">
+          {t.benefits.title}
+        </h3>
+        <p class="text-slate-400 text-lg">
+          {t.benefits.subtitle}
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {benefits.map((benefit, index) => (
+          <div
+            class="benefit-card text-center p-6 rounded-2xl bg-neutral-800/50 border border-neutral-700 hover:border-primary-500 transition-colors"
+            style={`--benefit-delay: ${index * 0.1}s`}
+          >
+            <div class="benefit-value text-4xl md:text-5xl font-bold mb-2">
+              {benefit.value}
+            </div>
+            <div class="text-lg font-semibold text-white mb-2">
+              {benefit.label}
+            </div>
+            <p class="text-sm text-neutral-400">
+              {benefit.description}
+            </p>
           </div>
-          <div class="text-slate-500 text-sm mt-2">
-            {stat.label}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -111,23 +146,23 @@ const t = content[locale];
     }
   }
 
-  /* Stat values - gradient text */
-  .stat-value {
+  /* Benefit values - gradient text */
+  .benefit-value {
     background: linear-gradient(135deg, #67e8f9 0%, #a78bfa 50%, #c084fc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Stat entrance animation */
-  .stat-item {
+  /* Benefit card entrance animation */
+  .benefit-card {
     opacity: 0;
-    transform: translateY(12px);
-    animation: statFadeIn 0.6s ease-out forwards;
-    animation-delay: calc(0.6s + var(--stat-delay, 0s));
+    transform: translateY(16px);
+    animation: benefitFadeIn 0.5s ease-out forwards;
+    animation-delay: calc(0.4s + var(--benefit-delay, 0s));
   }
 
-  @keyframes statFadeIn {
+  @keyframes benefitFadeIn {
     to {
       opacity: 1;
       transform: translateY(0);
@@ -135,7 +170,7 @@ const t = content[locale];
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .stat-item {
+    .benefit-card {
       animation: none;
       opacity: 1;
       transform: none;

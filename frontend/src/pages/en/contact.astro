@@ -1,6 +1,11 @@
 ---
 /**
  * English Contact Page
+ *
+ * SEO optimized contact page for GENERATIVA
+ * Target keywords: contact AI agents, free AI consultation, business automation
+ *
+ * Schema.org: ContactPage + ContactPoint + BreadcrumbList (@graph pattern)
  */
 
 import BaseLayout from '@layouts/BaseLayout.astro';
@@ -12,6 +17,65 @@ const t = getTranslations(locale);
 
 const title = `Contact - ${t.site.name}`;
 const description = 'Contact us for a free consultation about how AI agents can transform your business. We respond within 24 hours.';
+
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Schema.org @graph with ContactPage + ContactPoint + BreadcrumbList
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // ContactPage schema
+    {
+      '@type': 'ContactPage',
+      '@id': `${siteUrl}/en/contact/#webpage`,
+      url: `${siteUrl}/en/contact/`,
+      name: title,
+      description: description,
+      inLanguage: 'en-US',
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // ContactPoint — enables Google rich results for contact info
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization-contact`,
+      name: 'GENERATIVA',
+      url: siteUrl,
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: 'contact@generativa.ro',
+        availableLanguage: ['Romanian', 'English'],
+        areaServed: [
+          { '@type': 'Country', name: 'Romania' },
+          { '@type': 'Country', name: 'European Union' },
+        ],
+      },
+    },
+    // BreadcrumbList
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/en/contact/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: `${siteUrl}/en/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Contact',
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <BaseLayout
@@ -19,6 +83,7 @@ const description = 'Contact us for a free consultation about how AI agents can 
   description={description}
   locale={locale}
   canonicalUrl="/en/contact/"
+  schema={schema}
 >
   <ContactForm locale={locale} />
 </BaseLayout>

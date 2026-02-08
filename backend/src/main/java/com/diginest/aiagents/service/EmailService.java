@@ -85,7 +85,8 @@ public class EmailService {
                 sendViaResend(
                     request.getEmail(),
                     getConfirmationSubject(request.getLocale()),
-                    buildConfirmationText(request)
+                    buildConfirmationHtml(request),
+                    true  // Send as HTML
                 );
                 confirmSent = true;
                 log.info("Confirmation email sent to {} for contact request {}",
@@ -116,18 +117,29 @@ public class EmailService {
     }
 
     /**
-     * Send email via Resend HTTP API (port 443 - always available on cloud).
+     * Send plain-text email via Resend HTTP API.
      */
     private void sendViaResend(String to, String subject, String text) {
+        sendViaResend(to, subject, text, false);
+    }
+
+    /**
+     * Send email via Resend HTTP API (port 443 - always available on cloud).
+     * Supports both plain text and HTML content.
+     */
+    private void sendViaResend(String to, String subject, String content, boolean isHtml) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(resendApiKey);
+
+        // Resend API accepts "html" for HTML content, "text" for plain text
+        String contentKey = isHtml ? "html" : "text";
 
         Map<String, Object> body = Map.of(
             "from", fromEmail,
             "to", List.of(to),
             "subject", subject,
-            "text", text
+            contentKey, content
         );
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
@@ -177,51 +189,196 @@ public class EmailService {
             : "Mulțumim pentru mesaj - GENERATIVA";
     }
 
-    private String buildConfirmationText(ContactRequest request) {
-        boolean isEnglish = "en".equals(request.getLocale());
+    /**
+     * Build HTML confirmation email for the user.
+     *
+     * Design: Stripe/Linear-inspired enterprise B2B email.
+     * Layout: table-based for maximum email client compatibility.
+     * Styles: 100% inline CSS (no <style> tags, no flexbox/grid).
+     * i18n: Single template, locale-driven text via ternary operators.
+     * Tested for: Gmail, Outlook Desktop, Outlook Web, Apple Mail, Yahoo.
+     */
+    private String buildConfirmationHtml(ContactRequest request) {
+        boolean en = "en".equals(request.getLocale());
 
-        if (isEnglish) {
-            return String.format("""
-                Hello %s,
+        // Extract first name for greeting
+        String firstName = request.getName().contains(" ")
+            ? request.getName().substring(0, request.getName().indexOf(" "))
+            : request.getName();
 
-                Thank you for contacting GENERATIVA!
+        // Truncate message for display (max 300 chars)
+        String messagePreview = request.getMessage().length() > 300
+            ? request.getMessage().substring(0, 300) + "..."
+            : request.getMessage();
 
-                We have received your message and will get back to you within 24 hours.
+        // Escape HTML entities in user content
+        messagePreview = escapeHtml(messagePreview);
+        firstName = escapeHtml(firstName);
 
-                Your message:
-                "%s"
+        // --- i18n text blocks ---
+        String greeting = en
+            ? "Hi " + firstName + ","
+            : "Bun\u0103 " + firstName + ",";
 
-                Best regards,
-                The GENERATIVA Team
+        String mainText = en
+            ? "Thank you for reaching out. We\u2019ve received your message and a member of our team will get back to you within <strong style=\"color:#18181b;\">24 hours</strong>."
+            : "\u00CE\u021Bi mul\u021Bumim c\u0103 ne-ai contactat. Am primit mesajul t\u0103u \u0219i un membru al echipei noastre te va contacta \u00EEn maxim <strong style=\"color:#18181b;\">24 de ore</strong>.";
 
-                ---
-                Website: https://generativa.ro
-                Email: contact@generativa.ro
-                """,
-                request.getName(),
-                request.getMessage().substring(0, Math.min(200, request.getMessage().length())) + "..."
-            );
-        } else {
-            return String.format("""
-                Bună %s,
+        String messageLabel = en ? "Your message" : "Mesajul t\u0103u";
 
-                Îți mulțumim că ne-ai contactat!
+        String closing = en ? "Best regards," : "Cu stim\u0103,";
 
-                Am primit mesajul tău și te vom contacta în maxim 24 de ore.
+        String teamName = en ? "The GENERATIVA Team" : "Echipa GENERATIVA";
 
-                Mesajul tău:
-                "%s"
+        String footerNote = en
+            ? "This is an automated confirmation, but every message is read and answered by our team."
+            : "Acesta este un email automat de confirmare, dar fiecare mesaj este citit \u0219i tratat de echipa noastr\u0103.";
 
-                Cu drag,
-                Echipa GENERATIVA
+        String websiteLabel = en ? "Website" : "Website";
+        String emailLabel = en ? "Email" : "Email";
 
-                ---
-                Website: https://generativa.ro
-                Email: contact@generativa.ro
-                """,
-                request.getName(),
-                request.getMessage().substring(0, Math.min(200, request.getMessage().length())) + "..."
-            );
-        }
+        // --- HTML Template ---
+        return """
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="%LOCALE%">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="supported-color-schemes" content="light" />
+  <title>%SUBJECT%</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f4f5; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;">
+
+  <!-- Outer wrapper: full-width background -->
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f4f4f5;">
+    <tr>
+      <td align="center" style="padding:40px 16px;">
+
+        <!-- Inner container: 600px max width -->
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px; width:100%; background-color:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #e4e4e7;">
+
+          <!-- ====== HEADER: Logo ====== -->
+          <tr>
+            <td style="padding:32px 40px 24px 40px; border-bottom:1px solid #f4f4f5;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:22px; font-weight:700; color:#18181b; letter-spacing:-0.02em;">
+                    <!-- Logo text with brand gradient simulation -->
+                    <span style="color:#06b6d4;">G</span><span style="color:#18181b;">ENERATIVA</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ====== BODY: Main content ====== -->
+          <tr>
+            <td style="padding:32px 40px 16px 40px;">
+
+              <!-- Greeting -->
+              <p style="margin:0 0 20px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.6; color:#18181b; font-weight:500;">
+                %GREETING%
+              </p>
+
+              <!-- Main text -->
+              <p style="margin:0 0 28px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.7; color:#52525b;">
+                %MAIN_TEXT%
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- ====== MESSAGE BOX: User's message ====== -->
+          <tr>
+            <td style="padding:0 40px 32px 40px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#fafafa; border-radius:8px; border:1px solid #e4e4e7;">
+                <tr>
+                  <td style="padding:20px 24px;">
+                    <!-- Label -->
+                    <p style="margin:0 0 8px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:11px; font-weight:600; color:#a1a1aa; text-transform:uppercase; letter-spacing:0.05em;">
+                      %MESSAGE_LABEL%
+                    </p>
+                    <!-- Message content -->
+                    <p style="margin:0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.65; color:#3f3f46; font-style:italic;">
+                      %MESSAGE_PREVIEW%
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ====== CLOSING: Signature ====== -->
+          <tr>
+            <td style="padding:0 40px 32px 40px;">
+              <p style="margin:0 0 4px 0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.6; color:#52525b;">
+                %CLOSING%
+              </p>
+              <p style="margin:0; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:15px; line-height:1.6; color:#18181b; font-weight:600;">
+                %TEAM_NAME%
+              </p>
+            </td>
+          </tr>
+
+          <!-- ====== FOOTER ====== -->
+          <tr>
+            <td style="padding:24px 40px; background-color:#fafafa; border-top:1px solid #f4f4f5;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <!-- Links row -->
+                <tr>
+                  <td style="padding-bottom:16px; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; line-height:1.5; color:#a1a1aa;">
+                    <span style="color:#71717a;">%WEBSITE_LABEL%:</span>
+                    <a href="https://generativa.ro" style="color:#06b6d4; text-decoration:none;" target="_blank">generativa.ro</a>
+                    &nbsp;&nbsp;·&nbsp;&nbsp;
+                    <span style="color:#71717a;">%EMAIL_LABEL%:</span>
+                    <a href="mailto:contact@generativa.ro" style="color:#06b6d4; text-decoration:none;">contact@generativa.ro</a>
+                  </td>
+                </tr>
+                <!-- Trust note -->
+                <tr>
+                  <td style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:12px; line-height:1.5; color:#a1a1aa;">
+                    %FOOTER_NOTE%
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+        <!-- /Inner container -->
+
+      </td>
+    </tr>
+  </table>
+  <!-- /Outer wrapper -->
+
+</body>
+</html>"""
+            .replace("%LOCALE%", en ? "en" : "ro")
+            .replace("%SUBJECT%", getConfirmationSubject(request.getLocale()))
+            .replace("%GREETING%", greeting)
+            .replace("%MAIN_TEXT%", mainText)
+            .replace("%MESSAGE_LABEL%", messageLabel)
+            .replace("%MESSAGE_PREVIEW%", messagePreview)
+            .replace("%CLOSING%", closing)
+            .replace("%TEAM_NAME%", teamName)
+            .replace("%FOOTER_NOTE%", footerNote)
+            .replace("%WEBSITE_LABEL%", websiteLabel)
+            .replace("%EMAIL_LABEL%", emailLabel);
+    }
+
+    /**
+     * Escape HTML special characters in user-provided content
+     * to prevent XSS in email templates.
+     */
+    private String escapeHtml(String input) {
+        if (input == null) return "";
+        return input
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace("\"", "&quot;")
+            .replace("'", "&#39;");
     }
 }

@@ -27,7 +27,7 @@ const t = getTranslations(locale);
 const navItems = [
   {
     label: t.nav.services,
-    href: buildLocalePath('/servicii/', locale),
+    href: buildLocalePath('/', locale) + '#services',
     hasDropdown: true,
     items: [
       { label: t.services.automation.title, href: buildLocalePath('/servicii/automatizare-procese/', locale) },
@@ -36,7 +36,6 @@ const navItems = [
     ],
   },
   { label: t.nav.about, href: buildLocalePath('/despre/', locale) },
-  { label: t.nav.blog, href: buildLocalePath('/blog/', locale) },
   { label: t.nav.contact, href: buildLocalePath('/contact/', locale) },
 ];
 
@@ -62,7 +61,7 @@ const ctaHref = buildLocalePath('/contact/', locale);
 
 <header
   id="site-header"
-  class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-neutral-200/50 transition-all duration-300"
+  class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-primary-50/80 via-white/80 to-accent-50/60 backdrop-blur-lg border-b border-neutral-200/50 transition-all duration-300"
 >
   <div class="container-lg">
     <nav class="flex items-center justify-between h-16 lg:h-20" aria-label="Main navigation">

@@ -1,0 +1,585 @@
+---
+/**
+ * Conversational AI Agents Service Page - GENERATIVA
+ *
+ * Full service detail page with 7 sections:
+ * 1. Hero - Light gradient, breadcrumb, eyebrow, H1, CTA
+ * 2. Capabilities - What AI agents do (6 cards, mobile scroll)
+ * 3. Approach - How it works in practice (dark, vertical timeline, 4 steps)
+ * 4. Industries - Who benefits most (6 cards, mobile scroll)
+ * 5. Benefits - Results (5 metric cards, mobile scroll)
+ * 6. FAQ - Accordion Q&A (8 items, SEO/AEO optimized)
+ * 7. CTA - Dark gradient, contact button
+ *
+ * SEO/AEO: Question-based H2s, answer-first lead paragraphs,
+ * Schema.org handled at page shell level (@graph pattern).
+ *
+ * Design: Alternating light/dark sections (Stripe-inspired)
+ * Pattern: Same as ProcessAutomationPage.astro
+ */
+
+import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
+import Button from '@components/common/Button.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslations(locale);
+const sc = t.serviceConversational;
+
+const contactPath = buildLocalePath('/contact/', locale);
+const homePath = buildLocalePath('/', locale);
+const servicesPath = buildLocalePath('/', locale) + '#services';
+---
+
+<!-- ============================================ -->
+<!-- SECTION 1: HERO (Light gradient)             -->
+<!-- ============================================ -->
+<section class="relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary-50/30 pt-24 pb-12 md:pt-32 md:pb-20 lg:pt-40 lg:pb-28">
+  <!-- Background decorative elements -->
+  <div class="absolute inset-0 bg-grid opacity-20"></div>
+  <div class="absolute top-20 right-1/4 w-72 h-72 bg-primary-400/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-10 left-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+  <div class="container-lg relative">
+    <div class="max-w-3xl mx-auto text-center px-4 md:px-0">
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center justify-center gap-2 text-sm text-neutral-500">
+          <li>
+            <a href={homePath} class="hover:text-primary-600 transition-colors">
+              {sc.breadcrumb.home}
+            </a>
+          </li>
+          <li>
+            <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </li>
+          <li>
+            <a href={servicesPath} class="hover:text-primary-600 transition-colors">
+              {sc.breadcrumb.services}
+            </a>
+          </li>
+          <li>
+            <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </li>
+          <li class="text-neutral-900 font-medium">
+            {sc.breadcrumb.current}
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Eyebrow badge (chat bubble icon) -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-primary-100/80 text-primary-700 rounded-full text-xs md:text-sm font-medium mb-4 md:mb-6 backdrop-blur-sm">
+        <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+        </svg>
+        {sc.hero.eyebrow}
+      </div>
+
+      <!-- H1 Title -->
+      <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-900 mb-4 md:mb-6 leading-tight">
+        {sc.hero.title}
+      </h1>
+
+      <!-- AEO Lead Paragraph -->
+      <p class="text-base md:text-lg lg:text-xl text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-6 md:mb-8">
+        {sc.hero.subtitle}
+      </p>
+
+      <!-- CTA -->
+      <Button
+        href={contactPath}
+        variant="gradient"
+        size="lg"
+      >
+        {sc.hero.cta}
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </Button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 2: CAPABILITIES (White bg)           -->
+<!-- ============================================ -->
+<section class="py-12 md:py-20 lg:py-28 bg-white">
+  <div class="container-lg">
+    <!-- Header -->
+    <div class="text-center mb-8 md:mb-16 px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 md:mb-4">
+        {sc.capabilities.title}
+      </h2>
+      <p class="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+        {sc.capabilities.lead}
+      </p>
+    </div>
+
+    <!-- Dynamic swipe indicator (mobile only) -->
+    <div class="flex md:hidden items-center justify-center gap-2 text-xs text-neutral-400 mb-3 px-4" data-scroll-hint>
+      <svg class="w-4 h-4 transition-opacity duration-300 opacity-0" data-arrow-left fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span data-hint-text>{sc.capabilities.swipeHint}</span>
+      <svg class="w-4 h-4 animate-pulse transition-opacity duration-300" data-arrow-right fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+
+    <!-- 6 Cards - Mobile scroll / Desktop grid -->
+    <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0" data-scroll-container>
+      {sc.capabilities.items.map((item: { icon: string; title: string; description: string }) => (
+        <div class="group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto bg-neutral-50 rounded-2xl p-5 md:p-6 lg:p-8 border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-center">
+          <!-- Icon -->
+          <div class="w-11 h-11 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-4 md:mb-6 group-hover:from-primary-400/30 group-hover:to-accent-500/30 transition-all duration-300">
+            {item.icon === 'phone' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              </svg>
+            )}
+            {item.icon === 'intent' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11.25l-3-3m0 0l-3 3m3-3v7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            )}
+            {item.icon === 'collect' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0118 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3l1.5 1.5 3-3.75" />
+              </svg>
+            )}
+            {item.icon === 'actions' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+              </svg>
+            )}
+            {item.icon === 'multichannel' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+              </svg>
+            )}
+            {item.icon === 'escalation' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+              </svg>
+            )}
+          </div>
+
+          <!-- Content -->
+          <h3 class="text-lg md:text-xl font-bold text-neutral-900 mb-2 md:mb-3">
+            {item.title}
+          </h3>
+          <p class="text-sm md:text-base text-neutral-600 leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 3: APPROACH (Dark gradient)          -->
+<!-- ============================================ -->
+<section class="py-12 md:py-20 lg:py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 relative overflow-hidden">
+  <!-- Decorative elements -->
+  <div class="absolute inset-0 bg-grid-dark opacity-10"></div>
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+  <div class="container-lg relative">
+    <!-- Header -->
+    <div class="text-center mb-8 md:mb-16 px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 md:mb-4">
+        {sc.approach.title}
+      </h2>
+      <p class="text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+        {sc.approach.lead}
+      </p>
+    </div>
+
+    <!-- Vertical Timeline -->
+    <div class="max-w-3xl mx-auto px-4 md:px-0">
+      {sc.approach.steps.map((step: { title: string; description: string }, index: number) => (
+        <div class="relative flex gap-4 md:gap-6 pb-8 md:pb-12 last:pb-0">
+          <!-- Timeline connecting line -->
+          {index < sc.approach.steps.length - 1 && (
+            <div class="absolute left-4 md:left-5 top-10 md:top-12 bottom-0 w-0.5 bg-gradient-to-b from-primary-400/50 to-accent-500/50"></div>
+          )}
+
+          <!-- Step number circle -->
+          <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary-400 to-accent-500 flex items-center justify-center text-white font-bold text-sm md:text-base z-10 shadow-lg shadow-primary-500/25">
+            {index + 1}
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1 pt-0.5">
+            <h3 class="text-lg md:text-xl font-bold text-white mb-2">
+              {step.title}
+            </h3>
+            <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 4: INDUSTRIES (bg-neutral-50)        -->
+<!-- ============================================ -->
+<section class="py-12 md:py-20 lg:py-28 bg-neutral-50">
+  <div class="container-lg">
+    <!-- Header -->
+    <div class="text-center mb-8 md:mb-16 px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 md:mb-4">
+        {sc.industries.title}
+      </h2>
+      <p class="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+        {sc.industries.lead}
+      </p>
+    </div>
+
+    <!-- Dynamic swipe indicator (mobile only) -->
+    <div class="flex md:hidden items-center justify-center gap-2 text-xs text-neutral-400 mb-3 px-4" data-scroll-hint>
+      <svg class="w-4 h-4 transition-opacity duration-300 opacity-0" data-arrow-left fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      <span data-hint-text>{sc.industries.swipeHint}</span>
+      <svg class="w-4 h-4 animate-pulse transition-opacity duration-300" data-arrow-right fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+
+    <!-- 6 Industry Cards - Mobile scroll / Desktop grid -->
+    <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0" data-scroll-container>
+      {sc.industries.items.map((item: { icon: string; title: string; problem: string; solution: string }) => (
+        <div class="group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto bg-white rounded-2xl p-5 md:p-6 lg:p-8 border border-neutral-100 hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-center">
+          <!-- Icon -->
+          <div class="w-11 h-11 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-4 md:mb-6 group-hover:from-primary-400/30 group-hover:to-accent-500/30 transition-all duration-300">
+            {item.icon === 'headset' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+              </svg>
+            )}
+            {item.icon === 'medical' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+              </svg>
+            )}
+            {item.icon === 'hotel' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+              </svg>
+            )}
+            {item.icon === 'signal' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79M12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+              </svg>
+            )}
+            {item.icon === 'beauty' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+              </svg>
+            )}
+            {item.icon === 'car' && (
+              <svg class="w-5 h-5 md:w-7 md:h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17l-5.58 3.007A.563.563 0 015 17.635V12.61a.563.563 0 01.788-.517l5.632 2.345m0 0L17.053 12.1a.563.563 0 01.788.517v5.025a.563.563 0 01-.842.492l-5.58-3.007zm0 0V21M3 3l4.5 4.5M3 3v4.5M3 3h4.5M21 3l-4.5 4.5M21 3v4.5M21 3h-4.5" />
+              </svg>
+            )}
+          </div>
+
+          <!-- Content -->
+          <h3 class="text-lg md:text-xl font-bold text-neutral-900 mb-2 md:mb-3">
+            {item.title}
+          </h3>
+          <p class="text-sm text-neutral-500 mb-2 leading-relaxed">
+            <span class="font-medium text-neutral-700">Problema:</span> {item.problem}
+          </p>
+          <p class="text-sm text-neutral-600 leading-relaxed">
+            <span class="font-medium text-primary-600">Soluția:</span> {item.solution}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 5: BENEFITS (White bg)               -->
+<!-- ============================================ -->
+<section class="py-12 md:py-20 lg:py-28 bg-white">
+  <div class="container-lg">
+    <!-- Header -->
+    <div class="text-center mb-8 md:mb-16 px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 md:mb-4">
+        {sc.benefits.title}
+      </h2>
+      <p class="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+        {sc.benefits.lead}
+      </p>
+    </div>
+
+    <!-- 5 Benefit Cards - Mobile scroll / Desktop grid -->
+    <div class="flex md:grid md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+      {sc.benefits.items.map((item: { icon: string; value: string; label: string }) => (
+        <div class="flex-shrink-0 w-[200px] sm:w-[220px] md:w-auto bg-neutral-50 rounded-2xl p-5 md:p-6 border border-neutral-100 shadow-sm hover:shadow-lg hover:border-primary-200/50 transition-all duration-300 snap-center text-center">
+          <!-- Icon -->
+          <div class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary-400/20 to-accent-500/20 flex items-center justify-center mb-4">
+            {item.icon === 'clock' && (
+              <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            )}
+            {item.icon === 'trending' && (
+              <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+              </svg>
+            )}
+            {item.icon === 'wallet' && (
+              <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 00-2.25-2.25H15a3 3 0 11-6 0H5.25A2.25 2.25 0 003 12m18 0v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 013 9m18 0V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 013 6v3" />
+              </svg>
+            )}
+            {item.icon === 'star' && (
+              <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+              </svg>
+            )}
+            {item.icon === 'scale' && (
+              <svg class="w-6 h-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+              </svg>
+            )}
+          </div>
+
+          <!-- Value -->
+          <div class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-500 via-primary-600 to-accent-600 bg-clip-text text-transparent mb-1">
+            {item.value}
+          </div>
+
+          <!-- Label -->
+          <p class="text-sm md:text-base text-neutral-600 leading-relaxed">
+            {item.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 6: FAQ (bg-neutral-50)               -->
+<!-- ============================================ -->
+<section class="py-12 md:py-20 lg:py-28 bg-neutral-50">
+  <div class="container-lg">
+    <!-- Header -->
+    <div class="text-center mb-8 md:mb-16 px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-neutral-900 mb-3 md:mb-4">
+        {sc.faq.title}
+      </h2>
+      <p class="text-base md:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+        {sc.faq.lead}
+      </p>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="space-y-3 md:space-y-4 max-w-3xl mx-auto px-4 md:px-0" role="list">
+      {sc.faq.items.map((item: { question: string; answer: string }, index: number) => (
+        <div class="border border-neutral-200 rounded-xl overflow-hidden hover:border-neutral-300 transition-colors bg-white" role="listitem">
+          <button
+            class="w-full flex items-center justify-between gap-4 p-5 md:p-6 text-left hover:bg-neutral-50 transition-colors"
+            aria-expanded="false"
+            aria-controls={`conv-faq-content-${index}`}
+            data-conv-faq-trigger
+          >
+            <h3 class="text-base md:text-lg font-semibold text-neutral-900 pr-4">
+              {item.question}
+            </h3>
+            <!-- Plus icon (shown when closed) -->
+            <svg class="conv-faq-icon-plus w-5 h-5 flex-shrink-0 text-neutral-400 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <!-- Minus icon (shown when open) -->
+            <svg class="conv-faq-icon-minus w-5 h-5 flex-shrink-0 text-primary-500 hidden transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+            </svg>
+          </button>
+          <div id={`conv-faq-content-${index}`} class="conv-faq-content hidden" role="region">
+            <div class="px-5 pb-5 md:px-6 md:pb-6">
+              <p class="text-sm md:text-base text-neutral-600 leading-relaxed">
+                {item.answer}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 7: CTA (Dark gradient)               -->
+<!-- ============================================ -->
+<section class="py-12 md:py-20 lg:py-28 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 relative overflow-hidden">
+  <!-- Decorative elements -->
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
+
+  <div class="container-lg relative">
+    <div class="max-w-2xl mx-auto text-center px-4 md:px-0">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 md:mb-4">
+        {sc.cta.title}
+      </h2>
+      <p class="text-base md:text-lg text-slate-300 mb-6 md:mb-8">
+        {sc.cta.subtitle}
+      </p>
+      <Button
+        href={contactPath}
+        variant="gradient"
+        size="lg"
+      >
+        {sc.cta.button}
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </Button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- STYLES                                        -->
+<!-- ============================================ -->
+<style>
+  .bg-grid {
+    background-image: radial-gradient(circle, #e5e7eb 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .bg-grid-dark {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<!-- ============================================ -->
+<!-- FAQ ACCORDION SCRIPT                          -->
+<!-- ============================================ -->
+<script>
+  /**
+   * FAQ Accordion for Conversational Agents Service Page
+   * Uses data-conv-faq-trigger selector to avoid collision with
+   * homepage FAQ and process automation FAQ
+   */
+  (function() {
+    'use strict';
+
+    function initConvFaqAccordion() {
+      const triggers = document.querySelectorAll('[data-conv-faq-trigger]');
+      if (!triggers.length) return;
+
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+          const controlsId = trigger.getAttribute('aria-controls');
+          if (!controlsId) return;
+
+          const content = document.getElementById(controlsId);
+          if (!content) return;
+
+          const plusIcon = trigger.querySelector('.conv-faq-icon-plus') as HTMLElement;
+          const minusIcon = trigger.querySelector('.conv-faq-icon-minus') as HTMLElement;
+
+          // Close all other items first
+          triggers.forEach((otherTrigger) => {
+            if (otherTrigger !== trigger) {
+              const otherId = otherTrigger.getAttribute('aria-controls');
+              if (!otherId) return;
+              const otherContent = document.getElementById(otherId);
+              const otherPlus = otherTrigger.querySelector('.conv-faq-icon-plus') as HTMLElement;
+              const otherMinus = otherTrigger.querySelector('.conv-faq-icon-minus') as HTMLElement;
+
+              otherTrigger.setAttribute('aria-expanded', 'false');
+              otherContent?.classList.add('hidden');
+              otherPlus?.classList.remove('hidden');
+              otherMinus?.classList.add('hidden');
+            }
+          });
+
+          // Toggle current item
+          if (isExpanded) {
+            trigger.setAttribute('aria-expanded', 'false');
+            content.classList.add('hidden');
+            plusIcon?.classList.remove('hidden');
+            minusIcon?.classList.add('hidden');
+          } else {
+            trigger.setAttribute('aria-expanded', 'true');
+            content.classList.remove('hidden');
+            plusIcon?.classList.add('hidden');
+            minusIcon?.classList.remove('hidden');
+          }
+        });
+      });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initConvFaqAccordion);
+
+    // Re-initialize on Astro SPA navigation
+    document.addEventListener('astro:page-load', initConvFaqAccordion);
+  })();
+</script>
+
+<!-- Dynamic scroll indicators -->
+<script>
+  (function() {
+    function initScrollHints() {
+      const hints = document.querySelectorAll('[data-scroll-hint]');
+      hints.forEach((hint) => {
+        const container = hint.parentElement?.querySelector('[data-scroll-container]') as HTMLElement | null;
+        if (!container) return;
+
+        const arrowLeft = hint.querySelector('[data-arrow-left]') as HTMLElement;
+        const arrowRight = hint.querySelector('[data-arrow-right]') as HTMLElement;
+
+        function updateArrows() {
+          if (!container || !arrowLeft || !arrowRight) return;
+          const { scrollLeft, scrollWidth, clientWidth } = container;
+          const threshold = 10;
+          const atStart = scrollLeft <= threshold;
+          const atEnd = scrollLeft + clientWidth >= scrollWidth - threshold;
+
+          arrowLeft.style.opacity = atStart ? '0' : '1';
+          arrowLeft.classList.toggle('animate-pulse', !atStart);
+          arrowRight.style.opacity = atEnd ? '0' : '1';
+          arrowRight.classList.toggle('animate-pulse', !atEnd);
+        }
+
+        container.addEventListener('scroll', updateArrows, { passive: true });
+        updateArrows();
+        window.addEventListener('load', updateArrows);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', initScrollHints);
+    document.addEventListener('astro:page-load', initScrollHints);
+  })();
+</script>

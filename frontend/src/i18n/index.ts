@@ -123,6 +123,18 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   // Services pages
   'servicii': { ro: 'servicii', en: 'services' },
   'services': { ro: 'servicii', en: 'services' },
+  // Service sub-pages
+  'automatizare-procese': { ro: 'automatizare-procese', en: 'process-automation' },
+  'process-automation': { ro: 'automatizare-procese', en: 'process-automation' },
+  'agenti-conversationali': { ro: 'agenti-conversationali', en: 'conversational-agents' },
+  'conversational-agents': { ro: 'agenti-conversationali', en: 'conversational-agents' },
+  'integrari-ai': { ro: 'integrari-ai', en: 'ai-integrations' },
+  'ai-integrations': { ro: 'integrari-ai', en: 'ai-integrations' },
+  // Legal pages
+  'politica-confidentialitate': { ro: 'politica-confidentialitate', en: 'privacy-policy' },
+  'privacy-policy': { ro: 'politica-confidentialitate', en: 'privacy-policy' },
+  'termeni-conditii': { ro: 'termeni-conditii', en: 'terms-conditions' },
+  'terms-conditions': { ro: 'termeni-conditii', en: 'terms-conditions' },
   // Blog
   'blog': { ro: 'blog', en: 'blog' },
   // Add more mappings as needed

@@ -30,10 +30,36 @@
 15. ✅ **Mobile Optimization** - Scroll orizontal pentru carduri (vezi secțiunea dedicată)
 16. ✅ **Backend Email Funcțional** - Resend HTTP API, PostgreSQL, async emails (vezi secțiunea dedicată)
 17. ✅ **Contact Form UX** - Mesaj succes auto-hide după 5s, processed tracking în DB
+18. ✅ **Automatizare Procese Page** - Prima pagină de serviciu cu SEO/AEO, Schema.org @graph (Service + FAQPage + BreadcrumbList + HowTo), FAQ accordion, question-based H2s
+19. ✅ **Site-wide SEO/AEO Audit** - Schema.org pe toate paginile (Homepage, About, Contact), fix domain URLs, BreadcrumbList universal
+20. ✅ **Agenți Conversaționali Page** - A doua pagină de serviciu cu 7 secțiuni, SEO/AEO, Schema.org @graph, 8 FAQ items, 6 industrii cu problem→solution
+21. ✅ **Integrări AI Page** - A treia pagină de serviciu cu 7 secțiuni (Systems, Approach, Capabilities, Benefits, FAQ, CTA), SEO/AEO, Schema.org @graph, 8 FAQ items, hasOfferCatalog (CRM/Booking/Ticketing/ERP)
+22. ✅ **Fix 404 Servicii** - Link-ul "Servicii" din header/breadcrumb duce la homepage `/#services` (scroll), nu la pagină separată
+23. ✅ **Blog & Resources Cleanup** - Eliminat Blog din Header și secțiunea Resurse din Footer (pagini goale dăunează SEO la business nou)
+24. ✅ **Custom Form Validation** - Validare inline locale-aware (`novalidate` + JS custom), mesaje de eroare în limba paginii, regex email + E.164 phone (7-15 cifre)
+25. ✅ **Contact Form Lead Qualification** - Dropdown-uri Industry (8 opțiuni) și Interest (4 opțiuni) pentru calificarea lead-urilor înainte de primul contact
+26. ✅ **Unificare ScaleWithConfidence + Benefits** - Eliminat secțiunea Benefits separată, cardurile (70%, 24/7, 10x, 300%) integrate sub animația wave într-o singură secțiune dark coerentă
+27. ✅ **Politica de Confidențialitate** - Pagină legală GDPR-compliant cu 12 secțiuni + Politica de Cookies (5 secțiuni), Schema.org WebPage + BreadcrumbList, RO + EN
+28. ✅ **Termeni și Condiții** - Pagină legală cu 10 secțiuni (servicii, proprietate intelectuală, limitarea răspunderii, legislație), Schema.org WebPage + BreadcrumbList, RO + EN
+29. ✅ **Footer Update** - Înlocuit placeholder company info cu datele reale DIGITAL LEADERSHIP SRL (CUI: 38585123, J12/6715/2017)
+30. ✅ **Hreflang Fix** - Corectare hreflang tags în BaseLayout: `buildAlternatePath()` pentru traducere corectă path-uri, `x-default` → RO (piață principală), Organization schema cu adresă reală
+31. ✅ **Language Switcher Redesign** - Toggle pill compact (RO | EN) cu gradient brand, fără emoji flags (best practice 2025: flags = țări, nu limbi), accessibility complet (aria-current, lang attributes)
+32. ✅ **Services Mobile Scroll** - Carduri servicii scroll orizontal pe mobile (flex md:grid pattern)
+33. ✅ **Logo Redesign PNG** - Înlocuit SVG logo cu 3D G letter PNG (transparent background), imagine AI-generated, Logo.astro rescris complet
+34. ✅ **Header Gradient** - Fundal header cu gradient subtil cyan→white→lavender (`from-primary-50/80 via-white/80 to-accent-50/60`) + ambient color blobs în BaseLayout
+35. ✅ **IntegrationHub Mobile Labels** - Afișare label-uri sub iconițe pe toate dimensiunile (nu doar pe sm:+)
+36. ✅ **Favicon PNG Update** - Favicon-ul din tab-ul Chrome actualizat de la SVG vechi la PNG-uri generate din noul logo 3D (32x32, 16x16, apple-touch-icon 180x180)
+37. ✅ **CTA Redesign (Stripe-inspired)** - Dark gradient, eyebrow badge, gradient button cu glow, trust indicators. Canvas ribbon animation testată și respinsă. Buton secundar "Cum funcționează?" eliminat (link stricat + un singur CTA clar e mai eficient)
+38. ✅ **Section Spacing Optimization** - Reducere spațiere între secțiuni (Services pt-10/md:pt-14, UseCases pt-10/md:pt-14), normalizare IntegrationHub mobile (py-12→py-16), reducere CTA (py-20/28/36→py-16/24/28)
+39. ✅ **Mobile Card Centering** - Carduri centrate pe mobile (`w-[85vw]` + `snap-center`) pe toate paginile: 3 service pages, About, Homepage (Services, UseCases, BenefitsStrip, IntegrationHub)
+40. ✅ **Dynamic Scroll Arrows** - Săgeți de direcție dinamice pe mobile: arată doar direcția disponibilă (dreapta la start, ambele la mijloc, stânga la final). Pattern `data-scroll-hint` + `data-scroll-container` cu JS pe scroll event
+41. ✅ **AI Integrations 6th Capability** - Adăugat "Notificări și alerte inteligente" (Smart notifications & alerts) pe pagina Integrări AI pentru grid complet 3+3 pe desktop
+42. ✅ **Language Switcher Scroll Preservation** - La schimbarea limbii (RO↔EN), utilizatorul rămâne în aceeași poziție pe pagină. Scroll position salvat ca procent în `sessionStorage`, restaurat instant (`behavior: 'instant'`) pe pagina nouă
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
 - [ ] Test complet pe staging
+- [ ] Verificare vizuală pe cel mai recent preview URL Vercel
 
 ### Următorii pași:
 1. [ ] Verificare staging URL după deploy
@@ -125,7 +151,7 @@
 3. Services            → Ce oferim (existent)
 4. UseCases            → "Ți se pare familiar?" (auto-identificare)
 5. IntegrationHub      → Vizualizare conexiuni (stil Stripe)
-6. Benefits            → Rezultate concrete (existent)
+6. ScaleWithConfidence → Animație wave + metrici business (unificate)
 7. Process             → Cum funcționează (existent)
 8. FAQ                 → Întrebări frecvente (existent)
 9. CTA                 → Contact (existent)
@@ -175,8 +201,12 @@ background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
 
 ### Logo
 - **Component**: `frontend/src/components/common/Logo.astro`
-- **Design**: Litera "G" cu gradient + noduri orbitale animate
-- **Variante**: `default` (pe light), `white` (pe dark)
+- **Design**: 3D G letter PNG cu transparent background (AI-generated, glossy cyan-blue 3D effect)
+- **Fișier imagine**: `/images/generativa-g-512.png` (512x512, transparent PNG)
+- **Favicon**: `/favicon-32.png`, `/favicon-16.png`, `/apple-touch-icon.png` (generate din logo-ul PNG cu Sharp)
+- **Variante**: `default` (pe light, text gradient), `white` (pe dark, text alb), `dark` (text dark)
+- **Sizes**: `sm` (w-9), `md` (w-11), `lg` (w-14), `xl` (w-20)
+- **IMPORTANT**: Nu mai folosim SVG logo. `favicon.svg` vechi există încă în repo dar NU e referit nicăieri.
 
 ---
 
@@ -207,11 +237,10 @@ Secțiuni în ordine:
 3. <Services />             - Ce oferim (3 servicii)
 4. <UseCases />             - 6 industrii cu problemă→soluție
 5. <IntegrationHub />       - Hub central + 8 conexiuni
-6. <ScaleWithConfidence />  - Animație wave + statistici scalare
-7. <Benefits />             - Rezultate cu numere
-8. <Process />              - 4 pași cum funcționăm
-9. <FAQ />                  - Întrebări frecvente
-10. <CTA />                 - Contact final
+6. <ScaleWithConfidence />  - Animație wave + metrici business (unificate)
+7. <Process />              - 4 pași cum funcționăm
+8. <FAQ />                  - Întrebări frecvente
+9. <CTA />                  - Contact final
 ```
 
 ### Conținut Cheie per Secțiune
@@ -288,6 +317,11 @@ AI Agents Platform/
 │   │   │       ├── BenefitsStrip.astro   # 🆕 6 beneficii vizuale
 │   │   │       ├── UseCases.astro        # 🆕 Auto-identificare industrii
 │   │   │       ├── IntegrationHub.astro  # 🆕 Hub conexiuni (stil Stripe)
+│   │   │       ├── ProcessAutomationPage.astro # 🆕 Pagina serviciu automatizare (SEO/AEO)
+│   │   │       ├── ConversationalAgentsPage.astro # 🆕 Pagina serviciu agenți conversaționali (SEO/AEO)
+│   │   │       ├── AiIntegrationsPage.astro # 🆕 Pagina serviciu integrări AI (SEO/AEO)
+│   │   │       ├── PrivacyPolicyPage.astro  # 🆕 Politica de confidențialitate + Cookie Policy
+│   │   │       ├── TermsConditionsPage.astro # 🆕 Termeni și condiții
 │   │   │       ├── Services.astro        # Servicii
 │   │   │       ├── Benefits.astro        # Rezultate
 │   │   │       ├── Process.astro         # Cum funcționăm
@@ -305,8 +339,13 @@ AI Agents Platform/
 │   │   └── styles/
 │   │       └── global.css                # Stiluri globale
 │   ├── public/
-│   │   ├── favicon.svg
+│   │   ├── favicon-32.png              # Favicon 32x32 (3D G logo PNG)
+│   │   ├── favicon-16.png              # Favicon 16x16
+│   │   ├── apple-touch-icon.png        # iOS icon 180x180
+│   │   ├── favicon.svg                 # ⚠️ VECHI - nu mai e referit, păstrat în repo
 │   │   └── images/
+│   │       ├── generativa-g-512.png    # 🆕 Logo principal (3D G, transparent)
+│   │       └── generativa-g-200.png    # 🆕 Logo mic
 │   ├── tailwind.config.mjs               # Culori brand
 │   └── package.json
 │
@@ -396,6 +435,68 @@ git push origin main
 3. **Vercel auto-deploy** → orice push pe main merge INSTANT în producție
 4. **noindex automat** → toate preview URLs sunt protejate de indexare Google
 5. **Documentează în .md** → orice decizie importantă trebuie documentată pentru sesiuni viitoare
+6. **SEO/AEO obligatoriu** → orice pagină nouă TREBUIE să respecte regulile din `docs/SEO-AEO-GUIDELINES.md`
+
+---
+
+## 🔍 SEO & AEO — REGULI OBLIGATORII
+
+> **CITEȘTE `docs/SEO-AEO-GUIDELINES.md`** pentru documentul complet cu template-uri și exemple. Această secțiune conține regulile CRITICE pe scurt.
+
+### De Ce Contează
+
+Fiecare pagină este optimizată **dual**: SEO (Google clasic) + AEO (AI Overviews, Featured Snippets). Tehnicile se completează reciproc.
+
+### Reguli Critice (Sumar)
+
+| # | Regulă | Specificație |
+|---|--------|--------------|
+| 1 | **Title** | 50-70 chars, keyword la ÎNCEPUT, `GENERATIVA` la final |
+| 2 | **Description** | 140-160 chars, include CTA ("Solicită demo", "Consultanță gratuită") |
+| 3 | **H1** | Exact 1 per pagină, cuvântul cheie principal |
+| 4 | **H2** | Question-based ("Ce face X?", "Cum funcționează X?") — OBLIGATORIU |
+| 5 | **Lead paragraph** | 40-60 cuvinte imediat după H2, răspuns DIRECT la întrebare |
+| 6 | **Schema.org** | Pattern `@graph` cu tipurile corecte per pagină (vezi mai jos) |
+| 7 | **FAQ** | Minim 6 întrebări din People Also Ask, selector UNIC per pagină |
+| 8 | **Canonical URL** | Cu trailing slash, pe FIECARE pagină |
+| 9 | **Hreflang** | Automat în BaseLayout (`buildAlternatePath`), x-default → RO |
+| 10 | **i18n paths** | Adaugă mapări în `i18n/index.ts` pentru Language Switcher + hreflang |
+
+### Schema.org per Tip de Pagină
+
+| Tip Pagină | Scheme în `@graph` |
+|------------|-------------------|
+| Homepage | WebSite + WebPage + BreadcrumbList |
+| About | AboutPage (cu Organization) + BreadcrumbList |
+| Contact | ContactPage + Organization (ContactPoint) + BreadcrumbList |
+| Service | Service + FAQPage + BreadcrumbList + HowTo |
+| Legal (Privacy, Terms) | WebPage + BreadcrumbList |
+
+### FAQ Accordion — Naming Convention
+
+| Pagina | Data Attribute | Function Name |
+|--------|---------------|---------------|
+| Homepage | `data-faq-trigger` | (inline) |
+| Automatizare Procese | `data-service-faq-trigger` | `initServiceFaqAccordion` |
+| Agenți Conversaționali | `data-conv-faq-trigger` | `initConvFaqAccordion` |
+| Integrări AI | `data-integ-faq-trigger` | `initIntegFaqAccordion` |
+| **Pagină Nouă** | `data-[prefix]-faq-trigger` | `init[Prefix]FaqAccordion` |
+
+**Convenție**: Prefix scurt din slug pagină. NICIODATĂ reutiliza selector existent!
+
+### Checklist Rapid — Pagină Nouă de Serviciu
+
+- [ ] `ro.json` + `en.json` — bloc `serviceNume` complet
+- [ ] `i18n/index.ts` — path mappings ambele direcții (CRITIC: necesar pentru hreflang + Language Switcher)
+- [ ] Component `.astro` — secțiuni cu H2 question-based + lead paragraphs
+- [ ] Page shell RO — Schema.org @graph (Service + FAQPage + BreadcrumbList + HowTo)
+- [ ] Page shell EN — Mirror cu locale='en'
+- [ ] FAQ selector unic (`data-[prefix]-faq-trigger`)
+- [ ] `CLAUDE.md` — update: Ce s-a implementat, 404 table, structura, session history
+- [ ] `npm run build` — zero erori
+- [ ] Language Switcher — RO ↔ EN funcționează
+
+> **Document complet**: `docs/SEO-AEO-GUIDELINES.md` — conține template-uri, exemple concrete, și checklist detaliat.
 
 ---
 
@@ -466,9 +567,10 @@ right: 1.5rem;
 | Document | Conține |
 |----------|---------|
 | `docs/STRATEGY.md` | Analiză competitivă detaliată, strategie diferențiere, design system Stripe |
+| `docs/SEO-AEO-GUIDELINES.md` | **🔍 Reguli SEO & AEO obligatorii** — template-uri, Schema.org, checklist-uri |
 | `docs/branding/BRANDING-NOTES.md` | Detalii logo, culori, tipografie |
 | `docs/DEPLOYMENT.md` | Ghid deployment Vercel + Railway |
-| `docs/MAINTENANCE.md` | Ghid mentenanță și actualizări |
+| `docs/MAINTENANCE.md` | Ghid mentenanță și actualizări, proceduri SEO audit |
 
 ---
 
@@ -838,15 +940,47 @@ Pe mobile (sub 768px), secțiunile cu multiple carduri folosesc **scroll orizont
 </div>
 ```
 
-### Swipe Hint (Indicator vizual)
+### Dynamic Scroll Arrows (Pattern Standard)
+
+Săgețile de scroll sunt **dinamice** — arată doar direcția în care se poate scrola:
 
 ```html
-<!-- Afișat doar pe mobile -->
-<div class="flex md:hidden items-center justify-center gap-2 text-xs text-slate-500 mb-3">
-  <svg class="w-4 h-4 animate-pulse"><!-- arrow icon --></svg>
-  <span>Glisează pentru mai multe</span>
+<!-- Indicator dinamic (mobile only) -->
+<div class="flex md:hidden items-center justify-center gap-2 text-xs text-neutral-400 mb-3" data-scroll-hint>
+  <svg class="w-4 h-4 transition-opacity duration-300 opacity-0" data-arrow-left><!-- left chevron --></svg>
+  <span data-hint-text>Glisează pentru mai multe</span>
+  <svg class="w-4 h-4 animate-pulse transition-opacity duration-300" data-arrow-right><!-- right chevron --></svg>
+</div>
+
+<!-- Container cu data-scroll-container -->
+<div class="flex md:grid ... overflow-x-auto ... snap-x snap-mandatory" data-scroll-container>
+  <!-- cards -->
 </div>
 ```
+
+```javascript
+// Script: actualizează săgețile pe scroll
+function updateArrows() {
+  const { scrollLeft, scrollWidth, clientWidth } = container;
+  const atStart = scrollLeft <= 10;
+  const atEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+
+  arrowLeft.style.opacity = atStart ? '0' : '1';
+  arrowLeft.classList.toggle('animate-pulse', !atStart);
+  arrowRight.style.opacity = atEnd ? '0' : '1';
+  arrowRight.classList.toggle('animate-pulse', !atEnd);
+}
+container.addEventListener('scroll', updateArrows, { passive: true });
+```
+
+**Comportament:**
+| Poziție | Săgeata stânga | Săgeata dreapta |
+|---------|----------------|-----------------|
+| La început | Invizibilă | ✅ Pulsează |
+| La mijloc | ✅ Pulsează | ✅ Pulsează |
+| La final | ✅ Pulsează | Invizibilă |
+
+**Pagini cu pattern aplicat**: Services, UseCases (homepage), ProcessAutomation, ConversationalAgents (2x), AiIntegrations (2x)
 
 ### Dot Indicators (UseCases)
 
@@ -903,13 +1037,9 @@ Pe mobile (sub 768px), secțiunile cu multiple carduri folosesc **scroll orizont
 | Feb 2026 | ScrollToTop se suprapunea cu CookieBanner pe mobile | Ambele elemente în colțul dreapta-jos | ScrollToTop așteaptă cookie dismiss pe mobile, apare imediat pe desktop |
 | Feb 2026 | Mobile menu (hamburger) nu se deschidea | Event listeners nu se atașau corect, Astro SPA mode | Adăugat DOMContentLoaded + astro:page-load listeners, clonare buton |
 | Feb 2026 | Text invizibil pe secțiuni dark (About page) | Titlurile din secțiunile Mission și Stats nu aveau `text-white` explicit | Adăugat `text-white` la toate titlurile pe fundaluri dark |
-| Feb 2026 | Email-urile nu se trimiteau din Railway | Railway blochează toate porturile SMTP outbound (25, 465, 587) | Migrat de la JavaMailSender/SMTP la Resend HTTP API (port 443) |
-| Feb 2026 | Formularul de contact bloca pagina 4+ minute | Email se trimitea sincron pe thread-ul HTTP request | Adăugat `@Async` + `@EnableAsync` pentru trimitere în background |
-| Feb 2026 | Health endpoint raporta DOWN | Spring Boot MailHealthIndicator încerca SMTP și timeout-a | Dezactivat `management.health.mail.enabled=false` |
-| Feb 2026 | `processed`/`processed_at` mereu false/NULL în DB | ContactService nu actualiza câmpurile după trimiterea emailurilor | EmailService actualizează DB după trimitere cu succes/eșec |
-| Feb 2026 | Railway deploy eșua — "Could not find root directory" | Lipsea configurație build | Creat `nixpacks.toml` și `Procfile` |
-| Feb 2026 | Baza de date se pierdea la restart | App-ul rula pe H2 in-memory în producție | Adăugat PostgreSQL addon pe Railway, setat `SPRING_PROFILES_ACTIVE=prod` |
-| Feb 2026 | Mesajul de succes din contact form rămânea permanent | Nu exista auto-hide | Adăugat `setTimeout` 5 secunde pentru auto-hide |
+| Feb 2026 | Favicon în tab Chrome arăta vechiul logo SVG | Commit `1080d32` a revenit favicon.svg la SVG vechi, dar `3cf64f3` nu l-a restaurat | Generate PNG favicons (32x32, 16x16) din noul logo, actualizat BaseLayout |
+| Feb 2026 | IntegrationHub labels invizibile pe mobile | Label-urile aveau `hidden sm:block` — ascunse pe mobile | Schimbat la `block` pe toate dimensiunile |
+| Feb 2026 | Logo rollback greșit — revenit TOTAL la SVG | La "rollback" s-a presupus revert total, dar utilizatoarea voia doar eliminarea cercului gri | Restaurat PNG logo din commit anterior (`d86a3cd`) |
 
 ### Link-uri care duc la 404 (Pagini neimplementate) ⚠️
 
@@ -917,14 +1047,14 @@ Aceste link-uri există în Header/Footer dar paginile NU sunt create încă:
 
 | Link | Path RO | Path EN | Status |
 |------|---------|---------|--------|
-| **Servicii dropdown** | `/ro/servicii/` | `/en/services/` | ❌ Nu există |
-| Automatizare Procese | `/ro/servicii/automatizare-procese/` | `/en/services/process-automation/` | ❌ Nu există |
-| Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | `/en/services/conversational-agents/` | ❌ Nu există |
-| Integrări AI | `/ro/servicii/integrari-ai/` | `/en/services/ai-integrations/` | ❌ Nu există |
-| **Blog** | `/ro/blog/` | `/en/blog/` | ❌ Nu există |
-| Studii de caz | `/ro/studii-caz/` | `/en/case-studies/` | ❌ Nu există |
-| Politica confidențialitate | `/ro/politica-confidentialitate/` | `/en/privacy-policy/` | ❌ Nu există |
-| Termeni și condiții | `/ro/termeni-conditii/` | `/en/terms-conditions/` | ❌ Nu există |
+| **Servicii dropdown** | `/ro/servicii/` | `/en/services/` | ✅ Redirect la homepage /#services |
+| Automatizare Procese | `/ro/servicii/automatizare-procese/` | `/en/services/process-automation/` | ✅ Implementat |
+| Agenți Conversaționali | `/ro/servicii/agenti-conversationali/` | `/en/services/conversational-agents/` | ✅ Implementat |
+| Integrări AI | `/ro/servicii/integrari-ai/` | `/en/services/ai-integrations/` | ✅ Implementat |
+| ~~Blog~~ | ~~`/ro/blog/`~~ | ~~`/en/blog/`~~ | ✅ Eliminat din Header (pagini goale = SEO negativ) |
+| Studii de caz | `/ro/studii-caz/` | `/en/case-studies/` | ❌ Nu există (nu e linkuit nicăieri) |
+| Politica confidențialitate | `/ro/politica-confidentialitate/` | `/en/privacy-policy/` | ✅ Implementat |
+| Termeni și condiții | `/ro/termeni-conditii/` | `/en/terms-conditions/` | ✅ Implementat |
 
 ### Elemente de Verificat la Fiecare Modificare
 
@@ -983,6 +1113,13 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   'servicii': { ro: 'servicii', en: 'services' },
   'services': { ro: 'servicii', en: 'services' },
   'blog': { ro: 'blog', en: 'blog' },
+  // Service sub-pages
+  'automatizare-procese': { ro: 'automatizare-procese', en: 'process-automation' },
+  'process-automation': { ro: 'automatizare-procese', en: 'process-automation' },
+  'agenti-conversationali': { ro: 'agenti-conversationali', en: 'conversational-agents' },
+  'conversational-agents': { ro: 'agenti-conversationali', en: 'conversational-agents' },
+  'integrari-ai': { ro: 'integrari-ai', en: 'ai-integrations' },
+  'ai-integrations': { ro: 'integrari-ai', en: 'ai-integrations' },
   // Adaugă mapări noi aici!
 };
 ```
@@ -1075,6 +1212,237 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 - **Railway CLI** instalat (`@railway/cli` via npm) pentru management variabile
 - **Commits pe main**: 7 commits (`0319b7f` → `cf0490e`)
 - **Merge main → staging** efectuat pentru sincronizare
+
+### Sesiune Februarie 2026 - Pagina Automatizare Procese (SEO/AEO)
+- **Prima pagină de serviciu** creată (`/ro/servicii/automatizare-procese/`, `/en/services/process-automation/`)
+- **6 secțiuni**: Hero cu breadcrumb, Ce automatizăm (6 carduri), Cum abordăm (timeline vertical dark), Beneficii (5 metric cards), FAQ (6 Q&A accordion), CTA dark
+- **SEO/AEO optimizat**:
+  - Question-based H2 headings matching People Also Ask queries
+  - Answer-first lead paragraphs (40-60 words) for Featured Snippets & AI Overviews
+  - Schema.org `@graph` cu 4 scheme: Service, FAQPage, BreadcrumbList, HowTo
+  - Meta tags optimizate (title 46 chars, description 148 chars)
+  - FAQ section targetând întrebări reale (cost, durată, ROI, angajați)
+- **Pattern**: Urmează exact AboutPage.astro (locale prop, alternating light/dark, mobile scroll)
+- **Path mappings**: `automatizare-procese` ↔ `process-automation` pentru Language Switcher
+- **Fișiere**: 4 create, 3 modificate (ro.json, en.json, i18n/index.ts)
+
+### Sesiune Februarie 2026 - Site-wide SEO/AEO Audit & Agenți Conversaționali Page
+- **Audit SEO complet** pe toate paginile existente
+  - Homepage RO/EN: Fix domain URLs (`diginest.ai` → `diginest-ai-platform.vercel.app`), upgrade la `@graph` cu WebSite + WebPage + BreadcrumbList
+  - About RO/EN: Adăugat schema AboutPage + Organization (foundingDate, knowsAbout) + BreadcrumbList
+  - Contact RO/EN: Adăugat schema ContactPage + ContactPoint (email, languages) + BreadcrumbList
+  - FAQ inline schema verificat — fără duplicare (homepage și service pages au FAQ-uri separate)
+- **A doua pagină de serviciu** creată (`/ro/servicii/agenti-conversationali/`, `/en/services/conversational-agents/`)
+- **7 secțiuni** (una în plus față de Automatizare): Hero, Capabilități (6 carduri), Cum funcționează (timeline 4 pași), Industrii (6 carduri cu problem→solution), Beneficii (5 metric cards), FAQ (8 Q&A accordion), CTA
+- **SEO/AEO optimizat**:
+  - Question-based H2 headings targetând People Also Ask RO/EN
+  - Answer-first lead paragraphs (40-60 words) pentru Featured Snippets & AI Overviews
+  - Schema.org `@graph` cu 4 scheme: Service (cu hasOfferCatalog Voice/Chat/Email), FAQPage (8 items), BreadcrumbList, HowTo
+  - Meta tags optimizate (RO title 66 chars, EN title 70 chars)
+  - 8 FAQ items targetând întrebări reale (cost vs receptioner, limba română, integrări, înlocuire angajați, escalare, durată, industrii, GDPR)
+- **FAQ selector unic**: `data-conv-faq-trigger` (diferit de `data-faq-trigger` homepage și `data-service-faq-trigger` automatizare)
+- **Industrii cu problem→solution**: Call Center, Clinici Medicale, Hospitality, Utilities/Telecom, Beauty/SPA, Service Auto
+- **Path mappings**: `agenti-conversationali` ↔ `conversational-agents` pentru Language Switcher
+- **Fișiere**: 4 create, 5 modificate (ro.json, en.json, i18n/index.ts, + 6 page shells pentru SEO audit)
+
+### Sesiune Februarie 2026 - UX Cleanup, Form Validation & Lead Qualification
+- **Fix 404 Servicii**: Link-ul "Servicii" din Header dropdown + breadcrumb-urile service pages redirect la homepage `/#services` (scroll) în loc de pagină separată. Eliminat `ServicesPage.astro` (redundantă cu Services section de pe homepage). Actualizat breadcrumb Schema.org în toate 6 page shells.
+- **Eliminat Blog & Resources**:
+  - Scos link Blog din Header navigation
+  - Scos secțiunea Resurse din Footer (grid ajustat 5→4 coloane)
+  - Motivație documentată: paginile goale dăunează SEO la business nou (crawl budget waste, bounce rate, thin content signals)
+- **Custom Form Validation** (ContactForm.astro rewrite):
+  - `novalidate` pe form + validare JS completă cu mesaje locale-aware (RO/EN)
+  - Inline error messages per câmp cu stil vizual (border roșu, mesaj sub input)
+  - Validare email: regex comprehensive
+  - Validare telefon: E.164 standard (7-15 cifre), caractere permise: `+`, cifre, spații, `-`, `.`, `(`, `)`
+  - Validare pe `input`/`change` events (real-time clear) + `blur` (validate on leave)
+  - Mesaje traduse în `contact.form.validation` din ro.json/en.json
+- **Lead Qualification Dropdowns** (Industry + Interest):
+  - **Industry** (8 opțiuni): Clinică dentară, Cabinet medical, Salon beauty/SPA, Service auto, HoReCa, Retail/E-commerce, Rețea multi-locații, Altele
+  - **Interest** (4 opțiuni): Automatizare procese, Agenți conversaționali, Integrări AI, Nu sunt sigur
+  - Dropdown-uri required cu validare custom
+  - **Backend compatibility fără modificări**: Industry label + Interest label se prepend la mesaj
+    ```
+    [Industrie: Clinică dentară]
+    [Interes: Automatizare procese]
+
+    <mesajul utilizatorului>
+    ```
+  - Backend DTO/entity/DB **nemodificate** — evitat deploy backend
+- **Commits**: `7ccbf32`, `f661340`, `75fdc42`, `5f36a1b` (toate pe staging)
+
+### Sesiune Februarie 2026 - Unificare ScaleWithConfidence + Benefits
+- **Problema**: Două secțiuni dark consecutive pe homepage (ScaleWithConfidence + Benefits) comunicau redundant metrici de performanță (`24/7` apărea în ambele)
+- **Soluția**: Eliminat secțiunea Benefits separată, cardurile business (70%, 24/7, 10x, 300%) integrate direct sub animația wave în ScaleWithConfidence
+- **Fișiere modificate**: `ScaleWithConfidence.astro` (adăugat i18n + benefits cards, eliminat stats mici), `ro/index.astro` + `en/index.astro` (eliminat `<Benefits />`)
+- **Benefits.astro** păstrat în codebase (nefolosit pe homepage) — poate fi reutilizat dacă e nevoie
+- Homepage: 9 secțiuni (anterior 10)
+
+### Sesiune Februarie 2026 - Pagini Legale (Privacy Policy + Terms & Conditions)
+- **Două pagini legale** create, GDPR-compliant:
+  - Politica de Confidențialitate (`/ro/politica-confidentialitate/`, `/en/privacy-policy/`) — 12 secțiuni + Cookie Policy (5 secțiuni)
+  - Termeni și Condiții (`/ro/termeni-conditii/`, `/en/terms-conditions/`) — 10 secțiuni
+- **Companie**: DIGITAL LEADERSHIP SRL, CUI 38585123, J12/6715/2017, Dezmir, Cluj
+- **Conținut legal acoperă**: colectare date, temeiuri GDPR (art. 6), drepturi utilizator, securitate date, transfer UE/SEE, ANSPDCP, proprietate intelectuală, limitarea răspunderii, legislație română aplicabilă
+- **Schema.org**: WebPage + BreadcrumbList per pagină (pattern @graph)
+- **Path mappings**: `politica-confidentialitate` ↔ `privacy-policy`, `termeni-conditii` ↔ `terms-conditions`
+- **Footer actualizat**: Înlocuit placeholder company info cu datele reale DIGITAL LEADERSHIP SRL
+- **Fișiere create**: 4 page shells + 2 componente (`PrivacyPolicyPage.astro`, `TermsConditionsPage.astro`)
+- **Fișiere modificate**: `ro.json`, `en.json` (traduceri legale), `i18n/index.ts` (path mappings), `Footer.astro` (company info)
+
+### Sesiune Februarie 2026 - Hreflang Fix & Organization Schema
+- **Problema 1**: Hreflang tags din `BaseLayout.astro` foloseau `String.replace()` simplu care NU traducea path-urile (ex. `/ro/despre/` → `/en/despre/` în loc de `/en/about/`)
+- **Problema 2**: `x-default` pointea la `/en/` (greșit — publicul principal e românesc)
+- **Problema 3**: Organization schema avea adresă placeholder (București) în loc de adresa reală
+- **Soluții implementate**:
+  1. Înlocuit `currentPath.replace()` cu `buildAlternatePath()` din `i18n/index.ts` — translatează corect path-urile între limbi
+  2. `x-default` → versiunea RO a paginii curente (nu mai e hardcodat la homepage)
+  3. Organization schema actualizat: adresă reală (Dezmir, Cluj), `legalName: DIGITAL LEADERSHIP SRL`, `taxID: 38585123`
+- **Verificare**: Build HTML confirmat — hreflang generat corect pentru toate paginile (`/ro/despre/` ↔ `/en/about/`, `/ro/politica-confidentialitate/` ↔ `/en/privacy-policy/`)
+- **Fișiere modificate**: `BaseLayout.astro`, `SEO-AEO-GUIDELINES.md`, `CLAUDE.md`
+
+### Sesiune Februarie 2026 - Language Switcher Redesign
+- **Problema**: LanguageSwitcher arăta ca un link simplu cu emoji flag + text — nu se integra vizual cu brandul
+- **Soluția**: Toggle pill compact cu gradient brand (RO | EN)
+- **Design**:
+  - Container: `rounded-full bg-neutral-100 border border-neutral-200/80 p-0.5`
+  - Limba activă: `bg-gradient-to-r from-primary-500 to-accent-600 text-white rounded-full shadow-sm`
+  - Limba inactivă: `text-neutral-500 hover:text-neutral-700` — link clickable
+  - Labels: "RO" / "EN" — fără emoji flags (best practice 2025: flags = țări, nu limbi)
+- **Accessibility**: `role="navigation"`, `aria-label`, `aria-current="true"` pe limba activă, `lang` attribute pe fiecare label
+- **Fișiere modificate**: `LanguageSwitcher.astro` (rewrite complet)
+
+### Sesiune Februarie 2026 - Services Mobile Scroll
+- **Problema**: Cardurile servicii ocupau prea mult spațiu vertical pe mobile
+- **Soluția**: Scroll orizontal pe mobile cu snap-to-card
+- **Pattern CSS**: `flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0`
+- **Carduri**: `flex-shrink-0 w-[280px] md:w-auto snap-start`
+- **Swipe hint**: Vizibil doar pe mobile (`flex md:hidden`)
+- **Commit**: `3d94aa1`
+
+### Sesiune Februarie 2026 - Logo Redesign (SVG → PNG 3D)
+- **Context**: Utilizatoarea nu a fost mulțumită de logo-ul SVG vechi și a vrut să folosească o imagine AI-generated
+- **Proces** (multiple iterații):
+  1. Prima încercare SVG recreation → respins ("departe de ceea ce vreau eu")
+  2. PNG cu text complet → respins (prea mic, text duplicat, noduri invizibile pe alb)
+  3. Cropped doar G-ul → utilizatoarea a oferit altă imagine mai bună
+  4. `Image (5).jpg` — G 3D glossy cyan-blue pe fundal gri → procesat cu Sharp
+  5. Background removal: pixel-by-pixel (RGB > 210, channels within 15) → alpha=0
+  6. Gray circle behind logo → respins ("rollback nu imi place")
+  7. **GREȘEALĂ CRITICĂ**: Am făcut rollback TOTAL la SVG (commit `1080d32`) când utilizatoarea voia doar eliminarea cercului gri
+  8. Restaurare PNG fără cerc (commit `3cf64f3`)
+- **Fișiere finale**:
+  - `public/images/generativa-g-512.png` — logo principal (512x512, transparent)
+  - `public/images/generativa-g-200.png` — versiune mică
+  - `Logo.astro` — rescris complet pentru PNG (`<img>` în loc de inline SVG)
+- **Lecție învățată**: La "rollback" clarifică EXACT ce se dorește revertat, nu presupune
+- **Commits**: `4376f0c`, `5f454a8`, `d86a3cd`, `55066a2`, `1080d32` (greșit), `3cf64f3` (fix)
+
+### Sesiune Februarie 2026 - Header Gradient & Ambient Color Tones
+- **Problema**: Header-ul era `bg-white/80` — complet alb, fără nuanțe de brand
+- **Ce dorea utilizatoarea**: Nuanțe subtile de cyan/lavender vizibile în header (ca pe mobile cu blur)
+- **Soluție în 2 pași**:
+  1. **Ambient blobs** în `BaseLayout.astro` — `pointer-events-none fixed inset-0 z-0`:
+     - `w-[500px] h-[500px] bg-primary-200/25 blur-3xl` (stânga-sus)
+     - `w-[450px] h-[450px] bg-accent-200/20 blur-3xl` (dreapta-sus)
+     - `w-96 h-96 bg-primary-100/25 blur-3xl` (mijloc)
+  2. **Header gradient** în `Header.astro`:
+     - `bg-gradient-to-r from-primary-50/80 via-white/80 to-accent-50/60` (înlocuiește `bg-white/80`)
+     - Păstrat `backdrop-blur-lg border-b border-neutral-200/50`
+- **Main** content are `relative z-10` pentru a fi deasupra blob-urilor
+- **Commits**: `6216a87` (blobs), `f112d34` (header gradient + blobs mari)
+
+### Sesiune Februarie 2026 - IntegrationHub Mobile Labels + Favicon PNG
+- **IntegrationHub**: Label-urile conexiunilor (Apeluri telefonice, WhatsApp, etc.) erau `hidden sm:block` → schimbate la `block` pentru vizibilitate pe toate dimensiunile. Text `9px` pe mobile, `10px` pe sm, `12px` pe md+
+- **Favicon**: Tab-ul Chrome arăta încă vechiul SVG logo. Generate PNG favicons cu Sharp din logo-ul 3D:
+  - `favicon-32.png` (32x32) — favicon principal
+  - `favicon-16.png` (16x16) — favicon mic
+  - `apple-touch-icon.png` (180x180) — iOS
+  - `BaseLayout.astro` actualizat: eliminat `<link rel="icon" type="image/svg+xml" href="/favicon.svg">`
+- **Commits**: `61cf091` (labels), `0b42564` (favicon)
+
+### Sesiune Februarie 2026 - CTA Redesign, Spacing & Mobile Card UX
+- **CTA Redesign** (3 iterații):
+  1. Dark gradient + Canvas ribbon animation (18 ribbons, brand colors) → respins ("groaznic")
+  2. Rollback greșit la original → utilizatoarea voia doar eliminarea canvas-ului
+  3. Dark gradient + eyebrow badge + gradient button cu glow + trust indicators (fără canvas) → aprobat
+  4. Buton secundar "Cum funcționează?" eliminat (link `/#process` stricat, un singur CTA e mai clar)
+- **Section Spacing** — fix-uri bazate pe screenshot-ul utilizatoarei:
+  - Services: `py-16 md:py-24` → `pt-10 pb-16 md:pt-14 md:pb-24` (reducere gap deasupra)
+  - UseCases: `py-16 md:py-24` → `pt-10 pb-16 md:pt-14 md:pb-24` (reducere gap dedesubt Services)
+  - IntegrationHub: `py-12` → `py-16` pe mobile (normalizare la standard)
+  - CTA: `py-20 md:py-28 lg:py-36` → `py-16 md:py-24 lg:py-28` (reducere disproporție)
+- **Mobile Card Centering** — toate cardurile centrate (`snap-center` + `w-[85vw]`):
+  - ProcessAutomationPage: 2 secțiuni (Process Types, Benefits)
+  - ConversationalAgentsPage: 3 secțiuni (Capabilities, Industries, Benefits)
+  - AiIntegrationsPage: 3 secțiuni (Systems, Capabilities, Benefits)
+  - AboutPage: 2 secțiuni (Approach, WhyUs)
+  - BenefitsStrip + IntegrationHub: `snap-start` → `snap-center`
+- **Dynamic Scroll Arrows** — indicatori de direcție bazați pe scroll position:
+  - Pattern: `data-scroll-hint` (pe div indicator) + `data-scroll-container` (pe scroll container)
+  - `data-arrow-left`: opacity 0 la start, 1 + animate-pulse altfel
+  - `data-arrow-right`: opacity 1 + animate-pulse la start, 0 la end
+  - JavaScript: `scrollLeft`, `scrollWidth`, `clientWidth` pe event `scroll` (passive: true)
+  - Aplicat pe: Services, UseCases (homepage), ProcessAutomation, ConversationalAgents (2x), AiIntegrations (2x)
+- **Commits**: `18e7af6` (spacing + CTA cleanup), `d4ac6c9` (card centering), `a505d09` (dynamic arrows)
+
+### Sesiune Februarie 2026 - AI Integrations 6th Card + Language Switcher Scroll
+- **6th Capability Card** pe AiIntegrationsPage — grid incomplet (3+2) completat la 3+3:
+  - **RO**: "Notificări și alerte inteligente" — reminder-e programare, confirmări plată, alerte stoc, actualizări status prin SMS/email/WhatsApp
+  - **EN**: "Smart notifications and alerts"
+  - Icon: `notifications` (bell icon, Heroicons)
+  - Fișiere: `ro.json`, `en.json` (item adăugat în `serviceIntegrations.capabilities.items`), `AiIntegrationsPage.astro` (icon rendering)
+- **Language Switcher Scroll Preservation** — la schimbarea limbii utilizatorul rămâne în aceeași poziție:
+  - **Problema**: Click pe RO/EN ducea la începutul paginii (navigare completă `<a href>`)
+  - **Soluția**: `sessionStorage` cu scroll position ca procent (nu pixeli — paginile traduse pot avea înălțimi diferite)
+  - **Flow**: click → salvează `window.scrollY / maxScroll` → navigare → `requestAnimationFrame` → `scrollTo({ behavior: 'instant' })` → ștergere din storage
+  - CSS class `lang-switch-link` pe link-urile de limbă pentru targeting JS
+  - Events: `DOMContentLoaded` + `astro:page-load` (SPA compatibility)
+- **Commits**: `e5d2b61` (6th capability), `9051fc0` (scroll preservation), `060f48a` (instant scroll)
+
+### ⚠️ Lecții din Sesiunea Logo Redesign
+1. **Rollback parțial vs total**: Când utilizatorul zice "rollback", clarifică CE anume. Nu presupune.
+2. **Browser cache**: Favicon-urile și imaginile sunt puternic cached. Recomandă Ctrl+Shift+R.
+3. **Vercel preview URLs**: Fiecare push creează un URL unic. URL-uri vechi NU se actualizează automat — trebuie accesat cel mai recent din dashboard.
+4. **Sharp pentru imagini**: Astro include Sharp ca dependență. Poate fi folosit cu `node -e "require('sharp')..."` pentru crop, resize, background removal.
+5. **PNG transparent background**: Tehnica pixel-by-pixel — verifică dacă RGB > threshold și channels similare (near-gray), apoi setează alpha=0.
+
+---
+
+## 🌐 HREFLANG & MULTILINGV — STRATEGIE SEO
+
+> **Pentru AI**: Această secțiune conține decizii strategice despre versiunea multilingvă a site-ului.
+
+### Decizia: Păstrăm versiunea EN
+
+**Motivație**: Versiunea EN nu afectează negativ SEO-ul. Google tratează limbi separate corect dacă hreflang e implementat. Crawl budget nu e o problemă pentru site-uri mici (~34 pagini).
+
+### Prioritizare
+
+| Aspect | Decizie |
+|--------|---------|
+| **Limba principală** | Română (x-default → RO) |
+| **Conținut nou** | Întotdeauna RO first, apoi EN |
+| **Keyword targeting** | Doar RO activ, EN pasiv (traducere fără SEO targeting) |
+| **Blog viitor** | Începe doar în RO |
+| **x-default** | Pointează la versiunea RO (nu EN) |
+
+### Implementare Hreflang (Automată)
+
+Hreflang se generează automat în `BaseLayout.astro` pentru TOATE paginile:
+- `hreflang="ro"` → URL pagina RO
+- `hreflang="en"` → URL pagina EN
+- `hreflang="x-default"` → URL pagina RO (fallback)
+
+**Condiție CRITICĂ**: Fiecare pagină nouă **TREBUIE** să aibă path mappings în `i18n/index.ts`, altfel hreflang generează URL-uri greșite!
+
+### De ce contează
+
+1. **Fără hreflang**: Google poate vedea `/ro/despre/` și `/en/about/` ca pagini separate care concurează → dilution of authority
+2. **Cu hreflang**: Google consolidează semnalele SEO și servește limba corectă utilizatorului
+3. **31% din români vorbesc engleză** → 69% din audiență nu va folosi niciodată versiunea EN
+4. **Expats & multinationale**: Versiunea EN oferă credibilitate și acces pentru non-români
 
 ---
 
@@ -1183,6 +1551,80 @@ EMAIL_FROM=contact@generativa.ro
 EMAIL_ADMIN=contact@generativa.ro
 EMAIL_ENABLED=true
 ```
+
+---
+
+## 📝 CONTACT FORM - DETALII TEHNICE
+
+> **Pentru AI**: Această secțiune conține specificațiile formularului de contact. Citește înainte de orice modificare la ContactForm.astro.
+
+### Câmpuri Formular
+
+| Câmp | Tip | Required | Validare |
+|------|-----|----------|----------|
+| **Nume** | `text` | ✅ | Min 2 caractere, max 100 |
+| **Email** | `email` | ✅ | Regex comprehensive |
+| **Companie** | `text` | ✅ | Min 2 caractere, max 100 |
+| **Industrie** | `select` | ✅ | Must select a non-empty option |
+| **Interes** | `select` | ✅ | Must select a non-empty option |
+| **Telefon** | `tel` | ❌ | Dacă completat: doar caractere valide + 7-15 cifre (E.164) |
+| **Mesaj** | `textarea` | ✅ | Min 10 caractere |
+
+### Opțiuni Industry (8)
+
+| Key | RO | EN |
+|-----|----|----|
+| `dental` | Clinică dentară | Dental clinic |
+| `medical` | Cabinet medical | Medical practice |
+| `beauty` | Salon beauty / SPA | Beauty salon / SPA |
+| `auto` | Service auto | Auto service |
+| `horeca` | HoReCa (restaurant, hotel) | HoReCa (restaurant, hotel) |
+| `retail` | Retail / E-commerce | Retail / E-commerce |
+| `network` | Rețea multi-locații | Multi-location network |
+| `other` | Altă industrie | Other industry |
+
+### Opțiuni Interest (4)
+
+| Key | RO | EN |
+|-----|----|----|
+| `automation` | Automatizare procese | Process automation |
+| `conversational` | Agenți conversaționali (voice/chat) | Conversational agents (voice/chat) |
+| `integrations` | Integrări AI cu sisteme existente | AI integrations with existing systems |
+| `unsure` | Nu sunt sigur(ă) încă | Not sure yet |
+
+### Validare — Abordare Tehnică
+
+- `novalidate` pe `<form>` — dezactivează validarea nativă browser
+- Validare custom în JS via `validateField(fieldName, value)` → returnează mesaj eroare sau `''`
+- `define:vars={{ validationMessages: v }}` — Astro trece mesajele traduse (server → client)
+- Erori afișate inline sub fiecare câmp (`<p class="field-error">`)
+- Stil error: `border-color: #dc2626` + text roșu sub input
+- Events: `input` pentru text fields, `change` pentru selects, `blur` pentru validare la pierdere focus
+
+### Backend Compatibility — Industry/Interest Prepend
+
+Backend-ul DTO (`ContactRequestDTO.java`) NU are câmpuri `industry`/`interest`. În loc de a modifica backend-ul (care ar necesita deploy), dropdown-urile se adaugă la începutul mesajului:
+
+```
+[Industrie: Clinică dentară]
+[Interes: Automatizare procese]
+
+Mesajul original al utilizatorului...
+```
+
+**Dacă în viitor** se adaugă câmpuri `industry` + `interest` la backend:
+1. Adaugă în `ContactRequestDTO.java`
+2. Adaugă în `ContactRequest.java` (entity)
+3. Adaugă coloane în DB (auto via `ddl-auto: update`)
+4. Trimite separat în `requestBody` din ContactForm.astro
+5. Elimină prepend-ul la mesaj
+
+### Traduceri
+
+Mesajele de validare sunt în `contact.form.validation` din `ro.json`/`en.json`:
+- `nameRequired`, `nameMin`, `emailRequired`, `emailInvalid`
+- `companyRequired`, `companyMin`, `industryRequired`, `interestRequired`
+- `phoneInvalid`, `messageRequired`, `messageMin`
 
 ---
 

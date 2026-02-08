@@ -28,10 +28,6 @@ const footerNav = {
     { label: t.footer.services.conversational, href: buildLocalePath(locale === 'ro' ? '/servicii/agenti-conversationali/' : '/services/conversational-agents/', locale) },
     { label: t.footer.services.integrations, href: buildLocalePath(locale === 'ro' ? '/servicii/integrari-ai/' : '/services/ai-integrations/', locale) },
   ],
-  resources: [
-    { label: t.footer.resources.blog, href: buildLocalePath('/blog/', locale) },
-    { label: t.footer.resources.caseStudies, href: buildLocalePath(locale === 'ro' ? '/studii-caz/' : '/case-studies/', locale) },
-  ],
   legal: [
     { label: t.footer.legal.privacy, href: buildLocalePath(locale === 'ro' ? '/politica-confidentialitate/' : '/privacy-policy/', locale) },
     { label: t.footer.legal.terms, href: buildLocalePath(locale === 'ro' ? '/termeni-conditii/' : '/terms-conditions/', locale) },
@@ -49,9 +45,9 @@ const socialLinks = [
 <footer class="bg-neutral-900 text-neutral-300">
   <div class="container-lg py-12 lg:py-16">
     <!-- Main footer content -->
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-12">
       <!-- Brand column -->
-      <div class="col-span-2 md:col-span-4 lg:col-span-1 lg:pr-8">
+      <div class="col-span-2 md:col-span-3 lg:col-span-1 lg:pr-8">
         <a href={buildLocalePath('/', locale)} class="inline-block mb-4">
           <Logo size="md" showText={true} variant="white" />
         </a>
@@ -117,20 +113,6 @@ const socialLinks = [
         </ul>
       </div>
 
-      <!-- Resources links -->
-      <div>
-        <h3 class="text-white font-semibold mb-4">{t.footer.resources.title}</h3>
-        <ul class="space-y-3">
-          {footerNav.resources.map((item) => (
-            <li>
-              <a href={item.href} class="text-neutral-400 hover:text-primary-400 transition-colors">
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <!-- Legal links -->
       <div>
         <h3 class="text-white font-semibold mb-4">{t.footer.legal.title}</h3>
@@ -153,8 +135,7 @@ const socialLinks = [
           &copy; {currentYear} GENERATIVA. {t.footer.copyright}
         </p>
         <p class="text-neutral-600 text-sm">
-          <!-- TODO: Update with real company info -->
-          CUI: RO12345678 | J40/1234/2025
+          DIGITAL LEADERSHIP SRL | CUI: 38585123 | J12/6715/2017
         </p>
       </div>
     </div>
