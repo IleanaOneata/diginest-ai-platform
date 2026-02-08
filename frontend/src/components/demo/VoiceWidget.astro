@@ -301,7 +301,9 @@ const isEn = locale === 'en';
         if (isInitialized) return Promise.resolve();
         return import('https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/+esm')
           .then(function(module) {
-            var Vapi = module.default;
+            // Handle different export formats (ESM CDN wraps exports)
+            var VapiModule = module.default || module;
+            var Vapi = (typeof VapiModule === 'function') ? VapiModule : (VapiModule.default || VapiModule.Vapi || VapiModule);
             vapi = new Vapi(VAPI_PUBLIC_KEY);
 
             vapi.on('call-start', function() {
