@@ -16,6 +16,7 @@
 import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
 import Button from '@components/common/Button.astro';
 import ChatSimulator from '@components/demo/ChatSimulator.astro';
+import VoiceWidget from '@components/demo/VoiceWidget.astro';
 
 interface Props {
   locale: Locale;
@@ -159,21 +160,25 @@ const hero = heroTexts[locale] || heroTexts.ro;
         </div>
       </div>
 
-      <!-- Right: Chat Simulator -->
-      <div class="order-1 lg:order-2 flex justify-center lg:justify-end animate-fade-in" style="animation-delay: 300ms;">
-        <div class="relative">
-          <!-- Decorative elements behind chat -->
-          <div class="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-primary-400/20 to-accent-500/20 rounded-2xl transform rotate-3"></div>
-          <div class="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-accent-400/20 to-primary-500/20 rounded-2xl transform -rotate-3"></div>
+      <!-- Right: Voice Widget (DOMINANT) + Chat Simulator (secondary) -->
+      <div class="order-1 lg:order-2 flex flex-col items-center gap-6 lg:gap-8 animate-fade-in" style="animation-delay: 300ms;">
 
-          <!-- Chat Simulator (includes Voice Widget in footer) -->
+        <!-- HERO Voice Widget — Large, Central, Prominent -->
+        <div class="relative">
+          <!-- Decorative glow behind voice widget -->
+          <div class="absolute inset-0 -z-10 scale-125 bg-gradient-to-br from-primary-400/15 to-accent-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+          <VoiceWidget locale={locale} />
+        </div>
+
+        <!-- Chat Simulator — Secondary, Smaller -->
+        <div class="relative w-full max-w-sm lg:max-w-md">
+          <!-- Subtle decorative elements (reduced prominence) -->
+          <div class="absolute -top-2 -left-2 w-full h-full bg-gradient-to-br from-primary-400/10 to-accent-500/10 rounded-2xl transform rotate-2 -z-10"></div>
+          <div class="absolute -bottom-2 -right-2 w-full h-full bg-gradient-to-br from-accent-400/10 to-primary-500/10 rounded-2xl transform -rotate-2 -z-10"></div>
+
           <div class="relative z-10">
             <ChatSimulator locale={locale} autoPlay={true} />
-          </div>
-
-          <!-- Floating badges -->
-          <div class="absolute -top-2 -right-2 bg-white px-3 py-1.5 rounded-full shadow-lg text-xs font-medium text-primary-600 animate-bounce z-20">
-            Live Demo
           </div>
         </div>
       </div>

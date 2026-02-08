@@ -2,14 +2,20 @@
 /**
  * Voice Widget Component - GENERATIVA
  *
- * Buton vocal integrat cu VAPI Web SDK pentru demo live.
- * Permite vizitatorilor să vorbească direct cu agentul AI.
+ * Buton vocal MARE, circular, cu inele animate (sonar/radar).
+ * Element central și dominant în Hero section.
  *
- * Se integrează în footer-ul ChatSimulator-ului.
+ * Design:
+ * - Buton circular mare cu gradient brand (cyan→purple)
+ * - 3 inele concentrice animate cu timing decalat
+ * - Text descriptiv sub buton
+ * - Badge hint cu ping indicator
  *
  * Tehnic:
  * - VAPI Web SDK încărcat via ESM (import dinamic, lazy la primul click)
  * - Labels pasate via data attributes (NU define:vars — incompatibil cu import())
+ * - CSS @keyframes pentru ring pulse animations
+ * - prefers-reduced-motion: animații dezactivate
  * - SPA cleanup pe navigare
  */
 
@@ -22,14 +28,8 @@ const { locale = 'ro' } = Astro.props;
 const isEn = locale === 'en';
 ---
 
-<button
-  id="voice-call-btn"
-  class="group flex items-center gap-2.5 w-full px-3 py-2 rounded-lg
-         bg-gradient-to-r from-primary-500/8 to-accent-500/8
-         hover:from-primary-500/15 hover:to-accent-500/15
-         border border-primary-300/30 hover:border-primary-400/50
-         transition-all duration-300 cursor-pointer"
-  aria-label={isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+<div
+  class="voice-widget-container flex flex-col items-center gap-5"
   data-cta={isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
   data-cta-active={isEn ? 'End call' : 'Oprește apelul'}
   data-connecting={isEn ? 'Connecting...' : 'Se conectează...'}
@@ -38,31 +38,168 @@ const isEn = locale === 'en';
   data-processing={isEn ? 'Processing...' : 'Procesează...'}
   data-ended={isEn ? 'Call ended' : 'Apel încheiat'}
   data-error={isEn ? 'Connection error' : 'Eroare de conexiune'}
+  data-hint-idle={isEn ? 'Live demo · Click to start' : 'Live demo · Click pentru a începe'}
 >
-  <!-- Mic Icon (idle) -->
-  <div id="voice-icon-idle" class="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-primary-400 to-accent-600 flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
-    <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
-    </svg>
+  <!-- Animated Ring Container -->
+  <div class="voice-rings-wrapper relative flex items-center justify-center w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56">
+    <!-- Ring 3 - Outermost (slowest, largest) -->
+    <div class="voice-ring voice-ring-3 absolute inset-0 rounded-full border-2 border-primary-400/30 animate-ring-pulse-3"></div>
+
+    <!-- Ring 2 - Middle -->
+    <div class="voice-ring voice-ring-2 absolute inset-0 rounded-full border-2 border-primary-400/40 animate-ring-pulse-2"></div>
+
+    <!-- Ring 1 - Innermost (fastest, smallest) -->
+    <div class="voice-ring voice-ring-1 absolute inset-0 rounded-full border-2 border-accent-500/50 animate-ring-pulse-1"></div>
+
+    <!-- Main Button -->
+    <button
+      id="voice-call-btn"
+      class="voice-button relative group
+             w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36
+             rounded-full
+             bg-gradient-to-br from-primary-400 to-accent-600
+             shadow-2xl shadow-primary-500/30
+             hover:shadow-[0_25px_60px_-12px_rgba(6,182,212,0.5)]
+             transition-all duration-500
+             flex items-center justify-center
+             cursor-pointer
+             hover:scale-105 active:scale-95
+             focus:outline-none focus:ring-4 focus:ring-primary-400/50"
+      aria-label={isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+    >
+      <!-- Mic Icon (idle) -->
+      <svg
+        id="voice-icon-idle"
+        class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 text-white drop-shadow-lg transition-transform duration-300 group-hover:scale-110"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+      </svg>
+
+      <!-- Stop Icon (active, hidden by default) -->
+      <svg
+        id="voice-icon-active"
+        class="hidden w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 text-white drop-shadow-lg"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <rect x="6" y="6" width="12" height="12" rx="2" />
+      </svg>
+
+      <!-- Inner Glow Effect (hover) -->
+      <div class="absolute inset-0 rounded-full bg-white/0 group-hover:bg-white/15 transition-all duration-500 pointer-events-none"></div>
+    </button>
   </div>
 
-  <!-- Stop Icon (active, hidden by default) -->
-  <div id="voice-icon-active" class="hidden flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-sm animate-pulse">
-    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <rect x="7" y="7" width="10" height="10" rx="1.5" />
-    </svg>
-  </div>
-
-  <!-- Text -->
-  <div class="flex flex-col text-left min-w-0">
-    <span id="voice-cta-text" class="text-xs font-semibold text-neutral-700 group-hover:text-primary-700 transition-colors leading-tight">
+  <!-- Text Labels -->
+  <div class="text-center space-y-1.5">
+    <h3
+      id="voice-cta-text"
+      class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-900 transition-colors"
+    >
       {isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+    </h3>
+    <p
+      id="voice-status-text"
+      class="text-sm md:text-base text-neutral-500"
+    >
+      {isEn ? 'Live demo · Click to start' : 'Live demo · Click pentru a începe'}
+    </p>
+  </div>
+
+  <!-- Visual Hint Badge -->
+  <div class="voice-hint flex items-center gap-2 px-4 py-2 bg-primary-100/80 backdrop-blur-sm rounded-full border border-primary-200/50 transition-all duration-300">
+    <span class="relative flex h-2 w-2">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-500 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-600"></span>
     </span>
-    <span id="voice-status-text" class="text-[10px] text-neutral-400 leading-tight">
-      Live demo
+    <span class="text-xs md:text-sm font-medium text-primary-700">
+      {isEn ? 'Try the live voice demo' : 'Încearcă demo-ul vocal live'}
     </span>
   </div>
-</button>
+</div>
+
+<style>
+  /* ===== Ring Pulse Animations ===== */
+  @keyframes ringPulse1 {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1.15);
+      opacity: 0;
+    }
+  }
+
+  @keyframes ringPulse2 {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.45;
+    }
+    100% {
+      transform: scale(1.3);
+      opacity: 0;
+    }
+  }
+
+  @keyframes ringPulse3 {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.3;
+    }
+    100% {
+      transform: scale(1.45);
+      opacity: 0;
+    }
+  }
+
+  .animate-ring-pulse-1 {
+    animation: ringPulse1 2.5s ease-out infinite;
+  }
+  .animate-ring-pulse-2 {
+    animation: ringPulse2 2.5s ease-out infinite 0.4s;
+  }
+  .animate-ring-pulse-3 {
+    animation: ringPulse3 2.5s ease-out infinite 0.8s;
+  }
+
+  /* ===== Hover: accelerate rings ===== */
+  .voice-widget-container:hover .voice-ring {
+    animation-duration: 1.6s;
+  }
+
+  /* ===== Active state: red rings ===== */
+  .voice-widget-container.voice-active .voice-ring {
+    border-color: rgba(239, 68, 68, 0.5);
+    animation-duration: 1.2s;
+  }
+
+  .voice-widget-container.voice-active .voice-button {
+    background: linear-gradient(to bottom right, #ef4444, #dc2626);
+    box-shadow: 0 25px 50px -12px rgba(239, 68, 68, 0.4);
+  }
+
+  /* ===== Hide hint when active ===== */
+  .voice-widget-container.voice-active .voice-hint {
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+  }
+
+  /* ===== Reduced motion ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .voice-ring {
+      animation: none !important;
+    }
+    .voice-button {
+      transition: none !important;
+    }
+  }
+</style>
 
 <script is:inline>
   (function() {
@@ -71,42 +208,46 @@ const isEn = locale === 'en';
     const VAPI_PUBLIC_KEY = '0a18ef59-2f8d-4e0a-aed3-1dfdee8f5caf';
     const ASSISTANT_ID = '6feee494-a480-433c-95ac-4899c467b972';
 
-    let vapi = null;
-    let isActive = false;
-    let isInitialized = false;
+    var vapi = null;
+    var isActive = false;
+    var isInitialized = false;
 
     function init() {
-      const btn = document.getElementById('voice-call-btn');
-      if (!btn) return;
+      var container = document.querySelector('.voice-widget-container');
+      var btn = document.getElementById('voice-call-btn');
+      if (!btn || !container) return;
 
-      // Read labels from data attributes
-      const t = {
-        cta: btn.dataset.cta || 'Vorbește cu agentul AI',
-        ctaActive: btn.dataset.ctaActive || 'Oprește apelul',
-        connecting: btn.dataset.connecting || 'Se conectează...',
-        connected: btn.dataset.connected || 'Conectat — vorbește acum',
-        listening: btn.dataset.listening || 'Ascultă...',
-        processing: btn.dataset.processing || 'Procesează...',
-        ended: btn.dataset.ended || 'Apel încheiat',
-        error: btn.dataset.error || 'Eroare de conexiune',
+      // Read labels from data attributes on container
+      var t = {
+        cta: container.dataset.cta || 'Vorbește cu agentul AI',
+        ctaActive: container.dataset.ctaActive || 'Oprește apelul',
+        connecting: container.dataset.connecting || 'Se conectează...',
+        connected: container.dataset.connected || 'Conectat — vorbește acum',
+        listening: container.dataset.listening || 'Ascultă...',
+        processing: container.dataset.processing || 'Procesează...',
+        ended: container.dataset.ended || 'Apel încheiat',
+        error: container.dataset.error || 'Eroare de conexiune',
+        hintIdle: container.dataset.hintIdle || 'Live demo · Click pentru a începe',
       };
 
-      const iconIdle = document.getElementById('voice-icon-idle');
-      const iconActive = document.getElementById('voice-icon-active');
-      const ctaText = document.getElementById('voice-cta-text');
-      const statusText = document.getElementById('voice-status-text');
+      var iconIdle = document.getElementById('voice-icon-idle');
+      var iconActive = document.getElementById('voice-icon-active');
+      var ctaText = document.getElementById('voice-cta-text');
+      var statusText = document.getElementById('voice-status-text');
 
       if (!iconIdle || !iconActive || !ctaText || !statusText) return;
 
       function updateUI(state) {
         switch (state) {
           case 'idle':
+            container.classList.remove('voice-active');
             iconIdle.classList.remove('hidden');
             iconActive.classList.add('hidden');
             ctaText.textContent = t.cta;
-            statusText.textContent = 'Live demo';
+            statusText.textContent = t.hintIdle;
             statusText.style.color = '';
-            btn.classList.remove('ring-2', 'ring-red-400/50');
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
             break;
           case 'connecting':
             ctaText.textContent = t.connecting;
@@ -115,13 +256,13 @@ const isEn = locale === 'en';
             btn.style.cursor = 'wait';
             break;
           case 'active':
+            container.classList.add('voice-active');
             iconIdle.classList.add('hidden');
             iconActive.classList.remove('hidden');
             ctaText.textContent = t.ctaActive;
             statusText.textContent = t.connected;
             btn.style.opacity = '1';
             btn.style.cursor = 'pointer';
-            btn.classList.add('ring-2', 'ring-red-400/50');
             break;
           case 'listening':
             statusText.textContent = t.listening;
@@ -130,15 +271,17 @@ const isEn = locale === 'en';
             statusText.textContent = t.processing;
             break;
           case 'ended':
+            container.classList.remove('voice-active');
             iconIdle.classList.remove('hidden');
             iconActive.classList.add('hidden');
+            ctaText.textContent = t.cta;
             statusText.textContent = t.ended;
             btn.style.opacity = '1';
             btn.style.cursor = 'pointer';
-            btn.classList.remove('ring-2', 'ring-red-400/50');
-            setTimeout(() => updateUI('idle'), 3000);
+            setTimeout(function() { updateUI('idle'); }, 3000);
             break;
           case 'error':
+            container.classList.remove('voice-active');
             iconIdle.classList.remove('hidden');
             iconActive.classList.add('hidden');
             ctaText.textContent = t.cta;
@@ -146,54 +289,54 @@ const isEn = locale === 'en';
             statusText.style.color = '#ef4444';
             btn.style.opacity = '1';
             btn.style.cursor = 'pointer';
-            btn.classList.remove('ring-2', 'ring-red-400/50');
-            setTimeout(() => {
-              statusText.textContent = 'Live demo';
+            setTimeout(function() {
+              statusText.textContent = t.hintIdle;
               statusText.style.color = '';
             }, 4000);
             break;
         }
       }
 
-      async function initVapi() {
-        if (isInitialized) return;
-        try {
-          // Use destructuring exactly like the working widget.js
-          const { default: Vapi } = await import('https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/+esm');
-          vapi = new Vapi(VAPI_PUBLIC_KEY);
+      function initVapi() {
+        if (isInitialized) return Promise.resolve();
+        return import('https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/+esm')
+          .then(function(module) {
+            var Vapi = module.default;
+            vapi = new Vapi(VAPI_PUBLIC_KEY);
 
-          vapi.on('call-start', () => {
-            isActive = true;
-            updateUI('active');
-          });
+            vapi.on('call-start', function() {
+              isActive = true;
+              updateUI('active');
+            });
 
-          vapi.on('call-end', () => {
-            isActive = false;
-            updateUI('ended');
-          });
+            vapi.on('call-end', function() {
+              isActive = false;
+              updateUI('ended');
+            });
 
-          vapi.on('speech-start', () => {
-            if (isActive) updateUI('listening');
-          });
+            vapi.on('speech-start', function() {
+              if (isActive) updateUI('listening');
+            });
 
-          vapi.on('speech-end', () => {
-            if (isActive) updateUI('processing');
-          });
+            vapi.on('speech-end', function() {
+              if (isActive) updateUI('processing');
+            });
 
-          vapi.on('error', (e) => {
-            console.error('VAPI error:', e);
-            isActive = false;
+            vapi.on('error', function(e) {
+              console.error('VAPI error:', e);
+              isActive = false;
+              updateUI('error');
+            });
+
+            isInitialized = true;
+          })
+          .catch(function(e) {
+            console.error('Failed to load VAPI SDK:', e);
             updateUI('error');
           });
-
-          isInitialized = true;
-        } catch (e) {
-          console.error('Failed to load VAPI SDK:', e);
-          updateUI('error');
-        }
       }
 
-      btn.addEventListener('click', async () => {
+      btn.addEventListener('click', function() {
         if (isActive && vapi) {
           vapi.stop();
           return;
@@ -201,19 +344,17 @@ const isEn = locale === 'en';
 
         updateUI('connecting');
 
-        if (!isInitialized) {
-          await initVapi();
-        }
+        var proceed = isInitialized ? Promise.resolve() : initVapi();
 
-        if (vapi) {
-          try {
-            await vapi.start(ASSISTANT_ID);
-          } catch (e) {
-            console.error('VAPI start error:', e);
-            isActive = false;
-            updateUI('error');
+        proceed.then(function() {
+          if (vapi) {
+            vapi.start(ASSISTANT_ID).catch(function(e) {
+              console.error('VAPI start error:', e);
+              isActive = false;
+              updateUI('error');
+            });
           }
-        }
+        });
       });
     }
 
@@ -221,7 +362,7 @@ const isEn = locale === 'en';
     document.addEventListener('astro:page-load', init);
 
     // Cleanup on SPA navigation
-    document.addEventListener('astro:before-preparation', () => {
+    document.addEventListener('astro:before-preparation', function() {
       if (vapi && isActive) {
         vapi.stop();
       }
