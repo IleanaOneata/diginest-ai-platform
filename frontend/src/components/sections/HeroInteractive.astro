@@ -16,7 +16,6 @@
 import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
 import Button from '@components/common/Button.astro';
 import ChatSimulator from '@components/demo/ChatSimulator.astro';
-import VoiceWidget from '@components/demo/VoiceWidget.astro';
 
 interface Props {
   locale: Locale;
@@ -167,13 +166,9 @@ const hero = heroTexts[locale] || heroTexts.ro;
           <div class="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-primary-400/20 to-accent-500/20 rounded-2xl transform rotate-3"></div>
           <div class="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-accent-400/20 to-primary-500/20 rounded-2xl transform -rotate-3"></div>
 
-          <!-- Chat Simulator -->
+          <!-- Chat Simulator (includes Voice Widget in footer) -->
           <div class="relative z-10">
             <ChatSimulator locale={locale} autoPlay={true} />
-            <!-- Voice Widget: sub chat simulator -->
-            <div class="mt-3 max-w-md w-full">
-              <VoiceWidget locale={locale} />
-            </div>
           </div>
 
           <!-- Floating badges -->

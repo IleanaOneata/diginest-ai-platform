@@ -5,100 +5,66 @@
  * Buton vocal integrat cu VAPI Web SDK pentru demo live.
  * Permite vizitatorilor să vorbească direct cu agentul AI.
  *
- * Funcționare:
- * - Click pe buton → se conectează la VAPI
- * - Agentul AI răspunde vocal în română
- * - Click din nou → oprește apelul
+ * Se integrează în footer-ul ChatSimulator-ului.
  *
  * Tehnic:
- * - VAPI Web SDK încărcat via ESM (import dinamic)
- * - Design integrat cu brand-ul GENERATIVA (gradient cyan→purple)
- * - Stări vizuale: idle, connecting, active
- * - Microfon necesită HTTPS (secure context)
+ * - VAPI Web SDK încărcat via ESM (import dinamic, lazy la primul click)
+ * - Labels pasate via data attributes (NU define:vars — incompatibil cu import())
+ * - SPA cleanup pe navigare
  */
 
 interface Props {
   locale?: 'ro' | 'en';
-  className?: string;
 }
 
-const { locale = 'ro', className = '' } = Astro.props;
+const { locale = 'ro' } = Astro.props;
 
-const labels = {
-  ro: {
-    cta: 'Vorbește cu agentul AI',
-    ctaActive: 'Oprește apelul',
-    connecting: 'Se conectează...',
-    connected: 'Conectat — vorbește acum',
-    listening: 'Ascultă...',
-    processing: 'Procesează...',
-    ended: 'Apel încheiat',
-    error: 'Eroare de conexiune',
-    micPermission: 'Permite accesul la microfon',
-  },
-  en: {
-    cta: 'Talk to the AI agent',
-    ctaActive: 'End call',
-    connecting: 'Connecting...',
-    connected: 'Connected — speak now',
-    listening: 'Listening...',
-    processing: 'Processing...',
-    ended: 'Call ended',
-    error: 'Connection error',
-    micPermission: 'Allow microphone access',
-  },
-};
-
-const t = labels[locale] || labels.ro;
+const isEn = locale === 'en';
 ---
 
-<div class:list={["voice-widget", className]}>
-  <!-- Voice Call Button -->
-  <button
-    id="voice-call-btn"
-    class="group relative flex items-center gap-3 w-full px-5 py-3.5 rounded-xl
-           bg-gradient-to-r from-primary-500/10 to-accent-500/10
-           border border-primary-300/40
-           hover:from-primary-500/15 hover:to-accent-500/15
-           hover:border-primary-400/60 hover:shadow-lg hover:shadow-primary-500/10
-           transition-all duration-300 cursor-pointer"
-    aria-label={t.cta}
-    data-locale={locale}
-  >
-    <!-- Mic Icon (idle state) -->
-    <div id="voice-icon-idle" class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-primary-400 to-accent-600 flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:shadow-primary-500/20 transition-all duration-300">
-      <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
-      </svg>
-    </div>
+<button
+  id="voice-call-btn"
+  class="group flex items-center gap-2.5 w-full px-3 py-2 rounded-lg
+         bg-gradient-to-r from-primary-500/8 to-accent-500/8
+         hover:from-primary-500/15 hover:to-accent-500/15
+         border border-primary-300/30 hover:border-primary-400/50
+         transition-all duration-300 cursor-pointer"
+  aria-label={isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+  data-cta={isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+  data-cta-active={isEn ? 'End call' : 'Oprește apelul'}
+  data-connecting={isEn ? 'Connecting...' : 'Se conectează...'}
+  data-connected={isEn ? 'Connected — speak now' : 'Conectat — vorbește acum'}
+  data-listening={isEn ? 'Listening...' : 'Ascultă...'}
+  data-processing={isEn ? 'Processing...' : 'Procesează...'}
+  data-ended={isEn ? 'Call ended' : 'Apel încheiat'}
+  data-error={isEn ? 'Connection error' : 'Eroare de conexiune'}
+>
+  <!-- Mic Icon (idle) -->
+  <div id="voice-icon-idle" class="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-primary-400 to-accent-600 flex items-center justify-center shadow-sm group-hover:shadow-md transition-all duration-300">
+    <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+    </svg>
+  </div>
 
-    <!-- Pulse Icon (active state - hidden by default) -->
-    <div id="voice-icon-active" class="hidden flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-md animate-pulse">
-      <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-        <rect x="6" y="6" width="12" height="12" rx="2" />
-      </svg>
-    </div>
+  <!-- Stop Icon (active, hidden by default) -->
+  <div id="voice-icon-active" class="hidden flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center shadow-sm animate-pulse">
+    <svg class="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+      <rect x="7" y="7" width="10" height="10" rx="1.5" />
+    </svg>
+  </div>
 
-    <!-- Text -->
-    <div class="flex flex-col text-left min-w-0">
-      <span id="voice-cta-text" class="text-sm font-semibold text-neutral-800 group-hover:text-primary-700 transition-colors">
-        {t.cta}
-      </span>
-      <span id="voice-status-text" class="text-xs text-neutral-500">
-        Live demo
-      </span>
-    </div>
+  <!-- Text -->
+  <div class="flex flex-col text-left min-w-0">
+    <span id="voice-cta-text" class="text-xs font-semibold text-neutral-700 group-hover:text-primary-700 transition-colors leading-tight">
+      {isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+    </span>
+    <span id="voice-status-text" class="text-[10px] text-neutral-400 leading-tight">
+      Live demo
+    </span>
+  </div>
+</button>
 
-    <!-- Arrow / indicator -->
-    <div id="voice-arrow" class="ml-auto flex-shrink-0">
-      <svg class="w-4 h-4 text-neutral-400 group-hover:text-primary-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-      </svg>
-    </div>
-  </button>
-</div>
-
-<script define:vars={{ labels }}>
+<script is:inline>
   (function() {
     'use strict';
 
@@ -113,14 +79,24 @@ const t = labels[locale] || labels.ro;
       const btn = document.getElementById('voice-call-btn');
       if (!btn) return;
 
-      const locale = btn.dataset.locale || 'ro';
-      const t = labels[locale] || labels.ro;
+      // Read labels from data attributes
+      const t = {
+        cta: btn.dataset.cta || 'Vorbește cu agentul AI',
+        ctaActive: btn.dataset.ctaActive || 'Oprește apelul',
+        connecting: btn.dataset.connecting || 'Se conectează...',
+        connected: btn.dataset.connected || 'Conectat — vorbește acum',
+        listening: btn.dataset.listening || 'Ascultă...',
+        processing: btn.dataset.processing || 'Procesează...',
+        ended: btn.dataset.ended || 'Apel încheiat',
+        error: btn.dataset.error || 'Eroare de conexiune',
+      };
 
       const iconIdle = document.getElementById('voice-icon-idle');
       const iconActive = document.getElementById('voice-icon-active');
       const ctaText = document.getElementById('voice-cta-text');
       const statusText = document.getElementById('voice-status-text');
-      const arrow = document.getElementById('voice-arrow');
+
+      if (!iconIdle || !iconActive || !ctaText || !statusText) return;
 
       function updateUI(state) {
         switch (state) {
@@ -129,16 +105,12 @@ const t = labels[locale] || labels.ro;
             iconActive.classList.add('hidden');
             ctaText.textContent = t.cta;
             statusText.textContent = 'Live demo';
-            arrow.classList.remove('hidden');
-            btn.classList.remove('ring-2', 'ring-red-400/50', 'from-red-500/10', 'to-red-500/10', 'border-red-300/50');
-            btn.classList.add('from-primary-500/10', 'to-accent-500/10', 'border-primary-300/40');
+            statusText.style.color = '';
+            btn.classList.remove('ring-2', 'ring-red-400/50');
             break;
           case 'connecting':
-            iconIdle.classList.remove('hidden');
-            iconActive.classList.add('hidden');
             ctaText.textContent = t.connecting;
             statusText.textContent = '';
-            arrow.classList.add('hidden');
             btn.style.opacity = '0.7';
             btn.style.cursor = 'wait';
             break;
@@ -147,11 +119,9 @@ const t = labels[locale] || labels.ro;
             iconActive.classList.remove('hidden');
             ctaText.textContent = t.ctaActive;
             statusText.textContent = t.connected;
-            arrow.classList.add('hidden');
             btn.style.opacity = '1';
             btn.style.cursor = 'pointer';
-            btn.classList.remove('from-primary-500/10', 'to-accent-500/10', 'border-primary-300/40');
-            btn.classList.add('ring-2', 'ring-red-400/50', 'from-red-500/10', 'to-red-500/10', 'border-red-300/50');
+            btn.classList.add('ring-2', 'ring-red-400/50');
             break;
           case 'listening':
             statusText.textContent = t.listening;
@@ -160,9 +130,12 @@ const t = labels[locale] || labels.ro;
             statusText.textContent = t.processing;
             break;
           case 'ended':
+            iconIdle.classList.remove('hidden');
+            iconActive.classList.add('hidden');
             statusText.textContent = t.ended;
             btn.style.opacity = '1';
             btn.style.cursor = 'pointer';
+            btn.classList.remove('ring-2', 'ring-red-400/50');
             setTimeout(() => updateUI('idle'), 3000);
             break;
           case 'error':
@@ -173,9 +146,7 @@ const t = labels[locale] || labels.ro;
             statusText.style.color = '#ef4444';
             btn.style.opacity = '1';
             btn.style.cursor = 'pointer';
-            arrow.classList.remove('hidden');
-            btn.classList.remove('ring-2', 'ring-red-400/50', 'from-red-500/10', 'to-red-500/10', 'border-red-300/50');
-            btn.classList.add('from-primary-500/10', 'to-accent-500/10', 'border-primary-300/40');
+            btn.classList.remove('ring-2', 'ring-red-400/50');
             setTimeout(() => {
               statusText.textContent = 'Live demo';
               statusText.style.color = '';
@@ -187,8 +158,8 @@ const t = labels[locale] || labels.ro;
       async function initVapi() {
         if (isInitialized) return;
         try {
-          const module = await import('https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/+esm');
-          const Vapi = module.default || module.Vapi || module;
+          // Use destructuring exactly like the working widget.js
+          const { default: Vapi } = await import('https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/+esm');
           vapi = new Vapi(VAPI_PUBLIC_KEY);
 
           vapi.on('call-start', () => {

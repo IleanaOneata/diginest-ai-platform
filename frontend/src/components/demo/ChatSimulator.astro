@@ -12,6 +12,8 @@
  * - Ending cu CTA relevant
  */
 
+import VoiceWidget from '@components/demo/VoiceWidget.astro';
+
 interface Props {
   locale?: 'ro' | 'en';
   autoPlay?: boolean;
@@ -116,15 +118,22 @@ const t = labels[locale] || labels.ro;
       </div>
     </div>
 
-    <!-- Footer -->
-    <div class="px-4 py-3 bg-white border-t border-neutral-100 flex items-center justify-between">
-      <span class="text-xs text-neutral-400">{t.poweredBy}</span>
-      <button
-        id="replay-btn"
-        class="text-xs text-primary-500 hover:text-primary-600 font-medium opacity-0 transition-opacity"
-      >
-        Replay
-      </button>
+    <!-- Footer: Voice Widget + Powered By -->
+    <div class="bg-white border-t border-neutral-100">
+      <!-- Voice Widget Row -->
+      <div class="px-3 pt-2.5 pb-1.5">
+        <VoiceWidget locale={locale} />
+      </div>
+      <!-- Bottom Row: Powered By + Replay -->
+      <div class="px-4 pb-2.5 flex items-center justify-between">
+        <span class="text-xs text-neutral-400">{t.poweredBy}</span>
+        <button
+          id="replay-btn"
+          class="text-xs text-primary-500 hover:text-primary-600 font-medium opacity-0 transition-opacity"
+        >
+          Replay
+        </button>
+      </div>
     </div>
   </div>
 </div>
