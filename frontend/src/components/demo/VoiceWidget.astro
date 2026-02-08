@@ -297,46 +297,71 @@ const isEn = locale === 'en';
         }
       }
 
-      function initVapi() {
-        if (isInitialized) return Promise.resolve();
+      // Cached VAPI constructor (loaded once, reusable)
+      var VapiConstructor = null;
+
+      function loadSdk() {
+        if (VapiConstructor) return Promise.resolve(VapiConstructor);
         return import('https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/+esm')
           .then(function(module) {
-            // Handle different export formats (ESM CDN wraps exports)
             var VapiModule = module.default || module;
-            var Vapi = (typeof VapiModule === 'function') ? VapiModule : (VapiModule.default || VapiModule.Vapi || VapiModule);
-            vapi = new Vapi(VAPI_PUBLIC_KEY);
-
-            vapi.on('call-start', function() {
-              isActive = true;
-              updateUI('active');
-            });
-
-            vapi.on('call-end', function() {
-              isActive = false;
-              updateUI('ended');
-            });
-
-            vapi.on('speech-start', function() {
-              if (isActive) updateUI('listening');
-            });
-
-            vapi.on('speech-end', function() {
-              if (isActive) updateUI('processing');
-            });
-
-            vapi.on('error', function(e) {
-              console.error('VAPI error:', e);
-              isActive = false;
-              updateUI('error');
-            });
-
-            isInitialized = true;
-          })
-          .catch(function(e) {
-            console.error('Failed to load VAPI SDK:', e);
-            updateUI('error');
+            VapiConstructor = (typeof VapiModule === 'function')
+              ? VapiModule
+              : (VapiModule.default || VapiModule.Vapi || VapiModule);
+            return VapiConstructor;
           });
       }
+
+      function createVapiInstance() {
+        // Reset any previous instance
+        if (vapi) {
+          try { vapi.stop(); } catch(e) { /* ignore */ }
+          vapi = null;
+        }
+        isInitialized = false;
+        isActive = false;
+
+        return loadSdk().then(function(Vapi) {
+          vapi = new Vapi(VAPI_PUBLIC_KEY);
+
+          vapi.on('call-start', function() {
+            isActive = true;
+            updateUI('active');
+          });
+
+          vapi.on('call-end', function() {
+            isActive = false;
+            updateUI('ended');
+          });
+
+          vapi.on('speech-start', function() {
+            if (isActive) updateUI('listening');
+          });
+
+          vapi.on('speech-end', function() {
+            if (isActive) updateUI('processing');
+          });
+
+          vapi.on('error', function(e) {
+            console.error('VAPI error:', e);
+            isActive = false;
+            updateUI('error');
+          });
+
+          isInitialized = true;
+        });
+      }
+
+      // Preload SDK when widget becomes visible (no waiting on click)
+      var preloadObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            loadSdk().catch(function() { /* silent preload fail is OK */ });
+            preloadObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      preloadObserver.observe(container);
 
       btn.addEventListener('click', function() {
         if (isActive && vapi) {
@@ -346,17 +371,23 @@ const isEn = locale === 'en';
 
         updateUI('connecting');
 
-        var proceed = isInitialized ? Promise.resolve() : initVapi();
+        // If already initialized and healthy, just start
+        // If not (first time or after error), create fresh instance
+        var ready = isInitialized ? Promise.resolve() : createVapiInstance();
 
-        proceed.then(function() {
-          if (vapi) {
-            vapi.start(ASSISTANT_ID).catch(function(e) {
-              console.error('VAPI start error:', e);
-              isActive = false;
-              updateUI('error');
-            });
-          }
-        });
+        ready
+          .then(function() {
+            if (vapi) {
+              return vapi.start(ASSISTANT_ID);
+            }
+          })
+          .catch(function(e) {
+            console.error('VAPI error:', e);
+            isActive = false;
+            // Reset so next click will create a fresh instance
+            isInitialized = false;
+            updateUI('error');
+          });
       });
     }
 
@@ -366,7 +397,7 @@ const isEn = locale === 'en';
     // Cleanup on SPA navigation
     document.addEventListener('astro:before-preparation', function() {
       if (vapi && isActive) {
-        vapi.stop();
+        try { vapi.stop(); } catch(e) { /* ignore */ }
       }
     });
   })();
