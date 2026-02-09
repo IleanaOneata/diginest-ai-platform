@@ -86,9 +86,10 @@ const v = d.validation;
               id="demo-phone"
               name="phone"
               autocomplete="tel"
+              inputmode="tel"
               class="input"
               placeholder="+40 7XX XXX XXX"
-              maxlength="20"
+              maxlength="30"
             />
             <p class="field-error hidden" data-error="phone"></p>
             <p class="text-xs text-neutral-400 mt-1">{d.phoneHelper}</p>
@@ -275,13 +276,46 @@ const v = d.validation;
 </style>
 
 <script define:vars={{ validationMessages: v }}>
-  // Demo form handling with custom validation
+  // Demo form handling with custom validation + sessionStorage persistence
   const API_URL = 'https://diginest-backend-production.up.railway.app/api/v1/demo';
+  const STORAGE_KEY = 'generativa_demo_form';
 
   const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
   const PHONE_CHARS_REGEX = /^[+\d\s\-().]+$/;
 
   const vm = validationMessages;
+
+  // --- sessionStorage helpers ---
+  function saveFormData(form) {
+    try {
+      var data = {};
+      ['name', 'email', 'phone', 'company', 'industry', 'problem', 'details'].forEach(function(fieldName) {
+        var field = form.querySelector('[name="' + fieldName + '"]');
+        if (field) data[fieldName] = field.value;
+      });
+      var gdpr = form.querySelector('[name="gdprConsent"]');
+      if (gdpr) data.gdprConsent = gdpr.checked;
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) { /* sessionStorage not available */ }
+  }
+
+  function restoreFormData(form) {
+    try {
+      var stored = sessionStorage.getItem(STORAGE_KEY);
+      if (!stored) return;
+      var data = JSON.parse(stored);
+      ['name', 'email', 'phone', 'company', 'industry', 'problem', 'details'].forEach(function(fieldName) {
+        var field = form.querySelector('[name="' + fieldName + '"]');
+        if (field && data[fieldName]) field.value = data[fieldName];
+      });
+      var gdpr = form.querySelector('[name="gdprConsent"]');
+      if (gdpr && data.gdprConsent === true) gdpr.checked = true;
+    } catch (e) { /* parse error or storage not available */ }
+  }
+
+  function clearFormData() {
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  }
 
   function validateField(name, value) {
     switch (name) {
@@ -345,7 +379,10 @@ const v = d.validation;
     const textFields = ['name', 'email', 'phone', 'company'];
     const selectFields = ['industry', 'problem'];
 
-    // Clear error on input/change (real-time feedback)
+    // Restore saved form data from sessionStorage
+    restoreFormData(form);
+
+    // Clear error on input/change (real-time feedback) + save to sessionStorage
     textFields.forEach(fieldName => {
       const field = form.querySelector('[name="' + fieldName + '"]');
       const errorEl = form.querySelector('[data-error="' + fieldName + '"]');
@@ -356,6 +393,7 @@ const v = d.validation;
           const msg = validateField(fieldName, field.value.trim());
           showFieldError(field, errorEl, msg);
         }
+        saveFormData(form);
       });
 
       field.addEventListener('blur', () => {
@@ -375,8 +413,17 @@ const v = d.validation;
       field.addEventListener('change', () => {
         const msg = validateField(fieldName, field.value);
         showFieldError(field, errorEl, msg);
+        saveFormData(form);
       });
     });
+
+    // Details textarea — save on input
+    const detailsField = form.querySelector('[name="details"]');
+    if (detailsField) {
+      detailsField.addEventListener('input', () => {
+        saveFormData(form);
+      });
+    }
 
     // GDPR checkbox
     const gdprCheckbox = form.querySelector('[name="gdprConsent"]');
@@ -385,6 +432,7 @@ const v = d.validation;
       gdprCheckbox.addEventListener('change', () => {
         const msg = validateField('gdprConsent', gdprCheckbox.checked ? 'true' : 'false');
         showFieldError(gdprCheckbox, gdprError, msg);
+        saveFormData(form);
       });
     }
 
@@ -468,6 +516,7 @@ const v = d.validation;
           messageContainer?.classList.remove('hidden');
           successMessage?.classList.remove('hidden');
           form.reset();
+          clearFormData();
 
           // Clear all field error states
           allFields.forEach(fieldName => {
