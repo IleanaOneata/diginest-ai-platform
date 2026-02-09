@@ -37,6 +37,13 @@ public class RateLimitConfig {
     }
 
     /**
+     * Rate limit for demo form submissions: 3 requests per hour per IP.
+     */
+    public Bucket resolveDemoFormBucket(String ip) {
+        return buckets.computeIfAbsent("demo:" + ip, this::createDemoFormBucket);
+    }
+
+    /**
      * General API rate limit: 100 requests per minute per IP.
      */
     public Bucket resolveGeneralBucket(String ip) {
@@ -52,6 +59,14 @@ public class RateLimitConfig {
     }
 
     private Bucket createNewsletterBucket(String key) {
+        Bandwidth limit = Bandwidth.builder()
+            .capacity(3)
+            .refillGreedy(3, Duration.ofHours(1))
+            .build();
+        return Bucket.builder().addLimit(limit).build();
+    }
+
+    private Bucket createDemoFormBucket(String key) {
         Bandwidth limit = Bandwidth.builder()
             .capacity(3)
             .refillGreedy(3, Duration.ofHours(1))

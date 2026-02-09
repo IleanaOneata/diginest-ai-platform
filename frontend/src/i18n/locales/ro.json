@@ -173,28 +173,8 @@
     "form": {
       "name": "Nume complet",
       "email": "Email",
-      "company": "Companie",
-      "industry": "Industrie",
-      "industryPlaceholder": "Selectează industria",
-      "industryOptions": {
-        "dental": "Clinică dentară",
-        "medical": "Cabinet medical",
-        "beauty": "Salon beauty / SPA",
-        "auto": "Service auto",
-        "horeca": "Restaurant / HoReCa",
-        "retail": "Retail / E-commerce",
-        "network": "Rețea de locații",
-        "other": "Altă industrie"
-      },
-      "interest": "Ce te interesează?",
-      "interestPlaceholder": "Selectează serviciul",
-      "interestOptions": {
-        "automation": "Automatizare procese",
-        "conversational": "Agenți conversaționali (chatbot / voce)",
-        "integrations": "Integrări AI cu sisteme existente",
-        "unsure": "Nu sunt sigur — vreau o consultanță"
-      },
-      "phone": "Telefon (opțional)",
+      "company": "Companie (opțional)",
+      "phone": "Telefon",
       "message": "Mesaj",
       "submit": "Trimite mesajul",
       "success": "Mesajul a fost trimis cu succes! Te vom contacta în curând.",
@@ -204,10 +184,7 @@
         "nameMin": "Numele trebuie să aibă cel puțin 2 caractere",
         "emailRequired": "Te rugăm să introduci adresa de email",
         "emailInvalid": "Te rugăm să introduci o adresă de email validă",
-        "companyRequired": "Te rugăm să introduci numele companiei",
-        "companyMin": "Numele companiei trebuie să aibă cel puțin 2 caractere",
-        "industryRequired": "Te rugăm să selectezi industria",
-        "interestRequired": "Te rugăm să selectezi ce te interesează",
+        "phoneRequired": "Te rugăm să introduci numărul de telefon",
         "phoneInvalid": "Te rugăm să introduci un număr de telefon valid (ex: +40 712 345 678)",
         "messageRequired": "Te rugăm să descrii proiectul sau întrebarea ta",
         "messageMin": "Mesajul trebuie să aibă cel puțin 10 caractere"
@@ -262,9 +239,67 @@
   },
 
   "demo": {
-    "title": "Testează un agent AI",
-    "subtitle": "Experimentează puterea automatizării într-un demo interactiv",
-    "placeholder": "Demo în construcție - Disponibil în curând"
+    "meta": {
+      "title": "Solicită Demo Personalizat - GENERATIVA | Agenți AI",
+      "description": "Solicită un demo personalizat de agenți AI pentru afacerea ta. Pregătim un agent configurat pentru industria și nevoile tale. Gratuit, fără obligații."
+    },
+    "breadcrumb": {
+      "home": "Acasa",
+      "demo": "Solicită Demo"
+    },
+    "form": {
+      "title": "Solicită un demo personalizat",
+      "subtitle": "Completează formularul de mai jos și vom pregăti un agent AI configurat special pentru nevoile afacerii tale. Demo-ul este gratuit și fără obligații.",
+      "name": "Nume complet",
+      "email": "Email business",
+      "emailHelper": "Vom trimite confirmarea și detaliile demo-ului pe acest email",
+      "phone": "Telefon",
+      "phoneHelper": "Te vom contacta pentru a programa demo-ul",
+      "company": "Companie / Organizație",
+      "industry": "Domeniu de activitate",
+      "industryPlaceholder": "Selectează domeniul",
+      "industryOptions": {
+        "health": "Sănătate / Clinici",
+        "realestate": "Imobiliare",
+        "professional": "Servicii profesionale",
+        "retail": "Retail / eCommerce",
+        "education": "Educație",
+        "other": "Alt domeniu"
+      },
+      "problem": "Ce problemă vrei să rezolvi?",
+      "problemPlaceholder": "Selectează problema principală",
+      "problemOptions": {
+        "calls": "Preluare automată apeluri",
+        "scheduling": "Programări și confirmări",
+        "support": "Suport clienți",
+        "leads": "Calificare lead-uri",
+        "other": "Altă provocare"
+      },
+      "details": "Detalii suplimentare (opțional)",
+      "detailsPlaceholder": "Ex: Avem 50+ apeluri/zi și pierdem ~30% după programul de lucru...",
+      "gdpr": "Sunt de acord cu prelucrarea datelor personale conform <a href=\"/ro/politica-confidentialitate/\" target=\"_blank\" class=\"text-primary-600 hover:text-primary-700 underline\">Politicii de Confidențialitate</a>. Datele vor fi folosite exclusiv pentru pregătirea demo-ului.",
+      "submit": "Solicită demo-ul gratuit",
+      "success": "Mulțumim! Am primit cererea ta. Un consultant GENERATIVA te va contacta în maxim 24 de ore pentru a programa demo-ul personalizat.",
+      "error": "A apărut o eroare. Te rugăm să încerci din nou.",
+      "validation": {
+        "nameRequired": "Te rugăm să introduci numele complet",
+        "nameMin": "Numele trebuie să aibă cel puțin 2 caractere",
+        "emailRequired": "Te rugăm să introduci adresa de email",
+        "emailInvalid": "Te rugăm să introduci o adresă de email validă",
+        "phoneRequired": "Te rugăm să introduci numărul de telefon",
+        "phoneInvalid": "Te rugăm să introduci un număr de telefon valid (ex: +40 712 345 678)",
+        "companyRequired": "Te rugăm să introduci numele companiei",
+        "companyMin": "Numele companiei trebuie să aibă cel puțin 2 caractere",
+        "industryRequired": "Te rugăm să selectezi domeniul de activitate",
+        "problemRequired": "Te rugăm să selectezi problema principală",
+        "gdprRequired": "Trebuie să fii de acord cu prelucrarea datelor personale"
+      },
+      "trust": {
+        "free": "100% gratuit, fără obligații",
+        "time": "Demo personalizat de 20-30 min",
+        "response": "Răspundem în maxim 24 de ore"
+      }
+    }
   },
 
   "about": {

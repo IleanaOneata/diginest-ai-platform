@@ -96,55 +96,23 @@ const v = t.contact.form.validation;
             <p class="field-error hidden" data-error="email"></p>
           </div>
 
-          <!-- Company -->
+          <!-- Company (optional) -->
           <div>
-            <label for="company" class="label">{t.contact.form.company} *</label>
+            <label for="company" class="label">{t.contact.form.company}</label>
             <input
               type="text"
               id="company"
               name="company"
               class="input"
               placeholder={locale === 'ro' ? 'Numele companiei' : 'Company name'}
-              maxlength="100"
+              maxlength="200"
             />
             <p class="field-error hidden" data-error="company"></p>
           </div>
 
-          <!-- Industry -->
+          <!-- Phone -->
           <div>
-            <label for="industry" class="label">{t.contact.form.industry} *</label>
-            <select
-              id="industry"
-              name="industry"
-              class="input"
-            >
-              <option value="">{t.contact.form.industryPlaceholder}</option>
-              {Object.entries(t.contact.form.industryOptions).map(([key, label]) => (
-                <option value={key}>{label}</option>
-              ))}
-            </select>
-            <p class="field-error hidden" data-error="industry"></p>
-          </div>
-
-          <!-- Interest -->
-          <div>
-            <label for="interest" class="label">{t.contact.form.interest} *</label>
-            <select
-              id="interest"
-              name="interest"
-              class="input"
-            >
-              <option value="">{t.contact.form.interestPlaceholder}</option>
-              {Object.entries(t.contact.form.interestOptions).map(([key, label]) => (
-                <option value={key}>{label}</option>
-              ))}
-            </select>
-            <p class="field-error hidden" data-error="interest"></p>
-          </div>
-
-          <!-- Phone (optional) -->
-          <div>
-            <label for="phone" class="label">{t.contact.form.phone}</label>
+            <label for="phone" class="label">{t.contact.form.phone} *</label>
             <input
               type="tel"
               id="phone"
@@ -227,18 +195,6 @@ const v = t.contact.form.validation;
     border-color: #dc2626 !important;
     box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
   }
-  select.input {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%236b7280'%3E%3Cpath fill-rule='evenodd' d='M5.22 8.22a.75.75 0 011.06 0L10 11.94l3.72-3.72a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.22 9.28a.75.75 0 010-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 1.25rem;
-    padding-right: 2.5rem;
-    cursor: pointer;
-  }
-  select.input option[value=""] {
-    color: #9ca3af;
-  }
 </style>
 
 <script define:vars={{ validationMessages: v }}>
@@ -263,21 +219,13 @@ const v = t.contact.form.validation;
         if (!EMAIL_REGEX.test(value)) return vm.emailInvalid;
         return '';
       case 'company':
-        if (!value) return vm.companyRequired;
-        if (value.length < 2) return vm.companyMin;
-        return '';
-      case 'industry':
-        if (!value) return vm.industryRequired;
-        return '';
-      case 'interest':
-        if (!value) return vm.interestRequired;
+        // Company is optional — no required validation
         return '';
       case 'phone':
-        if (value) {
-          if (!PHONE_CHARS_REGEX.test(value)) return vm.phoneInvalid;
-          var digitCount = value.replace(/\D/g, '').length;
-          if (digitCount < 7 || digitCount > 15) return vm.phoneInvalid;
-        }
+        if (!value) return vm.phoneRequired;
+        if (!PHONE_CHARS_REGEX.test(value)) return vm.phoneInvalid;
+        var digitCount = value.replace(/\D/g, '').length;
+        if (digitCount < 7 || digitCount > 15) return vm.phoneInvalid;
         return '';
       case 'message':
         if (!value) return vm.messageRequired;
@@ -313,7 +261,7 @@ const v = t.contact.form.validation;
 
     const locale = window.location.pathname.startsWith('/en') ? 'en' : 'ro';
 
-    const fields = ['name', 'email', 'company', 'industry', 'interest', 'phone', 'message'];
+    const fields = ['name', 'email', 'company', 'phone', 'message'];
 
     // Clear error on input/change (real-time feedback)
     fields.forEach(fieldName => {
@@ -386,24 +334,12 @@ const v = t.contact.form.validation;
 
       const formData = new FormData(form);
 
-      // Get selected labels (not keys) for industry and interest
-      var industrySelect = form.querySelector('[name="industry"]');
-      var interestSelect = form.querySelector('[name="interest"]');
-      var industryLabel = industrySelect?.options[industrySelect.selectedIndex]?.text || '';
-      var interestLabel = interestSelect?.options[interestSelect.selectedIndex]?.text || '';
-      var userMessage = formData.get('message')?.toString().trim();
-
-      // Prepend industry + interest to message for backend
-      var fullMessage = '[' + (locale === 'ro' ? 'Industrie' : 'Industry') + ': ' + industryLabel + ']\n'
-        + '[' + (locale === 'ro' ? 'Interes' : 'Interest') + ': ' + interestLabel + ']\n\n'
-        + userMessage;
-
       const requestBody = {
         name: formData.get('name')?.toString().trim(),
         email: formData.get('email')?.toString().trim(),
-        company: formData.get('company')?.toString().trim(),
-        phone: formData.get('phone')?.toString().trim() || null,
-        message: fullMessage,
+        company: formData.get('company')?.toString().trim() || null,
+        phone: formData.get('phone')?.toString().trim(),
+        message: formData.get('message')?.toString().trim(),
         locale: locale
       };
 

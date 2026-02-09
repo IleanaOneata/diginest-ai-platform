@@ -135,6 +135,8 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   'privacy-policy': { ro: 'politica-confidentialitate', en: 'privacy-policy' },
   'termeni-conditii': { ro: 'termeni-conditii', en: 'terms-conditions' },
   'terms-conditions': { ro: 'termeni-conditii', en: 'terms-conditions' },
+  // Demo page
+  'demo': { ro: 'demo', en: 'demo' },
   // Blog
   'blog': { ro: 'blog', en: 'blog' },
   // Add more mappings as needed

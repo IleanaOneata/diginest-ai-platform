@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * DTO for contact form submissions.
+ * DTO for demo request form submissions.
  *
- * Includes validation rules for all fields.
+ * Captures business details for preparing a personalized AI agent demo.
  */
-public record ContactRequestDTO(
+public record DemoRequestDTO(
 
     @NotBlank(message = "Name is required")
     @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
@@ -20,16 +20,27 @@ public record ContactRequestDTO(
     @Size(max = 255, message = "Email must be at most 255 characters")
     String email,
 
-    @Size(max = 200, message = "Company name must be at most 200 characters")
-    String company,
-
     @NotBlank(message = "Phone is required")
     @Size(max = 20, message = "Phone must be at most 20 characters")
     String phone,
 
-    @NotBlank(message = "Message is required")
-    @Size(min = 10, max = 2000, message = "Message must be between 10 and 2000 characters")
-    String message,
+    @NotBlank(message = "Company is required")
+    @Size(min = 2, max = 200, message = "Company name must be between 2 and 200 characters")
+    String company,
+
+    @NotBlank(message = "Industry is required")
+    @Size(max = 100, message = "Industry must be at most 100 characters")
+    String industry,
+
+    @NotBlank(message = "Problem is required")
+    @Size(max = 200, message = "Problem must be at most 200 characters")
+    String problem,
+
+    @Size(max = 2000, message = "Details must be at most 2000 characters")
+    String details,
+
+    // GDPR consent (validated client-side, stored for audit)
+    boolean gdprConsent,
 
     // Optional: source tracking
     String source,
@@ -41,7 +52,7 @@ public record ContactRequestDTO(
     /**
      * Create with defaults for optional fields.
      */
-    public ContactRequestDTO {
+    public DemoRequestDTO {
         if (source == null) source = "website";
         if (locale == null) locale = "ro";
     }

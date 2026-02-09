@@ -151,10 +151,15 @@ vercel --prod
 ```
 
 **Backend:**
+> ⚠️ **NU folosi `railway up` (CLI)!** Railway are Root Directory setat la `/backend`, dar CLI-ul nu gestionează corect monorepo-urile. Rezultatul: eroarea `Could not find root directory: /backend`. În plus, fișierul `nul` din rădăcina repo-ului (nume rezervat pe Windows) cauzează crash cu `Incorrect function. (os error 1)`.
+
+**Singura metodă funcțională pentru backend:**
 ```bash
-cd backend
-railway up
+# Push pe main → Railway auto-deploy via GitHub
+git push origin main
 ```
+
+~~`railway up` — NU FUNCȚIONEAZĂ cu monorepo~~
 
 ## ✅ Verification Checklist
 
@@ -182,6 +187,12 @@ După deployment, verifică:
 2. Verify DATABASE_URL
 3. Check environment variables
 
+### Railway deploy fails cu "Could not find root directory"
+
+**Cauză**: Folosești `railway up` (CLI). CLI-ul NU suportă Root Directory config pentru monorepo-uri.
+
+**Soluție**: Deploy DOAR prin `git push origin main`. Railway auto-deploy via GitHub funcționează perfect.
+
 ### CORS errors
 
 1. Verify `CORS_ORIGINS` includes frontend domain
@@ -200,4 +211,4 @@ După deployment, verifică:
 
 ---
 
-*Ultima actualizare: Ianuarie 2025*
+*Ultima actualizare: Februarie 2026*
