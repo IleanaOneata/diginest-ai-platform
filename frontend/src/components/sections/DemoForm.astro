@@ -285,6 +285,20 @@ const v = d.validation;
 
   const vm = validationMessages;
 
+  // Normalize phone: strip formatting, auto-add +40 for Romanian numbers
+  function normalizePhone(raw) {
+    // Strip everything except digits and +
+    var cleaned = raw.replace(/[^\d+]/g, '');
+    // Romanian number without prefix: starts with 7, 9 digits (e.g. 757532054)
+    if (/^7\d{8}$/.test(cleaned)) return '+40' + cleaned;
+    // Romanian number with 0 prefix: starts with 07, 10 digits (e.g. 0757532054)
+    if (/^07\d{8}$/.test(cleaned)) return '+4' + cleaned;
+    // Romanian number without +: starts with 40, 11 digits (e.g. 40757532054)
+    if (/^40\d{9}$/.test(cleaned)) return '+' + cleaned;
+    // Already has + or other international format — return cleaned
+    return cleaned;
+  }
+
   // --- sessionStorage helpers ---
   function saveFormData(form) {
     try {
@@ -397,11 +411,20 @@ const v = d.validation;
       });
 
       field.addEventListener('blur', () => {
-        const value = field.value.trim();
+        var value = field.value.trim();
+        // Normalize phone on blur (handles autofill formatting)
+        if (fieldName === 'phone' && value) {
+          var normalized = normalizePhone(value);
+          if (normalized !== value.replace(/[^\d+]/g, '')) {
+            field.value = normalized;
+            value = normalized;
+          }
+        }
         if (value || field.classList.contains('input-invalid')) {
           const msg = validateField(fieldName, value);
           showFieldError(field, errorEl, msg);
         }
+        if (fieldName === 'phone') saveFormData(form);
       });
     });
 
@@ -490,10 +513,14 @@ const v = d.validation;
       var industryLabel = industrySelect?.options[industrySelect.selectedIndex]?.text || '';
       var problemLabel = problemSelect?.options[problemSelect.selectedIndex]?.text || '';
 
+      // Normalize phone before sending
+      var rawPhone = form.querySelector('[name="phone"]')?.value.trim() || '';
+      var normalizedPhone = normalizePhone(rawPhone);
+
       const requestBody = {
         name: form.querySelector('[name="name"]')?.value.trim(),
         email: form.querySelector('[name="email"]')?.value.trim(),
-        phone: form.querySelector('[name="phone"]')?.value.trim(),
+        phone: normalizedPhone,
         company: form.querySelector('[name="company"]')?.value.trim(),
         industry: industryLabel,
         problem: problemLabel,

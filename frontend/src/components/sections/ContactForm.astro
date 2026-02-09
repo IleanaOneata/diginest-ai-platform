@@ -241,6 +241,15 @@ const v = t.contact.form.validation;
 
   const vm = validationMessages;
 
+  // Normalize phone: strip formatting, auto-add +40 for Romanian numbers
+  function normalizePhone(raw) {
+    var cleaned = raw.replace(/[^\d+]/g, '');
+    if (/^7\d{8}$/.test(cleaned)) return '+40' + cleaned;
+    if (/^07\d{8}$/.test(cleaned)) return '+4' + cleaned;
+    if (/^40\d{9}$/.test(cleaned)) return '+' + cleaned;
+    return cleaned;
+  }
+
   function validateField(name, value) {
     switch (name) {
       case 'name':
@@ -315,7 +324,15 @@ const v = t.contact.form.validation;
       // Validate on blur (not for selects — change handles it)
       if (field.tagName !== 'SELECT') {
         field.addEventListener('blur', () => {
-          const value = field.value.trim();
+          var value = field.value.trim();
+          // Normalize phone on blur (handles autofill formatting like +40 (757) 532 054)
+          if (fieldName === 'phone' && value) {
+            var normalized = normalizePhone(value);
+            if (normalized !== value.replace(/[^\d+]/g, '')) {
+              field.value = normalized;
+              value = normalized;
+            }
+          }
           if (value || field.classList.contains('input-invalid')) {
             const msg = validateField(fieldName, value);
             showFieldError(field, errorEl, msg);
@@ -367,11 +384,15 @@ const v = t.contact.form.validation;
 
       const formData = new FormData(form);
 
+      // Normalize phone before sending
+      var rawPhone = formData.get('phone')?.toString().trim() || '';
+      var normalizedPhone = normalizePhone(rawPhone);
+
       const requestBody = {
         name: formData.get('name')?.toString().trim(),
         email: formData.get('email')?.toString().trim(),
         company: formData.get('company')?.toString().trim() || null,
-        phone: formData.get('phone')?.toString().trim(),
+        phone: normalizedPhone,
         message: formData.get('message')?.toString().trim(),
         locale: locale
       };
