@@ -165,11 +165,16 @@ EmailService trimite email-uri prin POST la `https://api.resend.com/emails` cu B
 cd frontend
 npx vercel --prod
 
-# Backend
-cd backend
-railway up
-# ⚠️ railway up folosește URL-uri publice, nu private networking
+**Backend:**
+> ⚠️ **NU folosi `railway up` (CLI)!** Railway are Root Directory setat la `/backend`, dar CLI-ul nu gestionează corect monorepo-urile. Rezultatul: eroarea `Could not find root directory: /backend`. În plus, fișierul `nul` din rădăcina repo-ului (nume rezervat pe Windows) cauzează crash cu `Incorrect function. (os error 1)`.
+
+**Singura metodă funcțională pentru backend:**
+```bash
+# Push pe main → Railway auto-deploy via GitHub
+git push origin main
 ```
+
+~~`railway up` — NU FUNCȚIONEAZĂ cu monorepo~~
 
 ## ✅ Verification Checklist
 
@@ -203,6 +208,12 @@ După deployment, verifică:
 1. Verifică `management.health.mail.enabled=false` în application.yml
 2. Verifică DATABASE_URL (prefix `jdbc:postgresql://`)
 3. Verifică PostgreSQL addon e activ
+
+### Railway deploy fails cu "Could not find root directory"
+
+**Cauză**: Folosești `railway up` (CLI). CLI-ul NU suportă Root Directory config pentru monorepo-uri.
+
+**Soluție**: Deploy DOAR prin `git push origin main`. Railway auto-deploy via GitHub funcționează perfect.
 
 ### CORS errors
 

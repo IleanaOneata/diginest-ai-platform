@@ -173,28 +173,8 @@
     "form": {
       "name": "Full name",
       "email": "Email",
-      "company": "Company",
-      "industry": "Industry",
-      "industryPlaceholder": "Select your industry",
-      "industryOptions": {
-        "dental": "Dental clinic",
-        "medical": "Medical practice",
-        "beauty": "Beauty salon / SPA",
-        "auto": "Auto service",
-        "horeca": "Restaurant / HoReCa",
-        "retail": "Retail / E-commerce",
-        "network": "Multi-location business",
-        "other": "Other industry"
-      },
-      "interest": "What are you interested in?",
-      "interestPlaceholder": "Select service",
-      "interestOptions": {
-        "automation": "Process automation",
-        "conversational": "Conversational agents (chatbot / voice)",
-        "integrations": "AI integrations with existing systems",
-        "unsure": "Not sure — I'd like a consultation"
-      },
-      "phone": "Phone (optional)",
+      "company": "Company (optional)",
+      "phone": "Phone",
       "message": "Message",
       "submit": "Send message",
       "success": "Message sent successfully! We'll contact you soon.",
@@ -204,10 +184,7 @@
         "nameMin": "Name must be at least 2 characters",
         "emailRequired": "Please enter your email address",
         "emailInvalid": "Please enter a valid email address",
-        "companyRequired": "Please enter your company name",
-        "companyMin": "Company name must be at least 2 characters",
-        "industryRequired": "Please select your industry",
-        "interestRequired": "Please select what you're interested in",
+        "phoneRequired": "Please enter your phone number",
         "phoneInvalid": "Please enter a valid phone number (e.g. +40 712 345 678)",
         "messageRequired": "Please describe your project or question",
         "messageMin": "Message must be at least 10 characters"
@@ -262,9 +239,67 @@
   },
 
   "demo": {
-    "title": "Try an AI agent",
-    "subtitle": "Experience the power of automation in an interactive demo",
-    "placeholder": "Demo under construction - Coming soon"
+    "meta": {
+      "title": "Request Personalized Demo - GENERATIVA | AI Agents",
+      "description": "Request a personalized AI agent demo for your business. We'll prepare an agent configured for your industry and needs. Free, no obligations."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "demo": "Request Demo"
+    },
+    "form": {
+      "title": "Request a personalized demo",
+      "subtitle": "Fill out the form below and we'll prepare an AI agent configured specifically for your business needs. The demo is free and with no obligations.",
+      "name": "Full name",
+      "email": "Business email",
+      "emailHelper": "We'll send the confirmation and demo details to this email",
+      "phone": "Phone",
+      "phoneHelper": "We'll contact you to schedule the demo",
+      "company": "Company / Organization",
+      "industry": "Industry",
+      "industryPlaceholder": "Select your industry",
+      "industryOptions": {
+        "health": "Healthcare / Clinics",
+        "realestate": "Real Estate",
+        "professional": "Professional Services",
+        "retail": "Retail / eCommerce",
+        "education": "Education",
+        "other": "Other industry"
+      },
+      "problem": "What problem do you want to solve?",
+      "problemPlaceholder": "Select the main challenge",
+      "problemOptions": {
+        "calls": "Automatic call handling",
+        "scheduling": "Scheduling and confirmations",
+        "support": "Customer support",
+        "leads": "Lead qualification",
+        "other": "Other challenge"
+      },
+      "details": "Additional details (optional)",
+      "detailsPlaceholder": "E.g.: We get 50+ calls/day and lose ~30% after business hours...",
+      "gdpr": "I agree to the processing of personal data according to the <a href=\"/en/privacy-policy/\" target=\"_blank\" class=\"text-primary-600 hover:text-primary-700 underline\">Privacy Policy</a>. Data will be used exclusively for preparing the demo.",
+      "submit": "Request free demo",
+      "success": "Thank you! We've received your request. A GENERATIVA consultant will contact you within 24 hours to schedule your personalized demo.",
+      "error": "An error occurred. Please try again.",
+      "validation": {
+        "nameRequired": "Please enter your full name",
+        "nameMin": "Name must be at least 2 characters",
+        "emailRequired": "Please enter your email address",
+        "emailInvalid": "Please enter a valid email address",
+        "phoneRequired": "Please enter your phone number",
+        "phoneInvalid": "Please enter a valid phone number (e.g. +40 712 345 678)",
+        "companyRequired": "Please enter your company name",
+        "companyMin": "Company name must be at least 2 characters",
+        "industryRequired": "Please select your industry",
+        "problemRequired": "Please select the main challenge",
+        "gdprRequired": "You must agree to the processing of personal data"
+      },
+      "trust": {
+        "free": "100% free, no obligations",
+        "time": "Personalized 20-30 min demo",
+        "response": "We respond within 24 hours"
+      }
+    }
   },
 
   "about": {

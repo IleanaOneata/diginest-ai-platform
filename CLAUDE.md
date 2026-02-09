@@ -55,6 +55,13 @@
 40. ✅ **Dynamic Scroll Arrows** - Săgeți de direcție dinamice pe mobile: arată doar direcția disponibilă (dreapta la start, ambele la mijloc, stânga la final). Pattern `data-scroll-hint` + `data-scroll-container` cu JS pe scroll event
 41. ✅ **AI Integrations 6th Capability** - Adăugat "Notificări și alerte inteligente" (Smart notifications & alerts) pe pagina Integrări AI pentru grid complet 3+3 pe desktop
 42. ✅ **Language Switcher Scroll Preservation** - La schimbarea limbii (RO↔EN), utilizatorul rămâne în aceeași poziție pe pagină. Scroll position salvat ca procent în `sessionStorage`, restaurat instant (`behavior: 'instant'`) pe pagina nouă
+43. ✅ **HTML Email Template** - Email confirmare contact form: Stripe/Linear-inspired, table-based layout, inline CSS only, i18n RO/EN, XSS protection, Resend API suport HTML (`html` field). Fără logo imagine (text fallback "GENERATIVA")
+44. ✅ **UX/UI Audit Document** - Analiză completă psihologie cumpărător B2B AI + audit UX desktop/mobile, salvat în `docs/UX-AUDIT-FEBRUARY-2026.md`
+45. ✅ **Voice Widget Redesign** - Buton vocal MARE, circular, cu inele animate (sonar/radar) ca element central și dominant în Hero section. VAPI Web SDK via ESM CDN
+46. ✅ **ChatSimulator Removed from Hero** - Voice widget e singurul focal point în Hero; ChatSimulator eliminat din HeroInteractive
+47. ✅ **VAPI SDK Fix** - Fix constructor error (`Vapi is not a constructor`) cauzat de ESM CDN export wrapping + `define:vars` incompatibil cu `import()`
+48. ✅ **Voice Widget UX** - Preload SDK via IntersectionObserver + auto-retry după erori fără refresh pagină
+49. ✅ **Railway Deployment Analysis** - Documentat: `railway up` CLI NU funcționează cu monorepo Root Directory; deploy DOAR via GitHub push
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -216,7 +223,8 @@ background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
 
 | Component | Fișier | Scop |
 |-----------|--------|------|
-| **ChatSimulator** | `components/demo/ChatSimulator.astro` | Chat animat cu typing effect, auto-play |
+| **VoiceWidget** | `components/demo/VoiceWidget.astro` | 🆕 Buton vocal mare cu inele animate, VAPI Web SDK, element central Hero |
+| **ChatSimulator** | `components/demo/ChatSimulator.astro` | Chat animat cu typing effect, auto-play (NU mai e în Hero) |
 | **HeroInteractive** | `components/sections/HeroInteractive.astro` | Hero cu demo în dreapta |
 | **BenefitsStrip** | `components/sections/BenefitsStrip.astro` | 6 beneficii în strip vizual |
 | **UseCases** | `components/sections/UseCases.astro` | Auto-identificare pe industrii |
@@ -311,7 +319,8 @@ AI Agents Platform/
 │   │   │   │   ├── Footer.astro         # Footer
 │   │   │   │   └── Button.astro         # Butoane (variant: gradient)
 │   │   │   ├── demo/
-│   │   │   │   └── ChatSimulator.astro  # 🆕 Chat animat pentru Hero
+│   │   │   │   ├── VoiceWidget.astro    # 🆕 Buton vocal VAPI cu inele animate (Hero central)
+│   │   │   │   └── ChatSimulator.astro  # Chat animat (nu mai e în Hero)
 │   │   │   └── sections/
 │   │   │       ├── HeroInteractive.astro # 🆕 Hero cu demo
 │   │   │       ├── BenefitsStrip.astro   # 🆕 6 beneficii vizuale
@@ -1040,6 +1049,9 @@ container.addEventListener('scroll', updateArrows, { passive: true });
 | Feb 2026 | Favicon în tab Chrome arăta vechiul logo SVG | Commit `1080d32` a revenit favicon.svg la SVG vechi, dar `3cf64f3` nu l-a restaurat | Generate PNG favicons (32x32, 16x16) din noul logo, actualizat BaseLayout |
 | Feb 2026 | IntegrationHub labels invizibile pe mobile | Label-urile aveau `hidden sm:block` — ascunse pe mobile | Schimbat la `block` pe toate dimensiunile |
 | Feb 2026 | Logo rollback greșit — revenit TOTAL la SVG | La "rollback" s-a presupus revert total, dar utilizatoarea voia doar eliminarea cercului gri | Restaurat PNG logo din commit anterior (`d86a3cd`) |
+| Feb 2026 | VAPI `Vapi is not a constructor` | 1. `define:vars` în Astro transformă `<script>` și sparge `import()` dinamic. 2. ESM CDN (jsdelivr) wraps exports cu nested `.default` | 1. Folosit `is:inline` + `data-*` attributes. 2. Fallback chain: `module.default.default \|\| module.default.Vapi \|\| module.default` |
+| Feb 2026 | VAPI eroare necesita refresh browser | După eroare de conexiune, `isInitialized` rămânea `true` dar instanța era coruptă | Reset `isInitialized = false` pe eroare → next click creează instanță nouă via `createVapiInstance()` |
+| Feb 2026 | Railway CLI deploy-uri eșuau mereu | `railway up` nu gestionează Root Directory `/backend` în monorepo | Deploy DOAR via GitHub push pe `main` (auto-deploy) |
 
 ### Link-uri care duc la 404 (Pagini neimplementate) ⚠️
 
@@ -1401,6 +1413,61 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   - Events: `DOMContentLoaded` + `astro:page-load` (SPA compatibility)
 - **Commits**: `e5d2b61` (6th capability), `9051fc0` (scroll preservation), `060f48a` (instant scroll)
 
+### Sesiune Februarie 2026 - HTML Email Template + UX Audit
+- **HTML Email Template** pentru confirmarea formularului de contact:
+  - **Design**: Stripe/Linear-inspired, enterprise B2B, clean și minimal
+  - **Layout**: 100% table-based (email client compatibility), inline CSS only
+  - **i18n**: Un singur template cu texte RO/EN bazate pe `request.getLocale()`
+  - **Secțiuni**: Header (text GENERATIVA cu G cyan), Greeting personalizat (prenume), Body (24h răspuns), Message Box (preview mesaj client), Closing (semnătură echipă), Footer (website + email + trust note)
+  - **Securitate**: `escapeHtml()` pe conținutul user-ului (XSS prevention)
+  - **Resend API**: Adăugat suport HTML — `sendViaResend()` overload cu parametru `isHtml`, trimite `"html"` în loc de `"text"` în request body
+  - **Logo imagine**: Nu se include (Gmail/Outlook blochează imagini externe by default la primul email), fallback text e suficient
+  - **Fix**: `%%` → `%` în text block (nu e `String.format()`, ci `.replace()`)
+  - **Deploy**: Merge staging → main, Railway auto-deploy
+- **UX/UI Audit** — analiză completă salvată în `docs/UX-AUDIT-FEBRUARY-2026.md`:
+  - Psihologia cumpărătorului B2B în AI/tech (5 faze decizie)
+  - Audit UX desktop (flow, ierarhie, conversion path)
+  - Audit UX mobile (responsive, touch, scroll)
+  - 10 recomandări prioritizate (3 critice, 4 importante, 3 nice-to-have)
+  - Scor global: 7.9/10
+- **Commits**: `54cd37c` (UX audit doc), `cac497a` (HTML email template), `595fbc4` (merge to main)
+
+### Sesiune Februarie 2026 - Voice Widget Redesign & VAPI Integration
+- **Problema**: Widget-ul vocal VAPI era mic, ascuns în footer-ul ChatSimulator-ului — nimeni nu-l observa
+- **Cerința utilizatoarei**: "Trebuie să fie primul lucru care să atragă atenția. Cu animație în jurul microfonului să te intrige să incepi o conversație."
+- **Redesign complet VoiceWidget.astro** (4 iterații):
+  1. Mutat widget în footer ChatSimulator → respins ("nu imi place locul")
+  2. Redesign ca buton circular mare cu 3 inele animate (sonar/radar) → aprobat
+  3. Eliminat ChatSimulator din Hero ("sa scoatem elementul de chat, nu mai are nici un sens")
+  4. Fix VAPI constructor error + UX improvements
+- **Design final**:
+  - Buton circular mare: `w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36`
+  - Gradient brand: `bg-gradient-to-br from-primary-400 to-accent-600`
+  - 3 inele concentrice animate cu timing decalat (ringPulse1/2/3)
+  - Text descriptiv + badge hint cu ping indicator
+  - Stări: idle, connecting, active (roșu), listening, processing, ended, error
+- **Probleme tehnice rezolvate**:
+  - **`define:vars` incompatibil cu `import()`**: Astro transformă script-ul și sparge dynamic import. Soluție: `is:inline` + `data-*` attributes pentru i18n
+  - **ESM CDN nested exports**: jsdelivr wraps `module.default` ca obiect cu propriul `.default`. Soluție: fallback chain `typeof === 'function' ? use : .default || .Vapi`
+  - **SDK preload**: IntersectionObserver încarcă SDK când widget-ul devine vizibil (nu la click)
+  - **Auto-retry**: După eroare, `isInitialized = false` → next click creează instanță VAPI nouă
+- **HeroInteractive restructurat**: Grid `lg:grid-cols-[1fr_auto]`, VoiceWidget în dreapta cu glow decorativ blur
+- **Commits**: `1aad288` (fix widget in card), `ef6e9ae` (redesign rings), `43c2ad2` (remove ChatSimulator), `a00fba5` (fix constructor), `43c25d8` (preload + retry)
+
+### Sesiune Februarie 2026 - Railway Deployment Analysis
+- **Problema**: Deploy-uri eșuau aparent aleator pe Railway — primul pica, al doilea mergea
+- **Investigare** (cu feedback utilizatoare "Esti 100% sigur?"):
+  - Ipoteză inițială (greșită): PostgreSQL cold boot / HikariCP race condition
+  - Log-uri reale: totul funcționa corect, nu era problema DB
+  - **Cauza reală** (confirmată din dashboard screenshots):
+    - Toate deploy-urile **FAILED** erau via `railway up` (CLI)
+    - Toate deploy-urile **SUCCESS** erau via GitHub auto-deploy
+    - Eroarea: `Could not find root directory: /backend` — CLI trimite tot repo-ul dar NU aplică Root Directory config
+- **Fișierul `nul`**: Există un fișier `nul` în rădăcina repo-ului. Pe Windows e nume rezervat → Railway CLI crashează cu `Incorrect function. (os error 1)`
+- **Concluzie**: **NU folosi `railway up`**. Deploy backend DOAR via `git push origin main` (GitHub auto-deploy)
+- **Documentat**: Reguli adăugate în Railway Constraints, DEPLOYMENT.md actualizat
+- **Lecție**: Când ai o ipoteză, verifică datele reale (log-uri, dashboard) înainte de a concluziona
+
 ### ⚠️ Lecții din Sesiunea Logo Redesign
 1. **Rollback parțial vs total**: Când utilizatorul zice "rollback", clarifică CE anume. Nu presupune.
 2. **Browser cache**: Favicon-urile și imaginile sunt puternic cached. Recomandă Ctrl+Shift+R.
@@ -1532,6 +1599,8 @@ User submit form → ContactController (HTTP thread)
 3. **DATABASE_URL** — trebuie prefix `jdbc:postgresql://` și URL public (`metro.proxy.rlwy.net`) pentru CLI deploys
 4. **Maven wrapper** — NU adăuga `mvnw` — Nixpacks folosește `mise` care gestionează Java/Maven direct
 5. **Build time** — ~2-3 min (Maven build + app start). Prima cerere după deploy poate fi mai lentă (JVM warmup)
+6. **🔴 NU folosi `railway up` (CLI deploy)** — Railway are Root Directory setat la `/backend`. CLI-ul `railway up` nu gestionează corect monorepo-urile: trimite tot repo-ul dar NU aplică Root Directory, rezultând eroarea `Could not find root directory: /backend`. **Deploy-ul funcționează DOAR prin GitHub push pe `main`** (auto-deploy configurat). Pattern observat: toate deploy-urile FAILED din dashboard erau via CLI, toate SUCCESS erau via GitHub.
+7. **Fișierul `nul` din rădăcina repo** — Există un fișier numit `nul` în root-ul repo-ului. Pe Windows, `nul` e un nume rezervat (device name), ceea ce face ca Railway CLI să crasheze cu `Incorrect function. (os error 1)` când încearcă să-l proceseze. Acest fișier trebuie șters (de pe alt OS sau cu `git rm`).
 
 ### Railway All Variables (February 2026)
 
@@ -1628,5 +1697,5 @@ Mesajele de validare sunt în `contact.form.validation` din `ro.json`/`en.json`:
 
 ---
 
-*Ultima actualizare: Februarie 2026*
+*Ultima actualizare: 9 Februarie 2026*
 *Pentru detalii complete despre strategie, vezi `docs/STRATEGY.md`*

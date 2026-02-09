@@ -20,7 +20,7 @@ public class ContactRequest {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false, length = 200)
+    @Column(length = 200)
     private String company;
 
     @Column(length = 20)

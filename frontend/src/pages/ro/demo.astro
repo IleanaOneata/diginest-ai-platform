@@ -1,0 +1,72 @@
+---
+/**
+ * Romanian Demo Request Page
+ *
+ * SEO optimized demo request page for GENERATIVA
+ * Target keywords: demo agent AI, demo automatizare, consultanță AI gratuită
+ *
+ * Schema.org: WebPage + BreadcrumbList (@graph pattern)
+ */
+
+import BaseLayout from '@layouts/BaseLayout.astro';
+import DemoForm from '@components/sections/DemoForm.astro';
+import { getTranslations } from '@i18n/index';
+
+const locale = 'ro';
+const t = getTranslations(locale);
+
+const title = t.demo.meta.title;
+const description = t.demo.meta.description;
+
+const siteUrl = 'https://diginest-ai-platform.vercel.app';
+
+// Schema.org @graph with WebPage + BreadcrumbList
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // WebPage schema
+    {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/ro/demo/#webpage`,
+      url: `${siteUrl}/ro/demo/`,
+      name: title,
+      description: description,
+      inLanguage: 'ro-RO',
+      isPartOf: {
+        '@id': `${siteUrl}/#website`,
+      },
+      about: {
+        '@id': `${siteUrl}/#organization`,
+      },
+    },
+    // BreadcrumbList
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/ro/demo/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: t.demo.breadcrumb.home,
+          item: `${siteUrl}/ro/`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: t.demo.breadcrumb.demo,
+        },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  canonicalUrl="/ro/demo/"
+  schema={schema}
+>
+  <DemoForm locale={locale} />
+</BaseLayout>

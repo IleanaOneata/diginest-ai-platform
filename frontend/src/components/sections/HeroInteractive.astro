@@ -15,7 +15,7 @@
 
 import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
 import Button from '@components/common/Button.astro';
-import ChatSimulator from '@components/demo/ChatSimulator.astro';
+import VoiceWidget from '@components/demo/VoiceWidget.astro';
 
 interface Props {
   locale: Locale;
@@ -92,7 +92,7 @@ const hero = heroTexts[locale] || heroTexts.ro;
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row items-start gap-4 mb-10 animate-slide-up" style="animation-delay: 200ms;">
           <Button
-            href={buildLocalePath('/contact/', locale)}
+            href={buildLocalePath('/demo/', locale)}
             variant="gradient"
             size="lg"
           >
@@ -159,22 +159,13 @@ const hero = heroTexts[locale] || heroTexts.ro;
         </div>
       </div>
 
-      <!-- Right: Chat Simulator -->
-      <div class="order-1 lg:order-2 flex justify-center lg:justify-end animate-fade-in" style="animation-delay: 300ms;">
+      <!-- Right: Voice Widget — Central, Prominent -->
+      <div class="order-1 lg:order-2 flex flex-col items-center justify-center animate-fade-in" style="animation-delay: 300ms;">
         <div class="relative">
-          <!-- Decorative elements behind chat -->
-          <div class="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-primary-400/20 to-accent-500/20 rounded-2xl transform rotate-3"></div>
-          <div class="absolute -bottom-4 -right-4 w-full h-full bg-gradient-to-br from-accent-400/20 to-primary-500/20 rounded-2xl transform -rotate-3"></div>
+          <!-- Decorative glow behind voice widget -->
+          <div class="absolute inset-0 -z-10 scale-150 bg-gradient-to-br from-primary-400/15 to-accent-500/15 rounded-full blur-3xl pointer-events-none"></div>
 
-          <!-- Chat Simulator -->
-          <div class="relative z-10">
-            <ChatSimulator locale={locale} autoPlay={true} />
-          </div>
-
-          <!-- Floating badges -->
-          <div class="absolute -top-2 -right-2 bg-white px-3 py-1.5 rounded-full shadow-lg text-xs font-medium text-primary-600 animate-bounce z-20">
-            Live Demo
-          </div>
+          <VoiceWidget locale={locale} />
         </div>
       </div>
     </div>
