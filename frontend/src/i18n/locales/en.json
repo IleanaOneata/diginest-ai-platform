@@ -389,10 +389,10 @@
   "serviceAutomation": {
     "meta": {
       "title": "AI Process Automation | GENERATIVA",
-      "description": "Eliminate repetitive work from your business with AI agents. 60-80% time reduction, zero errors, positive ROI in 3 months. Request a free audit.",
+      "description": "Eliminate repetitive work from your business with AI agents. 60-80% time reduction, zero errors, positive ROI in 3 months. Request a free consultation.",
       "schemaName": "AI Process Automation",
       "schemaDescription": "Business process automation service using intelligent AI agents. We eliminate repetitive work, reduce errors and free your team for strategic activities.",
-      "schemaOffer": "Free process audit and personalized consultation",
+      "schemaOffer": "Free consultation and personalized automation plan",
       "breadcrumbName": "Process Automation"
     },
     "breadcrumb": {
@@ -404,7 +404,7 @@
       "eyebrow": "Process Automation",
       "title": "AI Process Automation",
       "subtitle": "We eliminate repetitive work from your business. Our AI agents take over manual tasks, reduce errors and free your team for what truly matters. Implementation in weeks, not months, with measurable results from the first month.",
-      "cta": "Request a free audit"
+      "cta": "Request a free consultation"
     },
     "processTypes": {
       "title": "What business processes can be automated with AI?",
@@ -508,7 +508,7 @@
       "items": [
         {
           "question": "How much does AI process automation cost?",
-          "answer": "The cost depends on process complexity and the number of required integrations. We offer a free audit where we evaluate your processes and propose a solution with transparent pricing. Generally, the investment pays for itself within the first 3 months through saved time and resources."
+          "answer": "The cost depends on process complexity and the number of required integrations. We offer a free consultation where we evaluate your processes and propose a solution with transparent pricing. Generally, the investment pays for itself within the first 3 months through saved time and resources."
         },
         {
           "question": "How long does automation implementation take?",
@@ -534,8 +534,8 @@
     },
     "cta": {
       "title": "Let's identify the processes draining your time",
-      "subtitle": "Schedule a free process audit. In 30 minutes, we'll show you exactly where you're losing time and how AI can solve it.",
-      "button": "Request a free audit"
+      "subtitle": "Schedule a free consultation. In 30 minutes, we'll show you exactly where you're losing time and how AI can solve it.",
+      "button": "Request a free consultation"
     }
   },
 

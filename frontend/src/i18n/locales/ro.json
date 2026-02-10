@@ -389,10 +389,10 @@
   "serviceAutomation": {
     "meta": {
       "title": "Automatizare Procese cu AI | GENERATIVA",
-      "description": "Eliminăm munca repetitivă din afacerea ta cu agenți AI. Reducere 60-80% timp, zero erori, ROI pozitiv în 3 luni. Solicită un audit gratuit.",
+      "description": "Eliminăm munca repetitivă din afacerea ta cu agenți AI. Reducere 60-80% timp, zero erori, ROI pozitiv în 3 luni. Solicită o consultanță gratuită.",
       "schemaName": "Automatizare Procese cu AI",
       "schemaDescription": "Serviciu de automatizare a proceselor de business folosind agenți AI inteligenți. Eliminăm munca repetitivă, reducem erorile și eliberăm echipa pentru activități strategice.",
-      "schemaOffer": "Audit gratuit de procese și consultanță personalizată",
+      "schemaOffer": "Consultanță gratuită de procese și plan personalizat",
       "breadcrumbName": "Automatizare Procese"
     },
     "breadcrumb": {
@@ -404,7 +404,7 @@
       "eyebrow": "Automatizare Procese",
       "title": "Automatizare Procese cu AI",
       "subtitle": "Eliminăm munca repetitivă din afacerea ta. Agenții noștri AI preiau sarcinile manuale, reduc erorile și eliberează echipa ta pentru ce contează cu adevărat. Implementare în săptămâni, nu luni, cu rezultate măsurabile din prima lună.",
-      "cta": "Solicită un audit gratuit"
+      "cta": "Solicită o consultanță gratuită"
     },
     "processTypes": {
       "title": "Ce procese de business pot fi automatizate cu AI?",
@@ -508,7 +508,7 @@
       "items": [
         {
           "question": "Cât costă automatizarea proceselor cu AI?",
-          "answer": "Costul depinde de complexitatea proceselor și numărul de integrări necesare. Oferim un audit gratuit în care evaluăm procesele tale și propunem o soluție cu buget transparent. În general, investiția se recuperează în primele 3 luni prin timpul și resursele economisite."
+          "answer": "Costul depinde de complexitatea proceselor și numărul de integrări necesare. Oferim o consultanță gratuită în care evaluăm procesele tale și propunem o soluție cu buget transparent. În general, investiția se recuperează în primele 3 luni prin timpul și resursele economisite."
         },
         {
           "question": "Cât durează implementarea automatizării?",
@@ -534,8 +534,8 @@
     },
     "cta": {
       "title": "Hai să identificăm procesele care îți consumă timpul",
-      "subtitle": "Programează un audit gratuit de procese. În 30 de minute, îți arătăm exact unde pierzi timp și cum AI-ul poate rezolva asta.",
-      "button": "Solicită un audit gratuit"
+      "subtitle": "Programează o consultanță gratuită. În 30 de minute, îți arătăm exact unde pierzi timp și cum AI-ul poate rezolva asta.",
+      "button": "Solicită o consultanță gratuită"
     }
   },
 
