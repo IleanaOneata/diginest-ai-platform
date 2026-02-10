@@ -159,9 +159,9 @@ const about = t.about;
     </div>
 
     <!-- Horizontal scroll on mobile, grid on tablet+ -->
-    <div class="flex md:grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+    <div class="flex md:grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 mx-auto overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
       {about.whyUs.items.map((item: { title: string; description: string }, index: number) => (
-        <div class="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto flex gap-3 md:gap-4 bg-neutral-50 p-4 md:p-5 lg:p-6 rounded-xl snap-center">
+        <div class="flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto min-w-0 flex gap-3 md:gap-4 bg-neutral-50 p-4 md:p-5 lg:p-6 rounded-xl snap-center">
           <!-- Number badge -->
           <div class="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-primary-400 to-accent-500 flex items-center justify-center text-white font-bold text-xs md:text-sm">
             {index + 1}
