@@ -29,7 +29,7 @@ const isEn = locale === 'en';
 ---
 
 <div
-  class="voice-widget-container flex flex-col items-center gap-5"
+  class="voice-widget-container flex flex-col items-center gap-5 w-[17rem] md:w-[20rem] lg:w-[22rem]"
   data-cta={isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
   data-cta-active={isEn ? 'End call' : 'Oprește apelul'}
   data-connecting={isEn ? 'Connecting...' : 'Se conectează...'}
@@ -182,10 +182,10 @@ const isEn = locale === 'en';
     box-shadow: 0 25px 50px -12px rgba(239, 68, 68, 0.4);
   }
 
-  /* ===== Hide hint when active ===== */
+  /* ===== Hide hint when active (visibility keeps layout space) ===== */
   .voice-widget-container.voice-active .voice-hint {
+    visibility: hidden;
     opacity: 0;
-    transform: translateY(-8px);
     pointer-events: none;
   }
 
