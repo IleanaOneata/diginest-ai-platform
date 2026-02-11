@@ -320,7 +320,7 @@ public class EmailService {
               <table role="presentation" cellpadding="0" cellspacing="0" border="0">
                 <tr>
                   <td style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:22px; font-weight:700; color:#18181b; letter-spacing:-0.02em;">
-                    <span style="color:#06b6d4;">G</span><span style="color:#18181b;">ENERATIVA</span>
+                    <span style="color:#D97706;">G</span><span style="color:#18181b;">ENERATIVA</span>
                   </td>
                 </tr>
               </table>
@@ -352,27 +352,27 @@ public class EmailService {
           <!-- ====== STEPS BOX ====== -->
           <tr>
             <td style="padding:0 40px 28px 40px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%%" style="background-color:#f0fdfa; border-radius:8px; border:1px solid #ccfbf1;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%%" style="background-color:#fffbeb; border-radius:8px; border:1px solid #fde68a;">
                 <tr>
                   <td style="padding:20px 24px;">
                     <!-- Step 1 -->
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%%" style="margin-bottom:14px;">
                       <tr>
-                        <td width="28" valign="top" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; color:#06b6d4; font-weight:700; padding-top:1px;">1.</td>
+                        <td width="28" valign="top" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; color:#D97706; font-weight:700; padding-top:1px;">1.</td>
                         <td style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.6; color:#52525b;">%STEP1%</td>
                       </tr>
                     </table>
                     <!-- Step 2 -->
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%%" style="margin-bottom:14px;">
                       <tr>
-                        <td width="28" valign="top" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; color:#06b6d4; font-weight:700; padding-top:1px;">2.</td>
+                        <td width="28" valign="top" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; color:#D97706; font-weight:700; padding-top:1px;">2.</td>
                         <td style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.6; color:#52525b;">%STEP2%</td>
                       </tr>
                     </table>
                     <!-- Step 3 -->
                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%%">
                       <tr>
-                        <td width="28" valign="top" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; color:#06b6d4; font-weight:700; padding-top:1px;">3.</td>
+                        <td width="28" valign="top" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; color:#D97706; font-weight:700; padding-top:1px;">3.</td>
                         <td style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; line-height:1.6; color:#52525b;">%STEP3%</td>
                       </tr>
                     </table>
@@ -430,10 +430,10 @@ public class EmailService {
                 <tr>
                   <td style="padding-bottom:16px; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; line-height:1.5; color:#a1a1aa;">
                     <span style="color:#71717a;">%WEBSITE_LABEL%:</span>
-                    <a href="https://generativa.ro" style="color:#06b6d4; text-decoration:none;" target="_blank">generativa.ro</a>
+                    <a href="https://generativa.ro" style="color:#D97706; text-decoration:none;" target="_blank">generativa.ro</a>
                     &nbsp;&nbsp;&middot;&nbsp;&nbsp;
                     <span style="color:#71717a;">%EMAIL_LABEL%:</span>
-                    <a href="mailto:contact@generativa.ro" style="color:#06b6d4; text-decoration:none;">contact@generativa.ro</a>
+                    <a href="mailto:contact@generativa.ro" style="color:#D97706; text-decoration:none;">contact@generativa.ro</a>
                   </td>
                 </tr>
                 <!-- Trust note -->
@@ -629,7 +629,7 @@ public class EmailService {
                 <tr>
                   <td style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:22px; font-weight:700; color:#18181b; letter-spacing:-0.02em;">
                     <!-- Logo text with brand gradient simulation -->
-                    <span style="color:#06b6d4;">G</span><span style="color:#18181b;">ENERATIVA</span>
+                    <span style="color:#D97706;">G</span><span style="color:#18181b;">ENERATIVA</span>
                   </td>
                 </tr>
               </table>
@@ -693,10 +693,10 @@ public class EmailService {
                 <tr>
                   <td style="padding-bottom:16px; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; line-height:1.5; color:#a1a1aa;">
                     <span style="color:#71717a;">%WEBSITE_LABEL%:</span>
-                    <a href="https://generativa.ro" style="color:#06b6d4; text-decoration:none;" target="_blank">generativa.ro</a>
+                    <a href="https://generativa.ro" style="color:#D97706; text-decoration:none;" target="_blank">generativa.ro</a>
                     &nbsp;&nbsp;·&nbsp;&nbsp;
                     <span style="color:#71717a;">%EMAIL_LABEL%:</span>
-                    <a href="mailto:contact@generativa.ro" style="color:#06b6d4; text-decoration:none;">contact@generativa.ro</a>
+                    <a href="mailto:contact@generativa.ro" style="color:#D97706; text-decoration:none;">contact@generativa.ro</a>
                   </td>
                 </tr>
                 <!-- Trust note -->
