@@ -94,7 +94,7 @@ const benefits = [
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {benefits.map((benefit, index) => (
           <div
-            class="benefit-card text-center p-6 bg-neutral-800/50 border border-neutral-700 hover:border-primary-500 transition-colors"
+            class="benefit-card text-center p-6 bg-neutral-800/50 border border-neutral-700 hover:border-accent-500 transition-colors"
             style={`border-radius: 16px; --benefit-delay: ${index * 0.1}s`}
           >
             <div class="benefit-value text-4xl md:text-5xl font-bold mb-2">
@@ -146,12 +146,10 @@ const benefits = [
     }
   }
 
-  /* Benefit values - gradient text */
+  /* Benefit values — flat amber accent */
   .benefit-value {
-    background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #F59E0B;
+    -webkit-text-fill-color: #F59E0B;
   }
 
   /* Benefit card entrance animation */

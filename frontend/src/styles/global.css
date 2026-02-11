@@ -84,20 +84,20 @@
 
   .btn-primary {
     @apply btn text-white shadow-soft;
-    background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+    background: #F59E0B;
   }
 
   .btn-primary:hover {
-    filter: brightness(1.08);
+    background: #D97706;
   }
 
   .btn-gradient {
     @apply btn text-white shadow-soft;
-    background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+    background: #F59E0B;
   }
 
   .btn-gradient:hover {
-    filter: brightness(1.08);
+    background: #D97706;
   }
 
   .btn-secondary {
@@ -272,23 +272,23 @@
     text-wrap: balance;
   }
 
-  /* Gradient text — brand gradient */
+  /* Gradient text — brand gradient (Slate → Amber) */
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+    background-image: linear-gradient(135deg, #1E293B 0%, #F59E0B 100%);
   }
 
   /* Gradient backgrounds */
   .bg-gradient-hero {
-    background: linear-gradient(to bottom right, #F7F8FA, #ffffff, #faf5ff);
+    background: linear-gradient(to bottom right, #F8FAFC, #ffffff, #FFFBEB);
   }
 
   .bg-gradient-brand {
-    background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+    background: linear-gradient(135deg, #1E293B 0%, #334155 50%, #0F172A 100%);
   }
 
   .bg-gradient-brand-reverse {
-    background: linear-gradient(90deg, #7C3AED 0%, #4F7CF3 50%, #16B6C9 100%);
+    background: linear-gradient(135deg, #0F172A 0%, #334155 50%, #1E293B 100%);
   }
 
   .bg-gradient-subtle {
@@ -296,7 +296,7 @@
   }
 
   .bg-gradient-dark {
-    background: radial-gradient(ellipse at top, #111827 0%, #0B0F1A 50%, #1E1B4B 100%);
+    background: radial-gradient(ellipse at top, #1E293B 0%, #0F172A 50%, #020617 100%);
   }
 
   /* Grid pattern background */
@@ -343,8 +343,8 @@
     overflow: hidden;
   }
 
-  /* Brand glow — restrained */
+  /* Brand glow — restrained (Amber warmth) */
   .glow-brand {
-    box-shadow: 0 0 20px rgba(22, 182, 201, 0.2), 0 0 40px rgba(124, 58, 237, 0.1);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.2), 0 0 40px rgba(30, 41, 59, 0.1);
   }
 }

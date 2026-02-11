@@ -138,19 +138,20 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={fullOgImage} />
 
-    <!-- Favicon - GENERATIVA 3D G logo -->
+    <!-- Favicon - GENERATIVA (Deep Slate + Amber) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#0B0F1A" />
+    <meta name="theme-color" content="#0F172A" />
 
     <!-- Preconnect to important third-party origins -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
 
-    <!-- Google Fonts — Prompt (official brand font) -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Google Fonts — Inter (UI) + Prompt (logo only) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@600;700&display=swap" rel="stylesheet" />
 
     <!-- Schema.org JSON-LD -->
     {pageSchema.map((schema) => (

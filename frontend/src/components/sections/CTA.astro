@@ -27,7 +27,7 @@ const t = getTranslations(locale);
   <!-- Content -->
   <div class="container-md relative z-10 text-center">
     <!-- Eyebrow badge -->
-    <span class="inline-block px-4 py-1.5 bg-white/5 text-primary-300 rounded-full text-sm font-medium mb-6 border border-white/10">
+    <span class="inline-block px-4 py-1.5 bg-white/5 text-accent-300 rounded-full text-sm font-medium mb-6 border border-white/10">
       {locale === 'ro' ? '✨ Consultanță gratuită' : '✨ Free consultation'}
     </span>
 
@@ -44,7 +44,7 @@ const t = getTranslations(locale);
       <a
         href={buildLocalePath('/contact/', locale)}
         class="group relative inline-flex items-center gap-2.5 px-8 py-4 font-semibold text-white text-lg
-               bg-gradient-brand
+               bg-accent-500 hover:bg-accent-600
                shadow-soft
                transition-all duration-300 hover:-translate-y-0.5"
         style="border-radius: 16px;"
@@ -54,7 +54,7 @@ const t = getTranslations(locale);
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
         <!-- Glow effect behind button -->
-        <div class="absolute inset-0 bg-gradient-brand blur-xl opacity-40 group-hover:opacity-60 transition-opacity -z-10" style="border-radius: 16px;"></div>
+        <div class="absolute inset-0 bg-accent-500 blur-xl opacity-40 group-hover:opacity-60 transition-opacity -z-10" style="border-radius: 16px;"></div>
       </a>
     </div>
 

@@ -37,11 +37,11 @@ const baseClasses = 'inline-flex items-center justify-center gap-2 font-semibold
 
 // Variant classes
 const variantClasses = {
-  primary: 'bg-gradient-brand text-white focus-visible:ring-primary-500 shadow-soft hover:brightness-110',
+  primary: 'text-white focus-visible:ring-accent-500 shadow-soft hover:brightness-110',
   secondary: 'bg-white text-neutral-900 border border-neutral-200 hover:bg-neutral-50 focus-visible:ring-neutral-400',
-  outline: 'border border-primary-500 text-primary-600 hover:bg-primary-50 focus-visible:ring-primary-500',
+  outline: 'border border-accent-500 text-accent-600 hover:bg-accent-50 focus-visible:ring-accent-500',
   ghost: 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:ring-neutral-400',
-  gradient: 'bg-gradient-brand text-white focus-visible:ring-primary-500 shadow-soft hover:brightness-110',
+  gradient: 'text-white focus-visible:ring-accent-500 shadow-soft hover:brightness-110',
 };
 
 // Size classes
@@ -60,14 +60,20 @@ const classes = [
 
 // External link attributes
 const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+
+// Amber background for CTA variants
+const isCtaVariant = variant === 'primary' || variant === 'gradient';
+const ctaStyle = isCtaVariant
+  ? 'border-radius: 12px; background: #F59E0B;'
+  : 'border-radius: 12px;';
 ---
 
 {href ? (
-  <a href={href} class={classes} style="border-radius: 12px;" {...externalAttrs} {...rest}>
+  <a href={href} class={classes} style={ctaStyle} {...externalAttrs} {...rest}>
     <slot />
   </a>
 ) : (
-  <button type={type} class={classes} style="border-radius: 12px;" disabled={disabled} {...rest}>
+  <button type={type} class={classes} style={ctaStyle} disabled={disabled} {...rest}>
     <slot />
   </button>
 )}
@@ -75,5 +81,11 @@ const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' 
 <style>
   .hover\:brightness-110:hover {
     filter: brightness(1.08);
+  }
+
+  /* Amber CTA hover — darken to #D97706 */
+  a[style*="background: #F59E0B"]:hover,
+  button[style*="background: #F59E0B"]:hover {
+    background: #D97706 !important;
   }
 </style>
