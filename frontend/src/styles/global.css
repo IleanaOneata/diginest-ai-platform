@@ -4,18 +4,9 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   Base Styles - GENERATIVA Brand
+   Base Styles — GENERATIVA Brand (Prompt Font)
    ========================================================================== */
 @layer base {
-  /* Font imports - Inter from Google Fonts */
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 100 900;
-    font-display: swap;
-    src: url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff2') format('woff2');
-  }
-
   /* HTML & Body */
   html {
     @apply scroll-smooth antialiased;
@@ -25,48 +16,50 @@
     @apply bg-white text-neutral-900 font-sans;
   }
 
-  /* Typography defaults */
+  /* Typography defaults — Prompt font hierarchy */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold text-neutral-900;
+    color: #263244;
   }
 
   h1 {
-    @apply text-display-lg md:text-display;
+    @apply text-display-lg md:text-display font-bold;
+    letter-spacing: -0.01em;
   }
 
   h2 {
-    @apply text-heading-lg;
+    @apply text-heading-lg font-bold;
   }
 
   h3 {
-    @apply text-heading;
+    @apply text-heading font-semibold;
   }
 
   h4 {
-    @apply text-heading-sm;
+    @apply text-heading-sm font-semibold;
   }
 
   p {
     @apply text-body text-neutral-600;
+    line-height: 1.6;
   }
 
   a {
     @apply transition-colors duration-200;
   }
 
-  /* Focus states for accessibility - GENERATIVA cyan */
+  /* Focus states for accessibility */
   :focus-visible {
-    @apply outline-none ring-2 ring-primary-400 ring-offset-2;
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
   }
 
-  /* Selection - GENERATIVA brand colors */
+  /* Selection */
   ::selection {
     @apply bg-primary-100 text-primary-900;
   }
 }
 
 /* ==========================================================================
-   Component Styles - GENERATIVA Brand
+   Component Styles — GENERATIVA Brand
    ========================================================================== */
 @layer components {
   /* Container with max width */
@@ -82,36 +75,41 @@
     @apply max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Buttons - Updated with GENERATIVA colors */
+  /* Buttons — refined system */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-           font-medium rounded-lg transition-all duration-200
+    @apply inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200
            focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+    border-radius: 12px;
   }
 
   .btn-primary {
-    @apply btn bg-primary-400 text-neutral-900
-           hover:bg-primary-500
-           focus-visible:ring-primary-400;
+    @apply btn text-white shadow-soft;
+    background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+  }
+
+  .btn-primary:hover {
+    filter: brightness(1.08);
   }
 
   .btn-gradient {
-    @apply btn bg-gradient-to-r from-primary-400 to-accent-600 text-white
-           hover:from-primary-500 hover:to-accent-700
-           focus-visible:ring-accent-500
-           shadow-md hover:shadow-lg;
+    @apply btn text-white shadow-soft;
+    background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+  }
+
+  .btn-gradient:hover {
+    filter: brightness(1.08);
   }
 
   .btn-secondary {
-    @apply btn bg-neutral-100 text-neutral-900
-           hover:bg-neutral-200
+    @apply btn bg-white text-neutral-900 border border-neutral-200
+           hover:bg-neutral-50
            focus-visible:ring-neutral-400;
   }
 
   .btn-outline {
-    @apply btn border-2 border-primary-400 text-primary-500
+    @apply btn border border-primary-500 text-primary-500
            hover:bg-primary-50
-           focus-visible:ring-primary-400;
+           focus-visible:ring-primary-500;
   }
 
   .btn-ghost {
@@ -128,10 +126,11 @@
     @apply px-4 py-2 text-sm;
   }
 
-  /* Cards */
+  /* Cards — refined: white bg, neutral border, no glassmorphism */
   .card {
-    @apply bg-white rounded-2xl border border-neutral-200 p-6
+    @apply bg-white border border-neutral-200 p-6
            transition-all duration-200;
+    border-radius: 16px;
   }
 
   .card-hover {
@@ -139,10 +138,10 @@
   }
 
   .card-interactive {
-    @apply card hover:shadow-medium hover:border-primary-300 cursor-pointer;
+    @apply card hover:shadow-soft hover:border-neutral-300 cursor-pointer;
   }
 
-  /* Links - Updated with GENERATIVA colors */
+  /* Links */
   .link {
     @apply text-primary-500 hover:text-primary-600 underline underline-offset-4;
   }
@@ -160,9 +159,10 @@
     @apply py-24 md:py-32;
   }
 
-  /* Badge - Updated with GENERATIVA colors */
+  /* Badge */
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+    @apply inline-flex items-center px-3 py-1 text-sm font-medium;
+    border-radius: 999px;
   }
 
   .badge-primary {
@@ -181,13 +181,14 @@
     @apply badge bg-neutral-100 text-neutral-700;
   }
 
-  /* Form elements - Updated with GENERATIVA colors */
+  /* Form elements */
   .input {
-    @apply w-full px-4 py-3 rounded-lg border border-neutral-300
+    @apply w-full px-4 py-3 border border-neutral-200
            bg-white text-neutral-900
            placeholder:text-neutral-400
-           focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
            transition-all duration-200;
+    border-radius: 12px;
   }
 
   .input-error {
@@ -206,17 +207,19 @@
     @apply text-sm text-red-600 mt-1;
   }
 
-  /* Prose for rich content (blog, etc.) - Updated with GENERATIVA colors */
+  /* Prose for rich content */
   .prose {
     @apply text-neutral-700 leading-relaxed;
   }
 
   .prose h2 {
-    @apply text-heading-lg text-neutral-900 mt-12 mb-4;
+    @apply text-heading-lg mt-12 mb-4;
+    color: #263244;
   }
 
   .prose h3 {
-    @apply text-heading text-neutral-900 mt-8 mb-3;
+    @apply text-heading mt-8 mb-3;
+    color: #263244;
   }
 
   .prose p {
@@ -244,7 +247,7 @@
   }
 
   .prose blockquote {
-    @apply border-l-4 border-primary-400 pl-4 italic text-neutral-600 my-4;
+    @apply border-l-4 border-primary-500 pl-4 italic text-neutral-600 my-4;
   }
 
   .prose code {
@@ -261,7 +264,7 @@
 }
 
 /* ==========================================================================
-   Utility Classes - GENERATIVA Brand
+   Utility Classes — GENERATIVA Brand
    ========================================================================== */
 @layer utilities {
   /* Text balance for headings */
@@ -269,22 +272,23 @@
     text-wrap: balance;
   }
 
-  /* Gradient text - GENERATIVA cyan to purple */
+  /* Gradient text — brand gradient */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-600;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
   }
 
-  /* Gradient backgrounds - GENERATIVA brand */
+  /* Gradient backgrounds */
   .bg-gradient-hero {
-    background: linear-gradient(to bottom right, #ecfeff, #ffffff, #faf5ff);
+    background: linear-gradient(to bottom right, #F7F8FA, #ffffff, #faf5ff);
   }
 
   .bg-gradient-brand {
-    background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+    background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
   }
 
   .bg-gradient-brand-reverse {
-    background: linear-gradient(135deg, #8b5cf6 0%, #22d3ee 100%);
+    background: linear-gradient(90deg, #7C3AED 0%, #4F7CF3 50%, #16B6C9 100%);
   }
 
   .bg-gradient-subtle {
@@ -292,7 +296,7 @@
   }
 
   .bg-gradient-dark {
-    background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+    background: radial-gradient(ellipse at top, #111827 0%, #0B0F1A 50%, #1E1B4B 100%);
   }
 
   /* Grid pattern background */
@@ -339,8 +343,8 @@
     overflow: hidden;
   }
 
-  /* GENERATIVA brand highlight glow */
+  /* Brand glow — restrained */
   .glow-brand {
-    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3), 0 0 40px rgba(139, 92, 246, 0.2);
+    box-shadow: 0 0 20px rgba(22, 182, 201, 0.2), 0 0 40px rgba(124, 58, 237, 0.1);
   }
 }

@@ -121,14 +121,14 @@ const industryIcons: Record<string, string> = {
 };
 ---
 
-<section class="pt-10 pb-16 md:pt-14 md:pb-24 bg-gradient-to-b from-white to-neutral-50">
+<section class="pt-10 pb-16 md:pt-14 md:pb-24 bg-neutral-50">
   <div class="container-lg">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
       <span class="inline-block px-4 py-1.5 bg-accent-100 text-accent-700 rounded-full text-sm font-medium mb-4">
         {t.eyebrow}
       </span>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-4">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-750 mb-4">
         {t.headline}
       </h2>
       <p class="text-lg text-neutral-600">
@@ -153,12 +153,12 @@ const industryIcons: Record<string, string> = {
       <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0" data-scroll-container>
         {t.useCases.map((useCase, index) => (
           <div
-            class="group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto bg-white rounded-2xl p-5 md:p-6 shadow-soft hover:shadow-medium transition-all duration-300 border border-neutral-100 hover:border-primary-200 snap-center"
-            style={`animation-delay: ${index * 100}ms`}
+            class="group flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto bg-white p-5 md:p-6 shadow-soft hover:shadow-medium transition-all duration-300 border border-neutral-100 hover:border-primary-200 snap-center"
+            style={`border-radius: 16px; animation-delay: ${index * 100}ms`}
           >
             <!-- Icon & Title -->
             <div class="flex items-center gap-3 mb-3 md:mb-4">
-              <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-primary-400 to-accent-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300">
+              <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-900 group-hover:scale-110 transition-transform duration-300">
                 <svg
                   class="w-4 h-4 md:w-5 md:h-5"
                   fill="none"
@@ -221,7 +221,7 @@ const industryIcons: Record<string, string> = {
 
   /* Active scroll indicator */
   .scroll-indicator.active {
-    background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+    background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
     width: 1rem;
   }
 </style>

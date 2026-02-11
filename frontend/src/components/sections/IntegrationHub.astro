@@ -86,14 +86,10 @@ const connectionIcons: Record<string, string> = {
 
 <section class="relative py-16 md:py-20 lg:py-32 overflow-hidden">
   <!-- Gradient Background - Stripe style -->
-  <div class="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0f172a] to-[#1e1b4b]"></div>
+  <div class="absolute inset-0 bg-gradient-dark"></div>
 
   <!-- Dot pattern overlay -->
   <div class="absolute inset-0 opacity-30" style="background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px); background-size: 24px 24px;"></div>
-
-  <!-- Subtle gradient orbs -->
-  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl"></div>
 
   <div class="container-lg relative z-10">
     <!-- Header -->
@@ -115,8 +111,8 @@ const connectionIcons: Record<string, string> = {
       <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid meet">
         <defs>
           <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.6" />
-            <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.4" />
+            <stop offset="0%" stop-color="#16B6C9" stop-opacity="0.6" />
+            <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.4" />
           </linearGradient>
         </defs>
 
@@ -174,7 +170,7 @@ const connectionIcons: Record<string, string> = {
             <div class="absolute inset-0 bg-gradient-to-br from-primary-400 to-accent-600 rounded-full blur-xl opacity-40 scale-110"></div>
 
             <!-- Main hub - Responsive sizing -->
-            <div class="relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full bg-gradient-to-br from-primary-400 via-primary-500 to-accent-600 flex flex-col items-center justify-center shadow-2xl">
+            <div class="relative w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 rounded-full bg-gradient-brand flex flex-col items-center justify-center shadow-2xl">
               <span class="font-bold text-[10px] sm:text-xs md:text-base lg:text-lg text-white tracking-wide">{t.centerLabel}</span>
               <span class="text-[7px] sm:text-[8px] md:text-[10px] lg:text-xs text-white/70 mt-0.5 sm:mt-1">{t.centerSubtitle}</span>
             </div>
@@ -233,7 +229,7 @@ const connectionIcons: Record<string, string> = {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 class="font-semibold text-white text-sm md:text-base mb-1">{benefit.title}</h3>
+          <h3 class="font-bold text-white text-sm md:text-base mb-1">{benefit.title}</h3>
           <p class="text-xs md:text-sm text-slate-500 leading-relaxed">{benefit.description}</p>
         </div>
       ))}
@@ -245,9 +241,8 @@ const connectionIcons: Record<string, string> = {
   .integration-card {
     @apply flex flex-col items-center p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl
            bg-white/5 border border-white/10
-           backdrop-blur-sm
            hover:bg-white/10 hover:border-primary-500/30
-           hover:shadow-lg hover:shadow-primary-500/10
+           hover:shadow-soft
            transition-all duration-300 cursor-default;
     min-width: 40px;
   }

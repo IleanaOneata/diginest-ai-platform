@@ -1,0 +1,24 @@
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="427.1199645996094" height="112" viewBox="-20 -20 427.1199645996094 112">
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;700&display=swap');
+        .wordmark { font-family: 'Prompt', sans-serif; font-weight: 700; letter-spacing: 0.04em; fill: #0B0B0B; }
+        .subtitle { font-family: 'Prompt', sans-serif; font-weight: 500; letter-spacing: 0.2em; fill: #666666; }
+      </style>
+      
+      <!-- Wordmark -->
+      <text x="0" y="38.400000000000006" font-size="48" class="wordmark">GENERATIVA</text>
+      
+      <!-- Subtitle -->
+      <text x="0" y="59.040000000000006" font-size="16.799999999999997" class="subtitle">AI AUTOMATION</text>
+      
+      <!-- Symbol Group -->
+      <g transform="translate(322.31996459960936, 7.200000000000003)">
+         <!-- Track (Border) -->
+         <rect x="0" y="0" width="64.8" height="36" rx="18" fill="none" stroke="#0B0B0B" stroke-width="2.88" />
+         
+         <!-- Knob -->
+         <circle cx="46.8" cy="18" r="10.799999999999999" fill="#0B0B0B" />
+      </g>
+    </svg>
+  

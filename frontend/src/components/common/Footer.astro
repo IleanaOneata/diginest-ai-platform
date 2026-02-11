@@ -1,9 +1,9 @@
 ---
 /**
  * Footer Component
- * GENERATIVA - AI Agents Platform
+ * GENERATIVA — AI Agents Platform
  *
- * Site footer with navigation links, contact info, and legal
+ * Refined: darker bg, cleaner typography, structured layout
  */
 
 import { getTranslations, type Locale, buildLocalePath } from '@i18n/index';
@@ -34,7 +34,7 @@ const footerNav = {
   ],
 };
 
-// Social links - Updated for GENERATIVA
+// Social links
 const socialLinks = [
   { name: 'LinkedIn', href: 'https://linkedin.com/company/generativa', icon: 'linkedin' },
   { name: 'Facebook', href: 'https://facebook.com/generativa.ro', icon: 'facebook' },
@@ -42,7 +42,7 @@ const socialLinks = [
 ];
 ---
 
-<footer class="bg-neutral-900 text-neutral-300">
+<footer class="bg-neutral-950 text-neutral-300">
   <div class="container-lg py-12 lg:py-16">
     <!-- Main footer content -->
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 lg:gap-12">
@@ -56,13 +56,13 @@ const socialLinks = [
         </p>
 
         <!-- Social links -->
-        <div class="flex gap-4">
+        <div class="flex gap-3">
           {socialLinks.map((social) => (
             <a
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              class="w-10 h-10 flex items-center justify-center rounded-lg bg-neutral-800 text-neutral-400 hover:bg-gradient-to-r hover:from-primary-400 hover:to-accent-600 hover:text-white transition-all duration-300"
+              class="w-10 h-10 flex items-center justify-center rounded-lg bg-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-700 transition-all duration-200"
               aria-label={social.name}
             >
               {social.icon === 'linkedin' && (
@@ -87,11 +87,11 @@ const socialLinks = [
 
       <!-- Company links -->
       <div>
-        <h3 class="text-white font-semibold mb-4">{t.footer.company.title}</h3>
+        <h3 class="text-white font-bold text-xl mb-4">{t.footer.company.title}</h3>
         <ul class="space-y-3">
           {footerNav.company.map((item) => (
             <li>
-              <a href={item.href} class="text-neutral-400 hover:text-primary-400 transition-colors">
+              <a href={item.href} class="text-neutral-400 hover:text-white transition-colors text-base">
                 {item.label}
               </a>
             </li>
@@ -101,11 +101,11 @@ const socialLinks = [
 
       <!-- Services links -->
       <div>
-        <h3 class="text-white font-semibold mb-4">{t.footer.services.title}</h3>
+        <h3 class="text-white font-bold text-xl mb-4">{t.footer.services.title}</h3>
         <ul class="space-y-3">
           {footerNav.services.map((item) => (
             <li>
-              <a href={item.href} class="text-neutral-400 hover:text-primary-400 transition-colors">
+              <a href={item.href} class="text-neutral-400 hover:text-white transition-colors text-base">
                 {item.label}
               </a>
             </li>
@@ -115,11 +115,11 @@ const socialLinks = [
 
       <!-- Legal links -->
       <div>
-        <h3 class="text-white font-semibold mb-4">{t.footer.legal.title}</h3>
+        <h3 class="text-white font-bold text-xl mb-4">{t.footer.legal.title}</h3>
         <ul class="space-y-3">
           {footerNav.legal.map((item) => (
             <li>
-              <a href={item.href} class="text-neutral-400 hover:text-primary-400 transition-colors">
+              <a href={item.href} class="text-neutral-400 hover:text-white transition-colors text-base">
                 {item.label}
               </a>
             </li>

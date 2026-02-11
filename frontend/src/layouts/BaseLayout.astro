@@ -143,14 +143,14 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#22d3ee" />
+    <meta name="theme-color" content="#0B0F1A" />
 
     <!-- Preconnect to important third-party origins -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Google Fonts - Space Grotesk for display text -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Google Fonts — Prompt (official brand font) -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- Schema.org JSON-LD -->
     {pageSchema.map((schema) => (
@@ -163,13 +163,6 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
   </head>
 
   <body class="min-h-screen flex flex-col bg-white text-neutral-900 antialiased relative">
-    <!-- Subtle ambient color blobs (visible through semi-transparent header) -->
-    <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
-      <div class="absolute -top-20 -left-20 w-[500px] h-[500px] bg-primary-200/25 rounded-full blur-3xl"></div>
-      <div class="absolute top-10 right-0 w-[450px] h-[450px] bg-accent-200/20 rounded-full blur-3xl"></div>
-      <div class="absolute top-[500px] left-1/4 w-96 h-96 bg-primary-100/25 rounded-full blur-3xl"></div>
-    </div>
-
     <!-- Skip to main content link for accessibility -->
     <a
       href="#main-content"

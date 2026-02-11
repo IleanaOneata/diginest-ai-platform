@@ -62,7 +62,7 @@ const icons = {
   <div class="container-lg">
     <!-- Section header -->
     <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-      <h2 class="text-heading-lg md:text-display text-neutral-900 mb-4">
+      <h2 class="text-heading-lg md:text-display text-neutral-750 mb-4">
         {t.services.title}
       </h2>
       <p class="text-body-lg text-neutral-600">
@@ -94,12 +94,12 @@ const icons = {
           style={`animation-delay: ${index * 100}ms`}
         >
           <!-- Icon -->
-          <div class="w-14 h-14 md:w-16 md:h-16 bg-primary-100 rounded-2xl flex items-center justify-center text-primary-600 mb-4 md:mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+          <div class="w-14 h-14 md:w-16 md:h-16 bg-neutral-100 flex items-center justify-center text-primary-600 mb-4 md:mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors" style="border-radius: 16px;">
             <Fragment set:html={icons[service.icon as keyof typeof icons]} />
           </div>
 
           <!-- Content -->
-          <h3 class="text-heading-sm text-neutral-900 mb-2 md:mb-3">
+          <h3 class="text-heading-sm text-neutral-750 mb-2 md:mb-3">
             {service.title}
           </h3>
           <p class="text-sm md:text-base text-neutral-600 mb-4 md:mb-6 flex-1">

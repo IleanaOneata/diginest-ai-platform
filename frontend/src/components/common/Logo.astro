@@ -1,14 +1,12 @@
 ---
 /**
- * Logo Component - GENERATIVA
+ * Logo Component — GENERATIVA
  *
- * Uses the 3D G letter PNG with transparent background.
- * A subtle gradient circle behind the icon adds depth and brand feel.
- *
- * Variants:
- * - default: G icon with subtle bg circle + gradient text (light backgrounds)
- * - white: G icon + white text (dark backgrounds)
- * - dark: G icon + dark text
+ * Inline SVG for brand protection and reliable font rendering.
+ * Two variants: black (light bg) and white (dark bg).
+ * Font "Prompt" is loaded globally in BaseLayout — SVG inherits it.
+ * No gradients, shadows, filters, or CSS effects applied.
+ * Minimum width: 120px. Clear space = height of "G".
  */
 
 interface Props {
@@ -25,58 +23,59 @@ const {
   class: className = ''
 } = Astro.props;
 
-// Size configurations
+// Size configurations — minimum 120px width enforced
 const sizes = {
-  sm: { wrapper: 'w-9 h-9', icon: 'w-8 h-8', text: 'text-lg', gap: 'gap-2' },
-  md: { wrapper: 'w-11 h-11', icon: 'w-10 h-10', text: 'text-xl', gap: 'gap-2.5' },
-  lg: { wrapper: 'w-14 h-14', icon: 'w-13 h-13', text: 'text-2xl', gap: 'gap-3' },
-  xl: { wrapper: 'w-20 h-20', icon: 'w-18 h-18', text: 'text-3xl', gap: 'gap-4' },
-};
-
-const textColors = {
-  default: 'text-neutral-900',
-  white: 'text-white',
-  dark: 'text-neutral-900',
+  sm: { height: 'h-8', minWidth: '150px' },
+  md: { height: 'h-8 lg:h-9', minWidth: '160px' },
+  lg: { height: 'h-12', minWidth: '220px' },
+  xl: { height: 'h-16', minWidth: '300px' },
 };
 
 const config = sizes[size];
-const textColor = textColors[variant];
+
+// Color tokens per variant
+const isWhite = variant === 'white';
+const wordmarkFill = isWhite ? 'white' : '#0B0B0B';
+const subtitleFill = isWhite ? '#8A8A8A' : '#666666';
+const strokeColor = isWhite ? 'white' : '#0B0B0B';
+const knobFill = isWhite ? 'white' : '#0B0B0B';
 ---
 
-<div class:list={["flex items-center", config.gap, className]}>
-  <!-- Logo Icon - 3D G letter with subtle background circle -->
-  <div class:list={[
-    config.wrapper,
-    "relative flex items-center justify-center flex-shrink-0"
-  ]}>
-    <img
-      src="/images/generativa-g-512.png"
-      alt="GENERATIVA"
-      class:list={[
-        config.icon,
-        "object-contain relative z-10"
-      ]}
-      width="512"
-      height="512"
-      loading="eager"
-      decoding="async"
-    />
-  </div>
+<div class:list={["flex items-center flex-shrink-0", className]} role="img" aria-label="GENERATIVA — AI Automation">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="-2 -2 400 72"
+    class:list={[config.height, "w-auto"]}
+    style={`min-width: ${config.minWidth};`}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <!-- Wordmark -->
+    <text
+      x="0"
+      y="38.4"
+      font-size="48"
+      font-family="'Prompt', sans-serif"
+      font-weight="700"
+      letter-spacing="0.04em"
+      fill={wordmarkFill}
+    >GENERATIVA</text>
 
-  <!-- Text: GENERATIVA -->
-  {showText && (
-    <span class:list={[
-      "font-bold tracking-wide",
-      config.text,
-      textColor
-    ]}>
-      {variant === 'white' ? (
-        <span class="text-white">GENERATIVA</span>
-      ) : (
-        <span class="bg-gradient-to-r from-primary-400 via-indigo-500 to-accent-600 bg-clip-text text-transparent">
-          GENERATIVA
-        </span>
-      )}
-    </span>
-  )}
+    <!-- Subtitle -->
+    <text
+      x="0"
+      y="59.04"
+      font-size="16.8"
+      font-family="'Prompt', sans-serif"
+      font-weight="500"
+      letter-spacing="0.2em"
+      fill={subtitleFill}
+    >AI AUTOMATION</text>
+
+    <!-- Toggle symbol -->
+    <g transform="translate(322.32, 7.2)">
+      <rect x="0" y="0" width="64.8" height="36" rx="18" fill="none" stroke={strokeColor} stroke-width="2.88" />
+      <circle cx="46.8" cy="18" r="10.8" fill={knobFill} />
+    </g>
+  </svg>
 </div>
