@@ -360,4 +360,24 @@ Urmează checklist-ul complet din `docs/SEO-AEO-GUIDELINES.md` secțiunea 8 (Pag
 
 ---
 
-*Ultima actualizare: Februarie 2026 — Blog/Resources eliminat, form validation & lead qualification adăugat*
+### Visual Identity Guidelines (Februarie 2026)
+
+Când modifici componente vizuale, respectă aceste reguli:
+
+| Element | Specificație |
+|---------|-------------|
+| **Font** | Prompt (Google Font) — weights 400, 500, 600, 700 |
+| **Brand gradient** | `linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%)` |
+| **Heading color** | `#263244` (neutral-750) pe light backgrounds, `text-white` pe dark |
+| **Card radius** | 16px |
+| **Button/Input radius** | 12px |
+| **Badge radius** | 999px |
+| **Shadow** | `shadow-soft` (custom) — nu shadow-lg standard |
+
+**⚠️ Important**: `text-neutral-750` NU funcționează cu `@apply` în CSS. Folosește `color: #263244` direct.
+
+**Referință completă**: `docs/branding/BRANDING-NOTES.md`
+
+---
+
+*Ultima actualizare: 11 Februarie 2026 — Visual identity refactoring, design tokens, font Prompt*

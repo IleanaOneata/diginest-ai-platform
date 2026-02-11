@@ -3,7 +3,7 @@
 > **Pentru AI în sesiuni noi**: Acest document conține toate deciziile de branding și design system. Citește-l pentru context vizual.
 
 ## Status: ✅ IMPLEMENTAT
-**Ultima actualizare**: Februarie 2026
+**Ultima actualizare**: 11 Februarie 2026
 
 ---
 
@@ -14,12 +14,14 @@
 | **Nume** | GENERATIVA |
 | **Tagline RO** | "Agenți AI pentru afacerea ta" |
 | **Tagline EN** | "AI Agents for your business" |
-| **Primary color** | `#22d3ee` (cyan) |
-| **Accent color** | `#8b5cf6` (purple) |
-| **Gradient** | `linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%)` |
-| **Dark sections** | `linear-gradient(to-br, #0a1628, #0f172a, #1e1b4b)` - stil Stripe |
-| **Font** | Inter (sans-serif) |
-| **Logo** | `frontend/src/components/common/Logo.astro` |
+| **Brand Gradient** | `linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%)` |
+| **Heading color** | `#263244` (neutral-750) — nu negru pur |
+| **Dark sections** | `radial-gradient(ellipse at top, #111827 0%, #0B0F1A 50%, #1E1B4B 100%)` |
+| **Font** | **Prompt** (Google Font) — weights 400, 500, 600, 700 |
+| **Logo** | Inline SVG wordmark — `frontend/src/components/common/Logo.astro` |
+| **Card radius** | 16px |
+| **Button/Input radius** | 12px |
+| **Badge radius** | 999px (full round) |
 
 ---
 
@@ -37,61 +39,132 @@
 
 ## 2. PALETĂ DE CULORI
 
-### Culorile principale
-| Culoare | Hex | Utilizare |
-|---------|-----|-----------|
-| Cyan vibrant | `#22d3ee` | Primary, start gradient |
-| Indigo | `#6366f1` | Gradient mijloc |
-| Purple electric | `#8b5cf6` | Accent, end gradient |
-| Dark background | `#18181b` | Footer, dark sections |
-| Light background | `#fafafa` | Main background |
+### Brand Gradient (3-stop — ACTUALIZAT Februarie 2026)
 
-### Gradient Brand
 ```css
-background: linear-gradient(135deg, #22d3ee 0%, #6366f1 50%, #8b5cf6 100%);
+/* Gradient principal — folosit peste tot */
+background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+/* Cyan → Blue → Violet */
 ```
 
+### Culorile principale
+
+| Culoare | Hex | Token Tailwind | Utilizare |
+|---------|-----|---------------|-----------|
+| Cyan | `#16B6C9` | `primary-500` | Start gradient, primary actions |
+| Cyan light | `#22D3EE` | `primary-400` | Hover states, accents |
+| Blue | `#4F7CF3` | — | Mijloc gradient (doar inline) |
+| Violet | `#7C3AED` | `accent-600` | End gradient |
+| Violet light | `#8B5CF6` | `accent-500` | Accent secundar |
+| Heading text | `#263244` | `neutral-750` | Toate titlurile pe light bg |
+| Body text | `#475569` | `neutral-600` | Paragrafe, text secundar |
+| Dark bg | `#0B0F1A` | `neutral-950` | Centre secțiuni dark |
+| Light bg | `#F7F8FA` | `neutral-50` | Fundal pagină, secțiuni alternate |
+
 ### Implementare Tailwind
+
 ```javascript
-// tailwind.config.mjs
+// tailwind.config.mjs — extracte relevante
 colors: {
   primary: {
-    400: '#22d3ee',  // Main cyan
-    500: '#06b6d4',
-    600: '#0891b2',  // Hover
+    50: '#ECFEFF',
+    100: '#CFFAFE',
+    200: '#A5F3FC',
+    300: '#67E8F9',
+    400: '#22D3EE',
+    500: '#16B6C9',    // Start gradient brand
+    600: '#0891B2',
+    700: '#0E7490',
+    800: '#155E75',
+    900: '#164E63',
   },
   accent: {
-    500: '#a855f7',
-    600: '#8b5cf6',  // Main purple
+    50: '#FAF5FF',
+    100: '#F3E8FF',
+    200: '#E9D5FF',
+    300: '#D8B4FE',
+    400: '#C084FC',
+    500: '#8B5CF6',
+    600: '#7C3AED',    // End gradient brand
+    700: '#6D28D9',
+    800: '#5B21B6',
+    900: '#4C1D95',
   },
   neutral: {
-    50: '#fafafa',   // Light bg
-    900: '#18181b',  // Dark bg
-  }
+    50: '#F7F8FA',
+    100: '#F1F5F9',
+    200: '#E2E8F0',
+    300: '#CBD5E1',
+    400: '#94A3B8',
+    500: '#64748B',
+    600: '#475569',
+    700: '#334155',
+    750: '#263244',    // ← Custom shade pentru headings
+    800: '#1E293B',
+    900: '#0F172A',
+    950: '#0B0F1A',
+  },
 }
+```
+
+### ⚠️ ATENȚIE: neutral-750 și @apply
+
+`text-neutral-750` funcționează în fișiere `.astro` (Tailwind JIT compilează la nevoie).
+**NU funcționează** cu `@apply` în fișiere CSS/global.css (PostCSS nu recunoaște shades intermediare).
+
+**Soluție în CSS**:
+```css
+/* ❌ GREȘIT — va da CssSyntaxError */
+h1 { @apply text-neutral-750; }
+
+/* ✅ CORECT — raw CSS value */
+h1 { color: #263244; }
 ```
 
 ---
 
-## 3. LOGO - IMPLEMENTARE FINALĂ
+## 3. LOGO - IMPLEMENTARE FINALĂ (Februarie 2026)
 
-### Design
-- **Concept**: Litera "G" cu gradient + noduri orbitale animate
+### Design Actual
+- **Concept**: Inline SVG wordmark — "GENERATIVA" + "AI AUTOMATION" subtitle + toggle symbol (ON state)
 - **Component**: `frontend/src/components/common/Logo.astro`
+- **Font**: Prompt — moștenit din fontul global încărcat în BaseLayout
 
 ### Structura SVG
-1. **Cerc background** - subtil, opacity 8%
-2. **Litera G** - stroke gradient, width 4, cu glow filter
-3. **Bara orizontală** - clară, distinctivă
-4. **4 noduri orbitale** - animate cu opacity pulsing
-5. **Linii conexiune** - opacity 30%
+1. **"GENERATIVA"** — `<text>` Prompt Bold (700), font-size 48, letter-spacing 0.04em
+2. **"AI AUTOMATION"** — `<text>` Prompt Medium (500), font-size 16.8, letter-spacing 0.2em
+3. **Toggle symbol** — `<rect>` rounded (rx=18) + `<circle>` knob la dreapta (ON state)
+
+### viewBox
+```
+viewBox="-2 -2 400 72"
+```
+**⚠️ NU MODIFICA viewBox** — iterații anterioare au demonstrat că ajustarea y-offset taie textul sau toggle-ul.
 
 ### Variante disponibile
+
 | Prop | Opțiuni | Descriere |
 |------|---------|-----------|
 | `size` | sm, md, lg, xl | Dimensiune logo |
-| `showText` | true/false | Afișare "GENERATIVA" |
-| `variant` | default, white | Pentru light/dark backgrounds |
+| `showText` | true/false | Afișare text (mereu true în practică) |
+| `variant` | default, white, dark | Pentru light/dark backgrounds |
+
+### Size Configuration
+
+| Size | Height | Min Width |
+|------|--------|-----------|
+| `sm` | `h-8` | 150px |
+| `md` | `h-8 lg:h-9` | 160px |
+| `lg` | `h-12` | 220px |
+| `xl` | `h-16` | 300px |
+
+### Color per Variant
+
+| Variant | Wordmark | Subtitle | Toggle |
+|---------|----------|----------|--------|
+| `default` | `#0B0B0B` | `#666666` | `#0B0B0B` |
+| `white` | `white` | `#8A8A8A` | `white` |
+| `dark` | `#0B0B0B` | `#666666` | `#0B0B0B` |
 
 ### Utilizare
 ```astro
@@ -104,20 +177,86 @@ import Logo from '@components/common/Logo.astro';
 <Logo size="md" showText={true} variant="white" />
 ```
 
+### Fișiere Logo
+
+| Fișier | Scop |
+|--------|------|
+| `Logo.astro` | Componenta principală (inline SVG) |
+| `/images/generativa-logo-black.svg` | Export SVG pentru referință/fallback |
+| `/images/generativa-logo-white.svg` | Export SVG white variant |
+| `/images/generativa-g-512.png` | ⚠️ VECHI — logo PNG anterior, nu mai e folosit |
+| `/images/generativa-g-200.png` | ⚠️ VECHI — poate fi șters |
+
+### Istoric Logo
+
+| Versiune | Descriere | Status |
+|----------|-----------|--------|
+| v1 | Rețea neurală SVG, purple | ❌ Respins |
+| v2 | Hexagon geometric | ❌ "Prea colțuros" |
+| v3 | G din noduri orbitale | ❌ G arăta ca C |
+| v4 | G solid + noduri orbitale animate | ✅ Folosit o perioadă |
+| v5 | 3D G letter PNG (AI-generated) | ✅ Folosit o perioadă |
+| **v6** | **SVG wordmark + Prompt font + toggle** | ✅ **ACTUAL** |
+
 ---
 
 ## 4. TYPOGRAPHY
 
-### Font Principal: Inter
-- **Logo text**: ALL CAPS, bold, tracking-wide
-- **Headings**: font-semibold
-- **Body**: font-normal
+### Font Principal: Prompt (Google Font)
 
-### Gradient text
+| Utilizare | Weight | Tailwind |
+|-----------|--------|----------|
+| Headings H1, H2 | 700 (Bold) | `font-bold` |
+| Headings H3, H4 | 600 (SemiBold) | `font-semibold` |
+| Body text | 400 (Regular) | `font-normal` |
+| Labels, buttons | 500 (Medium) | `font-medium` |
+| Logo wordmark | 700 (Bold) | — (inline SVG) |
+| Logo subtitle | 500 (Medium) | — (inline SVG) |
+
+### Heading Styles (global.css)
+
+```css
+h1, h2, h3, h4, h5, h6 {
+  color: #263244;  /* neutral-750 */
+}
+
+h1 {
+  @apply text-display-lg md:text-display font-bold;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  @apply text-heading-lg font-bold;
+}
+
+h3 {
+  @apply text-heading font-semibold;
+}
+
+h4 {
+  @apply text-heading-sm font-semibold;
+}
+```
+
+### Custom Font Sizes
+
+| Token | Size | Utilizare |
+|-------|------|-----------|
+| `display` | 3.5rem (56px) | H1 desktop |
+| `display-lg` | 3rem (48px) | H1 mobile |
+| `heading-lg` | 1.875rem (30px) | H2 |
+| `heading` | 1.5rem (24px) | H3 |
+| `heading-sm` | 1.25rem (20px) | H4 |
+| `body` | 1rem (16px) | Paragrafe |
+| `body-sm` | 0.875rem (14px) | Text secundar |
+| `caption` | 0.75rem (12px) | Labels mici |
+
+### Gradient Text
+
 ```css
 .text-gradient {
-  @apply bg-gradient-to-r from-primary-400 via-indigo-500 to-accent-600
-         bg-clip-text text-transparent;
+  @apply bg-clip-text text-transparent;
+  background-image: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
 }
 ```
 
@@ -125,21 +264,75 @@ import Logo from '@components/common/Logo.astro';
 
 ## 5. COMPONENTE UI
 
-### Button variants
-```javascript
-variants: {
-  primary: 'bg-primary-400 text-neutral-900 hover:bg-primary-500',
-  gradient: 'bg-gradient-to-r from-primary-400 to-accent-600 text-white',
-  outline: 'border-2 border-primary-400 text-primary-500',
-  ghost: 'text-neutral-600 hover:bg-neutral-100'
+### Button Variants
+
+```css
+.btn-primary {
+  background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+  color: white;
+  border-radius: 12px;
+}
+
+.btn-secondary {
+  background: white;
+  border: 1px solid neutral-200;
+  color: neutral-900;
+  border-radius: 12px;
+}
+
+.btn-outline {
+  border: 1px solid primary-500;
+  color: primary-500;
+  border-radius: 12px;
+}
+
+.btn-ghost {
+  color: neutral-600;
+  background: transparent;
+  border-radius: 12px;
 }
 ```
 
-### CTA recomandat
-```astro
-<Button variant="gradient" size="lg">
-  Programează Demo
-</Button>
+### Card Style
+
+```css
+.card {
+  background: white;
+  border: 1px solid neutral-200;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.card:hover {
+  box-shadow: shadow-soft;
+  border-color: neutral-300;
+}
+```
+
+### Input Style
+
+```css
+.input {
+  border: 1px solid neutral-200;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+}
+
+.input:focus {
+  border-color: primary-500;
+  ring: 2px primary-500/20;
+}
+```
+
+### Badge Style
+
+```css
+.badge {
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
 ```
 
 ---
@@ -151,136 +344,87 @@ variants: {
 docs/branding/
 ├── BRANDING-NOTES.md              # Acest fișier
 └── logo-concepts/
-    └── generativa-logo-final-dark.png  # Referință PNG
+    └── generativa-logo-final-dark.png  # Referință PNG vechi
 
 frontend/
 ├── src/components/common/
-│   └── Logo.astro                 # ✅ Logo SVG implementat
+│   └── Logo.astro                 # ✅ Logo SVG inline (Prompt font)
 ├── public/
-│   ├── favicon.svg                # ✅ Favicon actualizat
+│   ├── favicon-32.png             # ✅ Favicon 32x32
+│   ├── favicon-16.png             # ✅ Favicon 16x16
+│   ├── apple-touch-icon.png       # ✅ iOS icon 180x180
 │   └── images/
-│       └── generativa-logo.png    # PNG pentru fallback
-└── tailwind.config.mjs            # ✅ Culori brand
+│       ├── generativa-logo-black.svg   # ✅ SVG export (dark)
+│       ├── generativa-logo-white.svg   # ✅ SVG export (white)
+│       ├── generativa-g-512.png        # ⚠️ Logo vechi PNG (nu mai e folosit)
+│       └── generativa-g-200.png        # ⚠️ Logo vechi PNG mic
+├── tailwind.config.mjs            # ✅ Design tokens brand
+└── src/styles/global.css          # ✅ Typography defaults
 ```
 
 ### De creat (TODO)
-- [ ] OG Image pentru social sharing (1200x630)
-- [ ] Favicon PNG variants (16x16, 32x32, 180x180)
-- [ ] Logo varianta icon-only
+- [ ] OG Image pentru social sharing (1200x630) — cu noul wordmark
+- [ ] Favicon actualizat din noul SVG wordmark (opțional — cel curent e OK)
 
 ---
 
-## 7. ISTORIC ITERAȚII
-
-| Iterație | Descriere | Status |
-|----------|-----------|--------|
-| 1 | Rețea neurală, purple | ❌ Culori nepotrivite |
-| 2 | Hexagon geometric | ❌ "Prea colțuros" |
-| 3 | G din noduri | ⚠️ G arăta ca C |
-| 4 | G solid + noduri orbitale | ✅ **FINAL** |
-
-### Inspirație
-- ElevenLabs - typography ALL CAPS
-- Linear - gradients moderne
-- Vercel - minimal, premium
-
----
-
-## 8. CHECKLIST IMPLEMENTARE
-
-### ✅ Completat
-- [x] Paletă culori definită
-- [x] Logo SVG creat (Logo.astro)
-- [x] Header actualizat
-- [x] Footer actualizat
-- [x] Button variant gradient
-- [x] Favicon actualizat
-- [x] Traduceri actualizate (ro.json, en.json)
-- [x] Tailwind config actualizat
-- [x] Global CSS actualizat
-
-### ⏳ Pending
-- [ ] Achiziție domeniu generativa.ro
-- [ ] OG Image (1200x630)
-- [ ] Favicon PNG variants
-
----
-
-## 9. DESIGN PATTERNS ADĂUGATE (Februarie 2026)
+## 7. DESIGN PATTERNS
 
 ### Secțiuni Dark (stil Stripe)
-Folosite în: `IntegrationHub.astro`
+Folosite în: `IntegrationHub.astro`, `ScaleWithConfidence.astro`, `CTA.astro`
 
 ```css
-/* Background gradient - NU solid black */
-background: linear-gradient(to-br, #0a1628, #0f172a, #1e1b4b);
+/* Background gradient dark */
+background: radial-gradient(ellipse at top, #111827 0%, #0B0F1A 50%, #1E1B4B 100%);
 
 /* Dot pattern overlay */
-background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
 background-size: 24px 24px;
 
 /* Gradient orbs pentru depth */
-.orb {
-  background: rgba(34, 211, 238, 0.1); /* cyan */
-  /* sau */
-  background: rgba(139, 92, 246, 0.1); /* purple */
-  filter: blur(60px);
-}
+background: rgba(22, 182, 201, 0.1); /* cyan */
+filter: blur(60px);
 ```
 
-### Glassmorphism Cards
-Folosite în: `IntegrationHub.astro`
-
+### Cards pe Light Background
 ```css
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
+.card {
+  background: white;
+  border: 1px solid theme('colors.neutral.200');
+  border-radius: 16px;
+  transition: all 200ms;
 }
 
-.glass-card:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(34, 211, 238, 0.3);
-  box-shadow: 0 10px 40px rgba(34, 211, 238, 0.1);
-}
-```
-
-### Linii Animate (SVG)
-Folosite în: `IntegrationHub.astro`
-
-```css
-/* SVG path */
-stroke: url(#gradient);
-stroke-dasharray: 8 4;
-
-@keyframes dash {
-  to { stroke-dashoffset: -24; }
-}
-
-.animated-line {
-  animation: dash 2s linear infinite;
+.card:hover {
+  box-shadow: theme('boxShadow.soft');
+  border-color: theme('colors.neutral.300');
 }
 ```
 
-### Principii de Design (de la Stripe)
+### Principii de Design
 
-1. **Restraint elegant** - spațiu > decorații
-2. **Gradient > Solid** - mereu adaugă subtilitate
-3. **Dark ≠ Black** - folosește `#0a1628`, nu `#000`
-4. **Animate subtil** - dashed lines, hover glow
-5. **Glassmorphism** - transparency pentru modernitate
+1. **Restraint elegant** — spațiu > decorații
+2. **3-stop gradient** — cyan→blue→violet creează profunzime vizuală
+3. **Bold dar nu agresiv** — titluri `#263244`, nu negru pur
+4. **Prompt font** — clean geometry, premium feel
+5. **Consistent radius** — 12px (UI elements), 16px (cards), 999px (pills)
+6. **Dark ≠ Black** — folosește `#0B0F1A` cu gradient, nu `#000`
+7. **Animate subtil** — hover glow, counter animation, NU bounce agresiv
 
 ---
 
-## 10. COMPONENTE VIZUALE NOI
+## 8. COMPONENTE VIZUALE
 
 | Component | Locație | Stil |
 |-----------|---------|------|
-| ChatSimulator | `components/demo/` | Light, cu gradient header |
-| BenefitsStrip | `components/sections/` | Light background |
+| VoiceWidget | `components/demo/` | Buton circular cu inele animate, gradient brand |
+| ChatSimulator | `components/demo/` | Light, cu gradient header (nu mai e în Hero) |
+| BenefitsStrip | `components/sections/` | Light background, icon cards |
 | UseCases | `components/sections/` | Light cu gradient subtle |
 | IntegrationHub | `components/sections/` | Dark stil Stripe |
+| ScaleWithConfidence | `components/sections/` | Dark cu wave animation Canvas |
+| CTA | `components/sections/` | Dark gradient cu glow button |
 
 ---
 
-*Document actualizat: Februarie 2026 - Adăugate pattern-uri design de la Stripe*
+*Document actualizat: 11 Februarie 2026 — Refactoring complet: SVG wordmark, Prompt font, 3-stop gradient, design tokens*

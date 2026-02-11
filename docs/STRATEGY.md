@@ -4,8 +4,8 @@
 
 ## Document Version
 - **Creat**: Februarie 2026
-- **Ultima actualizare**: Februarie 2026
-- **Status**: ✅ Implementat parțial (Hero, BenefitsStrip, UseCases, IntegrationHub)
+- **Ultima actualizare**: 11 Februarie 2026
+- **Status**: ✅ Implementat complet (Hero, BenefitsStrip, UseCases, IntegrationHub, ScaleWithConfidence, 3 Service Pages, Legal Pages, Visual Identity Refactoring)
 
 ---
 
@@ -517,13 +517,16 @@ stroke-dasharray: 8 4;
 animation: dash 2s linear infinite;
 ```
 
-### 8.3 Principii de Design Reținute
+### 8.3 Principii de Design Reținute (Actualizat Februarie 2026)
 
-1. **Restraint elegant** - puterea din spațiu, nu din decorații
-2. **Gradient > Solid** - mereu adaugă subtilitate
-3. **Transparency > Opacity** - glassmorphism pentru modernitate
-4. **Animate subtil** - linii dashed, hover glow, nu bounce agresiv
-5. **Dark ≠ Black** - folosește dark blue/purple, nu `#000`
+1. **Restraint elegant** — puterea din spațiu, nu din decorații
+2. **3-stop gradient** — `#16B6C9 → #4F7CF3 → #7C3AED` (cyan→blue→violet) creează profunzime
+3. **Font Prompt** — Google Font cu geometry clean, ALL CAPS excelent pentru brand
+4. **Titluri: bold dar nu agresive** — `#263244` (neutral-750), nu negru pur
+5. **Consistent radius** — 12px (butoane/inputs), 16px (carduri), 999px (badge/pills)
+6. **Shadow subtil** — `shadow-soft` custom, nu Tailwind shadow-lg standard
+7. **Animate subtil** — hover glow, counter animation, NU bounce agresiv
+8. **Dark ≠ Black** — folosește dark blue/purple (`#0B0F1A`), nu `#000`
 
 ---
 
@@ -558,27 +561,27 @@ frontend/src/pages/en/index.astro
 10. <CTA />                 (existent)
 ```
 
-### Stiluri Cheie Adăugate
+### Stiluri Cheie (Actualizat Februarie 2026)
 
 ```css
-/* IntegrationHub - Background stil Stripe */
-.integration-hub {
-  background: linear-gradient(to-br, #0a1628, #0f172a, #1e1b4b);
-}
+/* Brand gradient 3-stop — NOUA bază vizuală */
+background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
 
-/* Dot pattern */
-background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+/* Heading color — rafinat, nu negru pur */
+color: #263244; /* neutral-750 — custom shade */
 
-/* Glassmorphism cards */
-.integration-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-}
+/* Font: Prompt (Google Font) — înlocuiește Inter */
+font-family: 'Prompt', sans-serif;
 
-/* Animated dashed lines */
-stroke-dasharray: 8 4;
-animation: dash 2s linear infinite;
+/* Card standard */
+border-radius: 16px;
+border: 1px solid theme('colors.neutral.200');
+
+/* Button/Input standard */
+border-radius: 12px;
+
+/* Dark sections */
+background: radial-gradient(ellipse at top, #111827 0%, #0B0F1A 50%, #1E1B4B 100%);
 ```
 
 ---
@@ -778,5 +781,5 @@ Fiecare pagină nouă de serviciu (Integrări AI, etc.) TREBUIE să urmeze exact
 
 ---
 
-*Document de lucru - se actualizează pe măsură ce implementăm*
-*Ultima actualizare: Februarie 2026 - Adăugat secțiunea SEO/AEO Strategy*
+*Document de lucru — se actualizează pe măsură ce implementăm*
+*Ultima actualizare: 11 Februarie 2026 — Visual identity refactoring (SVG wordmark, Prompt font, 3-stop gradient, design tokens)*

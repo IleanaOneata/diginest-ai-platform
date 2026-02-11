@@ -62,6 +62,7 @@
 47. ✅ **VAPI SDK Fix** - Fix constructor error (`Vapi is not a constructor`) cauzat de ESM CDN export wrapping + `define:vars` incompatibil cu `import()`
 48. ✅ **Voice Widget UX** - Preload SDK via IntersectionObserver + auto-retry după erori fără refresh pagină
 49. ✅ **Railway Deployment Analysis** - Documentat: `railway up` CLI NU funcționează cu monorepo Root Directory; deploy DOAR via GitHub push
+50. ✅ **Visual Identity Refactoring** - Refactoring complet identitate vizuală: logo SVG inline (GENERATIVA wordmark + AI AUTOMATION + toggle symbol) cu font Prompt, gradient brand 3-stop (#16B6C9→#4F7CF3→#7C3AED), design tokens noi (shadow, radius, spacing), culoare titluri rafinată (#263244 / neutral-750), footer titluri mărite, Language Switcher cu gradient pill
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -177,43 +178,53 @@
 ### Paletă de Culori
 
 ```css
-/* Primary - Cyan vibrant (tehnologie, inovație) */
---primary-400: #22d3ee;  /* Main cyan din logo */
---primary-500: #06b6d4;
---primary-600: #0891b2;  /* Hover states */
+/* Brand Gradient — 3-stop (NOUA filozofie, Februarie 2026) */
+background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+/* Cyan → Blue → Violet — folosit în butoane gradient, text gradient, badge-uri */
 
-/* Accent - Purple electric (creativitate, AI) */
---accent-500: #a855f7;
---accent-600: #8b5cf6;   /* Main purple din logo */
+/* Primary - Cyan (tehnologie, inovație) */
+--primary-400: #22D3EE;
+--primary-500: #16B6C9;  /* Start gradient brand */
+--primary-600: #0891B2;  /* Hover states */
+
+/* Accent - Violet (creativitate, AI) */
+--accent-500: #8B5CF6;
+--accent-600: #7C3AED;   /* End gradient brand */
+
+/* Heading Text — rafinat, nu negru pur */
+--neutral-750: #263244;  /* Custom shade între 700 și 800 */
+/* IMPORTANT: text-neutral-750 funcționează în .astro templates dar NU cu @apply în CSS.
+   În global.css folosește `color: #263244` direct. */
 
 /* Neutral - Warm tones */
---neutral-50: #fafafa;   /* Light backgrounds */
---neutral-900: #18181b;  /* Dark text */
+--neutral-50: #F7F8FA;   /* Light backgrounds */
+--neutral-900: #0F172A;  /* Darkest text (folosit rar, doar body default) */
 
 /* Dark sections (stil Stripe) */
---dark-bg: linear-gradient(to-br, #0a1628, #0f172a, #1e1b4b);
-
-/* Brand Gradient */
-background: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+--dark-bg: radial-gradient(ellipse at top, #111827 0%, #0B0F1A 50%, #1E1B4B 100%);
 ```
 
-### Principii de Design (învățate de la Stripe)
+### Filozofie de Design (actualizată Februarie 2026)
 
-1. **Restraint elegant** - puterea din spațiu, nu din decorații
-2. **Gradient > Solid** - adaugă subtilitate, nu flat colors
-3. **Transparency > Opacity** - glassmorphism pentru modernitate
-4. **Animate subtil** - linii dashed, hover glow, NU bounce agresiv
-5. **Dark ≠ Black** - folosește dark blue/purple (`#0a1628`), nu `#000000`
-6. **Alternanță Light/Dark** - ritmul vizual menține atenția
+1. **Restraint elegant** — puterea din spațiu, nu din decorații
+2. **Gradient 3-stop > 2-stop** — cyan→blue→violet creează profunzime
+3. **Titluri: bold dar nu agresive** — `#263244` (neutral-750), nu negru pur
+4. **Font Prompt** — Google Font premium, ALL CAPS pentru brand, clean geometry
+5. **Border-radius consistent** — 12px butoane/inputs, 16px carduri, 999px badge-uri
+6. **Shadow subtil** — `shadow-soft` personalizat, nu shadow-lg standard
+7. **Dark ≠ Black** — folosește dark blue/purple (`#0B0F1A`), nu `#000000`
+8. **Alternanță Light/Dark** — ritmul vizual menține atenția
 
 ### Logo
 - **Component**: `frontend/src/components/common/Logo.astro`
-- **Design**: 3D G letter PNG cu transparent background (AI-generated, glossy cyan-blue 3D effect)
-- **Fișier imagine**: `/images/generativa-g-512.png` (512x512, transparent PNG)
-- **Favicon**: `/favicon-32.png`, `/favicon-16.png`, `/apple-touch-icon.png` (generate din logo-ul PNG cu Sharp)
-- **Variante**: `default` (pe light, text gradient), `white` (pe dark, text alb), `dark` (text dark)
-- **Sizes**: `sm` (w-9), `md` (w-11), `lg` (w-14), `xl` (w-20)
-- **IMPORTANT**: Nu mai folosim SVG logo. `favicon.svg` vechi există încă în repo dar NU e referit nicăieri.
+- **Design**: Inline SVG cu font Prompt — GENERATIVA wordmark + "AI AUTOMATION" subtitle + toggle symbol (ON state)
+- **SVG Files**: `/images/generativa-logo-black.svg` (light bg), `/images/generativa-logo-white.svg` (dark bg)
+- **Variante**: `default` (pe light, fill `#0B0B0B`), `white` (pe dark, fill `white`), `dark` (pe light, fill `#0B0B0B`)
+- **Sizes**: `sm` (h-8), `md` (h-8 lg:h-9, minWidth 160px), `lg` (h-12), `xl` (h-16)
+- **Font**: Prompt 700 (wordmark), Prompt 500 (subtitle) — moștenit din font global
+- **Toggle symbol**: Rounded rect + circle knob la dreapta wordmark-ului
+- **IMPORTANT**: Logo-ul este inline SVG cu `<text>` elements, NU imagine PNG. Fontul Prompt trebuie încărcat global în BaseLayout.
+- **IMPORTANT**: Logo-ul PNG anterior (3D G letter) a fost **înlocuit** cu SVG wordmark. PNG-urile vechi (`generativa-g-512.png`, `generativa-g-200.png`) pot fi șterse.
 
 ---
 
@@ -1468,6 +1479,43 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 - **Documentat**: Reguli adăugate în Railway Constraints, DEPLOYMENT.md actualizat
 - **Lecție**: Când ai o ipoteză, verifică datele reale (log-uri, dashboard) înainte de a concluziona
 
+### Sesiune Februarie 2026 - Visual Identity Refactoring (Logo SVG + Prompt Font + Design Tokens)
+- **Context**: Refactoring complet al identității vizuale — logo PNG 3D înlocuit cu SVG wordmark inline, font schimbat de la Inter la Prompt, gradient brand extins la 3 culori, design tokens rafinați
+- **Logo nou**:
+  - **Design**: Inline SVG cu `<text>` elements — "GENERATIVA" (Prompt Bold 48px) + "AI AUTOMATION" (Prompt Medium 16.8px) + toggle symbol (rect + circle)
+  - **Variante**: `default` (fill `#0B0B0B`), `white` (fill `white`) — controlat prin props
+  - **viewBox**: `"-2 -2 400 72"` — nu modifica (iterații anterioare au arătat că schimbarea viewBox taie conținutul)
+  - **Size md**: `h-8 lg:h-9`, minWidth `160px` (redus de la valori mai mari)
+  - **SVG exportat**: `/images/generativa-logo-black.svg` + `/images/generativa-logo-white.svg` pentru referință
+- **Font Prompt**:
+  - Google Font cu geometry clean, ALL CAPS excelent
+  - Înlocuiește Inter ca font principal
+  - Adăugat în `tailwind.config.mjs` (`fontFamily.sans`) și `BaseLayout.astro` (Google Fonts link)
+  - Weights: 400 (normal), 500 (medium), 600 (semibold), 700 (bold)
+- **Gradient brand 3-stop** (nou):
+  - `linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%)` — cyan → blue → violet
+  - Folosit în: butoane gradient, text gradient, Language Switcher active state, stat values din Hero
+  - Înlocuiește vechiul gradient 2-stop (cyan → purple)
+- **Culoare titluri rafinată**:
+  - Custom color `neutral-750: #263244` — între neutral-700 și neutral-800
+  - Toate titlurile pe light backgrounds: `text-neutral-750` sau `color: #263244`
+  - **⚠️ ATENȚIE**: `text-neutral-750` funcționează în `.astro` templates (Tailwind JIT) dar **NU** funcționează cu `@apply` în CSS files. În `global.css` folosește `color: #263244` direct.
+  - `font-bold` pe H1/H2, `font-semibold` pe H3/H4 (utilizatoarea a cerut explicit bold înapoi)
+- **Design tokens noi în tailwind.config.mjs**:
+  - `shadow-soft`: subtil, custom (nu shadow-lg standard)
+  - `borderRadius`: 12px (butoane, inputs), 16px (carduri), 999px (badge-uri, pills)
+  - Font sizes personalizate: `display`, `display-lg`, `heading`, `heading-lg`, `heading-sm`, `body`, `body-sm`, `caption`
+- **Footer**: Titluri coloane `text-xl font-bold`, link-uri `text-base` (anteriori `text-sm`)
+- **Language Switcher**: Active state cu `bg-gradient-to-r from-primary-500 to-accent-600` (gradient pill)
+- **Header**: `bg-white/90 backdrop-blur-lg border-b border-neutral-200` (simplificat, fără gradient anterior)
+- **Componente actualizate** (27 fișiere): Toate secțiunile, page shells, layouts — consistent `text-neutral-750` pe headings, `border-radius: 12px/16px` pe carduri/butoane
+- **Lecții învățate**:
+  1. **SVG viewBox**: Nu ajusta y-offset pentru aliniere verticală — taie conținutul. Folosește CSS alignment.
+  2. **Bold vs color**: Utilizatorii preferă bold pe titluri. Redu intensitatea din culoare, nu din font-weight.
+  3. **@apply limitation**: Tailwind `@apply` nu merge cu custom intermediate shades (750). Folosește raw CSS.
+  4. **Iterare**: Multe runde de feedback sunt normale la identitate vizuală — documentează fiecare decizie.
+- **Commit**: `67b5d8e` (local pe staging, fără push)
+
 ### ⚠️ Lecții din Sesiunea Logo Redesign
 1. **Rollback parțial vs total**: Când utilizatorul zice "rollback", clarifică CE anume. Nu presupune.
 2. **Browser cache**: Favicon-urile și imaginile sunt puternic cached. Recomandă Ctrl+Shift+R.
@@ -1697,5 +1745,5 @@ Mesajele de validare sunt în `contact.form.validation` din `ro.json`/`en.json`:
 
 ---
 
-*Ultima actualizare: 9 Februarie 2026*
+*Ultima actualizare: 11 Februarie 2026*
 *Pentru detalii complete despre strategie, vezi `docs/STRATEGY.md`*
