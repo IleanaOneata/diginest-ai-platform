@@ -65,7 +65,7 @@
 
 3. **Ierarhia tipografică** — Inter + Space Grotesk funcționează bine. Display headings cu letter-spacing negativ dau feel premium.
 
-4. **Brand gradient** (cyan→purple) — Consistent peste tot, memorabil, diferențiator vizual.
+4. **Brand palette** (Deep Slate + Warm Amber) — Amber CTA pe fundal slate creează contrast maxim (Von Restorff effect), diferențiator vizual față de competiție.
 
 5. **Header gradient subtil** — `from-primary-50/80 via-white/80 to-accent-50/60` cu backdrop-blur dă efect de sticlă premium.
 

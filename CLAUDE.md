@@ -46,7 +46,7 @@
 31. ✅ **Language Switcher Redesign** - Toggle pill compact (RO | EN) cu gradient brand, fără emoji flags (best practice 2025: flags = țări, nu limbi), accessibility complet (aria-current, lang attributes)
 32. ✅ **Services Mobile Scroll** - Carduri servicii scroll orizontal pe mobile (flex md:grid pattern)
 33. ✅ **Logo Redesign PNG** - Înlocuit SVG logo cu 3D G letter PNG (transparent background), imagine AI-generated, Logo.astro rescris complet
-34. ✅ **Header Gradient** - Fundal header cu gradient subtil cyan→white→lavender (`from-primary-50/80 via-white/80 to-accent-50/60`) + ambient color blobs în BaseLayout
+34. ✅ **Header Simplificat** - `bg-white/90 backdrop-blur-lg border-b border-neutral-200` (clean, fără gradient/blobs — simplificat cu Option D)
 35. ✅ **IntegrationHub Mobile Labels** - Afișare label-uri sub iconițe pe toate dimensiunile (nu doar pe sm:+)
 36. ✅ **Favicon PNG Update** - Favicon-ul din tab-ul Chrome actualizat de la SVG vechi la PNG-uri generate din noul logo 3D (32x32, 16x16, apple-touch-icon 180x180)
 37. ✅ **CTA Redesign (Stripe-inspired)** - Dark gradient, eyebrow badge, gradient button cu glow, trust indicators. Canvas ribbon animation testată și respinsă. Buton secundar "Cum funcționează?" eliminat (link stricat + un singur CTA clar e mai eficient)
@@ -63,6 +63,10 @@
 48. ✅ **Voice Widget UX** - Preload SDK via IntersectionObserver + auto-retry după erori fără refresh pagină
 49. ✅ **Railway Deployment Analysis** - Documentat: `railway up` CLI NU funcționează cu monorepo Root Directory; deploy DOAR via GitHub push
 50. ✅ **Visual Identity Refactoring** - Refactoring complet identitate vizuală: logo SVG inline (GENERATIVA wordmark + AI AUTOMATION + toggle symbol) cu font Prompt, gradient brand 3-stop (#16B6C9→#4F7CF3→#7C3AED), design tokens noi (shadow, radius, spacing), culoare titluri rafinată (#263244 / neutral-750), footer titluri mărite, Language Switcher cu gradient pill
+51. ✅ **Color Palette Redesign (Option D)** - Paletă nouă research-backed: Deep Slate (#1E293B) + Warm Amber (#F59E0B). Regula 60-30-10, Von Restorff effect, flat CTA buttons. 15 fișiere frontend + 1 backend actualizate. Culorile vechi cyan/purple eliminate complet
+52. ✅ **Font System Update** - Inter pentru UI (body, headings, buttons), Prompt doar pe logo SVG. Sistem dual: `fontFamily.sans: Inter`, `fontFamily.brand: Prompt`
+53. ✅ **Favicon Redesign** - Toggle switch din logo (amber pe deep slate). SVG + PNG (32, 16, apple-touch 180). SVG favicon prioritar în BaseLayout
+54. ✅ **Backend Email Color Sync** - EmailService.java: cyan (#06b6d4) → amber (#D97706), teal backgrounds → amber backgrounds. Consistență brand în email templates
 
 ### În lucru:
 - [ ] Rafinare conținut și copy pentru toate secțiunile
@@ -175,56 +179,65 @@
 - **Tagline RO**: "Agenți AI pentru afacerea ta"
 - **Tagline EN**: "AI Agents for your business"
 
-### Paletă de Culori
+### Paletă de Culori — Option D: Deep Slate + Warm Amber (Februarie 2026)
+
+> **Filozofie**: Paletă research-backed pentru B2B. Deep Slate = autoritate. Warm Amber = conversie. Regula 60-30-10.
 
 ```css
-/* Brand Gradient — 3-stop (NOUA filozofie, Februarie 2026) */
-background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
-/* Cyan → Blue → Violet — folosit în butoane gradient, text gradient, badge-uri */
+/* Primary — Deep Slate (autoritate, încredere, sofisticare) */
+--primary-800: #1E293B;  /* Brand deep slate */
+--primary-900: #0F172A;  /* Dark backgrounds */
+--primary-950: #020617;  /* Darkest */
 
-/* Primary - Cyan (tehnologie, inovație) */
---primary-400: #22D3EE;
---primary-500: #16B6C9;  /* Start gradient brand */
---primary-600: #0891B2;  /* Hover states */
-
-/* Accent - Violet (creativitate, AI) */
---accent-500: #8B5CF6;
---accent-600: #7C3AED;   /* End gradient brand */
+/* Accent — Warm Amber (energie, conversie, acțiune) */
+--accent-400: #FBBF24;   /* Voice widget gradient start */
+--accent-500: #F59E0B;   /* Brand amber — CTA-uri, accente */
+--accent-600: #D97706;   /* Hover states, link-uri */
 
 /* Heading Text — rafinat, nu negru pur */
 --neutral-750: #263244;  /* Custom shade între 700 și 800 */
 /* IMPORTANT: text-neutral-750 funcționează în .astro templates dar NU cu @apply în CSS.
    În global.css folosește `color: #263244` direct. */
 
-/* Neutral - Warm tones */
---neutral-50: #F7F8FA;   /* Light backgrounds */
---neutral-900: #0F172A;  /* Darkest text (folosit rar, doar body default) */
+/* Dark sections */
+--dark-bg: radial-gradient(ellipse at top, #1E293B 0%, #0F172A 50%, #020617 100%);
 
-/* Dark sections (stil Stripe) */
---dark-bg: radial-gradient(ellipse at top, #111827 0%, #0B0F1A 50%, #1E1B4B 100%);
+/* CTA buttons — FLAT amber, NU gradient */
+--cta-bg: #F59E0B;
+--cta-hover: #D97706;
 ```
+
+### ⚠️ REGULA CRITICA: primary vs accent pe dark backgrounds
+
+Cu `primary` = slate scale, clasele `text-primary-400` pe secțiuni dark devin **gri pe negru = invizibil**!
+- Pe **dark backgrounds** → folosește **`accent-*`** (amber) pentru iconițe, badge-uri, CTA
+- Pe **light backgrounds** → `primary-*` (slate) sau `accent-*` (amber) pentru CTA
+- **CTA buttons**: Folosesc `style="background: #F59E0B"` inline (NU clase Tailwind gradient-brand)
 
 ### Filozofie de Design (actualizată Februarie 2026)
 
 1. **Restraint elegant** — puterea din spațiu, nu din decorații
-2. **Gradient 3-stop > 2-stop** — cyan→blue→violet creează profunzime
-3. **Titluri: bold dar nu agresive** — `#263244` (neutral-750), nu negru pur
-4. **Font Prompt** — Google Font premium, ALL CAPS pentru brand, clean geometry
-5. **Border-radius consistent** — 12px butoane/inputs, 16px carduri, 999px badge-uri
-6. **Shadow subtil** — `shadow-soft` personalizat, nu shadow-lg standard
-7. **Dark ≠ Black** — folosește dark blue/purple (`#0B0F1A`), nu `#000000`
-8. **Alternanță Light/Dark** — ritmul vizual menține atenția
+2. **Regula 60-30-10** — 60% neutral, 30% slate, 10% amber (doar pe acțiuni)
+3. **Flat CTA > Gradient CTA** — un singur buton amber clar convertește mai bine
+4. **Von Restorff Effect** — amber pe fundal rece = imposibil de ignorat
+5. **Titluri: bold dar nu agresive** — `#263244` (neutral-750), nu negru pur
+6. **Font dual**: Inter (UI) + Prompt (doar logo SVG)
+7. **Border-radius consistent** — 12px butoane/inputs, 16px carduri, 999px badge-uri
+8. **Shadow subtil** — `shadow-soft` personalizat, nu shadow-lg standard
+9. **Dark ≠ Black** — folosește `#0F172A` cu gradient, nu `#000000`
+10. **Alternanță Light/Dark** — ritmul vizual menține atenția
 
 ### Logo
 - **Component**: `frontend/src/components/common/Logo.astro`
-- **Design**: Inline SVG cu font Prompt — GENERATIVA wordmark + "AI AUTOMATION" subtitle + toggle symbol (ON state)
+- **Design**: Inline SVG cu font **Prompt** — GENERATIVA wordmark + "AI AUTOMATION" subtitle + toggle symbol (ON state)
 - **SVG Files**: `/images/generativa-logo-black.svg` (light bg), `/images/generativa-logo-white.svg` (dark bg)
 - **Variante**: `default` (pe light, fill `#0B0B0B`), `white` (pe dark, fill `white`), `dark` (pe light, fill `#0B0B0B`)
 - **Sizes**: `sm` (h-8), `md` (h-8 lg:h-9, minWidth 160px), `lg` (h-12), `xl` (h-16)
-- **Font**: Prompt 700 (wordmark), Prompt 500 (subtitle) — moștenit din font global
+- **Font Logo**: **Prompt** 700 (wordmark), Prompt 500 (subtitle) — hardcodat în SVG `font-family`, independent de Tailwind
+- **Font UI**: **Inter** — tot restul site-ului (body, headings, buttons) folosește Inter via `fontFamily.sans`
 - **Toggle symbol**: Rounded rect + circle knob la dreapta wordmark-ului
-- **IMPORTANT**: Logo-ul este inline SVG cu `<text>` elements, NU imagine PNG. Fontul Prompt trebuie încărcat global în BaseLayout.
-- **IMPORTANT**: Logo-ul PNG anterior (3D G letter) a fost **înlocuit** cu SVG wordmark. PNG-urile vechi (`generativa-g-512.png`, `generativa-g-200.png`) pot fi șterse.
+- **Favicon**: Toggle switch din logo pe fundal Deep Slate (#1E293B) cu amber (#F59E0B). SVG + PNG generat cu Sharp
+- **IMPORTANT**: Logo-ul este inline SVG cu `<text>` elements, NU imagine PNG. Fontul Prompt trebuie încărcat în BaseLayout (doar weights 600, 700)
 
 ---
 
@@ -1522,6 +1535,27 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 3. **Vercel preview URLs**: Fiecare push creează un URL unic. URL-uri vechi NU se actualizează automat — trebuie accesat cel mai recent din dashboard.
 4. **Sharp pentru imagini**: Astro include Sharp ca dependență. Poate fi folosit cu `node -e "require('sharp')..."` pentru crop, resize, background removal.
 5. **PNG transparent background**: Tehnica pixel-by-pixel — verifică dacă RGB > threshold și channels similare (near-gray), apoi setează alpha=0.
+
+### Sesiune Februarie 2026 - Color Palette Redesign (Option D: Deep Slate + Warm Amber)
+- **Context**: Paletele anterioare (inițială cyan+purple, Option A, B, C) au fost toate respinse de client. Cerința: "culori trendy cu impact psihologic demonstrat, într-un UI echilibrat dar căruia să nu îi lipsească dinamismul"
+- **Cercetare**: HubSpot (50k+ landing pages: amber CTA +32-40% click rate), Von Restorff effect, Nielsen Norman Group (flat > gradient pe CTA), regula 60-30-10, Pantone 2026 trends
+- **Decizie**: Option D — Deep Slate `#1E293B` (primary) + Warm Amber `#F59E0B` (accent)
+- **Rațional**:
+  - Slate = autoritate, stabilitate, încredere (pattern validat: Stripe, Linear, Vercel)
+  - Amber = cea mai performantă culoare CTA în B2B (HubSpot data)
+  - Flat buttons > gradient buttons (Baymard Institute research)
+  - O singură culoare de accent = atenție focalizată (vs 2-3 culori vibrante)
+- **Problemă critică rezolvată**: Când `primary` = slate, clasele Tailwind `from-primary-400 to-accent-600` deveneau gri→amber (urat). Pe dark backgrounds, `text-primary-400` = gri invizibil. Soluție: pe dark → `accent-*` (amber), CTA buttons → `style="background: #F59E0B"` inline
+- **Font update**: Prompt era prea lat pentru body text ("textul pare alungit"). Schimbat la Inter pentru UI, Prompt doar pe logo SVG (hardcodat in `font-family`)
+- **Favicon**: Toggle switch din logo pe deep slate bg cu amber — SVG + PNG via Sharp
+- **Backend email sync**: `#06b6d4` (cyan) → `#D97706` (amber) în EmailService.java
+- **Fișiere modificate**: 20 fișiere (15 frontend + 1 backend + 4 favicons)
+- **Commits**: `874b0b5` (staging — tot), `199ef61` (main — doar backend email)
+- **Lecții**:
+  1. **Tailwind accent naming conflict**: `accent` e proprietate CSS built-in, dar Tailwind 3.x generează totuși clasele corect (verificat în build output)
+  2. **Dev server cache**: La schimbare masivă de culori, dev server-ul Astro poate servi CSS vechi. Soluție: restart server + Ctrl+Shift+R
+  3. **Button.astro bg-gradient-brand trap**: `bg-gradient-brand` a fost redefinit ca gradient dark slate (pentru secțiuni). Butoanele CTA nu trebuie să-l folosească — trebuie amber flat inline
+  4. **Email HTML nu suportă Google Fonts**: Helvetica Neue rămâne font-ul corect pentru email templates
 
 ---
 

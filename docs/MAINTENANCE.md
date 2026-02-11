@@ -366,8 +366,12 @@ Când modifici componente vizuale, respectă aceste reguli:
 
 | Element | Specificație |
 |---------|-------------|
-| **Font** | Prompt (Google Font) — weights 400, 500, 600, 700 |
-| **Brand gradient** | `linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%)` |
+| **Font UI** | Inter (Google Font) — weights 400, 500, 600, 700 |
+| **Font Logo** | Prompt (Google Font) — weights 600, 700 (doar în Logo.astro SVG) |
+| **Primary color** | Deep Slate `#1E293B` (primary-800) — autoritate, încredere |
+| **Accent color** | Warm Amber `#F59E0B` (accent-500) — CTA, conversie |
+| **CTA buttons** | Flat `background: #F59E0B`, hover `#D97706` — NU gradient |
+| **Dark gradient** | `radial-gradient(ellipse at top, #1E293B 0%, #0F172A 50%, #020617 100%)` |
 | **Heading color** | `#263244` (neutral-750) pe light backgrounds, `text-white` pe dark |
 | **Card radius** | 16px |
 | **Button/Input radius** | 12px |
@@ -376,8 +380,10 @@ Când modifici componente vizuale, respectă aceste reguli:
 
 **⚠️ Important**: `text-neutral-750` NU funcționează cu `@apply` în CSS. Folosește `color: #263244` direct.
 
+**Regula 60-30-10**: 60% neutral (alb/gri deschis), 30% deep slate (structură), 10% amber (doar CTA și accente interactive).
+
 **Referință completă**: `docs/branding/BRANDING-NOTES.md`
 
 ---
 
-*Ultima actualizare: 11 Februarie 2026 — Visual identity refactoring, design tokens, font Prompt*
+*Ultima actualizare: 11 Februarie 2026 — Option D (Deep Slate + Warm Amber), Inter UI font, Prompt logo only*

@@ -517,16 +517,26 @@ stroke-dasharray: 8 4;
 animation: dash 2s linear infinite;
 ```
 
-### 8.3 Principii de Design Reținute (Actualizat Februarie 2026)
+### 8.3 Principii de Design Reținute (Actualizat Februarie 2026 — Option D)
+
+> **Paleta actuală**: Deep Slate (#1E293B) + Warm Amber (#F59E0B) — research-backed B2B palette
 
 1. **Restraint elegant** — puterea din spațiu, nu din decorații
-2. **3-stop gradient** — `#16B6C9 → #4F7CF3 → #7C3AED` (cyan→blue→violet) creează profunzime
-3. **Font Prompt** — Google Font cu geometry clean, ALL CAPS excelent pentru brand
-4. **Titluri: bold dar nu agresive** — `#263244` (neutral-750), nu negru pur
-5. **Consistent radius** — 12px (butoane/inputs), 16px (carduri), 999px (badge/pills)
-6. **Shadow subtil** — `shadow-soft` custom, nu Tailwind shadow-lg standard
-7. **Animate subtil** — hover glow, counter animation, NU bounce agresiv
-8. **Dark ≠ Black** — folosește dark blue/purple (`#0B0F1A`), nu `#000`
+2. **Regula 60-30-10** — 60% neutral (alb), 30% deep slate (structură), 10% amber (CTA/accente)
+3. **Von Restorff Effect** — amber pe fundal rece = imposibil de ignorat (HubSpot: +32-40% click rate)
+4. **Flat CTA > Gradient CTA** — un singur buton amber solid convertește mai bine (Baymard Institute)
+5. **Font dual** — Inter (UI text) + Prompt (doar logo SVG) — anterior era Prompt pe tot site-ul (prea lat pentru body)
+6. **Titluri: bold dar nu agresive** — `#263244` (neutral-750), nu negru pur
+7. **Consistent radius** — 12px (butoane/inputs), 16px (carduri), 999px (badge/pills)
+8. **Shadow subtil** — `shadow-soft` custom, nu Tailwind shadow-lg standard
+9. **Animate subtil** — hover glow, counter animation, NU bounce agresiv
+10. **Dark ≠ Black** — folosește deep slate (`#0F172A`) cu gradient, nu `#000`
+
+**De ce NU mai folosim cyan/purple (paleta anterioară)**:
+- Fragmenta atenția vizitatorului (2 culori vibrante concurente)
+- CTA-urile cu gradient convertesc mai slab decât flat amber
+- Cyan/purple = "tech-bro" vibe, nu se potrivea cu target-ul (owner clinică dentară, 40 ani)
+- Competitorul Agentic.ro folosește dark neon → ne diferențiem prin cald + profesional
 
 ---
 
@@ -549,29 +559,38 @@ animation: dash 2s linear infinite;
 frontend/src/pages/ro/index.astro
 frontend/src/pages/en/index.astro
 
-1. <HeroInteractive />      ✅
-2. <BenefitsStrip />        ✅
-3. <Services />             (existent)
-4. <UseCases />             ✅
-5. <IntegrationHub />       ✅
-6. <ScaleWithConfidence />  ✅ (NOU)
-7. <Benefits />             (existent)
-8. <Process />              (existent)
-9. <FAQ />                  (existent)
-10. <CTA />                 (existent)
+1. <HeroInteractive />      ✅ (VoiceWidget + headline + CTA)
+2. <BenefitsStrip />        ✅ (6 beneficii vizuale)
+3. <Services />             ✅ (3 servicii cu scroll orizontal mobile)
+4. <UseCases />             ✅ (6 industrii auto-identificare)
+5. <IntegrationHub />       ✅ (hub conexiuni stil Stripe)
+6. <ScaleWithConfidence />  ✅ (animație wave + metrici business unificate)
+7. <Process />              ✅ (4 pași cum funcționăm)
+8. <FAQ />                  ✅ (întrebări frecvente)
+9. <CTA />                  ✅ (dark gradient, amber CTA)
 ```
 
-### Stiluri Cheie (Actualizat Februarie 2026)
+### Stiluri Cheie (Actualizat Februarie 2026 — Option D: Deep Slate + Warm Amber)
 
 ```css
-/* Brand gradient 3-stop — NOUA bază vizuală */
-background: linear-gradient(90deg, #16B6C9 0%, #4F7CF3 50%, #7C3AED 100%);
+/* Primary — Deep Slate (autoritate, încredere, sofisticare) */
+--primary-800: #1E293B;  /* Brand deep slate */
+--primary-900: #0F172A;  /* Darkest */
+
+/* Accent — Warm Amber (energie, conversie, acțiune) */
+--accent-500: #F59E0B;   /* Brand amber — CTA principal */
+--accent-600: #D97706;   /* Hover state */
+
+/* CTA Buttons — FLAT amber, NU gradient (Baymard Institute: flat > gradient) */
+background: #F59E0B;
+/* Hover: */ background: #D97706;
 
 /* Heading color — rafinat, nu negru pur */
 color: #263244; /* neutral-750 — custom shade */
 
-/* Font: Prompt (Google Font) — înlocuiește Inter */
-font-family: 'Prompt', sans-serif;
+/* Font: Inter (UI), Prompt (doar logo) */
+font-family: 'Inter', system-ui, -apple-system, sans-serif;
+/* Logo only: */ font-family: 'Prompt', sans-serif;
 
 /* Card standard */
 border-radius: 16px;
@@ -580,8 +599,11 @@ border: 1px solid theme('colors.neutral.200');
 /* Button/Input standard */
 border-radius: 12px;
 
-/* Dark sections */
-background: radial-gradient(ellipse at top, #111827 0%, #0B0F1A 50%, #1E1B4B 100%);
+/* Dark sections — Deep Slate gradient */
+background: radial-gradient(ellipse at top, #1E293B 0%, #0F172A 50%, #020617 100%);
+
+/* Brand gradient (dark, pentru fundaluri, NU pentru CTA) */
+background: linear-gradient(135deg, #1E293B 0%, #334155 50%, #0F172A 100%);
 ```
 
 ---
