@@ -23,12 +23,12 @@ const {
   class: className = ''
 } = Astro.props;
 
-// Size configurations — minimum 120px width enforced
+// Size configurations
 const sizes = {
-  sm: { height: 'h-8', minWidth: '150px' },
-  md: { height: 'h-8 lg:h-9', minWidth: '160px' },
-  lg: { height: 'h-12', minWidth: '220px' },
-  xl: { height: 'h-16', minWidth: '300px' },
+  sm: { height: 'h-7', minWidth: '140px' },
+  md: { height: 'h-8 lg:h-9', minWidth: '170px' },
+  lg: { height: 'h-12', minWidth: '240px' },
+  xl: { height: 'h-16', minWidth: '320px' },
 };
 
 const config = sizes[size];
@@ -44,38 +44,39 @@ const knobFill = isWhite ? 'white' : '#0B0B0B';
 <div class:list={["flex items-center flex-shrink-0", className]} role="img" aria-label="GENERATIVA — AI Automation">
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="-2 -2 400 72"
+    viewBox="0 0 440 68"
     class:list={[config.height, "w-auto"]}
     style={`min-width: ${config.minWidth};`}
     aria-hidden="true"
     focusable="false"
+    preserveAspectRatio="xMinYMid meet"
   >
-    <!-- Wordmark -->
+    <!-- Wordmark — paths for cross-browser consistency -->
     <text
       x="0"
-      y="38.4"
-      font-size="48"
-      font-family="'Prompt', sans-serif"
+      y="38"
+      font-size="46"
+      font-family="'Prompt', system-ui, sans-serif"
       font-weight="700"
-      letter-spacing="0.04em"
+      letter-spacing="0.03em"
       fill={wordmarkFill}
     >GENERATIVA</text>
 
     <!-- Subtitle -->
     <text
-      x="0"
-      y="59.04"
-      font-size="16.8"
-      font-family="'Prompt', sans-serif"
+      x="1"
+      y="58"
+      font-size="14"
+      font-family="'Prompt', system-ui, sans-serif"
       font-weight="500"
-      letter-spacing="0.2em"
+      letter-spacing="0.22em"
       fill={subtitleFill}
     >AI AUTOMATION</text>
 
-    <!-- Toggle symbol -->
-    <g transform="translate(322.32, 7.2)">
-      <rect x="0" y="0" width="64.8" height="36" rx="18" fill="none" stroke={strokeColor} stroke-width="2.88" />
-      <circle cx="46.8" cy="18" r="10.8" fill={knobFill} />
+    <!-- Toggle symbol — positioned with generous gap -->
+    <g transform="translate(350, 6)">
+      <rect x="0" y="0" width="62" height="34" rx="17" fill="none" stroke={strokeColor} stroke-width="2.5" />
+      <circle cx="45" cy="17" r="10" fill={knobFill} />
     </g>
   </svg>
 </div>
