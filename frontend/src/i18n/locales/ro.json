@@ -11,31 +11,31 @@
     "about": "Despre",
     "blog": "Blog",
     "contact": "Contact",
-    "cta": "Programează Demo"
+    "cta": "Începe gratuit"
   },
 
   "services": {
     "title": "Servicii",
     "automation": {
       "title": "Automatizare Procese",
-      "description": "Automatizăm procesele repetitive cu agenți AI inteligenți"
+      "description": "Reduci costurile operaționale, elimini erorile și crești viteza de execuție"
     },
     "conversational": {
       "title": "Agenți Conversaționali",
-      "description": "Chatboți și asistenți virtuali pentru suport și vânzări"
+      "description": "Clienții tăi primesc răspuns în orice moment, pe orice canal, fără echipă suplimentară"
     },
     "integrations": {
       "title": "Integrări AI",
-      "description": "Conectăm AI-ul la sistemele tale existente"
+      "description": "Conectăm asistenții AI direct la CRM, ERP și aplicațiile tale interne"
     }
   },
 
   "hero": {
-    "badge": "Soluții AI pentru business",
-    "title": "Automatizăm procesele afacerii tale cu Agenți AI",
-    "subtitle": "Reduci costurile cu până la 70%, crești productivitatea și scalezi fără să angajezi. Implementare în săptămâni, nu luni.",
-    "cta_primary": "Programează o consultanță gratuită",
-    "cta_secondary": "Vezi cum funcționează",
+    "badge": "Implementare AI în săptămâni",
+    "title": "Implementăm AI care lucrează pentru compania ta",
+    "subtitle": "Eliminăm munca repetitivă din operațiunile zilnice. Echipa ta se concentrează pe creștere, nu pe task-uri manuale. Implementare în săptămâni, rezultate măsurabile din prima lună.",
+    "cta_primary": "Programează o analiză gratuită",
+    "cta_secondary": "Cum funcționează?",
     "trust": {
       "companies": "companii ajutate",
       "roi": "ROI mediu"
@@ -89,12 +89,12 @@
   },
 
   "process": {
-    "title": "Cum lucrăm",
-    "subtitle": "Un proces clar, orientat pe rezultate",
+    "title": "De la analiză la rezultate",
+    "subtitle": "Implementare structurată, fără surprize. Știi exact ce se întâmplă în fiecare etapă.",
     "steps": {
       "discovery": {
-        "title": "Analiză",
-        "description": "Înțelegem procesele tale și identificăm oportunitățile de automatizare"
+        "title": "Analiză gratuită",
+        "description": "Identificăm exact unde pierzi timp și bani. Primești un raport cu recomandări concrete, fără nicio obligație."
       },
       "design": {
         "title": "Design",
@@ -162,14 +162,34 @@
   },
 
   "cta": {
-    "title": "Pregătit să automatizezi?",
-    "subtitle": "Programează o consultanță gratuită de 30 minute. Fără obligații, doar claritate.",
-    "button": "Programează acum"
+    "title": "Câți clienți ai pierdut săptămâna asta?",
+    "subtitle": "Află în 30 de minute ce poți automatiza. Analiză gratuită, fără obligații.",
+    "button": "Începe acum"
   },
 
   "contact": {
     "title": "Contactează-ne",
-    "subtitle": "Hai să discutăm despre cum AI poate ajuta afacerea ta",
+    "subtitle": "Ai o întrebare sau vrei să discuți despre un proiect? Scrie-ne și revenim în maxim 24 de ore.",
+    "titleBySource": {
+      "hero": "Contactează-ne",
+      "automatizare": "Întrebare despre automatizare",
+      "conversational": "Întrebare despre asistenți virtuali",
+      "integrari": "Întrebare despre integrări",
+      "industrii": "Contactează-ne",
+      "nav": "Contactează-ne",
+      "cta": "Contactează-ne",
+      "despre": "Contactează-ne"
+    },
+    "subtitleBySource": {
+      "hero": "Scrie-ne și revenim cu un răspuns în maxim 24 de ore.",
+      "automatizare": "Spune-ne ce vrei să afli și revenim rapid.",
+      "conversational": "Spune-ne ce vrei să afli și revenim rapid.",
+      "integrari": "Spune-ne ce vrei să afli și revenim rapid.",
+      "industrii": "Scrie-ne și revenim cu un răspuns în maxim 24 de ore.",
+      "nav": "Scrie-ne și revenim cu un răspuns în maxim 24 de ore.",
+      "cta": "Scrie-ne și revenim cu un răspuns în maxim 24 de ore.",
+      "despre": "Scrie-ne și revenim cu un răspuns în maxim 24 de ore."
+    },
     "form": {
       "name": "Nume complet",
       "email": "Email",
@@ -242,46 +262,69 @@
 
   "demo": {
     "meta": {
-      "title": "Solicită Demo Personalizat - GENERATIVA | Agenți AI",
-      "description": "Solicită un demo personalizat de agenți AI pentru afacerea ta. Pregătim un agent configurat pentru industria și nevoile tale. Gratuit, fără obligații."
+      "title": "Programează o Analiză Gratuită - GENERATIVA | Agenți AI",
+      "description": "Programează o analiză gratuită și primești un demo personalizat cu agent AI configurat pentru industria ta. 30 de minute, fără obligații."
     },
     "breadcrumb": {
       "home": "Acasa",
-      "demo": "Solicită Demo"
+      "demo": "Analiză gratuită"
+    },
+    "titleBySource": {
+      "hero": "Spune-ne despre afacerea ta",
+      "nav": "Spune-ne despre afacerea ta",
+      "automatizare": "Analiză automatizare procese",
+      "conversational": "Spune-ne despre afacerea ta",
+      "integrari": "Spune-ne despre afacerea ta",
+      "industrii": "Analiză personalizată pe industria ta",
+      "cta": "Spune-ne despre afacerea ta",
+      "despre": "Spune-ne despre afacerea ta"
+    },
+    "subtitleBySource": {
+      "hero": "Pregătim o evaluare gratuită și un demo personalizat pe nevoile tale. 30 de minute, fără obligații.",
+      "nav": "Pregătim o evaluare gratuită și un demo personalizat pe nevoile tale. 30 de minute, fără obligații.",
+      "automatizare": "Identificăm procesele care îți consumă timpul și îți arătăm cum le automatizăm.",
+      "conversational": "Îți arătăm cum ar funcționa un asistent virtual în compania ta.",
+      "integrari": "Discutăm cum conectăm soluțiile la CRM, ERP și sistemele tale existente.",
+      "industrii": "Spune-ne din ce industrie ești și pregătim o analiză cu soluții concrete.",
+      "cta": "Pregătim o evaluare gratuită și un demo personalizat pe nevoile tale. 30 de minute, fără obligații.",
+      "despre": "Hai să vedem dacă te putem ajuta. Fără presiune, doar claritate."
     },
     "form": {
-      "title": "Solicită un demo personalizat",
-      "subtitle": "Completează formularul de mai jos și vom pregăti un agent AI configurat special pentru nevoile afacerii tale. Demo-ul este gratuit și fără obligații.",
+      "title": "Spune-ne despre afacerea ta",
+      "subtitle": "Completează formularul și pregătim o evaluare gratuită cu un demo personalizat pentru industria ta. 30 de minute, fără obligații.",
       "name": "Nume complet",
       "email": "Email business",
-      "emailHelper": "Vom trimite confirmarea și detaliile demo-ului pe acest email",
+      "emailHelper": "Primești confirmarea și detaliile pe acest email",
       "phone": "Telefon",
-      "phoneHelper": "Te vom contacta pentru a programa demo-ul",
-      "company": "Companie / Organizație",
-      "industry": "Domeniu de activitate",
-      "industryPlaceholder": "Selectează domeniul",
+      "phoneHelper": "Te contactăm pentru a stabili data demo-ului",
+      "company": "Companie",
+      "industry": "Industrie",
+      "industryPlaceholder": "Selectează industria",
       "industryOptions": {
-        "health": "Sănătate / Clinici",
-        "realestate": "Imobiliare",
-        "professional": "Servicii profesionale",
+        "dental": "Clinică dentară",
+        "medical": "Cabinet medical",
+        "beauty": "Salon beauty / SPA",
+        "auto": "Service auto",
+        "horeca": "HoReCa (restaurant, hotel)",
         "retail": "Retail / eCommerce",
-        "education": "Educație",
-        "other": "Alt domeniu"
+        "network": "Rețea multi-locații",
+        "other": "Altă industrie"
       },
       "problem": "Ce problemă vrei să rezolvi?",
-      "problemPlaceholder": "Selectează problema principală",
+      "problemPlaceholder": "Selectează provocarea principală",
       "problemOptions": {
-        "calls": "Preluare automată apeluri",
-        "scheduling": "Programări și confirmări",
-        "support": "Suport clienți",
-        "leads": "Calificare lead-uri",
+        "calls": "Apeluri pierdute / nepreluate",
+        "scheduling": "Programări și confirmări automate",
+        "support": "Suport clienți 24/7",
+        "leads": "Calificare și captare lead-uri",
+        "integration": "Integrare AI cu sisteme existente",
         "other": "Altă provocare"
       },
       "details": "Detalii suplimentare (opțional)",
       "detailsPlaceholder": "Ex: Avem 50+ apeluri/zi și pierdem ~30% după programul de lucru...",
-      "gdpr": "Sunt de acord cu prelucrarea datelor personale conform <a href=\"/ro/politica-confidentialitate/\" target=\"_blank\" class=\"text-primary-600 hover:text-primary-700 underline\">Politicii de Confidențialitate</a>. Datele vor fi folosite exclusiv pentru pregătirea demo-ului.",
-      "submit": "Solicită demo-ul gratuit",
-      "success": "Mulțumim! Am primit cererea ta. Un consultant GENERATIVA te va contacta în maxim 24 de ore pentru a programa demo-ul personalizat.",
+      "gdpr": "Sunt de acord cu prelucrarea datelor personale conform <a href=\"/ro/politica-confidentialitate/\" target=\"_blank\" class=\"text-primary-600 hover:text-primary-700 underline\">Politicii de Confidențialitate</a>.",
+      "submit": "Vreau evaluarea mea gratuită",
+      "success": "Mulțumim! Am primit cererea ta. Te contactăm în maxim 24 de ore pentru a programa analiza și demo-ul personalizat.",
       "error": "A apărut o eroare. Te rugăm să încerci din nou.",
       "validation": {
         "nameRequired": "Te rugăm să introduci numele complet",
@@ -292,14 +335,14 @@
         "phoneInvalid": "Te rugăm să introduci un număr de telefon valid (ex: +40 712 345 678)",
         "companyRequired": "Te rugăm să introduci numele companiei",
         "companyMin": "Numele companiei trebuie să aibă cel puțin 2 caractere",
-        "industryRequired": "Te rugăm să selectezi domeniul de activitate",
-        "problemRequired": "Te rugăm să selectezi problema principală",
+        "industryRequired": "Te rugăm să selectezi industria",
+        "problemRequired": "Te rugăm să selectezi provocarea principală",
         "gdprRequired": "Trebuie să fii de acord cu prelucrarea datelor personale"
       },
       "trust": {
         "free": "100% gratuit, fără obligații",
-        "time": "Demo personalizat de 20-30 min",
-        "response": "Răspundem în maxim 24 de ore"
+        "time": "Analiză + demo personalizat 30 min",
+        "response": "Te contactăm în maxim 24h"
       }
     }
   },
@@ -382,7 +425,7 @@
     "cta": {
       "title": "Hai să vedem dacă te putem ajuta",
       "subtitle": "O conversație de 15 minute ne arată dacă suntem potriviți. Fără pitch-uri de vânzare, fără presiune - doar claritate.",
-      "button": "Programează o discuție"
+      "button": "Evaluare gratuită"
     }
   },
 
@@ -404,7 +447,7 @@
       "eyebrow": "Automatizare Procese",
       "title": "Automatizare Procese cu AI",
       "subtitle": "Eliminăm munca repetitivă din afacerea ta. Agenții noștri AI preiau sarcinile manuale, reduc erorile și eliberează echipa ta pentru ce contează cu adevărat. Implementare în săptămâni, nu luni, cu rezultate măsurabile din prima lună.",
-      "cta": "Solicită o consultanță gratuită"
+      "cta": "Evaluare gratuită"
     },
     "processTypes": {
       "title": "Ce procese de business pot fi automatizate cu AI?",
@@ -535,7 +578,7 @@
     "cta": {
       "title": "Hai să identificăm procesele care îți consumă timpul",
       "subtitle": "Programează o consultanță gratuită. În 30 de minute, îți arătăm exact unde pierzi timp și cum AI-ul poate rezolva asta.",
-      "button": "Solicită o consultanță gratuită"
+      "button": "Evaluare gratuită"
     }
   },
 
@@ -557,7 +600,7 @@
       "eyebrow": "Agenți Conversaționali AI",
       "title": "Asistenți Virtuali Conversaționali AI",
       "subtitle": "Construim, integrăm și operăm asistenți virtuali care preiau solicitările clienților tăi și le duc până la rezolvare. Răspund la telefon, WhatsApp și email — 24/7, în limba română, cu voce naturală și acțiuni concrete în sistemele tale.",
-      "cta": "Solicită un demo gratuit"
+      "cta": "Evaluare gratuită"
     },
     "capabilities": {
       "title": "Ce face un agent conversational AI pentru afacerea ta?",
@@ -735,7 +778,7 @@
     "cta": {
       "title": "Hai să-ți arătăm cum sună AI-ul tău",
       "subtitle": "Solicită un demo gratuit personalizat. În 15 minute, auzi cum sună agentul AI antrenat pentru afacerea ta — cu scenarii reale din industria ta.",
-      "button": "Solicită un demo gratuit"
+      "button": "Evaluare gratuită"
     }
   },
   "serviceIntegrations": {
@@ -756,7 +799,7 @@
       "eyebrow": "Conectare inteligentă",
       "title": "Integrări AI care conectează automatizarea cu sistemele companiei",
       "subtitle": "GENERATIVA realizează integrări AI care permit asistenților virtuali și automatizărilor să opereze direct în sistemele existente ale organizației. Inteligența artificială este integrată în aplicațiile interne, astfel încât acțiunile să fie executate automat, controlat și în deplină coerență cu procesele operaționale.",
-      "cta": "Solicită o consultanță gratuită"
+      "cta": "Evaluare gratuită"
     },
     "systems": {
       "title": "Ce sisteme și aplicații se pot conecta cu un agent AI?",
@@ -932,7 +975,7 @@
     "cta": {
       "title": "Hai să conectăm AI-ul la sistemele tale",
       "subtitle": "Solicită un audit tehnic gratuit. Analizăm sistemele tale existente și îți arătăm exact cum le conectăm cu inteligența artificială — fără obligații.",
-      "button": "Solicită audit tehnic gratuit"
+      "button": "Evaluare gratuită"
     }
   },
 

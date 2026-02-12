@@ -11,31 +11,31 @@
     "about": "About",
     "blog": "Blog",
     "contact": "Contact",
-    "cta": "Book a Demo"
+    "cta": "Start free"
   },
 
   "services": {
     "title": "Services",
     "automation": {
       "title": "Process Automation",
-      "description": "We automate repetitive processes with intelligent AI agents"
+      "description": "Reduce operational costs, eliminate errors and increase execution speed"
     },
     "conversational": {
       "title": "Conversational Agents",
-      "description": "Chatbots and virtual assistants for support and sales"
+      "description": "Your customers get answers anytime, on any channel, without additional staff"
     },
     "integrations": {
       "title": "AI Integrations",
-      "description": "We connect AI to your existing systems"
+      "description": "We connect AI assistants directly to your CRM, ERP and internal applications"
     }
   },
 
   "hero": {
-    "badge": "AI solutions for business",
-    "title": "We automate your business processes with AI Agents",
-    "subtitle": "Reduce costs by up to 70%, increase productivity and scale without hiring. Implementation in weeks, not months.",
-    "cta_primary": "Book a free consultation",
-    "cta_secondary": "See how it works",
+    "badge": "AI implementation in weeks",
+    "title": "We implement AI that works for your company",
+    "subtitle": "We eliminate repetitive work from daily operations. Your team focuses on growth, not manual tasks. Implementation in weeks, measurable results from the first month.",
+    "cta_primary": "Schedule a free analysis",
+    "cta_secondary": "How does it work?",
     "trust": {
       "companies": "companies helped",
       "roi": "average ROI"
@@ -89,12 +89,12 @@
   },
 
   "process": {
-    "title": "How we work",
-    "subtitle": "A clear, results-oriented process",
+    "title": "From analysis to results",
+    "subtitle": "Structured implementation, no surprises. You know exactly what happens at every stage.",
     "steps": {
       "discovery": {
-        "title": "Analysis",
-        "description": "We understand your processes and identify automation opportunities"
+        "title": "Free analysis",
+        "description": "We identify exactly where you're losing time and money. You receive a report with concrete recommendations, with no obligations."
       },
       "design": {
         "title": "Design",
@@ -162,14 +162,34 @@
   },
 
   "cta": {
-    "title": "Ready to automate?",
-    "subtitle": "Book a free 30-minute consultation. No obligations, just clarity.",
-    "button": "Book now"
+    "title": "How many customers did you lose this week?",
+    "subtitle": "Find out in 30 minutes what you can automate. Free analysis, no obligations.",
+    "button": "Start now"
   },
 
   "contact": {
     "title": "Contact us",
-    "subtitle": "Let's discuss how AI can help your business",
+    "subtitle": "Have a question or want to discuss a project? Write to us and we'll get back within 24 hours.",
+    "titleBySource": {
+      "hero": "Contact us",
+      "automatizare": "Question about automation",
+      "conversational": "Question about virtual assistants",
+      "integrari": "Question about integrations",
+      "industrii": "Contact us",
+      "nav": "Contact us",
+      "cta": "Contact us",
+      "despre": "Contact us"
+    },
+    "subtitleBySource": {
+      "hero": "Write to us and we'll get back within 24 hours.",
+      "automatizare": "Tell us what you'd like to know and we'll get back quickly.",
+      "conversational": "Tell us what you'd like to know and we'll get back quickly.",
+      "integrari": "Tell us what you'd like to know and we'll get back quickly.",
+      "industrii": "Write to us and we'll get back within 24 hours.",
+      "nav": "Write to us and we'll get back within 24 hours.",
+      "cta": "Write to us and we'll get back within 24 hours.",
+      "despre": "Write to us and we'll get back within 24 hours."
+    },
     "form": {
       "name": "Full name",
       "email": "Email",
@@ -242,46 +262,69 @@
 
   "demo": {
     "meta": {
-      "title": "Request Personalized Demo - GENERATIVA | AI Agents",
-      "description": "Request a personalized AI agent demo for your business. We'll prepare an agent configured for your industry and needs. Free, no obligations."
+      "title": "Schedule a Free Analysis - GENERATIVA | AI Agents",
+      "description": "Schedule a free analysis and get a personalized demo with an AI agent configured for your industry. 30 minutes, no obligations."
     },
     "breadcrumb": {
       "home": "Home",
-      "demo": "Request Demo"
+      "demo": "Free analysis"
+    },
+    "titleBySource": {
+      "hero": "Tell us about your business",
+      "nav": "Tell us about your business",
+      "automatizare": "Process automation analysis",
+      "conversational": "Tell us about your business",
+      "integrari": "Tell us about your business",
+      "industrii": "Personalized analysis for your industry",
+      "cta": "Tell us about your business",
+      "despre": "Tell us about your business"
+    },
+    "subtitleBySource": {
+      "hero": "We'll prepare a free evaluation and a personalized demo for your needs. 30 minutes, no obligations.",
+      "nav": "We'll prepare a free evaluation and a personalized demo for your needs. 30 minutes, no obligations.",
+      "automatizare": "We'll identify the processes consuming your time and show you how we automate them.",
+      "conversational": "We'll show you how a virtual assistant would work in your company.",
+      "integrari": "Let's discuss how we connect solutions to your CRM, ERP and existing systems.",
+      "industrii": "Tell us your industry and we'll prepare an analysis with concrete solutions.",
+      "cta": "We'll prepare a free evaluation and a personalized demo for your needs. 30 minutes, no obligations.",
+      "despre": "Let's see if we can help. No pressure, just clarity."
     },
     "form": {
-      "title": "Request a personalized demo",
-      "subtitle": "Fill out the form below and we'll prepare an AI agent configured specifically for your business needs. The demo is free and with no obligations.",
+      "title": "Tell us about your business",
+      "subtitle": "Fill out the form and we'll prepare a free evaluation with a personalized demo for your industry. 30 minutes, no obligations.",
       "name": "Full name",
       "email": "Business email",
-      "emailHelper": "We'll send the confirmation and demo details to this email",
+      "emailHelper": "You'll receive the confirmation and details at this email",
       "phone": "Phone",
       "phoneHelper": "We'll contact you to schedule the demo",
-      "company": "Company / Organization",
+      "company": "Company",
       "industry": "Industry",
       "industryPlaceholder": "Select your industry",
       "industryOptions": {
-        "health": "Healthcare / Clinics",
-        "realestate": "Real Estate",
-        "professional": "Professional Services",
+        "dental": "Dental clinic",
+        "medical": "Medical practice",
+        "beauty": "Beauty salon / SPA",
+        "auto": "Auto service",
+        "horeca": "HoReCa (restaurant, hotel)",
         "retail": "Retail / eCommerce",
-        "education": "Education",
+        "network": "Multi-location network",
         "other": "Other industry"
       },
       "problem": "What problem do you want to solve?",
       "problemPlaceholder": "Select the main challenge",
       "problemOptions": {
-        "calls": "Automatic call handling",
-        "scheduling": "Scheduling and confirmations",
-        "support": "Customer support",
-        "leads": "Lead qualification",
+        "calls": "Missed / unanswered calls",
+        "scheduling": "Automatic scheduling and confirmations",
+        "support": "24/7 customer support",
+        "leads": "Lead qualification and capture",
+        "integration": "AI integration with existing systems",
         "other": "Other challenge"
       },
       "details": "Additional details (optional)",
       "detailsPlaceholder": "E.g.: We get 50+ calls/day and lose ~30% after business hours...",
-      "gdpr": "I agree to the processing of personal data according to the <a href=\"/en/privacy-policy/\" target=\"_blank\" class=\"text-primary-600 hover:text-primary-700 underline\">Privacy Policy</a>. Data will be used exclusively for preparing the demo.",
-      "submit": "Request free demo",
-      "success": "Thank you! We've received your request. A GENERATIVA consultant will contact you within 24 hours to schedule your personalized demo.",
+      "gdpr": "I agree to the processing of personal data according to the <a href=\"/en/privacy-policy/\" target=\"_blank\" class=\"text-primary-600 hover:text-primary-700 underline\">Privacy Policy</a>.",
+      "submit": "I want my free evaluation",
+      "success": "Thank you! We've received your request. We'll contact you within 24 hours to schedule your analysis and personalized demo.",
       "error": "An error occurred. Please try again.",
       "validation": {
         "nameRequired": "Please enter your full name",
@@ -298,8 +341,8 @@
       },
       "trust": {
         "free": "100% free, no obligations",
-        "time": "Personalized 20-30 min demo",
-        "response": "We respond within 24 hours"
+        "time": "Analysis + personalized demo 30 min",
+        "response": "We contact you within 24h"
       }
     }
   },
@@ -382,7 +425,7 @@
     "cta": {
       "title": "Let's see if we can help",
       "subtitle": "A 15-minute conversation shows us if we're a good fit. No sales pitches, no pressure - just clarity.",
-      "button": "Schedule a call"
+      "button": "Free evaluation"
     }
   },
 
@@ -404,7 +447,7 @@
       "eyebrow": "Process Automation",
       "title": "AI Process Automation",
       "subtitle": "We eliminate repetitive work from your business. Our AI agents take over manual tasks, reduce errors and free your team for what truly matters. Implementation in weeks, not months, with measurable results from the first month.",
-      "cta": "Request a free consultation"
+      "cta": "Free evaluation"
     },
     "processTypes": {
       "title": "What business processes can be automated with AI?",
@@ -535,7 +578,7 @@
     "cta": {
       "title": "Let's identify the processes draining your time",
       "subtitle": "Schedule a free consultation. In 30 minutes, we'll show you exactly where you're losing time and how AI can solve it.",
-      "button": "Request a free consultation"
+      "button": "Free evaluation"
     }
   },
 
@@ -557,7 +600,7 @@
       "eyebrow": "Conversational AI Agents",
       "title": "Conversational AI Virtual Assistants",
       "subtitle": "We build, integrate and operate virtual assistants that handle your customers' requests through to resolution. They answer phone calls, WhatsApp and email — 24/7, in Romanian, with natural voice and concrete actions in your systems.",
-      "cta": "Request a free demo"
+      "cta": "Free evaluation"
     },
     "capabilities": {
       "title": "What can a conversational AI agent do for your business?",
@@ -735,7 +778,7 @@
     "cta": {
       "title": "Let us show you how your AI sounds",
       "subtitle": "Request a free personalized demo. In 15 minutes, hear how the AI agent trained for your business sounds — with real scenarios from your industry.",
-      "button": "Request a free demo"
+      "button": "Free evaluation"
     }
   },
   "serviceIntegrations": {
@@ -756,7 +799,7 @@
       "eyebrow": "Intelligent connectivity",
       "title": "AI integrations that connect automation with your company's systems",
       "subtitle": "GENERATIVA builds AI integrations that allow virtual assistants and automations to operate directly within your organization's existing systems. Artificial intelligence is embedded into internal applications so actions are executed automatically, with control and in full alignment with operational processes.",
-      "cta": "Request a free consultation"
+      "cta": "Free evaluation"
     },
     "systems": {
       "title": "What systems and applications can connect with an AI agent?",
@@ -932,7 +975,7 @@
     "cta": {
       "title": "Let's connect AI to your systems",
       "subtitle": "Request a free technical audit. We analyze your existing systems and show you exactly how we connect them with artificial intelligence — no obligations.",
-      "button": "Request free technical audit"
+      "button": "Free evaluation"
     }
   },
 

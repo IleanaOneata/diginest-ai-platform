@@ -27,11 +27,11 @@ const t = getTranslations(locale);
 // Texte specifice pentru Hero interactiv
 const heroTexts = {
   ro: {
-    eyebrow: 'Vezi AI-ul în acțiune',
-    headline: 'Agenți AI care răspund clienților tăi',
-    headlineAccent: '24/7',
-    subheadline: 'În timp ce tu citești asta, demo-ul nostru arată cum un agent AI rezolvă o cerere de suport în 30 de secunde. Fără pauze, fără erori, fără ore suplimentare.',
-    cta_primary: 'Vreau și eu așa ceva',
+    eyebrow: 'Rezultate din prima lună',
+    headline: 'Niciun client pierdut. Niciun apel ratat.',
+    headlineAccent: '',
+    subheadline: 'Asistenții virtuali răspund clienților tăi la telefon, WhatsApp și email — 24/7, fără pauze. Echipa ta se concentrează pe creștere, nu pe apeluri repetitive.',
+    cta_primary: 'Vezi ce pierzi acum',
     cta_secondary: 'Cum funcționează?',
     stats: [
       { value: '0.8', unit: 's', label: 'timp răspuns', icon: 'bolt' },
@@ -40,11 +40,11 @@ const heroTexts = {
     ],
   },
   en: {
-    eyebrow: 'See AI in action',
-    headline: 'AI Agents that respond to your customers',
-    headlineAccent: '24/7',
-    subheadline: 'While you\'re reading this, our demo shows how an AI agent resolves a support request in 30 seconds. No breaks, no errors, no overtime.',
-    cta_primary: 'I want this too',
+    eyebrow: 'Results from month one',
+    headline: 'No lost customer. No missed call.',
+    headlineAccent: '',
+    subheadline: 'Virtual assistants answer your customers on phone, WhatsApp and email — 24/7, no breaks. Your team focuses on growth, not repetitive calls.',
+    cta_primary: 'See what you\'re losing',
     cta_secondary: 'How does it work?',
     stats: [
       { value: '0.8', unit: 's', label: 'response time', icon: 'bolt' },
@@ -79,9 +79,11 @@ const hero = heroTexts[locale] || heroTexts.ro;
         <!-- Headline -->
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-750 mb-6 animate-slide-up leading-tight">
           {hero.headline}
-          <span style="color: #F59E0B; -webkit-text-fill-color: #F59E0B;">
-            {' '}{hero.headlineAccent}
-          </span>
+          {hero.headlineAccent && (
+            <span style="color: #F59E0B; -webkit-text-fill-color: #F59E0B;">
+              {' '}{hero.headlineAccent}
+            </span>
+          )}
         </h1>
 
         <!-- Subheadline -->
@@ -92,7 +94,7 @@ const hero = heroTexts[locale] || heroTexts.ro;
         <!-- CTAs -->
         <div class="flex flex-col sm:flex-row items-start gap-4 mb-10 animate-slide-up" style="animation-delay: 200ms;">
           <Button
-            href={buildLocalePath('/demo/', locale)}
+            href={buildLocalePath('/demo/', locale) + '?source=hero'}
             variant="gradient"
             size="lg"
           >

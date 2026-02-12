@@ -16,6 +16,13 @@ interface Props {
 const { locale } = Astro.props;
 const t = getTranslations(locale);
 const v = t.contact.form.validation;
+
+// Dynamic headline data for ?source= parameter
+const titleBySource = t.contact.titleBySource || {};
+const subtitleBySource = t.contact.subtitleBySource || {};
+const trustText = locale === 'ro'
+  ? 'Răspundem în maxim 24 de ore.'
+  : 'We respond within 24 hours.';
 ---
 
 <section id="contact-form" class="section bg-neutral-50">
@@ -23,11 +30,17 @@ const v = t.contact.form.validation;
     <div class="grid lg:grid-cols-2 gap-12 items-start">
       <!-- Left: Info -->
       <div>
-        <h2 class="text-heading-lg md:text-display text-neutral-750 mb-4">
+        <h2 id="contact-title" class="text-heading-lg md:text-display text-neutral-750 mb-4">
           {t.contact.title}
         </h2>
-        <p class="text-body-lg text-neutral-600 mb-8">
+        <p id="contact-subtitle" class="text-body-lg text-neutral-600 mb-4">
           {t.contact.subtitle}
+        </p>
+        <p class="text-sm text-neutral-500 mb-8 flex items-center gap-2">
+          <svg class="w-4 h-4 text-accent-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          {trustText}
         </p>
 
         <!-- Contact info -->
@@ -229,6 +242,31 @@ const v = t.contact.form.validation;
     box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
   }
 </style>
+
+<script define:vars={{ titleBySource, subtitleBySource }}>
+  // Dynamic headline based on ?source= URL parameter
+  function initDynamicHeadline() {
+    var params = new URLSearchParams(window.location.search);
+    var source = params.get('source');
+    if (!source) return;
+
+    var titles = titleBySource;
+    var subtitles = subtitleBySource;
+
+    var titleEl = document.getElementById('contact-title');
+    var subtitleEl = document.getElementById('contact-subtitle');
+
+    if (titleEl && titles[source]) {
+      titleEl.textContent = titles[source];
+    }
+    if (subtitleEl && subtitles[source]) {
+      subtitleEl.textContent = subtitles[source];
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initDynamicHeadline);
+  document.addEventListener('astro:page-load', initDynamicHeadline);
+</script>
 
 <script define:vars={{ validationMessages: v }}>
   // Contact form handling with custom validation

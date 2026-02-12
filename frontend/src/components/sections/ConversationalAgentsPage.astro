@@ -298,10 +298,10 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
             {item.title}
           </h3>
           <p class="text-sm text-neutral-500 mb-2 leading-relaxed">
-            <span class="font-medium text-neutral-700">Problema:</span> {item.problem}
+            <span class="font-medium text-neutral-700">{locale === 'ro' ? 'Problema:' : 'Problem:'}</span> {item.problem}
           </p>
           <p class="text-sm text-neutral-600 leading-relaxed">
-            <span class="font-medium text-primary-600">Soluția:</span> {item.solution}
+            <span class="font-medium text-primary-600">{locale === 'ro' ? 'Soluția:' : 'Solution:'}</span> {item.solution}
           </p>
         </div>
       ))}

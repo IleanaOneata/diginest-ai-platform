@@ -22,8 +22,10 @@ const services = [
     description: t.services.automation.description,
     href: buildLocalePath(locale === 'ro' ? '/servicii/automatizare-procese/' : '/services/process-automation/', locale),
     features: locale === 'ro'
-      ? ['Automatizare workflow-uri', 'Procesare documente', 'Integrare sisteme']
-      : ['Workflow automation', 'Document processing', 'System integration'],
+      ? ['Reducere costuri operaționale', 'Eliminare erori umane', 'Implementare în săptămâni']
+      : ['Operational cost reduction', 'Eliminate human errors', 'Implementation in weeks'],
+    ctaLabel: locale === 'ro' ? 'Evaluare gratuită' : 'Free evaluation',
+    ctaHref: buildLocalePath('/demo/', locale) + '?source=automatizare',
   },
   {
     icon: 'chat',
@@ -31,8 +33,10 @@ const services = [
     description: t.services.conversational.description,
     href: buildLocalePath(locale === 'ro' ? '/servicii/agenti-conversationali/' : '/services/conversational-agents/', locale),
     features: locale === 'ro'
-      ? ['Chatboți inteligenți', 'Asistenți virtuali', 'Suport 24/7']
-      : ['Intelligent chatbots', 'Virtual assistants', '24/7 support'],
+      ? ['Răspuns 24/7 pe orice canal', 'Voce naturală în limba română', 'Zero apeluri pierdute']
+      : ['24/7 response on any channel', 'Natural voice in your language', 'Zero missed calls'],
+    ctaLabel: locale === 'ro' ? 'Evaluare gratuită' : 'Free evaluation',
+    ctaHref: buildLocalePath('/demo/', locale) + '?source=conversational',
   },
   {
     icon: 'integration',
@@ -40,8 +44,10 @@ const services = [
     description: t.services.integrations.description,
     href: buildLocalePath(locale === 'ro' ? '/servicii/integrari-ai/' : '/services/ai-integrations/', locale),
     features: locale === 'ro'
-      ? ['Conectare CRM/ERP', 'API-uri custom', 'Migrare date']
-      : ['CRM/ERP connection', 'Custom APIs', 'Data migration'],
+      ? ['Conectare CRM, ERP, Calendar', 'Acțiuni automate în sisteme', 'Date corecte, fără copy-paste']
+      : ['CRM, ERP, Calendar connection', 'Automated system actions', 'Accurate data, no copy-paste'],
+    ctaLabel: locale === 'ro' ? 'Evaluare gratuită' : 'Free evaluation',
+    ctaHref: buildLocalePath('/demo/', locale) + '?source=integrari',
   },
 ];
 
@@ -67,8 +73,8 @@ const icons = {
       </h2>
       <p class="text-body-lg text-neutral-600">
         {locale === 'ro'
-          ? 'Soluții AI personalizate pentru nevoile specifice ale afacerii tale'
-          : 'Custom AI solutions for your business specific needs'}
+          ? 'Eliminăm munca repetitivă, reducem costurile și creștem eficiența operațională'
+          : 'We eliminate repetitive work, reduce costs and increase operational efficiency'}
       </p>
     </div>
 
@@ -118,13 +124,23 @@ const icons = {
             ))}
           </ul>
 
-          <!-- Link -->
+          <!-- Contextual CTA -->
+          <a
+            href={service.ctaHref}
+            class="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5"
+            style="background: #F59E0B; border-radius: 12px;"
+          >
+            {service.ctaLabel}
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
           <a
             href={service.href}
-            class="inline-flex items-center gap-2 text-primary-600 font-medium hover:gap-3 transition-all"
+            class="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-primary-600 font-medium transition-colors mt-2"
           >
-            {locale === 'ro' ? 'Află mai multe' : 'Learn more'}
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {locale === 'ro' ? 'Detalii serviciu' : 'Service details'}
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>

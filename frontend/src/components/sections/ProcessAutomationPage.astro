@@ -28,7 +28,7 @@ const { locale } = Astro.props;
 const t = getTranslations(locale);
 const sa = t.serviceAutomation;
 
-const contactPath = buildLocalePath('/contact/', locale);
+const demoPath = buildLocalePath('/demo/', locale);
 const homePath = buildLocalePath('/', locale);
 const servicesPath = buildLocalePath('/', locale) + '#services';
 ---
@@ -90,7 +90,7 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
 
       <!-- CTA -->
       <Button
-        href={contactPath}
+        href={demoPath}
         variant="gradient"
         size="lg"
       >
@@ -359,7 +359,7 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
         {sa.cta.subtitle}
       </p>
       <Button
-        href={contactPath}
+        href={demoPath}
         variant="gradient"
         size="lg"
       >

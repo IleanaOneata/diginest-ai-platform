@@ -30,7 +30,7 @@ const isEn = locale === 'en';
 
 <div
   class="voice-widget-container flex flex-col items-center gap-5 w-[17rem] md:w-[20rem] lg:w-[22rem]"
-  data-cta={isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+  data-cta={isEn ? 'Talk to your assistant' : 'Vorbește cu asistentul tău'}
   data-cta-active={isEn ? 'End call' : 'Oprește apelul'}
   data-connecting={isEn ? 'Connecting...' : 'Se conectează...'}
   data-connected={isEn ? 'Connected — speak now' : 'Conectat — vorbește acum'}
@@ -38,7 +38,7 @@ const isEn = locale === 'en';
   data-processing={isEn ? 'Processing...' : 'Procesează...'}
   data-ended={isEn ? 'Call ended' : 'Apel încheiat'}
   data-error={isEn ? 'Connection error' : 'Eroare de conexiune'}
-  data-hint-idle={isEn ? 'Live demo · Click to start' : 'Live demo · Click pentru a începe'}
+  data-hint-idle={isEn ? 'Live demo · Listen how it sounds' : 'Demo live · Ascultă cum sună'}
 >
   <!-- Animated Ring Container -->
   <div class="voice-rings-wrapper relative flex items-center justify-center w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 overflow-visible">
@@ -64,7 +64,7 @@ const isEn = locale === 'en';
              flex items-center justify-center
              cursor-pointer
              focus:outline-none focus:ring-4 focus:ring-accent-400/50"
-      aria-label={isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+      aria-label={isEn ? 'Talk to your assistant' : 'Vorbește cu asistentul tău'}
     >
       <!-- Mic Icon (idle) -->
       <svg
@@ -99,13 +99,13 @@ const isEn = locale === 'en';
       id="voice-cta-text"
       class="text-lg md:text-xl lg:text-2xl font-bold text-neutral-750 transition-colors"
     >
-      {isEn ? 'Talk to the AI agent' : 'Vorbește cu agentul AI'}
+      {isEn ? 'Talk to your assistant' : 'Vorbește cu asistentul tău'}
     </h3>
     <p
       id="voice-status-text"
       class="text-sm md:text-base text-neutral-500 min-h-[1.25rem]"
     >
-      {isEn ? 'Live demo · Click to start' : 'Live demo · Click pentru a începe'}
+      {isEn ? 'Live demo · Listen how it sounds' : 'Demo live · Ascultă cum sună'}
     </p>
   </div>
 
@@ -116,7 +116,7 @@ const isEn = locale === 'en';
       <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-600"></span>
     </span>
     <span class="text-xs md:text-sm font-medium text-accent-700">
-      {isEn ? 'Try the live voice demo' : 'Încearcă demo-ul vocal live'}
+      {isEn ? 'Try the live voice demo' : 'Încearcă demo-ul vocal'}
     </span>
   </div>
 </div>
