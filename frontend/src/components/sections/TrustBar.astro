@@ -1,12 +1,12 @@
 ---
 /**
- * TrustBar Section Component — v4
+ * TrustBar Section Component — v5
  *
  * Technology partner logos (always colored, larger) + security trust badges.
  * "Borrowed credibility" — visitors trust platforms they already know.
  * Icons use permanent brand colors for instant recognition.
  *
- * Platforms: VAPI, ElevenLabs, Retell, WhatsApp, Google Calendar, Twilio, Make.com, n8n, FastAPI
+ * Platforms: VAPI, ElevenLabs, Retell, WhatsApp, Google Calendar, Twilio, Make.com, n8n, FastAPI, Modal, Trigger.dev
  */
 
 interface Props {
@@ -48,12 +48,17 @@ const isRo = locale === 'ro';
         <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">ElevenLabs</span>
       </div>
 
-      <!-- Retell -->
+      <!-- Retell (official logo — 8 dots pattern) -->
       <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="3" width="18" height="18" rx="4" fill="#004CC6"/>
-          <path d="M8.5 8h3.5a2.5 2.5 0 0 1 0 5H10v3H8.5V8z" fill="white"/>
-          <path d="M12.5 13l3 3" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <svg class="w-7 h-7 md:w-8 md:h-8" viewBox="0 0 20 20" fill="#0E121B">
+          <circle cx="7.13" cy="18.13" r="1.82"/>
+          <circle cx="12.32" cy="18.13" r="1.82"/>
+          <circle cx="1.82" cy="12.67" r="1.82"/>
+          <circle cx="17.63" cy="12.67" r="1.82"/>
+          <circle cx="1.82" cy="7.33" r="1.82"/>
+          <circle cx="17.63" cy="7.33" r="1.82"/>
+          <circle cx="7.13" cy="1.87" r="1.82"/>
+          <circle cx="12.32" cy="1.87" r="1.82"/>
         </svg>
         <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Retell</span>
       </div>
@@ -112,6 +117,24 @@ const isRo = locale === 'ro';
           <path d="M12 0C5.375 0 0 5.375 0 12c0 6.627 5.375 12 12 12 6.626 0 12-5.373 12-12 0-6.625-5.373-12-12-12zm-.624 21.62v-7.528H7.6L13.203 2.38v7.528h3.776L11.376 21.62z"/>
         </svg>
         <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">FastAPI</span>
+      </div>
+
+      <!-- Modal (official logo — overlapping green diamonds) -->
+      <div class="flex items-center gap-2.5 group">
+        <svg class="w-7 h-7 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none">
+          <path d="M4 12L10 4l6 8-6 8z" fill="#62DE61"/>
+          <path d="M10 12l6-8 6 8-6 8z" fill="#09AF58"/>
+        </svg>
+        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Modal</span>
+      </div>
+
+      <!-- Trigger.dev (official logo — green upward triangle) -->
+      <div class="flex items-center gap-2.5 group">
+        <svg class="w-7 h-7 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3L22 21H2L12 3z" fill="#4ADE80"/>
+          <path d="M12 7L18 19H6L12 7z" fill="#22C55E"/>
+        </svg>
+        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Trigger.dev</span>
       </div>
     </div>
 
