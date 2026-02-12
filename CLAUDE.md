@@ -67,16 +67,27 @@
 52. ✅ **Font System Update** - Inter pentru UI (body, headings, buttons), Prompt doar pe logo SVG. Sistem dual: `fontFamily.sans: Inter`, `fontFamily.brand: Prompt`
 53. ✅ **Favicon Redesign** - Toggle switch din logo (amber pe deep slate). SVG + PNG (32, 16, apple-touch 180). SVG favicon prioritar în BaseLayout
 54. ✅ **Backend Email Color Sync** - EmailService.java: cyan (#06b6d4) → amber (#D97706), teal backgrounds → amber backgrounds. Consistență brand în email templates
+55. ✅ **Conversion Optimization (CRO)** - Copy outcome-focused pe tot site-ul bazat pe psihologie: loss aversion ("Niciun client pierdut. Niciun apel ratat."), first-person CTAs ("Vreau evaluarea mea gratuită" +90% CTR), endowment effect ("asistentul tău"), CTA-uri unificate → `/demo/` + "Evaluare gratuită". Vezi `docs/CONVERSION-PSYCHOLOGY.md`
+56. ✅ **Social Proof fără Testimoniale** - TrustBar (logos parteneri tech + badge-uri trust), GDPR/SSL/EU security badges pe formulare, pilot gratuit 14 zile pe CTA. Vezi `docs/SOCIAL-PROOF-STRATEGY.md`
+57. ✅ **TrustBar Component** - Strip nou pe homepage cu 6 logos parteneri tech (VAPI, WhatsApp, Google Calendar, Twilio, CRM, Vercel) + 4 badge-uri trust (GDPR, SSL, EU Data, 14-day pilot)
+58. ✅ **Fix i18n ConversationalAgentsPage** - "Problema:"/"Soluția:" erau hardcoded RO → acum locale-aware
+59. ✅ **CTA Unification** - Toate CTA-urile de pe site duc la `/demo/` (nu `/contact/`). Text unificat: "Evaluare gratuită" pe toate paginile de servicii + About
+60. ✅ **VoiceWidget AI Jargon Removal** - Eliminat toate referințele la "AI" din widget: "agentul AI" → "asistentul tău", "demo vocal AI" → "demo live · ascultă cum sună"
 
 ### În lucru:
-- [ ] Rafinare conținut și copy pentru toate secțiunile
-- [ ] Test complet pe staging
-- [ ] Verificare vizuală pe cel mai recent preview URL Vercel
+- [ ] Test complet pe staging (verificare vizuală preview URL Vercel)
+- [ ] Ajustări bazate pe feedback vizual
 
-### Următorii pași:
-1. [ ] Verificare staging URL după deploy
-2. [ ] Achiziție domeniu generativa.ro
-3. [ ] Merge în `main` când e aprobat
+### Următorii pași (Prioritizat):
+1. [ ] **Verificare staging URL** — Testare vizuală pe cel mai recent preview Vercel
+2. [ ] **Pricing hints** — Adăugare indicii de preț (recomandat critic de UX audit, încă neimplementat)
+3. [ ] **Sticky CTA pe service pages** — Buton fix "Solicită Demo" după scroll 50%
+4. [ ] **Calendar booking direct** — Integrare Calendly/Cal.com pe pagina demo
+5. [ ] **Achiziție domeniu generativa.ro**
+6. [ ] **Setup analytics** — Plausible/Umami (privacy-first)
+7. [ ] **Exit-intent popup** — Ofertă simplificată la abandon (doar desktop)
+8. [ ] **Studii de caz** — Primele case studies după pilot-urile gratuite
+9. [ ] **Merge staging → main** — Când totul e aprobat
 
 ---
 
@@ -255,6 +266,7 @@ Cu `primary` = slate scale, clasele `text-primary-400` pe secțiuni dark devin *
 | **IntegrationHub** | `components/sections/IntegrationHub.astro` | Vizualizare conexiuni (stil Stripe) |
 | **ScaleWithConfidence** | `components/sections/ScaleWithConfidence.astro` | Animație wave Canvas (scalare, throughput) |
 | **ScrollToTop** | `components/common/ScrollToTop.astro` | Buton floating pentru scroll to top |
+| **TrustBar** | `components/sections/TrustBar.astro` | 🆕 Tech partner logos + trust badges (social proof) |
 | **CookieBanner** | `components/common/CookieBanner.astro` | Cookie consent modern corner popup |
 
 ### Flow Homepage (RO & EN)
@@ -264,15 +276,16 @@ frontend/src/pages/ro/index.astro
 frontend/src/pages/en/index.astro
 
 Secțiuni în ordine:
-1. <HeroInteractive />      - Demo chat + headline + CTA
-2. <BenefitsStrip />        - 6 beneficii vizuale
-3. <Services />             - Ce oferim (3 servicii)
-4. <UseCases />             - 6 industrii cu problemă→soluție
-5. <IntegrationHub />       - Hub central + 8 conexiuni
-6. <ScaleWithConfidence />  - Animație wave + metrici business (unificate)
-7. <Process />              - 4 pași cum funcționăm
-8. <FAQ />                  - Întrebări frecvente
-9. <CTA />                  - Contact final
+1.  <HeroInteractive />      - Voice demo + loss-framed headline + CTA
+2.  <BenefitsStrip />        - 6 beneficii vizuale
+3.  <TrustBar />             - 🆕 Tech partner logos + trust badges
+4.  <Services />             - Ce oferim (3 servicii, CTA → /demo/)
+5.  <UseCases />             - 6 industrii cu problemă→soluție
+6.  <IntegrationHub />       - Hub central + 8 conexiuni
+7.  <Process />              - 4 pași cum funcționăm
+8.  <ScaleWithConfidence />  - Animație wave + metrici business (unificate)
+9.  <FAQ />                  - Întrebări frecvente
+10. <CTA />                  - Pilot gratuit + loss-framed contact
 ```
 
 ### Conținut Cheie per Secțiune
@@ -600,6 +613,10 @@ right: 1.5rem;
 | Document | Conține |
 |----------|---------|
 | `docs/STRATEGY.md` | Analiză competitivă detaliată, strategie diferențiere, design system Stripe |
+| `docs/CONVERSION-PSYCHOLOGY.md` | **🧠 Research CRO complet** — loss aversion, endowment effect, first-person CTAs, sensory curiosity, toate deciziile de copy cu rațional psihologic |
+| `docs/SOCIAL-PROOF-STRATEGY.md` | **🏅 Strategie social proof fără testimoniale** — 3 tier-uri (implementat/viitor), TrustBar, security badges, pilot gratuit, plan testimoniale reale |
+| `docs/BUSINESS-LAUNCH-PLAYBOOK.md` | **🚀 Playbook complet lansare** — piață, pricing, canale achiziție, KPI-uri, faze lansare, riscuri, checklist pre-lansare |
+| `docs/UX-AUDIT-FEBRUARY-2026.md` | **📊 Audit UX/UI** — psihologia cumpărătorului B2B, probleme desktop/mobile, 10 recomandări, status implementări, scor actualizat 8.6/10 |
 | `docs/SEO-AEO-GUIDELINES.md` | **🔍 Reguli SEO & AEO obligatorii** — template-uri, Schema.org, checklist-uri |
 | `docs/branding/BRANDING-NOTES.md` | Detalii logo, culori, tipografie |
 | `docs/DEPLOYMENT.md` | Ghid deployment Vercel + Railway |
@@ -1557,6 +1574,30 @@ const pathMappings: Record<string, Record<Locale, string>> = {
   3. **Button.astro bg-gradient-brand trap**: `bg-gradient-brand` a fost redefinit ca gradient dark slate (pentru secțiuni). Butoanele CTA nu trebuie să-l folosească — trebuie amber flat inline
   4. **Email HTML nu suportă Google Fonts**: Helvetica Neue rămâne font-ul corect pentru email templates
 
+### Sesiune Februarie 2026 - Conversion Optimization & Social Proof
+- **Context**: Implementare propunere CRO research-backed pe tot site-ul
+- **Principii aplicate**: Loss aversion (Kahneman), endowment effect (Thaler), first-person CTAs (+90% CTR), sensory curiosity, Von Restorff effect
+- **Modificări copy**:
+  - Hero headline: "Agenți AI care răspund..." → **"Niciun client pierdut. Niciun apel ratat."** (loss frame)
+  - Hero CTA: "Programează analiză" → **"Vezi ce pierzi acum"** (urgency)
+  - CTA section: "Află în 30 min..." → **"Câți clienți ai pierdut săptămâna asta?"** (loss question)
+  - VoiceWidget: "agentul AI" → **"asistentul tău"** (endowment effect)
+  - VoiceWidget hint: "demo vocal AI" → **"Demo live · Ascultă cum sună"** (sensory curiosity)
+  - Demo form submit: → **"Vreau evaluarea mea gratuită"** (first-person CTA)
+  - All service CTAs: → **"Evaluare gratuită"** (unified, non-committal)
+- **Fix i18n**: ConversationalAgentsPage "Problema:"/"Soluția:" hardcoded RO → locale-aware
+- **CTA Unification**: Toate CTA-urile pe site duc la `/demo/` (nu `/contact/`). 7 butoane unificate.
+- **Social proof implementat** (fără testimoniale reale):
+  1. **TrustBar.astro** (NOU) — 6 tech partner logos + 4 trust badges pe homepage
+  2. **Security badges** — GDPR, SSL, EU data lângă DemoForm + ContactForm
+  3. **Pilot gratuit 14 zile** — card în CTA section cu icon + copy persuasiv
+- **Discuția "nerespondat"**: Cuvânt neuzual în română → "ratat" ales pentru regret aversion + double loss frame
+- **18 fișiere** modificate în commit 1, 6 fișiere în commit 2
+- **Commits**: `41045b4` (CRO copy + unified CTAs), `a837ecb` (social proof)
+- **Documente create**: `docs/CONVERSION-PSYCHOLOGY.md`, `docs/SOCIAL-PROOF-STRATEGY.md`, `docs/BUSINESS-LAUNCH-PLAYBOOK.md`
+- **UX Audit actualizat**: Scor global 7.9 → 8.6 (+0.7)
+- **Homepage flow actualizat**: 10 secțiuni (Hero → BenefitsStrip → TrustBar → Services → UseCases → IntegrationHub → Process → ScaleWithConfidence → FAQ → CTA)
+
 ---
 
 ## 🌐 HREFLANG & MULTILINGV — STRATEGIE SEO
@@ -1779,5 +1820,5 @@ Mesajele de validare sunt în `contact.form.validation` din `ro.json`/`en.json`:
 
 ---
 
-*Ultima actualizare: 11 Februarie 2026*
+*Ultima actualizare: 12 Februarie 2026*
 *Pentru detalii complete despre strategie, vezi `docs/STRATEGY.md`*

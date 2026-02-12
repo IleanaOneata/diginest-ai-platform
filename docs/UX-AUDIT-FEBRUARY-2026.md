@@ -21,8 +21,8 @@
 | **1. Awareness** | "Am o problemă, dar nu știu dacă AI e soluția" | Demo vizual instant | ✅ Chat Simulator |
 | **2. Consideration** | "OK, pare interesant, dar funcționează la mine?" | Industria lui specifică | ✅ UseCases |
 | **3. Evaluation** | "Cât costă? Cât durează? Ce risc?" | Cifre concrete + FAQ | ✅ Benefits + FAQ |
-| **4. Decision** | "De ce ei, nu altcineva?" | Diferențiere + Social proof | ⚠️ Parțial — lipsește social proof |
-| **5. Action** | "Vreau să vorbesc cu cineva" | CTA fără fricțiune | ⚠️ Formular cu 7 câmpuri |
+| **4. Decision** | "De ce ei, nu altcineva?" | Diferențiere + Social proof | ✅ TrustBar + Security Badges + Pilot Gratuit |
+| **5. Action** | "Vreau să vorbesc cu cineva" | CTA fără fricțiune | ✅ CTAs unificate → /demo/, loss-framed copy |
 
 ### Ce Face Site-ul BINE (Psihologic)
 
@@ -36,16 +36,16 @@
 
 5. **FAQ ca instrument de conversie** — Răspunde la obiecții ÎNAINTE ca vizitatorul să le pună: "Va înlocui angajații?" → "Nu." Dezamorsează frica principală.
 
-### Ce Lipsește (Psihologic)
+### Ce Lipsește (Psihologic) — STATUS ACTUALIZAT Februarie 2026
 
-| Problemă | Impact | Gravitate |
-|----------|--------|-----------|
-| **Zero social proof real** | Fără testimoniale, fără logo-uri clienți, fără studii de caz | 🔴 CRITIC |
-| **Nu există "de ce noi?" pe homepage** | Vizitatorul nu știe de ce să aleagă GENERATIVA vs Agentic.ro | 🔴 CRITIC |
-| **Formularul de contact are 7 câmpuri** | Fiecare câmp suplimentar reduce conversia cu ~10% | 🟡 IMPORTANT |
-| **Lipsește urgența** | Niciun element de timp ("primii 10 clienți", "ofertă limitată") | 🟡 IMPORTANT |
-| **Prețuri complet absente** | Cumpărătorul B2B vrea cel puțin un "de la X€/lună" | 🟡 IMPORTANT |
-| **Pagina Despre nu e linkuită prominent** | Trust-building-ul e ascuns | 🟢 MINOR |
+| Problemă | Impact | Gravitate | Status |
+|----------|--------|-----------|--------|
+| **Zero social proof real** | Fără testimoniale, fără logo-uri clienți, fără studii de caz | 🔴 CRITIC | ✅ REZOLVAT PARȚIAL — TrustBar (tech partner logos), Security Badges, Pilot gratuit 14 zile. Testimoniale reale = necesare după piloturi. Vezi `docs/SOCIAL-PROOF-STRATEGY.md` |
+| **Nu există "de ce noi?" pe homepage** | Vizitatorul nu știe de ce să aleagă GENERATIVA vs Agentic.ro | 🔴 CRITIC | ✅ REZOLVAT PARȚIAL — Demo live diferențiator + loss-framed copy + TrustBar. O secțiune dedicată "De ce noi?" rămâne opțională |
+| **Formularul de contact are 7 câmpuri** | Fiecare câmp suplimentar reduce conversia cu ~10% | 🟡 IMPORTANT | ⚠️ PARȚIAL — Formularul demo păstrează 7 câmpuri (lead qualification necesară). Formularul contact simplu separat cu 3 câmpuri |
+| **Lipsește urgența** | Niciun element de timp ("primii 10 clienți", "ofertă limitată") | 🟡 IMPORTANT | ✅ REZOLVAT — Loss-framed CTAs ("Vezi ce pierzi acum", "Câți clienți ai pierdut?") + Pilot 14 zile gratuit |
+| **Prețuri complet absente** | Cumpărătorul B2B vrea cel puțin un "de la X€/lună" | 🟡 IMPORTANT | ❌ NEREZOLVAT — Recomandat: adaugă "De la 200€/lună" în FAQ sau pe pagina demo |
+| **Pagina Despre nu e linkuită prominent** | Trust-building-ul e ascuns | 🟢 MINOR | ⚠️ NESCHIMBAT — Linkuită din Header, dar nu prominentă pe homepage |
 
 ---
 
@@ -112,53 +112,58 @@
 
 ### 🔴 CRITICE (Impact mare pe conversie)
 
-#### 1. Adaugă Social Proof pe Homepage
-- **Minim**: "50+ companii din România folosesc GENERATIVA" cu logo-uri (chiar și placeholder)
-- **Ideal**: 2-3 testimoniale reale cu nume, companie, foto
-- **De ce**: În B2B, 92% din cumpărători citesc testimoniale înainte de a contacta. Fără social proof, site-ul pare "nou și netestat."
-- **Unde**: Între UseCases și IntegrationHub (după auto-identificare, înainte de detalii tehnice)
+#### 1. Adaugă Social Proof pe Homepage — ✅ IMPLEMENTAT
+- ~~**Minim**: "50+ companii din România folosesc GENERATIVA" cu logo-uri (chiar și placeholder)~~
+- **Implementat**: TrustBar cu tech partner logos (VAPI, WhatsApp, Google Calendar, Twilio, CRM, Vercel) + Security Badges (GDPR, SSL, EU data) pe formulare + Pilot gratuit 14 zile pe CTA
+- **Unde**: TrustBar între BenefitsStrip și Services; Badges pe DemoForm + ContactForm; Pilot pe CTA
+- **Următorul pas**: Testimoniale reale după primele piloturi. Vezi `docs/SOCIAL-PROOF-STRATEGY.md`
+- **Commit**: `a837ecb` (staging)
 
-#### 2. Simplifică Formularul de Contact
-- **Varianta actuală**: 7 câmpuri (5 required)
-- **Varianta recomandată**: 3 câmpuri (Nume, Email, Mesaj) + CTA "Programează Demo"
-- Industry/Interest se pot colecta în follow-up call
-- **De ce**: Fiecare câmp suplimentar reduce conversia cu ~10%. Un formular de 7 câmpuri poate avea conversion rate cu 50-60% mai mic decât unul de 3.
+#### 2. Simplifică Formularul de Contact — ⚠️ PARȚIAL
+- **Varianta actuală**: DemoForm (7 câmpuri) + ContactForm (3 câmpuri) — sunt formulare SEPARATE
+- **Decizie**: Păstrăm 7 câmpuri pe DemoForm (industry + problem = lead qualification critică)
+- **Compensare**: Loss-framed CTAs, first-person submit button ("Vreau evaluarea mea gratuită"), security badges lângă formular
+- **Toate CTA-urile** duc la `/demo/` (formularul detaliat de evaluare, nu contact simplu)
 
-#### 3. Adaugă Indicii de Preț
-- Nu trebuie prețuri exacte. Un simplu "De la 500€/lună" sau "Investiție tipică: 2.000-10.000€" ajută enorm.
+#### 3. Adaugă Indicii de Preț — ❌ NEIMPLEMENTAT
+- Nu trebuie prețuri exacte. Un simplu "De la 200€/lună" sau "Investiție tipică: 200-1.000€" ajută enorm.
 - **De ce**: Cumpărătorii B2B care nu găsesc informații despre preț presupun că e "prea scump" și pleacă. 60% din cumpărătorii B2B consideră prețul cel mai important factor.
+- **Recomandare**: Adaugă în FAQ ("Care este investiția?") sau ca badge pe pagina demo
 
 ### 🟡 IMPORTANTE (Îmbunătățesc experiența)
 
-#### 4. Sticky CTA pe Paginile de Servicii
-- Un buton fix "Solicită Demo" care apare după scroll 50% pe paginile de servicii
+#### 4. Sticky CTA pe Paginile de Servicii — ❌ NEIMPLEMENTAT
+- Un buton fix "Evaluare gratuită" care apare după scroll 50% pe paginile de servicii
 - **De ce**: Pe paginile lungi (servicii, despre), CTA-ul din header dispare, iar cel de la final e departe
+- **Prioritate**: Următorul sprint
 
-#### 5. Adaugă Secțiune "De Ce Noi?" pe Homepage
-- 3-4 diferențiatori față de competiție: demo live, fără contract pe termen lung, echipă locală, suport în română
-- **Unde**: Între Process și FAQ
-- **De ce**: Vizitatorul care ajunge la FAQ e aproape convins — are nevoie de ultima confirmare că a ales corect
+#### 5. Adaugă Secțiune "De Ce Noi?" pe Homepage — ⚠️ PARȚIAL
+- ~~3-4 diferențiatori față de competiție~~
+- **Compensat prin**: TrustBar (credibilitate tech), loss-framed copy (diferențiator tonal), demo live (diferențiator funcțional)
+- O secțiune explicită "De ce noi?" rămâne opțională
 
-#### 6. Adaugă Label-uri Contextuale pe IntegrationHub
+#### 6. Adaugă Label-uri Contextuale pe IntegrationHub — ❌ NEIMPLEMENTAT
 - Categorii vizuale: "Canale de intrare" (stânga), "Sisteme" (dreapta)
 - Annotation pe linii: "date sincronizate"
 - **De ce**: Vizualizarea e frumoasă dar abstractă — utilizatorii non-tehnici nu înțeleg ce văd
 
-#### 7. Optimizează BenefitsStrip pe Mobile
-- Adaugă swipe hint (existent pe UseCases/Services, lipsește aici)
-- Sau: transformă în grid 2x3 pe mobile (fiecare benefit e mic oricum)
+#### 7. Optimizează BenefitsStrip pe Mobile — ⚠️ PARȚIAL
+- ~~Adaugă swipe hint~~ → Dynamic scroll arrows implementate pe alte secțiuni
+- BenefitsStrip are scroll orizontal dar fără arrows explicit (dimensiune mică per card)
 
 ### 🟢 NICE-TO-HAVE (Rafinamente)
 
-#### 8. Calendar Booking Direct
+#### 8. Calendar Booking Direct — ❌ NEIMPLEMENTAT
 - Integrare Calendly/Cal.com pe pagina de contact ca alternativă la formular
 - **De ce**: Unii cumpărători B2B preferă să-și aleagă singuri slot-ul
+- **Prioritate**: Luna 2 (după lansare)
 
-#### 9. Exit-Intent Popup
+#### 9. Exit-Intent Popup — ❌ NEIMPLEMENTAT
 - Când user-ul mișcă mouse-ul spre tab-ul browserului, arată popup cu ofertă simplificată: "Hai să vorbim 15 minute. Gratuit."
 - Doar pe desktop, doar la prima vizită
+- **Prioritate**: Nice-to-have
 
-#### 10. Animație Wave cu Context
+#### 10. Animație Wave cu Context — ❌ NEIMPLEMENTAT
 - Adaugă labels sub canvas: "Volume mari de cereri" (stânga) → "GENERATIVA" (centru) → "Răspunsuri consistente" (dreapta)
 - **De ce**: Transformă decorația în comunicare
 
@@ -183,18 +188,19 @@
 
 ## Analiza Structurii per Pagină
 
-### Homepage — Flow Conversie
+### Homepage — Flow Conversie (ACTUALIZAT Februarie 2026)
 
 ```
-1. HeroInteractive     → WOW factor (Chat Simulator)     ✅ Excelent
-2. BenefitsStrip       → Impact rapid (6 beneficii)       ✅ Bun
-3. Services            → Ce oferim (3 servicii)           ✅ Bun
-4. UseCases            → Auto-identificare (6 industrii)  ✅ Excelent
-5. IntegrationHub      → Vizualizare conexiuni            ⚠️ Abstract fără labels
-6. ScaleWithConfidence → Metrici + animație wave          ⚠️ Wave decorativ
-7. Process             → Cum funcționăm (4 pași)          ✅ Clar
-8. FAQ                 → Obiecții rezolvate               ✅ Excelent
-9. CTA                 → Contact final                    ⚠️ Lipsește social proof înainte
+1. HeroInteractive     → Loss-framed headline + Voice Demo  ✅ Excelent (CRO optimizat)
+2. BenefitsStrip       → Impact rapid (6 beneficii)          ✅ Bun
+3. TrustBar            → Tech partner logos + trust badges   ✅ NOU — Social proof
+4. Services            → Ce oferim (3 servicii)              ✅ CTAs unificate → /demo/
+5. UseCases            → Auto-identificare (6 industrii)     ✅ Excelent
+6. IntegrationHub      → Vizualizare conexiuni               ⚠️ Abstract fără labels
+7. Process             → Cum funcționăm (4 pași)             ✅ Clar
+8. ScaleWithConfidence → Metrici + animație wave             ⚠️ Wave decorativ
+9. FAQ                 → Obiecții rezolvate                  ✅ Excelent
+10. CTA                → Pilot gratuit + loss-framed copy    ✅ CRO optimizat
 ```
 
 ### Pagini Servicii — Pattern Comun
@@ -219,5 +225,42 @@ Hero → Story → Mission (Dark) → Approach → Why Us → Stats (Dark) → C
 
 ---
 
+---
+
+## PARTEA 5: Implementări Realizate (Februarie 2026)
+
+### Rezumat Implementări CRO
+
+| Recomandare | Status | Commit | Detalii |
+|-------------|--------|--------|---------|
+| Social Proof pe Homepage | ✅ | `a837ecb` | TrustBar + Security Badges + Pilot 14 zile |
+| Copy CRO (loss aversion) | ✅ | `41045b4` | Headline, CTAs, VoiceWidget, toate paginile |
+| CTA Unification | ✅ | `41045b4` | Toate → `/demo/` + "Evaluare gratuită" |
+| i18n Fix | ✅ | `41045b4` | ConversationalAgentsPage RO hardcoded |
+| Simplifică Formularul | ⚠️ | - | DemoForm 7 câmpuri (necesare), ContactForm 3 |
+| Pricing Hints | ❌ | - | Necesită decizie business |
+| Sticky CTA | ❌ | - | Următorul sprint |
+| Calendar Booking | ❌ | - | Luna 2 |
+| IntegrationHub Labels | ❌ | - | Următorul sprint |
+| Exit-Intent Popup | ❌ | - | Nice-to-have |
+
+### Scor Actualizat
+
+| Aspect | Scor Anterior | Scor Actual | Schimbare |
+|--------|--------------|-------------|-----------|
+| **Structura paginii** | 9/10 | 9.5/10 | +0.5 (TrustBar adăugat) |
+| **Design vizual** | 8.5/10 | 8.5/10 | = |
+| **Copy/Messaging** | 7.5/10 | 9/10 | +1.5 (CRO complet) |
+| **UX Desktop** | 8/10 | 8/10 | = |
+| **UX Mobile** | 7.5/10 | 7.5/10 | = |
+| **Conversion Path** | 6.5/10 | 8.5/10 | +2.0 (social proof + loss frame + unified CTAs) |
+| **Psihologie Buyer** | 7/10 | 9/10 | +2.0 (toate fazele acoperite) |
+| **SEO/AEO** | 9/10 | 9/10 | = |
+
+**Scor Global: 8.6/10** (anterior 7.9/10, +0.7) — Îmbunătățiri majore pe conversion path și messaging. Pricing hints rămâne singurul gap critic.
+
+---
+
 *Audit realizat: Februarie 2026*
-*Următorul pas: Analiza rezultatelor și prioritizare implementări*
+*Ultima actualizare: 12 Februarie 2026*
+*Documente conexe: `docs/CONVERSION-PSYCHOLOGY.md`, `docs/SOCIAL-PROOF-STRATEGY.md`, `docs/BUSINESS-LAUNCH-PLAYBOOK.md`*
