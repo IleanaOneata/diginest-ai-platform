@@ -58,8 +58,25 @@ const t = getTranslations(locale);
       </a>
     </div>
 
+    <!-- Pilot offer -->
+    <div class="mt-8 inline-flex items-center gap-3 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl">
+      <span class="flex-shrink-0 w-8 h-8 bg-accent-500/20 rounded-full flex items-center justify-center">
+        <svg class="w-4 h-4 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </span>
+      <div class="text-left">
+        <p class="text-sm font-semibold text-white">
+          {locale === 'ro' ? 'Pilot gratuit 14 zile' : '14-day free pilot'}
+        </p>
+        <p class="text-xs text-slate-400">
+          {locale === 'ro' ? 'Configurăm asistentul pentru afacerea ta. Fără plată, fără card.' : 'We configure the assistant for your business. No payment, no card.'}
+        </p>
+      </div>
+    </div>
+
     <!-- Trust indicators -->
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
       <span class="flex items-center gap-1.5">
         <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
