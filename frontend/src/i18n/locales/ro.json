@@ -603,8 +603,8 @@
       "cta": "Evaluare gratuită"
     },
     "capabilities": {
-      "title": "Ce face un agent conversational AI pentru afacerea ta?",
-      "lead": "Un agent conversational AI răspunde la telefon, WhatsApp, email și chat în locul echipei tale — 24/7, fără pauze. Colectează date de la clienți, face programări în calendar, actualizează CRM-ul și transferă la operator uman când e nevoie. Rezultatul: zero apeluri pierdute și clienți mulțumiți.",
+      "title": "Ce face un agent conversațional AI pentru afacerea ta?",
+      "lead": "Un agent conversațional AI răspunde la telefon, WhatsApp, email și chat în locul echipei tale — 24/7, fără pauze. Colectează date de la clienți, face programări în calendar, actualizează CRM-ul și transferă la operator uman când e nevoie. Rezultatul: zero apeluri pierdute și clienți mulțumiți.",
       "swipeHint": "Glisează pentru mai multe",
       "items": [
         {
@@ -642,8 +642,8 @@
     "approach": {
       "title": "Cum funcționează un agent vocal AI în practică?",
       "lead": "Agentul AI preia apelurile telefonice, înțelege intenția clientului folosind procesare de limbaj natural, răspunde cu voce umană și execută acțiuni concrete: confirmă o programare, trimite informații pe WhatsApp sau escalează la echipa ta în sub 2 secunde.",
-      "schemaName": "Implementarea unui agent conversational AI",
-      "schemaDescription": "Procesul complet de implementare a unui asistent virtual conversational, de la analiză la lansare și scalare multicanal.",
+      "schemaName": "Implementarea unui agent conversațional AI",
+      "schemaDescription": "Procesul complet de implementare a unui asistent virtual conversațional, de la analiză la lansare și scalare multicanal.",
       "steps": [
         {
           "title": "Analiză fluxuri existente",
@@ -707,7 +707,7 @@
       ]
     },
     "benefits": {
-      "title": "Ce rezultate aduce un agent conversational AI?",
+      "title": "Ce rezultate aduce un agent conversațional AI?",
       "lead": "Companiile care implementează agenți conversaționali AI văd rezultate concrete în prima lună: zero apeluri pierdute, 90% din întrebările frecvente rezolvate automat, 15-20 ore economie pe săptămână și o experiență consistentă a clienților pe toate canalele.",
       "items": [
         {
@@ -742,7 +742,7 @@
       "lead": "Am răspuns la cele mai frecvente întrebări pe care le primim de la companii interesate de asistenți virtuali conversaționali.",
       "items": [
         {
-          "question": "Cât costă un agent conversational AI?",
+          "question": "Cât costă un agent conversațional AI?",
           "answer": "Costul depinde de numărul de canale, volumul de interacțiuni și complexitatea integrărilor. Ca referință, un agent AI costă semnificativ mai puțin decât un receptioner full-time (1.500-2.500 EUR/lună). Oferim un demo gratuit și un calcul personalizat de ROI pentru afacerea ta."
         },
         {
