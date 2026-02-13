@@ -76,8 +76,8 @@
 | 1 | **IntegrationHub: linii animate fără context** | Homepage | Utilizatorul nu înțelege ce reprezintă liniile dashed animate. Lipsesc labels "input"/"output" |
 | 2 | **ScaleWithConfidence: animație abstractă** | Homepage | Wave-ul arată frumos dar nu comunică nimic concret. Metafora "flux de date" nu e evidentă fără explicație |
 | 3 | **Services dropdown în header: hover trigger** | Header | Pe desktop necesită precizie de mouse. Mega-menu sau click trigger ar fi mai sigur |
-| 4 | **Niciun element sticky CTA** | Global | Odată ce header-ul CTA iese din view (pe paginile de servicii lungi), nu mai există CTA vizibil |
-| 5 | **Spațiul gol pe 3+2 grid** | Service pages | Unele secțiuni au 5 carduri pe grid de 3 coloane — rândul de jos arată incomplet |
+| 4 | **Niciun element sticky CTA** | Global | Odată ce header-ul CTA iese din view (pe paginile de servicii lungi), nu mai există CTA vizibil. ⚠️ PARȚIAL REZOLVAT: Mid-page CTA adăugat pe toate 3 service pages (nu sticky, dar oferă CTA la jumătatea paginii) |
+| 5 | **Spațiul gol pe 3+2 grid** | Service pages | Unele secțiuni au 5 carduri pe grid de 3 coloane — rândul de jos arată incomplet. ✅ REZOLVAT pe AiIntegrations (6th capability) |
 
 ---
 
@@ -132,10 +132,12 @@
 
 ### 🟡 IMPORTANTE (Îmbunătățesc experiența)
 
-#### 4. Sticky CTA pe Paginile de Servicii — ❌ NEIMPLEMENTAT
-- Un buton fix "Evaluare gratuită" care apare după scroll 50% pe paginile de servicii
-- **De ce**: Pe paginile lungi (servicii, despre), CTA-ul din header dispare, iar cel de la final e departe
-- **Prioritate**: Următorul sprint
+#### 4. Sticky CTA pe Paginile de Servicii — ⚠️ PARȚIAL
+- ~~Un buton fix "Evaluare gratuită" care apare după scroll 50% pe paginile de servicii~~
+- **Implementat**: Mid-page CTA pe toate 3 paginile de servicii (buton amber la jumătatea paginii, după Industries/Capabilities)
+- **Rămâne**: Sticky CTA floating (buton fix pe scroll) încă neimplementat — mid-page CTA acoperă nevoia parțial
+- **De ce mid-page e suficient**: Vizitatorul are acum 3 CTA-uri (Hero, mid-page, bottom) vs 2 anterior — reducerea distanței max între CTA-uri
+- **Commit**: `440517d` (staging)
 
 #### 5. Adaugă Secțiune "De Ce Noi?" pe Homepage — ⚠️ PARȚIAL
 - ~~3-4 diferențiatori față de competiție~~
@@ -203,16 +205,21 @@
 10. CTA                → Pilot gratuit + loss-framed copy    ✅ CRO optimizat
 ```
 
-### Pagini Servicii — Pattern Comun
+### Pagini Servicii — Pattern Comun (Actualizat 13 Februarie 2026)
 
 ```
-Hero (Light) → Content Cards (White) → Approach/Timeline (Dark) →
-Benefits/Metrics (Light) → FAQ Accordion (White) → CTA (Dark)
+Hero (Light) → TrustBar Mini (Neutral) → Content Cards (White) →
+Approach/Timeline (Dark) → Industries/Content (White) → Mid-page CTA →
+Benefits/Metrics (Neutral-50) → FAQ Accordion (White) → CTA (Dark, Stripe-style)
 ```
 - ✅ Alternanța light/dark e consistentă
 - ✅ Question-based H2 pe toate secțiunile
 - ✅ FAQ-urile targetează People Also Ask
-- ⚠️ Lipsește social proof pe fiecare pagină de serviciu
+- ✅ TrustBar Mini pe fiecare pagină (tech logos relevante per serviciu + trust badges)
+- ✅ Mid-page CTA după Industries/Capabilities
+- ✅ CTA upgraded: Stripe-style dark gradient, eyebrow badge, first-person button, pilot offer
+- ✅ Source tracking pe CTA links (?source=service-*)
+- ✅ ProcessAutomation are acum Industries section (6 carduri)
 
 ### Pagina Despre — Trust Building
 
@@ -234,33 +241,37 @@ Hero → Story → Mission (Dark) → Approach → Why Us → Stats (Dark) → C
 | Recomandare | Status | Commit | Detalii |
 |-------------|--------|--------|---------|
 | Social Proof pe Homepage | ✅ | `a837ecb` | TrustBar + Security Badges + Pilot 14 zile |
+| Social Proof pe Service Pages | ✅ | `440517d` | TrustBar Mini pe toate 3 paginile (logos relevante per serviciu) |
 | Copy CRO (loss aversion) | ✅ | `41045b4` | Headline, CTAs, VoiceWidget, toate paginile |
 | CTA Unification | ✅ | `41045b4` | Toate → `/demo/` + "Evaluare gratuită" |
+| Service Pages CTA Upgrade | ✅ | `440517d` | Stripe-style dark gradient, first-person, pilot offer, trust checkmarks |
+| Mid-page CTA pe Service Pages | ✅ | `440517d` | Buton amber la jumătatea paginii (după Industries/Capabilities) |
+| Industries pe ProcessAutomation | ✅ | `440517d` | 6 carduri problem→solution cu mobile scroll |
 | i18n Fix | ✅ | `41045b4` | ConversationalAgentsPage RO hardcoded |
 | Simplifică Formularul | ⚠️ | - | DemoForm 7 câmpuri (necesare), ContactForm 3 |
 | Pricing Hints | ❌ | - | Necesită decizie business |
-| Sticky CTA | ❌ | - | Următorul sprint |
+| Sticky CTA (floating) | ⚠️ | `440517d` | Mid-page CTA implementat, sticky floating rămâne opțional |
 | Calendar Booking | ❌ | - | Luna 2 |
 | IntegrationHub Labels | ❌ | - | Următorul sprint |
 | Exit-Intent Popup | ❌ | - | Nice-to-have |
 
-### Scor Actualizat
+### Scor Actualizat (13 Februarie 2026)
 
-| Aspect | Scor Anterior | Scor Actual | Schimbare |
-|--------|--------------|-------------|-----------|
-| **Structura paginii** | 9/10 | 9.5/10 | +0.5 (TrustBar adăugat) |
-| **Design vizual** | 8.5/10 | 8.5/10 | = |
-| **Copy/Messaging** | 7.5/10 | 9/10 | +1.5 (CRO complet) |
-| **UX Desktop** | 8/10 | 8/10 | = |
-| **UX Mobile** | 7.5/10 | 7.5/10 | = |
-| **Conversion Path** | 6.5/10 | 8.5/10 | +2.0 (social proof + loss frame + unified CTAs) |
-| **Psihologie Buyer** | 7/10 | 9/10 | +2.0 (toate fazele acoperite) |
-| **SEO/AEO** | 9/10 | 9/10 | = |
+| Aspect | Scor Inițial | Scor CRO | Scor Actual | Schimbare |
+|--------|-------------|-----------|-------------|-----------|
+| **Structura paginii** | 9/10 | 9.5/10 | 9.5/10 | = (service pages acum au 9-10 secțiuni vs 6-7) |
+| **Design vizual** | 8.5/10 | 8.5/10 | 9/10 | +0.5 (consistență CTA design pe toate paginile) |
+| **Copy/Messaging** | 7.5/10 | 9/10 | 9/10 | = |
+| **UX Desktop** | 8/10 | 8/10 | 8.5/10 | +0.5 (mid-page CTA, TrustBar Mini) |
+| **UX Mobile** | 7.5/10 | 7.5/10 | 7.5/10 | = |
+| **Conversion Path** | 6.5/10 | 8.5/10 | 9/10 | +0.5 (3 CTA-uri pe service pages, trust pe fiecare) |
+| **Psihologie Buyer** | 7/10 | 9/10 | 9.5/10 | +0.5 (social proof consistent pe toate paginile) |
+| **SEO/AEO** | 9/10 | 9/10 | 9/10 | = |
 
-**Scor Global: 8.6/10** (anterior 7.9/10, +0.7) — Îmbunătățiri majore pe conversion path și messaging. Pricing hints rămâne singurul gap critic.
+**Scor Global: 8.9/10** (anterior 8.6/10, +0.3) — Consistență CRO pe toate paginile de servicii. Gap-uri rămase: pricing hints, sticky CTA floating, calendar booking.
 
 ---
 
 *Audit realizat: Februarie 2026*
-*Ultima actualizare: 12 Februarie 2026*
+*Ultima actualizare: 13 Februarie 2026*
 *Documente conexe: `docs/CONVERSION-PSYCHOLOGY.md`, `docs/SOCIAL-PROOF-STRATEGY.md`, `docs/BUSINESS-LAUNCH-PLAYBOOK.md`*

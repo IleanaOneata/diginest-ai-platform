@@ -4,8 +4,8 @@
 
 ---
 
-## Status: ✅ Implementat (Februarie 2026)
-- Commits: `41045b4` (conversion optimization), `a837ecb` (social proof)
+## Status: ✅ Implementat + Extins pe Service Pages (Februarie 2026)
+- Commits: `41045b4` (conversion optimization), `a837ecb` (social proof), `440517d` (service pages CRO)
 - Branch: `staging`
 
 ---
@@ -26,6 +26,16 @@
 | Hero CTA | "Programează o analiză gratuită" | **"Vezi ce pierzi acum"** |
 | CTA section title | "Află în 30 min ce poți automatiza" | **"Câți clienți ai pierdut săptămâna asta?"** |
 | UseCases CTA | "Vreau și eu așa ceva" | **"Începe evaluarea"** |
+
+**Extensie pe paginile de servicii** (13 Februarie 2026):
+
+| Pagină | CTA Title (Loss-framed) |
+|--------|------------------------|
+| ProcessAutomation | **"Câte ore pierde echipa ta pe sarcini repetitive?"** |
+| ConversationalAgents | **"Câți clienți ai pierdut săptămâna asta din cauza apelurilor nepreluate?"** |
+| AiIntegrations | **"Câte ore pierde echipa ta copiind date între sisteme?"** |
+
+Fiecare pagină de serviciu are acum un CTA loss-framed SPECIFIC pentru problema pe care o rezolvă acel serviciu. Nu e generic — vizitatorul simte pierderea relevantă pentru el.
 
 **De ce funcționează pe publicul nostru**:
 - CEO/Owner SME simte direct impactul financiar al clienților pierduți
@@ -63,6 +73,10 @@
 | Demo form submit | "Programează analiza gratuită" | **"Vreau evaluarea mea gratuită"** |
 | CTA principal | "Programează o analiză gratuită" | **"Începe acum"** |
 | Hero CTA | "Programează analiză" | **"Vezi ce pierzi acum"** |
+| Service pages CTA | "Evaluare gratuită" | **"Vreau evaluarea mea gratuită"** |
+| Mid-page CTA | (nu exista) | **"Vreau evaluarea mea gratuită"** |
+
+**Extensie pe service pages** (13 Februarie 2026): Toate 3 paginile de servicii + mid-page CTAs folosesc acum "Vreau evaluarea mea gratuită" (first-person) în loc de "Evaluare gratuită" (impersonal). Consistent pe 6+ puncte de contact.
 
 ### 1.4 Sensory Curiosity (Curiozitate senzorială)
 
@@ -198,6 +212,22 @@ Process (CLARITATE) → Scale (DOVEZI) → FAQ (OBIECȚII) → CTA (PIERDERE + R
 
 Această alternanță menține tensiunea emoțională fără a fi copleșitoare.
 
+### Flow Psihologic — Pagini de Servicii (13 Februarie 2026)
+
+```
+1. Hero            → SOLUȚIE: Headline descriptiv + CTA "Evaluare gratuită"
+2. TrustBar Mini   → CREDIBILITATE: Tech logos relevante + badges (GDPR, SSL, EU, Pilot)
+3. Content Cards   → DETALII: Ce facem concret (capabilities/process types/systems)
+4. Approach        → CLARITATE: Cum funcționează (timeline, pași)
+5. Industries      → IDENTIFICARE: Vizitatorul își găsește industria cu problem→solution
+6. Mid-page CTA    → CONVERSIE INTERMEDIARĂ: "Recunoști aceste probleme?" + first-person button
+7. Benefits        → DOVEZI: Metrici concrete (%, ore, cost)
+8. FAQ             → OBIECȚII: Răspunsuri la "Cât costă?", "Înlocuiesc angajații?", etc.
+9. CTA             → CONVERSIE FINALĂ: Loss-framed title + pilot + trust checkmarks
+```
+
+**Principiu cheie**: Mid-page CTA vine IMEDIAT după Industries — momentul în care vizitatorul tocmai s-a identificat cu o problemă și e cel mai motivat să acționeze. Trust indicators (checkmarks + pilot offer) reduc fricțiunea pe CTA final.
+
 ---
 
 ## 4. Metrici de Conversie — Așteptări & Benchmark-uri
@@ -276,4 +306,5 @@ Această alternanță menține tensiunea emoțională fără a fi copleșitoare.
 ---
 
 *Creat: 12 Februarie 2026*
-*Commits: `41045b4`, `a837ecb` (staging)*
+*Actualizat: 13 Februarie 2026 (service pages CRO — loss-framed CTAs, mid-page CTAs, TrustBar Mini)*
+*Commits: `41045b4`, `a837ecb`, `440517d` (staging)*

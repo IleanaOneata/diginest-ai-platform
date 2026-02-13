@@ -4,9 +4,10 @@
 
 ---
 
-## Status: ✅ Implementat Tier 1 (Februarie 2026)
-- Commits: `a837ecb` (staging)
-- Implementat: TrustBar, Security Badges, Free Pilot Offer
+## Status: ✅ Implementat Tier 1 + Extensie Service Pages (Februarie 2026)
+- Commits: `a837ecb` (TrustBar homepage), `440517d` (TrustBar Mini service pages + CTA upgrade)
+- Branch: `staging`
+- Implementat: TrustBar (homepage), TrustBar Mini (3 service pages), Security Badges, Free Pilot Offer, Stripe-style CTAs cu trust indicators
 
 ---
 
@@ -55,6 +56,33 @@
 - **+43% conversions** pe landing pages cu partner logos
 - NU pretindem că sunt "clienți" — sunt "tehnologii folosite" (100% onest)
 
+#### 1A-bis. TrustBar Mini pe Paginile de Servicii ✅ (13 Februarie 2026)
+
+**Ce e**: Versiune compactă a TrustBar-ului de pe homepage, plasată pe fiecare pagină de serviciu.
+
+**Implementare**: Inline în `ProcessAutomationPage.astro`, `ConversationalAgentsPage.astro`, `AiIntegrationsPage.astro` — Section 2 (imediat după Hero)
+
+**Pattern CSS**: `py-8 md:py-10 bg-gradient-to-b from-neutral-50/80 to-white border-t border-b border-neutral-100/50`
+
+**Diferențiere per serviciu** (logo-urile sunt relevante pentru serviciul respectiv):
+
+| Pagină | Logo-uri Tech (6) | Rațional |
+|--------|-------------------|----------|
+| **ProcessAutomation** | VAPI, ElevenLabs, WhatsApp, Make, n8n, FastAPI | Workflow automation tools |
+| **ConversationalAgents** | VAPI, ElevenLabs, Retell, WhatsApp, Twilio, Make | Voice/chat platforms |
+| **AiIntegrations** | VAPI, WhatsApp, Google Calendar, Make, n8n, FastAPI | Integration platforms |
+
+**Trust badges** (identice pe toate 3): GDPR, SSL, EU Data, Pilot gratuit 14 zile
+
+**Copy label**: "Integrat cu platforme de încredere" (RO) / "Integrated with trusted platforms" (EN)
+
+**De ce nu copiem TrustBar-ul de pe homepage 1:1**:
+- Homepage are 11 logos → pe service pages 6 sunt suficiente (page load + visual noise)
+- Logo-urile trebuie relevante pentru serviciul specific (ex: Retell e relevant doar pe ConversationalAgents)
+- TrustBar Mini e mai compact (py-8 vs py-10) — nu domină pagina
+
+**Commit**: `440517d` (staging)
+
 #### 1B. Security & Compliance Badges
 
 **Ce e**: Badge-uri de securitate/conformitate lângă formularele de contact și demo.
@@ -80,7 +108,7 @@
 
 **Ce e**: Ofertă clară "14 zile pilot gratuit" pe CTA-ul principal.
 
-**Implementare**: `CTA.astro` — card special între buton și trust indicators
+**Implementare**: `CTA.astro` (homepage) + Section 9 pe toate 3 service pages (Stripe-style dark gradient CTAs)
 
 **Copy RO**: "Pilot gratuit 14 zile — Configurăm asistentul pentru afacerea ta. Fără plată, fără card."
 **Copy EN**: "14-day free pilot — We configure the assistant for your business. No payment, no card."
@@ -224,14 +252,26 @@ VIZITATOR NOU (sceptic)
 
 Când creezi o pagină nouă, verifică:
 
-- [ ] TrustBar e pe homepage (nu pe subpagini — prea mult)
-- [ ] Security badges pe orice formular (DemoForm, ContactForm)
-- [ ] Pilot offer vizibil pe CTA section
-- [ ] Service pages au trust indicators (checkmarks cu beneficii)
+- [x] TrustBar e pe homepage (11 logos + 4 badges)
+- [x] TrustBar Mini pe fiecare pagină de serviciu (6 logos relevante + 4 badges)
+- [x] Security badges pe orice formular (DemoForm, ContactForm)
+- [x] Pilot offer vizibil pe CTA section (homepage + toate 3 service pages)
+- [x] Service pages au trust indicators (checkmarks cu beneficii pe CTA dark section)
+- [x] CTA-uri Stripe-style pe toate paginile de servicii (dark gradient, eyebrow, first-person, pilot card)
+- [x] Mid-page CTA pe paginile de servicii (buton amber la jumătatea paginii)
 - [ ] Când avem testimoniale: adaugă pe fiecare service page (industry-relevant)
+
+### Pattern pentru pagini de servicii noi:
+
+Dacă se creează o pagină de serviciu nouă, trebuie să includă:
+1. **Section 2: TrustBar Mini** — 6 logos relevante + 4 trust badges (copiază structura din orice service page existentă)
+2. **Mid-page CTA** — plasat după secțiunea de industries/capabilities
+3. **Section finală: CTA Stripe-style** — dark gradient, eyebrow, first-person button cu glow, pilot offer card, 3 trust checkmarks
+4. **Source tracking**: `?source=service-[slug]` pe link-ul CTA
 
 ---
 
 *Creat: 12 Februarie 2026*
+*Actualizat: 13 Februarie 2026 (TrustBar Mini + CTA upgrade pe service pages)*
 *Bazat pe research: comScore, Baymard Institute, G2, Unbounce, Trustpilot*
-*Commit: `a837ecb` (staging)*
+*Commits: `a837ecb` (homepage social proof), `440517d` (service pages upgrade)*

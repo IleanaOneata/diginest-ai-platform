@@ -30,10 +30,10 @@
 15. ✅ **Mobile Optimization** - Scroll orizontal pentru carduri (vezi secțiunea dedicată)
 16. ✅ **Backend Email Funcțional** - Resend HTTP API, PostgreSQL, async emails (vezi secțiunea dedicată)
 17. ✅ **Contact Form UX** - Mesaj succes auto-hide după 5s, processed tracking în DB
-18. ✅ **Automatizare Procese Page** - Prima pagină de serviciu cu SEO/AEO, Schema.org @graph (Service + FAQPage + BreadcrumbList + HowTo), FAQ accordion, question-based H2s
+18. ✅ **Automatizare Procese Page** - Prima pagină de serviciu cu SEO/AEO, Schema.org @graph (Service + FAQPage + BreadcrumbList + HowTo), FAQ accordion, question-based H2s. **Actualizat la 9 secțiuni**: +TrustBar Mini, +Industries (6 carduri), +Mid-page CTA, CTA upgraded Stripe-style
 19. ✅ **Site-wide SEO/AEO Audit** - Schema.org pe toate paginile (Homepage, About, Contact), fix domain URLs, BreadcrumbList universal
-20. ✅ **Agenți Conversaționali Page** - A doua pagină de serviciu cu 7 secțiuni, SEO/AEO, Schema.org @graph, 8 FAQ items, 6 industrii cu problem→solution
-21. ✅ **Integrări AI Page** - A treia pagină de serviciu cu 7 secțiuni (Systems, Approach, Capabilities, Benefits, FAQ, CTA), SEO/AEO, Schema.org @graph, 8 FAQ items, hasOfferCatalog (CRM/Booking/Ticketing/ERP)
+20. ✅ **Agenți Conversaționali Page** - A doua pagină de serviciu, SEO/AEO, Schema.org @graph, 8 FAQ items, 6 industrii cu problem→solution. **Actualizat la 10 secțiuni**: +TrustBar Mini, +Mid-page CTA, CTA upgraded Stripe-style
+21. ✅ **Integrări AI Page** - A treia pagină de serviciu (Systems, Approach, Capabilities, Benefits, FAQ, CTA), SEO/AEO, Schema.org @graph, 8 FAQ items, hasOfferCatalog (CRM/Booking/Ticketing/ERP). **Actualizat la 9 secțiuni**: +TrustBar Mini, +Mid-page CTA, CTA upgraded Stripe-style
 22. ✅ **Fix 404 Servicii** - Link-ul "Servicii" din header/breadcrumb duce la homepage `/#services` (scroll), nu la pagină separată
 23. ✅ **Blog & Resources Cleanup** - Eliminat Blog din Header și secțiunea Resurse din Footer (pagini goale dăunează SEO la business nou)
 24. ✅ **Custom Form Validation** - Validare inline locale-aware (`novalidate` + JS custom), mesaje de eroare în limba paginii, regex email + E.164 phone (7-15 cifre)
@@ -78,6 +78,13 @@
 63. ✅ **Browser Tab Title** - Tagline schimbat: "Agenți AI pentru afacerea ta" → "Automatizare AI pentru business" (RO), "AI Agents for your business" → "AI Automation for Business" (EN). Tab: `GENERATIVA - Automatizare AI pentru business`
 64. ✅ **Logo Spacing Fix** - Revenit la `<text>` SVG nativ cu font Prompt (kerning perfect de browser) în loc de path-uri convertite care pierduseră kerning-ul. Spațierea e acum identică cu fișierele SVG originale
 65. ✅ **Logo Size & Color Refinement** - Logo mărit (h-9/h-10 vs h-8/h-9), culoare soft: `#0B0B0B` → `#263244` (neutral-750, aceeași nuanță ca titlurile paginii). Subtitlu: `#666` → `#7A8694`
+66. ✅ **Service Pages Trust & Conversion Upgrade** - Audit complet + implementare 5 recomandări pe cele 3 pagini de servicii:
+    - **TrustBar Mini** pe fiecare pagină (tech logos relevante per serviciu + 4 trust badges GDPR/SSL/EU/Pilot)
+    - **CTA Upgrade** (Stripe-style dark gradient, eyebrow badge, first-person button cu glow, pilot offer card, trust indicators cu green checkmarks)
+    - **Mid-page CTA** (buton amber la jumătatea paginii, după Industries/Capabilities)
+    - **Industries section** pe ProcessAutomationPage (6 carduri problem→solution cu mobile scroll)
+    - **i18n complet** RO + EN pentru toate elementele noi
+    - ProcessAutomation: 6→9 secțiuni, ConversationalAgents: 7→10 secțiuni, AiIntegrations: 7→9 secțiuni
 
 ### În lucru:
 - [ ] Test complet pe staging (verificare vizuală preview URL Vercel)
@@ -316,6 +323,57 @@ Secțiuni în ordine:
 4. Service auto - status mașină automat
 5. Salon beauty - reducere no-show 60%
 6. Restaurant - rezervări fără pierderi
+
+### Flow Pagini Servicii (Actualizat Februarie 2026)
+
+**ProcessAutomationPage** (9 secțiuni):
+```
+1.  Hero (light gradient)         - Breadcrumb + H1 + CTA "Evaluare gratuită"
+2.  TrustBar Mini (neutral-50)    - VAPI, ElevenLabs, WhatsApp, Make, n8n, FastAPI + badges
+3.  Process Types (white)         - 6 tipuri de automatizări (cards, mobile scroll)
+4.  Approach (dark)               - Timeline vertical 5 pași
+5.  Industries (white)            - 6 industrii problem→solution (cards, mobile scroll)
+6.  Mid-page CTA (neutral-50)    - "Recunoști aceste probleme?" + buton amber
+7.  Benefits (white)              - 5 metric cards
+8.  FAQ (white)                   - 6 Q&A accordion (data-service-faq-trigger)
+9.  CTA (dark gradient)           - Stripe-style, first-person, pilot offer
+```
+
+**ConversationalAgentsPage** (10 secțiuni):
+```
+1.  Hero (light gradient)         - Breadcrumb + H1 + CTA "Evaluare gratuită"
+2.  TrustBar Mini (neutral-50)    - VAPI, ElevenLabs, Retell, WhatsApp, Twilio, Make + badges
+3.  Capabilities (white)          - 6 capabilități AI agents (cards, mobile scroll)
+4.  Approach (dark)               - Timeline vertical 4 pași
+5.  Industries (white)            - 6 industrii problem→solution (cards, mobile scroll)
+6.  Mid-page CTA (white)         - "Recunoști aceste probleme?" + buton amber
+7.  Benefits (neutral-50)         - 5 metric cards
+8.  FAQ (white)                   - 8 Q&A accordion (data-conv-faq-trigger)
+9.  CTA (dark gradient)           - Stripe-style, first-person, pilot offer
+```
+
+**AiIntegrationsPage** (9 secțiuni):
+```
+1.  Hero (light gradient)         - Breadcrumb + H1 + CTA "Evaluare gratuită"
+2.  TrustBar Mini (neutral-50)    - VAPI, WhatsApp, Google Calendar, Make, n8n, FastAPI + badges
+3.  Systems (white)               - 6 sisteme de integrat (CRM, Booking, etc.)
+4.  Approach (dark)               - Timeline vertical 5 pași
+5.  Capabilities (white)          - 6 capabilități automatizare (cards, mobile scroll)
+6.  Mid-page CTA (white)         - "Vrei să vezi cum funcționează?" + buton amber
+7.  Benefits (neutral-50)         - 5 metric cards
+8.  FAQ (white)                   - 8 Q&A accordion (data-integ-faq-trigger)
+9.  CTA (dark gradient)           - Stripe-style, first-person, pilot offer
+```
+
+### TrustBar Mini — Pattern per Service Page
+
+| Pagină | Logo-uri Tech | Rațional |
+|--------|--------------|----------|
+| ProcessAutomation | VAPI, ElevenLabs, WhatsApp, Make, n8n, FastAPI | Focus pe automatizare workflows |
+| ConversationalAgents | VAPI, ElevenLabs, Retell, WhatsApp, Twilio, Make | Focus pe voice/chat platforms |
+| AiIntegrations | VAPI, WhatsApp, Google Calendar, Make, n8n, FastAPI | Focus pe sisteme integrate |
+
+Trust badges (identice pe toate): GDPR, SSL, EU Data, Pilot gratuit 14 zile
 
 **IntegrationHub** (8 conexiuni):
 - Apeluri telefonice, WhatsApp, Email, SMS
@@ -1623,6 +1681,95 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 - **Logo color & size**: `#0B0B0B` (near-black) → `#263244` (neutral-750, aceeași culoare ca titlurile paginii). Mărit de la h-8/h-9 la h-9/h-10.
 - **Commits**: `b497195` (TrustBar v2), `5953b16` (v3), `19decb8` (v4), `d52b258` (v5), `291bcbe` (diacritice), `c3bb3dd` (tab title), `38e65b9` (logo text fix), `bbe8ef1` (logo size/color)
 
+### Sesiune Februarie 2026 - Service Pages Trust & Conversion Upgrade
+- **Context**: Audit al celor 3 pagini de servicii vs homepage — identificat gap-uri majore de trust, conversie și profesionalism. Paginile de servicii aveau doar 2 CTA-uri (Hero + final), zero social proof, CTA-uri simple fără trust indicators, și ProcessAutomation nu avea secțiune Industries.
+- **Analiză comparativă (Gap Analysis)**:
+
+  | Element | Homepage | Service Pages (înainte) |
+  |---------|----------|------------------------|
+  | TrustBar | ✅ 11 logos + 4 badges | ❌ Zero |
+  | CTA-uri | 3 (Hero, mid-page, bottom) | 2 (Hero, bottom) |
+  | Trust indicators pe CTA | ✅ Eyebrow, pilot, checkmarks | ❌ Doar buton simplu |
+  | First-person CTA | ✅ "Vreau evaluarea mea gratuită" | ❌ "Evaluare gratuită" generic |
+  | Pilot offer | ✅ Card cu 14 zile + copy | ❌ Zero |
+  | Industries section | ✅ UseCases (6 industrii) | ❌ Doar pe ConversationalAgents |
+
+- **5 recomandări implementate** (toate într-o singură sesiune):
+
+  **1. TrustBar Mini pe fiecare pagină de serviciu**:
+  - Pattern: `py-8 md:py-10 bg-gradient-to-b from-neutral-50/80 to-white border-t border-b border-neutral-100/50`
+  - Structură: Header label + Tech logos row + Trust badges row
+  - **Logo-uri diferite per serviciu** (relevante pentru serviciul respectiv):
+    - **ProcessAutomation**: VAPI, ElevenLabs, WhatsApp, Make, n8n, FastAPI
+    - **ConversationalAgents**: VAPI, ElevenLabs, Retell, WhatsApp, Twilio, Make
+    - **AiIntegrations**: VAPI, WhatsApp, Google Calendar, Make, n8n, FastAPI
+  - Trust badges (identice pe toate): GDPR, SSL, EU Data, Pilot gratuit 14 zile
+  - Copy label: "Integrat cu platforme de încredere" (RO) / "Integrated with trusted platforms" (EN)
+
+  **2. CTA Section Upgrade (Stripe-style)**:
+  - Dark gradient background (`bg-gradient-dark` + dot pattern overlay)
+  - Eyebrow badge: `bg-white/5 text-accent-300 rounded-full border border-white/10`
+  - Loss-framed titles unice per pagină:
+    - ProcessAutomation: "Câte ore pierde echipa ta pe sarcini repetitive?"
+    - ConversationalAgents: "Câți clienți ai pierdut săptămâna asta din cauza apelurilor nepreluate?"
+    - AiIntegrations: "Câte ore pierde echipa ta copiind date între sisteme?"
+  - First-person amber CTA button cu glow effect (`blur-xl opacity-40`)
+  - Pilot offer card: `bg-white/5 border border-white/10 rounded-2xl` cu clock icon
+  - Trust indicators: 3 checkmarks cu green-400 (Fără obligații, 30 minute, Răspuns în 24h)
+  - Source tracking: `?source=service-automation`, `?source=service-conversational`, `?source=service-integrations`
+
+  **3. Mid-page CTA** (buton amber la jumătatea paginii):
+  - Plasat DUPĂ secțiunea Industries/Capabilities (momentul psihologic optim — vizitatorul tocmai s-a identificat cu o industrie)
+  - Text: "Recunoști aceste probleme în afacerea ta?" (ProcessAutomation + ConversationalAgents)
+  - Text: "Vrei să vezi cum funcționează în practică?" (AiIntegrations — nu are Industries, CTA vine după Capabilities)
+  - Buton first-person: "Vreau evaluarea mea gratuită"
+  - Stil: `py-10 md:py-14`, fără dark gradient (pauză vizuală ușoară între secțiuni)
+
+  **4. Industries section pe ProcessAutomation** (NOUĂ):
+  - 6 industrii cu pattern problem→solution (identic cu ConversationalAgentsPage):
+    - Clinici Medicale (icon: medical/heart)
+    - HoReCa (icon: hotel/building)
+    - Service Auto (icon: car/wrench)
+    - Beauty/SPA (icon: beauty/sparkles)
+    - Retail/E-commerce (icon: headset)
+    - Rețele Multi-locații (icon: signal/wifi)
+  - Mobile scroll cu snap-center + dynamic arrows
+  - Grid desktop: `md:grid-cols-2 lg:grid-cols-3`
+  - Card: `bg-neutral-50 p-5 md:p-6 lg:p-8 border border-neutral-100 hover:shadow-lg`
+  - Problem text: `text-neutral-500`, Solution text: `text-primary-600`
+
+  **5. i18n complet** (RO + EN):
+  - `ro.json`: +`serviceAutomation.industries` (6 items cu icon, title, problem, solution, swipeHint), +CTA blocks upgrade pe toate 3 servicii (eyebrow, title, subtitle, button, pilotTitle, pilotDescription, trust*)
+  - `en.json`: Mirror complet al tuturor adăugărilor RO
+
+- **Secțiuni per pagină (actualizate)**:
+  - **ProcessAutomationPage**: 6→9 secțiuni (Hero, TrustBar Mini, Process Types, Approach, Industries★, Mid-CTA★, Benefits, FAQ, CTA★)
+  - **ConversationalAgentsPage**: 7→10 secțiuni (Hero, TrustBar Mini★, Capabilities, Approach, Industries, Mid-CTA★, Benefits, FAQ, CTA★) — ⚠️ header comment zice 10 dar secțiunile numerotate merg 1-9 (Section 8=FAQ e lipsă din comment)
+  - **AiIntegrationsPage**: 7→9 secțiuni (Hero, TrustBar Mini★, Systems, Approach, Capabilities, Mid-CTA★, Benefits, FAQ, CTA★)
+
+- **Alternare background-uri pe secțiuni** (pattern consistent):
+  ```
+  Hero (light gradient) → TrustBar Mini (neutral-50/white) → Content Cards (white) →
+  Approach/Timeline (dark) → Industries/Content (white) → Mid-CTA (white/neutral-50) →
+  Benefits (neutral-50) → FAQ (white) → CTA (dark gradient)
+  ```
+
+- **Fișiere modificate** (5):
+  - `frontend/src/components/sections/ProcessAutomationPage.astro` (+227 lines)
+  - `frontend/src/components/sections/ConversationalAgentsPage.astro` (+144 lines)
+  - `frontend/src/components/sections/AiIntegrationsPage.astro` (+144 lines)
+  - `frontend/src/i18n/locales/ro.json` (+77 lines)
+  - `frontend/src/i18n/locales/en.json` (+79 lines)
+  - **Total**: 566 insertions, 105 deletions
+
+- **Build**: 0 errors, 0 warnings, 19 pages generated
+- **Commit**: `440517d` (staging)
+- **Lecții**:
+  1. **TrustBar per serviciu**: Logo-urile tech trebuie să fie relevante pentru serviciul respectiv (ex: Retell + Twilio doar pe ConversationalAgents, Google Calendar doar pe AiIntegrations). Nu copia identic TrustBar-ul de pe homepage.
+  2. **Mid-page CTA placement**: Cel mai eficient loc e imediat după secțiunea de Industries/UseCases — vizitatorul tocmai s-a identificat cu o problemă și e motivat să acționeze.
+  3. **CTA source tracking**: Parametrul `?source=service-*` pe URL permite măsurarea care pagină generează cele mai multe lead-uri (important pentru analytics viitoare).
+  4. **Pattern CTA consistent**: Toate 3 paginile + homepage CTA folosesc acum exact același pattern vizual (dark gradient + eyebrow + first-person button + pilot + trust checkmarks). Consistența construiește familiaritate.
+
 ---
 
 ## 🌐 HREFLANG & MULTILINGV — STRATEGIE SEO
@@ -1845,5 +1992,5 @@ Mesajele de validare sunt în `contact.form.validation` din `ro.json`/`en.json`:
 
 ---
 
-*Ultima actualizare: 12 Februarie 2026*
+*Ultima actualizare: 13 Februarie 2026*
 *Pentru detalii complete despre strategie, vezi `docs/STRATEGY.md`*
