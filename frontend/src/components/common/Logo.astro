@@ -24,20 +24,20 @@ const {
 
 // Size configurations
 const sizes = {
-  sm: { height: 'h-7', minWidth: '140px' },
-  md: { height: 'h-8 lg:h-9', minWidth: '170px' },
+  sm: { height: 'h-8', minWidth: '150px' },
+  md: { height: 'h-9 lg:h-10', minWidth: '180px' },
   lg: { height: 'h-12', minWidth: '240px' },
   xl: { height: 'h-16', minWidth: '320px' },
 };
 
 const config = sizes[size];
 
-// Color tokens per variant
+// Color tokens per variant — dark variant uses #263244 (neutral-750) to match page headings
 const isWhite = variant === 'white';
-const fillColor = isWhite ? 'white' : '#0B0B0B';
-const subtitleFill = isWhite ? '#8A8A8A' : '#666666';
-const strokeColor = isWhite ? 'white' : '#0B0B0B';
-const knobFill = isWhite ? 'white' : '#0B0B0B';
+const fillColor = isWhite ? 'white' : '#263244';
+const subtitleFill = isWhite ? '#8A8A8A' : '#7A8694';
+const strokeColor = isWhite ? 'white' : '#263244';
+const knobFill = isWhite ? 'white' : '#263244';
 ---
 
 <div class:list={["flex items-center flex-shrink-0", className]} role="img" aria-label="GENERATIVA — AI Automation">
