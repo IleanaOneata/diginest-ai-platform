@@ -177,52 +177,47 @@ const about = t.about;
   </div>
 </section>
 
-<!-- Guarantee Section - Dark -->
-<section class="py-12 md:py-20 lg:py-24 bg-gradient-dark relative overflow-hidden">
-  <!-- Decorative -->
-  <div class="absolute inset-0 bg-grid-dark opacity-10"></div>
-  <div class="absolute top-0 left-1/4 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-primary-500/5 rounded-full blur-3xl"></div>
-
-  <div class="container-lg relative">
-    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-16 text-white">
+<!-- Guarantee Section - Light -->
+<section class="py-12 md:py-20 lg:py-24 bg-neutral-50">
+  <div class="container-lg">
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-16 text-neutral-750">
       {about.guarantee.title}
     </h2>
 
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
       {about.guarantee.items.map((item: { value: string; unit: string; label: string; icon: string }) => (
-        <div class="text-center bg-white/5 border border-white/10 rounded-2xl p-5 md:p-6">
+        <div class="text-center bg-white border border-neutral-100 rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
           <!-- Icon -->
-          <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-accent-500/20 flex items-center justify-center">
+          <div class="w-10 h-10 mx-auto mb-3 rounded-full bg-accent-100 flex items-center justify-center">
             {item.icon === 'calendar' && (
-              <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-5 h-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             )}
             {item.icon === 'bolt' && (
-              <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-5 h-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             )}
             {item.icon === 'shield' && (
-              <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-5 h-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             )}
             {item.icon === 'clock' && (
-              <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-5 h-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             )}
           </div>
 
           <!-- Value + Unit -->
-          <div class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1">
-            {item.value}<span class="text-lg md:text-xl lg:text-2xl text-accent-400 font-semibold ml-0.5">{item.unit}</span>
+          <div class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-750 mb-1">
+            {item.value}<span class="text-lg md:text-xl lg:text-2xl text-accent-600 font-semibold ml-0.5">{item.unit}</span>
           </div>
 
           <!-- Label -->
-          <div class="text-slate-400 text-xs md:text-sm leading-relaxed mt-2">
+          <div class="text-neutral-500 text-xs md:text-sm leading-relaxed mt-2">
             {item.label}
           </div>
         </div>
