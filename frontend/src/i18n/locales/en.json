@@ -575,10 +575,59 @@
         }
       ]
     },
+    "industries": {
+      "title": "Which industries benefit most from AI process automation?",
+      "lead": "Companies with repetitive processes, high document volumes and small teams see the fastest ROI. From dental clinics to multi-location networks, automation eliminates hours lost on manual tasks and reduces human errors to zero.",
+      "swipeHint": "Swipe for more",
+      "items": [
+        {
+          "icon": "medical",
+          "title": "Clinics & Medical Practices",
+          "problem": "Medical documents processed manually, missed appointments, reception overwhelmed by admin tasks",
+          "solution": "Complete automation: document processing, automatic confirmations and rescheduling, patient notifications and medical system sync."
+        },
+        {
+          "icon": "hotel",
+          "title": "HoReCa & Hospitality",
+          "problem": "Orders manually copied between systems, daily reports done by hand, inventory managed on paper",
+          "solution": "Automatic order→preparation→delivery flow, instant reports, stock alerts and multi-location synchronization."
+        },
+        {
+          "icon": "car",
+          "title": "Auto Service & Fleet",
+          "problem": "Quotes estimated manually, repair status communicated by phone, service bookings on paper",
+          "solution": "Automatic estimates, proactive client notifications, online scheduling and per-mechanic performance reports."
+        },
+        {
+          "icon": "beauty",
+          "title": "Beauty Salons & SPA",
+          "problem": "Appointments managed manually, frequent no-shows, no follow-up for return visits",
+          "solution": "Automatic calendar, SMS/WhatsApp reminders 24h before, post-visit follow-up and personalized recommendations."
+        },
+        {
+          "icon": "headset",
+          "title": "Retail & E-commerce",
+          "problem": "Orders processed manually, repetitive delivery questions, returns managed chaotically",
+          "solution": "Automatic order processing, tracking and client notifications, standardized return workflows and sales reports."
+        },
+        {
+          "icon": "signal",
+          "title": "Multi-location Networks",
+          "problem": "Different processes at each location, lack of central visibility, manual and inconsistent reporting",
+          "solution": "Automatically standardized processes across all locations, central dashboard, comparative reports and performance alerts."
+        }
+      ]
+    },
     "cta": {
-      "title": "Let's identify the processes draining your time",
-      "subtitle": "Schedule a free consultation. In 30 minutes, we'll show you exactly where you're losing time and how AI can solve it.",
-      "button": "Free evaluation"
+      "title": "How many hours does your team lose on repetitive tasks?",
+      "subtitle": "Schedule a free evaluation. In 30 minutes, we'll show you exactly where you're losing time and how AI automation solves it — no obligations.",
+      "button": "I want my free evaluation",
+      "eyebrow": "✨ Free evaluation — 30 min",
+      "pilotTitle": "14-day free pilot",
+      "pilotDescription": "We configure automation for your business. No payment, no card.",
+      "trustNoObligation": "No obligations",
+      "trust30min": "30 minutes",
+      "trustResponse": "Response within 24h"
     }
   },
 
@@ -776,9 +825,15 @@
       ]
     },
     "cta": {
-      "title": "Let us show you how your AI sounds",
-      "subtitle": "Request a free personalized demo. In 15 minutes, hear how the AI agent trained for your business sounds — with real scenarios from your industry.",
-      "button": "Free evaluation"
+      "title": "How many clients did you lose this week from unanswered calls?",
+      "subtitle": "Request a free evaluation. In 15 minutes, hear how your assistant sounds — trained for your business, with real scenarios from your industry.",
+      "button": "I want my free evaluation",
+      "eyebrow": "✨ Free evaluation — 15 min",
+      "pilotTitle": "14-day free pilot",
+      "pilotDescription": "We configure the assistant for your business. No payment, no card.",
+      "trustNoObligation": "No obligations",
+      "trust30min": "15 minutes",
+      "trustResponse": "Response within 24h"
     }
   },
   "serviceIntegrations": {
@@ -973,9 +1028,15 @@
       ]
     },
     "cta": {
-      "title": "Let's connect AI to your systems",
-      "subtitle": "Request a free technical audit. We analyze your existing systems and show you exactly how we connect them with artificial intelligence — no obligations.",
-      "button": "Free evaluation"
+      "title": "How many hours does your team lose copying data between systems?",
+      "subtitle": "Request a free technical audit. We analyze your existing systems and show you exactly how we connect them with AI — no obligations.",
+      "button": "I want my free evaluation",
+      "eyebrow": "✨ Free technical audit — 30 min",
+      "pilotTitle": "14-day free pilot",
+      "pilotDescription": "We connect AI to one existing system. No payment, no card.",
+      "trustNoObligation": "No obligations",
+      "trust30min": "30 minutes",
+      "trustResponse": "Response within 24h"
     }
   },
 

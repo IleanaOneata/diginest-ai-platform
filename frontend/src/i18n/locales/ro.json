@@ -575,10 +575,59 @@
         }
       ]
     },
+    "industries": {
+      "title": "Ce industrii beneficiază cel mai mult de automatizarea proceselor cu AI?",
+      "lead": "Companiile cu procese repetitive, volume mari de documente și echipe mici sunt cele care văd cel mai rapid ROI. De la clinici dentare la rețele multi-locații, automatizarea elimină orele pierdute pe task-uri manuale și reduce erorile umane la zero.",
+      "swipeHint": "Glisează pentru mai multe",
+      "items": [
+        {
+          "icon": "medical",
+          "title": "Clinici și Cabinete Medicale",
+          "problem": "Documente medicale procesate manual, programări pierdute, recepție copleșită de sarcini administrative",
+          "solution": "Automatizare completă: procesare documente, confirmare și reprogramare automată, notificări pacienți și sincronizare cu sistemul medical."
+        },
+        {
+          "icon": "hotel",
+          "title": "HoReCa & Hospitality",
+          "problem": "Comenzi copiate manual între sisteme, rapoarte zilnice făcute de mână, stocuri gestionate pe hârtie",
+          "solution": "Flux automat comandă→pregătire→livrare, rapoarte generate instant, alerte de stoc și sincronizare între locații."
+        },
+        {
+          "icon": "car",
+          "title": "Service Auto & Fleet",
+          "problem": "Devize estimate manual, status reparații comunicat prin telefon, programări service pe hârtie",
+          "solution": "Estimări automate, notificări proactive clienți, programări online și rapoarte de performanță per mecanic."
+        },
+        {
+          "icon": "beauty",
+          "title": "Saloane Beauty & SPA",
+          "problem": "Programări gestionate manual, no-show-uri frecvente, lipsă urmărire clienți pentru revenire",
+          "solution": "Calendar automat, remindere SMS/WhatsApp cu 24h înainte, follow-up post-vizită și recomandări personalizate."
+        },
+        {
+          "icon": "headset",
+          "title": "Retail & E-commerce",
+          "problem": "Comenzi procesate manual, întrebări repetitive despre livrare, retur-uri gestionate haotic",
+          "solution": "Procesare automată comenzi, tracking și notificări client, workflow-uri de retur standardizate și rapoarte de vânzări."
+        },
+        {
+          "icon": "signal",
+          "title": "Rețele Multi-locații",
+          "problem": "Procese diferite la fiecare locație, lipsa vizibilității centrale, raportare manuală și inconsistentă",
+          "solution": "Procese standardizate automat pe toate locațiile, dashboard central, rapoarte comparative și alerte de performanță."
+        }
+      ]
+    },
     "cta": {
-      "title": "Hai să identificăm procesele care îți consumă timpul",
-      "subtitle": "Programează o consultanță gratuită. În 30 de minute, îți arătăm exact unde pierzi timp și cum AI-ul poate rezolva asta.",
-      "button": "Evaluare gratuită"
+      "title": "Câte ore pierde echipa ta pe sarcini repetitive?",
+      "subtitle": "Programează o evaluare gratuită. În 30 de minute, îți arătăm exact unde pierzi timp și cum automatizarea AI rezolvă asta — fără obligații.",
+      "button": "Vreau evaluarea mea gratuită",
+      "eyebrow": "✨ Evaluare gratuită — 30 min",
+      "pilotTitle": "Pilot gratuit 14 zile",
+      "pilotDescription": "Configurăm automatizarea pentru afacerea ta. Fără plată, fără card.",
+      "trustNoObligation": "Fără obligații",
+      "trust30min": "30 minute",
+      "trustResponse": "Răspuns în 24h"
     }
   },
 
@@ -776,9 +825,15 @@
       ]
     },
     "cta": {
-      "title": "Hai să-ți arătăm cum sună AI-ul tău",
-      "subtitle": "Solicită un demo gratuit personalizat. În 15 minute, auzi cum sună agentul AI antrenat pentru afacerea ta — cu scenarii reale din industria ta.",
-      "button": "Evaluare gratuită"
+      "title": "Câți clienți ai pierdut săptămâna asta din cauza apelurilor nepreluate?",
+      "subtitle": "Solicită o evaluare gratuită. În 15 minute, auzi cum sună asistentul tău — antrenat pentru afacerea ta, cu scenarii reale din industria ta.",
+      "button": "Vreau evaluarea mea gratuită",
+      "eyebrow": "✨ Evaluare gratuită — 15 min",
+      "pilotTitle": "Pilot gratuit 14 zile",
+      "pilotDescription": "Configurăm asistentul pentru afacerea ta. Fără plată, fără card.",
+      "trustNoObligation": "Fără obligații",
+      "trust30min": "15 minute",
+      "trustResponse": "Răspuns în 24h"
     }
   },
   "serviceIntegrations": {
@@ -973,9 +1028,15 @@
       ]
     },
     "cta": {
-      "title": "Hai să conectăm AI-ul la sistemele tale",
+      "title": "Câte ore pierde echipa ta copiind date între sisteme?",
       "subtitle": "Solicită un audit tehnic gratuit. Analizăm sistemele tale existente și îți arătăm exact cum le conectăm cu inteligența artificială — fără obligații.",
-      "button": "Evaluare gratuită"
+      "button": "Vreau evaluarea mea gratuită",
+      "eyebrow": "✨ Audit tehnic gratuit — 30 min",
+      "pilotTitle": "Pilot gratuit 14 zile",
+      "pilotDescription": "Conectăm AI-ul la un sistem existent. Fără plată, fără card.",
+      "trustNoObligation": "Fără obligații",
+      "trust30min": "30 minute",
+      "trustResponse": "Răspuns în 24h"
     }
   },
 

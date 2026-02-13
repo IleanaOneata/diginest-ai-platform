@@ -2,14 +2,16 @@
 /**
  * AI Integrations Service Page - GENERATIVA
  *
- * Full service detail page with 7 sections:
+ * Full service detail page with 9 sections:
  * 1. Hero - Light gradient, breadcrumb, eyebrow, H1, CTA
- * 2. Systems - What we integrate (6 cards, mobile scroll)
- * 3. Approach - How integration works (dark, vertical timeline, 5 steps)
- * 4. Capabilities - What automations become possible (5 cards, mobile scroll)
- * 5. Benefits - Results (5 metric cards, mobile scroll)
- * 6. FAQ - Accordion Q&A (8 items, SEO/AEO optimized)
- * 7. CTA - Dark gradient, contact button
+ * 2. TrustBar Mini - Tech logos + trust badges (borrowed credibility)
+ * 3. Systems - What we integrate (6 cards, mobile scroll)
+ * 4. Approach - How integration works (dark, vertical timeline, 5 steps)
+ * 5. Capabilities - What automations become possible (6 cards, mobile scroll)
+ * 6. Mid-page CTA - Amber button after capabilities
+ * 7. Benefits - Results (5 metric cards, mobile scroll)
+ * 8. FAQ - Accordion Q&A (8 items, SEO/AEO optimized)
+ * 9. CTA - Dark gradient, eyebrow, first-person button, pilot offer, trust indicators
  *
  * SEO/AEO: Question-based H2s, answer-first lead paragraphs,
  * Schema.org handled at page shell level (@graph pattern).
@@ -104,7 +106,34 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
 </section>
 
 <!-- ============================================ -->
-<!-- SECTION 2: SYSTEMS (White bg)                -->
+<!-- SECTION 2: TRUST BAR MINI (Light gradient)    -->
+<!-- ============================================ -->
+<section class="py-8 md:py-10 bg-gradient-to-b from-neutral-50/80 to-white border-t border-b border-neutral-100/50">
+  <div class="container-lg">
+    <div class="text-center mb-5">
+      <p class="text-xs md:text-sm text-neutral-500 uppercase tracking-[0.15em] font-semibold">
+        {locale === 'ro' ? 'Integrat cu platforme de încredere' : 'Integrated with trusted platforms'}
+      </p>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-x-5 md:gap-x-8 gap-y-3 mb-5">
+      <div class="flex items-center gap-1.5"><svg class="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke="#6366F1" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4"/></svg><span class="text-xs md:text-sm font-semibold text-neutral-600">VAPI</span></div>
+      <div class="flex items-center gap-1.5"><svg class="w-5 h-5 md:w-6 md:h-6" fill="#25D366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="text-xs md:text-sm font-semibold text-neutral-600">WhatsApp</span></div>
+      <div class="flex items-center gap-1.5"><svg class="w-5 h-5 md:w-6 md:h-6" fill="#4285F4" viewBox="0 0 24 24"><path d="M19.5 3h-3V1.5a.75.75 0 00-1.5 0V3h-6V1.5a.75.75 0 00-1.5 0V3h-3A1.5 1.5 0 003 4.5v15A1.5 1.5 0 004.5 21h15a1.5 1.5 0 001.5-1.5v-15A1.5 1.5 0 0019.5 3zM19.5 19.5h-15V8.25h15v11.25z"/><path d="M8.25 11.25h2.25v2.25H8.25zM8.25 15h2.25v2.25H8.25zM12.75 11.25H15v2.25h-2.25zM12.75 15H15v2.25h-2.25z" opacity="0.5"/></svg><span class="text-xs md:text-sm font-semibold text-neutral-600">Google Calendar</span></div>
+      <div class="flex items-center gap-1.5"><svg class="w-5 h-5 md:w-6 md:h-6" fill="#6D00CC" viewBox="0 0 24 24"><path d="M13.38 3.498c-.27 0-.511.19-.566.465L9.85 18.986a.578.578 0 0 0 .453.678l4.095.826a.58.58 0 0 0 .682-.455l2.963-15.021a.578.578 0 0 0-.453-.678l-4.096-.826a.589.589 0 0 0-.113-.012zm-5.876.098a.576.576 0 0 0-.516.318L.062 17.697a.575.575 0 0 0 .256.774l3.733 1.877a.578.578 0 0 0 .775-.258l6.926-13.781a.577.577 0 0 0-.256-.776L7.762 3.658a.571.571 0 0 0-.258-.062zm11.74.115a.576.576 0 0 0-.576.576v15.426c0 .318.258.578.576.578h4.178a.58.58 0 0 0 .578-.578V4.287a.578.578 0 0 0-.578-.576Z"/></svg><span class="text-xs md:text-sm font-semibold text-neutral-600">Make</span></div>
+      <div class="flex items-center gap-1.5"><svg class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24"><circle cx="5" cy="12" r="3" fill="#EA4B71"/><circle cx="19" cy="6" r="3" fill="#EA4B71"/><circle cx="19" cy="18" r="3" fill="#EA4B71"/><path d="M7.5 10.5L16.5 7M7.5 13.5l9 3.5" stroke="#EA4B71" stroke-width="1.5" fill="none"/></svg><span class="text-xs md:text-sm font-semibold text-neutral-600">n8n</span></div>
+      <div class="flex items-center gap-1.5"><svg class="w-5 h-5 md:w-6 md:h-6" fill="#009688" viewBox="0 0 24 24"><path d="M12 0C5.375 0 0 5.375 0 12c0 6.627 5.375 12 12 12 6.626 0 12-5.373 12-12 0-6.625-5.373-12-12-12zm-.624 21.62v-7.528H7.6L13.203 2.38v7.528h3.776L11.376 21.62z"/></svg><span class="text-xs md:text-sm font-semibold text-neutral-600">FastAPI</span></div>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+      <div class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-neutral-100 rounded-full shadow-sm"><svg class="w-3.5 h-3.5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span class="text-xs font-medium text-neutral-600">GDPR</span></div>
+      <div class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-neutral-100 rounded-full shadow-sm"><svg class="w-3.5 h-3.5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg><span class="text-xs font-medium text-neutral-600">SSL</span></div>
+      <div class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-neutral-100 rounded-full shadow-sm"><svg class="w-3.5 h-3.5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span class="text-xs font-medium text-neutral-600">{locale === 'ro' ? 'Date în UE' : 'EU Data'}</span></div>
+      <div class="flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 border border-amber-200/60 rounded-full shadow-sm"><svg class="w-3.5 h-3.5 text-accent-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span class="text-xs font-semibold text-amber-700">{locale === 'ro' ? 'Pilot gratuit 14 zile' : '14-day free pilot'}</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 3: SYSTEMS (White bg)                -->
 <!-- ============================================ -->
 <section class="py-12 md:py-20 lg:py-28 bg-white">
   <div class="container-lg">
@@ -307,9 +336,32 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
 </section>
 
 <!-- ============================================ -->
-<!-- SECTION 5: BENEFITS (White bg)               -->
+<!-- SECTION 6: MID-PAGE CTA (White bg)            -->
 <!-- ============================================ -->
-<section class="py-12 md:py-20 lg:py-28 bg-white">
+<section class="py-10 md:py-14 bg-white">
+  <div class="container-lg">
+    <div class="max-w-xl mx-auto text-center px-4 md:px-0">
+      <p class="text-lg md:text-xl font-bold text-neutral-750 mb-4">
+        {locale === 'ro' ? 'Vrei să vezi cum funcționează în practică?' : 'Want to see how it works in practice?'}
+      </p>
+      <a
+        href={demoPath}
+        class="group inline-flex items-center gap-2.5 px-7 py-3.5 font-semibold text-white text-base bg-accent-500 hover:bg-accent-600 shadow-soft transition-all duration-300 hover:-translate-y-0.5"
+        style="border-radius: 12px;"
+      >
+        {locale === 'ro' ? 'Vreau evaluarea mea gratuită' : 'I want my free evaluation'}
+        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 7: BENEFITS (bg-neutral-50)          -->
+<!-- ============================================ -->
+<section class="py-12 md:py-20 lg:py-28 bg-neutral-50">
   <div class="container-lg">
     <!-- Header -->
     <div class="text-center mb-8 md:mb-16 px-4 md:px-0">
@@ -420,31 +472,63 @@ const servicesPath = buildLocalePath('/', locale) + '#services';
 </section>
 
 <!-- ============================================ -->
-<!-- SECTION 7: CTA (Dark gradient)               -->
+<!-- SECTION 9: CTA (Dark gradient — Stripe-style)-->
 <!-- ============================================ -->
-<section class="py-12 md:py-20 lg:py-28 bg-gradient-dark relative overflow-hidden">
-  <!-- Decorative elements -->
-  <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl"></div>
+<section class="relative py-16 md:py-24 lg:py-28 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-dark"></div>
+  <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(rgba(148, 163, 184, 0.12) 1px, transparent 1px); background-size: 32px 32px;"></div>
 
-  <div class="container-lg relative">
-    <div class="max-w-2xl mx-auto text-center px-4 md:px-0">
-      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 md:mb-4">
-        {si.cta.title}
-      </h2>
-      <p class="text-base md:text-lg text-slate-300 mb-6 md:mb-8">
-        {si.cta.subtitle}
-      </p>
-      <Button
-        href={demoPath}
-        variant="gradient"
-        size="lg"
+  <div class="container-lg relative z-10 text-center px-4 md:px-0">
+    <span class="inline-block px-4 py-1.5 bg-white/5 text-accent-300 rounded-full text-sm font-medium mb-6 border border-white/10">
+      {si.cta.eyebrow}
+    </span>
+
+    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 md:mb-6 leading-tight max-w-3xl mx-auto">
+      {si.cta.title}
+    </h2>
+    <p class="text-base md:text-lg text-slate-400 mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
+      {si.cta.subtitle}
+    </p>
+
+    <div class="flex items-center justify-center">
+      <a
+        href={demoPath + '?source=service-integrations'}
+        class="group relative inline-flex items-center gap-2.5 px-8 py-4 font-semibold text-white text-lg bg-accent-500 hover:bg-accent-600 shadow-soft transition-all duration-300 hover:-translate-y-0.5"
+        style="border-radius: 16px;"
       >
         {si.cta.button}
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
-      </Button>
+        <div class="absolute inset-0 bg-accent-500 blur-xl opacity-40 group-hover:opacity-60 transition-opacity -z-10" style="border-radius: 16px;"></div>
+      </a>
+    </div>
+
+    <div class="mt-8 inline-flex items-center gap-3 px-5 py-3 bg-white/5 border border-white/10 rounded-2xl">
+      <span class="flex-shrink-0 w-8 h-8 bg-accent-500/20 rounded-full flex items-center justify-center">
+        <svg class="w-4 h-4 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </span>
+      <div class="text-left">
+        <p class="text-sm font-semibold text-white">{si.cta.pilotTitle}</p>
+        <p class="text-xs text-slate-400">{si.cta.pilotDescription}</p>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-slate-500">
+      <span class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        {si.cta.trustNoObligation}
+      </span>
+      <span class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        {si.cta.trust30min}
+      </span>
+      <span class="flex items-center gap-1.5">
+        <svg class="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+        {si.cta.trustResponse}
+      </span>
     </div>
   </div>
 </section>
