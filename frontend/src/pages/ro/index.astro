@@ -6,7 +6,7 @@
  * Flow NOU (vezi docs/STRATEGY.md secțiunea 7.4):
  *
  * 1. HeroInteractive - Demo chat în primele 5 secunde
- * 2. BenefitsStrip - Impact vizual instant (6 beneficii)
+ * 2. TrustBar - Social proof compact (logos + badges)
  * 3. Services - Ce oferim
  * 4. UseCases - "Ți se pare familiar?" (auto-identificare)
  * 5. IntegrationHub - "Ce se întâmplă în spate" (vizual) [DARK]
@@ -18,7 +18,6 @@
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import HeroInteractive from '@components/sections/HeroInteractive.astro';
-import BenefitsStrip from '@components/sections/BenefitsStrip.astro';
 import TrustBar from '@components/sections/TrustBar.astro';
 import Services from '@components/sections/Services.astro';
 import UseCases from '@components/sections/UseCases.astro';
@@ -95,7 +94,6 @@ const pageSchema = {
   schema={pageSchema}
 >
   <HeroInteractive locale={locale} />
-  <BenefitsStrip locale={locale} />
   <TrustBar locale={locale} />
   <Services locale={locale} />
   <UseCases locale={locale} />

@@ -1,10 +1,10 @@
 ---
 /**
- * TrustBar Section Component — v5
+ * TrustBar Section Component — v6 (compact)
  *
- * Technology partner logos (always colored, larger) + security trust badges.
- * "Borrowed credibility" — visitors trust platforms they already know.
- * Icons use permanent brand colors for instant recognition.
+ * Single-row social proof bar between Hero and Services.
+ * Pattern: Stripe/Vercel — minimal logo strip as sole transition element.
+ * Technology partner logos (always colored) + trust badges inline.
  *
  * Platforms: VAPI, ElevenLabs, Retell, WhatsApp, Google Calendar, Twilio, Make.com, n8n, FastAPI, Modal, Trigger.dev
  */
@@ -17,40 +17,30 @@ const { locale = 'ro' } = Astro.props;
 const isRo = locale === 'ro';
 ---
 
-<section class="py-10 md:py-14 bg-gradient-to-b from-neutral-50/80 to-white relative overflow-hidden">
-  <!-- Top decorative line -->
-  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent"></div>
-
+<section class="py-5 md:py-6 bg-white border-y border-neutral-100">
   <div class="container-lg">
-    <!-- Section label -->
-    <div class="text-center mb-7 md:mb-9">
-      <p class="text-xs md:text-sm text-neutral-500 uppercase tracking-[0.15em] font-semibold">
-        {isRo ? 'Integrat cu platforme de încredere' : 'Integrated with trusted platforms'}
-      </p>
-    </div>
-
-    <!-- Technology logos — always colored for instant recognition, larger icons -->
-    <div class="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-9 lg:gap-x-11 gap-y-5 mb-9 md:mb-11">
+    <!-- Logos + Badges in one unified flex row -->
+    <div class="flex flex-wrap items-center justify-center gap-x-5 md:gap-x-7 lg:gap-x-9 gap-y-3">
 
       <!-- VAPI -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="#6366F1" stroke-width="2.2" stroke-linecap="round">
+      <div class="flex items-center gap-1.5">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" viewBox="0 0 24 24" stroke="#6366F1" stroke-width="2.2" stroke-linecap="round">
           <path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">VAPI</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">VAPI</span>
       </div>
 
       <!-- ElevenLabs -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="#000000" viewBox="0 0 24 24">
+      <div class="flex items-center gap-1.5">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="#000000" viewBox="0 0 24 24">
           <path d="M4.6035 0v24h4.9317V0zm9.8613 0v24h4.9317V0z"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">ElevenLabs</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">ElevenLabs</span>
       </div>
 
-      <!-- Retell (official logo — 8 dots pattern) -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" viewBox="0 0 20 20" fill="#0E121B">
+      <!-- Retell -->
+      <div class="flex items-center gap-1.5">
+        <svg class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 20 20" fill="#0E121B">
           <circle cx="7.13" cy="18.13" r="1.82"/>
           <circle cx="12.32" cy="18.13" r="1.82"/>
           <circle cx="1.82" cy="12.67" r="1.82"/>
@@ -60,123 +50,116 @@ const isRo = locale === 'ro';
           <circle cx="7.13" cy="1.87" r="1.82"/>
           <circle cx="12.32" cy="1.87" r="1.82"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Retell</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">Retell</span>
       </div>
 
       <!-- WhatsApp -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="#25D366" viewBox="0 0 24 24">
+      <div class="flex items-center gap-1.5">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="#25D366" viewBox="0 0 24 24">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">WhatsApp</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">WhatsApp</span>
       </div>
 
       <!-- Google Calendar -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="#4285F4" viewBox="0 0 24 24">
+      <div class="flex items-center gap-1.5">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="#4285F4" viewBox="0 0 24 24">
           <path d="M19.5 3h-3V1.5a.75.75 0 00-1.5 0V3h-6V1.5a.75.75 0 00-1.5 0V3h-3A1.5 1.5 0 003 4.5v15A1.5 1.5 0 004.5 21h15a1.5 1.5 0 001.5-1.5v-15A1.5 1.5 0 0019.5 3zM19.5 19.5h-15V8.25h15v11.25z"/>
           <path d="M8.25 11.25h2.25v2.25H8.25zM8.25 15h2.25v2.25H8.25zM12.75 11.25H15v2.25h-2.25zM12.75 15H15v2.25h-2.25z" opacity="0.5"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Google Calendar</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500 hidden lg:inline">Google Calendar</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500 lg:hidden">Calendar</span>
       </div>
 
       <!-- Twilio -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="#F22F46" viewBox="0 0 24 24">
+      <div class="flex items-center gap-1.5">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="#F22F46" viewBox="0 0 24 24">
           <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 20.5c-4.687 0-8.5-3.813-8.5-8.5S7.313 3.5 12 3.5s8.5 3.813 8.5 8.5-3.813 8.5-8.5 8.5z"/>
           <circle cx="8.5" cy="8.5" r="1.8"/>
           <circle cx="15.5" cy="8.5" r="1.8"/>
           <circle cx="8.5" cy="15.5" r="1.8"/>
           <circle cx="15.5" cy="15.5" r="1.8"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Twilio</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">Twilio</span>
       </div>
 
-      <!-- Make.com (official logo — tilted dominos) -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="#6D00CC" viewBox="0 0 24 24">
+      <!-- Make.com -->
+      <div class="flex items-center gap-1.5">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="#6D00CC" viewBox="0 0 24 24">
           <path d="M13.38 3.498c-.27 0-.511.19-.566.465L9.85 18.986a.578.578 0 0 0 .453.678l4.095.826a.58.58 0 0 0 .682-.455l2.963-15.021a.578.578 0 0 0-.453-.678l-4.096-.826a.589.589 0 0 0-.113-.012zm-5.876.098a.576.576 0 0 0-.516.318L.062 17.697a.575.575 0 0 0 .256.774l3.733 1.877a.578.578 0 0 0 .775-.258l6.926-13.781a.577.577 0 0 0-.256-.776L7.762 3.658a.571.571 0 0 0-.258-.062zm11.74.115a.576.576 0 0 0-.576.576v15.426c0 .318.258.578.576.578h4.178a.58.58 0 0 0 .578-.578V4.287a.578.578 0 0 0-.578-.576Z"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Make</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">Make</span>
       </div>
 
       <!-- n8n -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" viewBox="0 0 24 24">
+      <div class="flex items-center gap-1.5">
+        <svg class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24">
           <circle cx="5" cy="12" r="3" fill="#EA4B71"/>
           <circle cx="19" cy="6" r="3" fill="#EA4B71"/>
           <circle cx="19" cy="18" r="3" fill="#EA4B71"/>
           <path d="M7.5 10.5L16.5 7M7.5 13.5l9 3.5" stroke="#EA4B71" stroke-width="1.5" fill="none"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">n8n</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">n8n</span>
       </div>
 
       <!-- FastAPI -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" fill="#009688" viewBox="0 0 24 24">
+      <div class="flex items-center gap-1.5 hidden md:flex">
+        <svg class="w-5 h-5 md:w-6 md:h-6" fill="#009688" viewBox="0 0 24 24">
           <path d="M12 0C5.375 0 0 5.375 0 12c0 6.627 5.375 12 12 12 6.626 0 12-5.373 12-12 0-6.625-5.373-12-12-12zm-.624 21.62v-7.528H7.6L13.203 2.38v7.528h3.776L11.376 21.62z"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">FastAPI</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">FastAPI</span>
       </div>
 
-      <!-- Modal (official logo — overlapping green diamonds) -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none">
+      <!-- Modal -->
+      <div class="flex items-center gap-1.5 hidden md:flex">
+        <svg class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none">
           <path d="M4 12L10 4l6 8-6 8z" fill="#62DE61"/>
           <path d="M10 12l6-8 6 8-6 8z" fill="#09AF58"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Modal</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">Modal</span>
       </div>
 
-      <!-- Trigger.dev (official logo — green upward triangle) -->
-      <div class="flex items-center gap-2.5 group">
-        <svg class="w-7 h-7 md:w-8 md:h-8" viewBox="0 0 24 24" fill="none">
+      <!-- Trigger.dev -->
+      <div class="flex items-center gap-1.5 hidden lg:flex">
+        <svg class="w-5 h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none">
           <path d="M12 3L22 21H2L12 3z" fill="#4ADE80"/>
           <path d="M12 7L18 19H6L12 7z" fill="#22C55E"/>
         </svg>
-        <span class="text-sm md:text-base font-semibold text-neutral-700 group-hover:text-neutral-900 transition-colors">Trigger.dev</span>
+        <span class="text-xs md:text-sm font-semibold text-neutral-500">Trigger.dev</span>
       </div>
-    </div>
 
-    <!-- Thin divider -->
-    <div class="w-12 h-px bg-neutral-200 mx-auto mb-7 md:mb-9"></div>
+      <!-- Visual separator -->
+      <div class="hidden md:block w-px h-5 bg-neutral-200"></div>
 
-    <!-- Trust badges -->
-    <div class="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-      <!-- GDPR -->
-      <div class="flex items-center gap-2 px-4 py-2.5 bg-white border border-neutral-100 rounded-full shadow-sm">
+      <!-- Trust badges inline -->
+      <div class="flex items-center gap-1.5">
         <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
-        <span class="text-xs md:text-sm font-medium text-neutral-600">GDPR Compliant</span>
+        <span class="text-xs font-medium text-neutral-500">GDPR</span>
       </div>
 
-      <!-- SSL -->
-      <div class="flex items-center gap-2 px-4 py-2.5 bg-white border border-neutral-100 rounded-full shadow-sm">
+      <div class="flex items-center gap-1.5">
         <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
-        <span class="text-xs md:text-sm font-medium text-neutral-600">SSL Encrypted</span>
+        <span class="text-xs font-medium text-neutral-500">SSL</span>
       </div>
 
-      <!-- EU Data -->
-      <div class="flex items-center gap-2 px-4 py-2.5 bg-white border border-neutral-100 rounded-full shadow-sm">
+      <div class="flex items-center gap-1.5">
         <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <span class="text-xs md:text-sm font-medium text-neutral-600">{isRo ? 'Date procesate în UE' : 'EU data processing'}</span>
+        <span class="text-xs font-medium text-neutral-500">{isRo ? 'Date UE' : 'EU Data'}</span>
       </div>
 
-      <!-- Pilot gratuit — highlighted -->
-      <div class="flex items-center gap-2 px-4 py-2.5 bg-amber-50 border border-amber-200/60 rounded-full shadow-sm">
+      <div class="flex items-center gap-1.5">
         <svg class="w-4 h-4 text-accent-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <span class="text-xs md:text-sm font-semibold text-amber-700">{isRo ? 'Pilot gratuit 14 zile' : '14-day free pilot'}</span>
+        <span class="text-xs font-semibold text-amber-700">{isRo ? 'Pilot gratuit 14 zile' : '14-day free pilot'}</span>
       </div>
+
     </div>
   </div>
-
-  <!-- Bottom decorative line -->
-  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent"></div>
 </section>

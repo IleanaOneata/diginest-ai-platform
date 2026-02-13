@@ -6,7 +6,7 @@
  * NEW Flow (see docs/STRATEGY.md section 7.4):
  *
  * 1. HeroInteractive - Chat demo in the first 5 seconds
- * 2. BenefitsStrip - Instant visual impact (6 benefits)
+ * 2. TrustBar - Compact social proof (logos + badges)
  * 3. Services - What we offer
  * 4. UseCases - "Sound familiar?" (self-identification)
  * 5. IntegrationHub - "What happens behind the scenes" (visual) [DARK]
@@ -18,7 +18,6 @@
 
 import BaseLayout from '@layouts/BaseLayout.astro';
 import HeroInteractive from '@components/sections/HeroInteractive.astro';
-import BenefitsStrip from '@components/sections/BenefitsStrip.astro';
 import TrustBar from '@components/sections/TrustBar.astro';
 import Services from '@components/sections/Services.astro';
 import UseCases from '@components/sections/UseCases.astro';
@@ -95,7 +94,6 @@ const pageSchema = {
   schema={pageSchema}
 >
   <HeroInteractive locale={locale} />
-  <BenefitsStrip locale={locale} />
   <TrustBar locale={locale} />
   <Services locale={locale} />
   <UseCases locale={locale} />
