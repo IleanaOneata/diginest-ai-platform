@@ -69,10 +69,15 @@
 54. ✅ **Backend Email Color Sync** - EmailService.java: cyan (#06b6d4) → amber (#D97706), teal backgrounds → amber backgrounds. Consistență brand în email templates
 55. ✅ **Conversion Optimization (CRO)** - Copy outcome-focused pe tot site-ul bazat pe psihologie: loss aversion ("Niciun client pierdut. Niciun apel ratat."), first-person CTAs ("Vreau evaluarea mea gratuită" +90% CTR), endowment effect ("asistentul tău"), CTA-uri unificate → `/demo/` + "Evaluare gratuită". Vezi `docs/CONVERSION-PSYCHOLOGY.md`
 56. ✅ **Social Proof fără Testimoniale** - TrustBar (logos parteneri tech + badge-uri trust), GDPR/SSL/EU security badges pe formulare, pilot gratuit 14 zile pe CTA. Vezi `docs/SOCIAL-PROOF-STRATEGY.md`
-57. ✅ **TrustBar Component** - Strip nou pe homepage cu 6 logos parteneri tech (VAPI, WhatsApp, Google Calendar, Twilio, CRM, Vercel) + 4 badge-uri trust (GDPR, SSL, EU Data, 14-day pilot)
+57. ✅ **TrustBar Component** - Strip pe homepage cu 11 logos parteneri tech (VAPI, ElevenLabs, Retell, WhatsApp, Google Calendar, Twilio, Make, n8n, FastAPI, Modal, Trigger.dev) cu culori brand permanente + 4 badge-uri trust (GDPR, SSL, EU Data, 14-day pilot)
 58. ✅ **Fix i18n ConversationalAgentsPage** - "Problema:"/"Soluția:" erau hardcoded RO → acum locale-aware
 59. ✅ **CTA Unification** - Toate CTA-urile de pe site duc la `/demo/` (nu `/contact/`). Text unificat: "Evaluare gratuită" pe toate paginile de servicii + About
 60. ✅ **VoiceWidget AI Jargon Removal** - Eliminat toate referințele la "AI" din widget: "agentul AI" → "asistentul tău", "demo vocal AI" → "demo live · ascultă cum sună"
+61. ✅ **TrustBar v5 — Real Brand Logos** - Logo-uri reale SVG cu culori brand permanente (nu grayscale-on-hover). Make.com (official tilted dominos), Retell (8-dots pattern de pe retellai.com), ElevenLabs (two bars "11"), Modal (overlapping green diamonds), Trigger.dev (green triangle). Iconuri mărite w-7/h-7 → w-8/h-8
+62. ✅ **Fix diacritice RO** - Corectat 6 instanțe "conversational" → "conversațional" în traducerile vizibile pe pagina Agenți Conversaționali
+63. ✅ **Browser Tab Title** - Tagline schimbat: "Agenți AI pentru afacerea ta" → "Automatizare AI pentru business" (RO), "AI Agents for your business" → "AI Automation for Business" (EN). Tab: `GENERATIVA - Automatizare AI pentru business`
+64. ✅ **Logo Spacing Fix** - Revenit la `<text>` SVG nativ cu font Prompt (kerning perfect de browser) în loc de path-uri convertite care pierduseră kerning-ul. Spațierea e acum identică cu fișierele SVG originale
+65. ✅ **Logo Size & Color Refinement** - Logo mărit (h-9/h-10 vs h-8/h-9), culoare soft: `#0B0B0B` → `#263244` (neutral-750, aceeași nuanță ca titlurile paginii). Subtitlu: `#666` → `#7A8694`
 
 ### În lucru:
 - [ ] Test complet pe staging (verificare vizuală preview URL Vercel)
@@ -242,8 +247,9 @@ Cu `primary` = slate scale, clasele `text-primary-400` pe secțiuni dark devin *
 - **Component**: `frontend/src/components/common/Logo.astro`
 - **Design**: Inline SVG cu font **Prompt** — GENERATIVA wordmark + "AI AUTOMATION" subtitle + toggle symbol (ON state)
 - **SVG Files**: `/images/generativa-logo-black.svg` (light bg), `/images/generativa-logo-white.svg` (dark bg)
-- **Variante**: `default` (pe light, fill `#0B0B0B`), `white` (pe dark, fill `white`), `dark` (pe light, fill `#0B0B0B`)
-- **Sizes**: `sm` (h-8), `md` (h-8 lg:h-9, minWidth 160px), `lg` (h-12), `xl` (h-16)
+- **Variante**: `default` (pe light, fill `#263244` neutral-750), `white` (pe dark, fill `white`), `dark` (pe light, fill `#263244`)
+- **Sizes**: `sm` (h-8), `md` (h-9 lg:h-10, minWidth 180px), `lg` (h-12), `xl` (h-16)
+- **Subtitle color**: `#7A8694` (light bg), `#8A8A8A` (dark bg)
 - **Font Logo**: **Prompt** 700 (wordmark), Prompt 500 (subtitle) — hardcodat în SVG `font-family`, independent de Tailwind
 - **Font UI**: **Inter** — tot restul site-ului (body, headings, buttons) folosește Inter via `fontFamily.sans`
 - **Toggle symbol**: Rounded rect + circle knob la dreapta wordmark-ului
@@ -1597,6 +1603,25 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 - **Documente create**: `docs/CONVERSION-PSYCHOLOGY.md`, `docs/SOCIAL-PROOF-STRATEGY.md`, `docs/BUSINESS-LAUNCH-PLAYBOOK.md`
 - **UX Audit actualizat**: Scor global 7.9 → 8.6 (+0.7)
 - **Homepage flow actualizat**: 10 secțiuni (Hero → BenefitsStrip → TrustBar → Services → UseCases → IntegrationHub → Process → ScaleWithConfidence → FAQ → CTA)
+
+### Sesiune Februarie 2026 - TrustBar Real Logos, Logo Spacing & Tab Title
+- **TrustBar evoluat prin 5 versiuni** (v1→v5):
+  - v1: Placeholder icons generice, neutral-400 → respins ("greyed out")
+  - v2: SVG-uri reale dar grayscale cu color doar pe hover → respins ("tot greyed out")
+  - v3: Culori brand permanente (fără grayscale) → ok
+  - v4: Fix logo Make.com (official tilted dominos SVG), adăugat ElevenLabs + Retell, iconuri mărite
+  - v5: Fix logo Retell (8-dots pattern extras de pe retellai.com), adăugat Modal + Trigger.dev
+- **11 platforme finale**: VAPI, ElevenLabs, Retell, WhatsApp, Google Calendar, Twilio, Make, n8n, FastAPI, Modal, Trigger.dev
+- **Lecție TrustBar**: "Borrowed credibility" necesită culori brand permanente — vizitatorii trebuie să recunoască logo-urile instant fără interacțiune. Grayscale-on-hover e contraproductiv.
+- **DemoForm fix**: Eliminat text repetitiv "100% gratuit. 30 de minute. Fără obligații" (duplica subtitlul formularului)
+- **Fix diacritice**: 6 instanțe "conversational" → "conversațional" în textele RO vizibile
+- **Browser tab title**: "Agenți AI pentru afacerea ta" → "Automatizare AI pentru business" (mai descriptiv, fără repetare cu hero)
+- **Logo spacing fix** (2 iterații):
+  1. Încercat recalculare manuală a gap-urilor între path coordinates → nu a rezolvat
+  2. **Soluția corectă**: Revenit la `<text>` SVG nativ cu font Prompt (fișierele originale `generativa-logo-black.svg` foloseau `<text>`, nu `<path>`). Browserul face kerning-ul perfect din font metrics.
+  - **Lecție critică**: NU converti text SVG la path-uri manual — pierzi tabelele de kerning ale fontului. Folosește `<text>` cu `font-family` și lasă browserul să calculeze spacing-ul.
+- **Logo color & size**: `#0B0B0B` (near-black) → `#263244` (neutral-750, aceeași culoare ca titlurile paginii). Mărit de la h-8/h-9 la h-9/h-10.
+- **Commits**: `b497195` (TrustBar v2), `5953b16` (v3), `19decb8` (v4), `d52b258` (v5), `291bcbe` (diacritice), `c3bb3dd` (tab title), `38e65b9` (logo text fix), `bbe8ef1` (logo size/color)
 
 ---
 
