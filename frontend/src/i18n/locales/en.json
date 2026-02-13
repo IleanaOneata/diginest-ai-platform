@@ -143,6 +143,10 @@
         "answer": "AI agents are intelligent software programs that can autonomously perform complex tasks. Unlike simple rule-based automations, AI agents can make decisions, learn from experience, and adapt to new situations."
       },
       {
+        "question": "How much do GENERATIVA services cost?",
+        "answer": "Plans start from €200/month, depending on complexity and the number of channels. The setup fee varies based on each business's specifics and is determined after the free evaluation. We offer a 14-day free pilot with no obligations, so you can test before you invest."
+      },
+      {
         "question": "How long does it take to implement an AI agent?",
         "answer": "Implementation takes between 2-8 weeks depending on the complexity of the automated process and required integrations. We start with a functional MVP and iterate based on feedback."
       },
@@ -153,10 +157,6 @@
       {
         "question": "What systems can be integrated with AI agents?",
         "answer": "Our agents integrate with most popular systems: CRM (Salesforce, HubSpot), ERP (SAP, Odoo), ticketing systems, email, chat platforms, and many more."
-      },
-      {
-        "question": "How much do GENERATIVA services cost?",
-        "answer": "Plans start from €200/month, depending on complexity and the number of channels. The setup fee varies based on each business's specifics and is determined after the free evaluation. We offer a 14-day free pilot with no obligations, so you can test before you invest."
       }
     ]
   },
@@ -361,6 +361,7 @@
       "title": "Our Story",
       "paragraphs": [
         "It all started with a simple question: Why does a dental clinic lose new patients just because reception closes after 6 PM?",
+        "With experience in automation, artificial intelligence and enterprise integrations, we've spent years working with systems that handle thousands of interactions per hour. We've seen what works and what doesn't. And we understood that the solution for small businesses isn't a cheap version of what corporations have — it's something entirely different.",
         "We saw excellent businesses - dedicated doctors, restaurants with amazing food, trustworthy auto shops - losing customers because they couldn't answer the phone after hours.",
         "It wasn't their fault. It was a human limitation that technology can solve.",
         "That's how GENERATIVA was born: from the desire to give every business an assistant that never sleeps, never gets tired, and never forgets to be polite."
@@ -413,19 +414,20 @@
         }
       ]
     },
-    "stats": {
-      "title": "The Numbers Speak",
+    "guarantee": {
+      "title": "Our Promise",
       "items": [
-        { "value": "50+", "label": "Businesses that trusted us" },
-        { "value": "100K+", "label": "Conversations handled by our agents" },
-        { "value": "4.9", "label": "Average satisfaction rating (out of 5)" },
-        { "value": "< 1s", "label": "Average response time" }
+        { "value": "14", "unit": "days", "label": "Free pilot, no obligations. Test before you invest.", "icon": "calendar" },
+        { "value": "<1", "unit": "s", "label": "Assistant response time, regardless of volume.", "icon": "bolt" },
+        { "value": "0", "unit": "cost", "label": "If you're not satisfied with results, you don't pay.", "icon": "shield" },
+        { "value": "24", "unit": "/7", "label": "Non-stop availability, including weekends and holidays.", "icon": "clock" }
       ]
     },
     "cta": {
-      "title": "Let's see if we can help",
-      "subtitle": "A 15-minute conversation shows us if we're a good fit. No sales pitches, no pressure - just clarity.",
-      "button": "Free evaluation"
+      "eyebrow": "Free evaluation — 30 min",
+      "title": "Ready to stop losing customers?",
+      "subtitle": "A 30-minute conversation shows us if we're a good fit. No sales pitches, no pressure.",
+      "button": "I want my free evaluation"
     }
   },
 

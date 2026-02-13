@@ -143,6 +143,10 @@
         "answer": "Agenții AI sunt programe software inteligente care pot îndeplini sarcini complexe autonom. Spre deosebire de automatizările simple bazate pe reguli, agenții AI pot lua decizii, învăța din experiență și se adapta la situații noi."
       },
       {
+        "question": "Cât costă serviciile GENERATIVA?",
+        "answer": "Planurile pornesc de la 200€/lună, în funcție de complexitate și numărul de canale. Taxa de setup variază în funcție de specificul fiecărui business și se stabilește după evaluarea gratuită. Oferim pilot gratuit 14 zile fără obligații, astfel încât poți testa înainte de a investi."
+      },
+      {
         "question": "Cât durează implementarea unui agent AI?",
         "answer": "Implementarea durează între 2-8 săptămâni în funcție de complexitatea procesului automatizat și integrările necesare. Începem cu un MVP funcțional și iterăm pe baza feedback-ului."
       },
@@ -153,10 +157,6 @@
       {
         "question": "Ce sisteme pot fi integrate cu agenții AI?",
         "answer": "Agenții noștri se integrează cu majoritatea sistemelor populare: CRM (Salesforce, HubSpot), ERP (SAP, Odoo), sisteme de ticketing, email, chat platforms și multe altele."
-      },
-      {
-        "question": "Cât costă serviciile GENERATIVA?",
-        "answer": "Planurile pornesc de la 200€/lună, în funcție de complexitate și numărul de canale. Taxa de setup variază în funcție de specificul fiecărui business și se stabilește după evaluarea gratuită. Oferim pilot gratuit 14 zile fără obligații, astfel încât poți testa înainte de a investi."
       }
     ]
   },
@@ -361,6 +361,7 @@
       "title": "Povestea noastră",
       "paragraphs": [
         "Totul a început cu o întrebare simplă: De ce o clinică dentară pierde pacienți noi doar pentru că recepția e închisă după ora 18:00?",
+        "Cu experiență în automatizare, inteligență artificială și integrări enterprise, am lucrat ani de zile cu sisteme care gestionează mii de interacțiuni pe oră. Am văzut ce funcționează și ce nu. Și am înțeles că soluția pentru business-ul mic nu e o versiune ieftină a ce au corporațiile — e ceva complet diferit.",
         "Am văzut afaceri excelente - doctori dedicați, restaurante cu mâncare extraordinară, service-uri auto de încredere - care pierdeau clienți pentru că nu puteau răspunde la telefon în afara programului.",
         "Nu era vina lor. Era o limitare umană pe care tehnologia o poate rezolva.",
         "Așa s-a născut GENERATIVA: din dorința de a oferi fiecărei afaceri un asistent care nu doarme, nu obosește și nu uită niciodată să fie politicos."
@@ -413,19 +414,20 @@
         }
       ]
     },
-    "stats": {
-      "title": "Numerele vorbesc",
+    "guarantee": {
+      "title": "Promisiunea noastră",
       "items": [
-        { "value": "50+", "label": "Afaceri care ne-au acordat încrederea" },
-        { "value": "100K+", "label": "Conversații gestionate de agenții noștri" },
-        { "value": "4.9", "label": "Rating mediu de satisfacție (din 5)" },
-        { "value": "< 1s", "label": "Timp mediu de răspuns" }
+        { "value": "14", "unit": "zile", "label": "Pilot gratuit, fără obligații. Testezi înainte să investești.", "icon": "calendar" },
+        { "value": "<1", "unit": "s", "label": "Timp de răspuns al asistentului, indiferent de volum.", "icon": "bolt" },
+        { "value": "0", "unit": "lei", "label": "Dacă nu ești mulțumit cu rezultatele, nu plătești.", "icon": "shield" },
+        { "value": "24", "unit": "/7", "label": "Disponibilitate non-stop, inclusiv weekenduri și sărbători.", "icon": "clock" }
       ]
     },
     "cta": {
-      "title": "Hai să vedem dacă te putem ajuta",
-      "subtitle": "O conversație de 15 minute ne arată dacă suntem potriviți. Fără pitch-uri de vânzare, fără presiune - doar claritate.",
-      "button": "Evaluare gratuită"
+      "eyebrow": "Evaluare gratuită — 30 min",
+      "title": "Ești pregătit să nu mai pierzi clienți?",
+      "subtitle": "O conversație de 30 de minute ne arată dacă suntem potriviți. Fără pitch-uri de vânzare, fără presiune.",
+      "button": "Vreau evaluarea mea gratuită"
     }
   },
 
