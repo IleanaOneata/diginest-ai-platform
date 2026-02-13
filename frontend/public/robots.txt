@@ -1,10 +1,10 @@
-# Robots.txt for diginest.ai
+# Robots.txt for generativa.ro
 
 User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://diginest.ai/sitemap-index.xml
+Sitemap: https://generativa.ro/sitemap-index.xml
 
 # Disallow admin or private areas (when they exist)
 # Disallow: /admin/

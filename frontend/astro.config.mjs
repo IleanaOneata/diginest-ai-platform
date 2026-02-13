@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-// import sitemap from '@astrojs/sitemap'; // Temporarily disabled
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://diginest-ai-platform.vercel.app',
+  site: 'https://generativa.ro',
 
   // Default language and i18n configuration
   i18n: {
@@ -17,7 +17,7 @@ export default defineConfig({
 
   integrations: [
     tailwind(),
-    // sitemap(), // Temporarily disabled - will fix later
+    sitemap(),
   ],
 
   // Build configuration

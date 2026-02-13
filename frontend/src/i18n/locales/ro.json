@@ -155,8 +155,8 @@
         "answer": "Agenții noștri se integrează cu majoritatea sistemelor populare: CRM (Salesforce, HubSpot), ERP (SAP, Odoo), sisteme de ticketing, email, chat platforms și multe altele."
       },
       {
-        "question": "Care sunt costurile?",
-        "answer": "Costurile depind de complexitatea soluției. Oferim consultanță gratuită pentru a evalua nevoile și a propune o soluție cu buget transparent. ROI-ul tipic este de 3-6 luni."
+        "question": "Cât costă serviciile GENERATIVA?",
+        "answer": "Planurile pornesc de la 200€/lună, în funcție de complexitate și numărul de canale. Taxa de setup variază în funcție de specificul fiecărui business și se stabilește după evaluarea gratuită. Oferim pilot gratuit 14 zile fără obligații, astfel încât poți testa înainte de a investi."
       }
     ]
   },
@@ -551,7 +551,7 @@
       "items": [
         {
           "question": "Cât costă automatizarea proceselor cu AI?",
-          "answer": "Costul depinde de complexitatea proceselor și numărul de integrări necesare. Oferim o consultanță gratuită în care evaluăm procesele tale și propunem o soluție cu buget transparent. În general, investiția se recuperează în primele 3 luni prin timpul și resursele economisite."
+          "answer": "Planurile de automatizare pornesc de la 200€/lună, în funcție de complexitatea proceselor și numărul de integrări. Taxa de setup depinde de specificul fiecărui business și se stabilește după evaluarea gratuită inițială. Investiția se recuperează de obicei în primele 3 luni. Oferim pilot gratuit 14 zile."
         },
         {
           "question": "Cât durează implementarea automatizării?",
@@ -792,7 +792,7 @@
       "items": [
         {
           "question": "Cât costă un agent conversațional AI?",
-          "answer": "Costul depinde de numărul de canale, volumul de interacțiuni și complexitatea integrărilor. Ca referință, un agent AI costă semnificativ mai puțin decât un receptioner full-time (1.500-2.500 EUR/lună). Oferim un demo gratuit și un calcul personalizat de ROI pentru afacerea ta."
+          "answer": "Planurile pentru agenți conversaționali pornesc de la 200€/lună, semnificativ mai puțin decât un receptioner full-time (1.500-2.500€/lună). Taxa de setup variază în funcție de specificul afacerii tale și se stabilește după evaluarea gratuită. Oferim pilot gratuit 14 zile și un calcul personalizat de ROI."
         },
         {
           "question": "Agentul AI înțelege și vorbește în limba română?",
@@ -999,7 +999,7 @@
         },
         {
           "question": "Cât costă o integrare AI pentru o companie mică sau medie?",
-          "answer": "O integrare simplă (1-2 sisteme, conectori standard) costă între 2.000-4.000 EUR. Proiectele complexe multi-sistem cu conectori custom variază între 10.000-25.000 EUR. Oferim consultanță gratuită pentru evaluarea costurilor exacte."
+          "answer": "Planurile cu integrări AI pornesc de la 200€/lună. Taxa de setup depinde de complexitatea proiectului și se stabilește individual după evaluarea gratuită: integrări simple (1-2 sisteme) au un cost de setup diferit față de proiecte complexe multi-sistem cu conectori custom. Oferim pilot gratuit 14 zile."
         },
         {
           "question": "Cât durează implementarea unei integrări AI?",

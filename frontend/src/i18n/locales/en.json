@@ -155,8 +155,8 @@
         "answer": "Our agents integrate with most popular systems: CRM (Salesforce, HubSpot), ERP (SAP, Odoo), ticketing systems, email, chat platforms, and many more."
       },
       {
-        "question": "What are the costs?",
-        "answer": "Costs depend on the solution's complexity. We offer free consultation to assess needs and propose a solution with transparent budget. Typical ROI is 3-6 months."
+        "question": "How much do GENERATIVA services cost?",
+        "answer": "Plans start from €200/month, depending on complexity and the number of channels. The setup fee varies based on each business's specifics and is determined after the free evaluation. We offer a 14-day free pilot with no obligations, so you can test before you invest."
       }
     ]
   },
@@ -551,7 +551,7 @@
       "items": [
         {
           "question": "How much does AI process automation cost?",
-          "answer": "The cost depends on process complexity and the number of required integrations. We offer a free consultation where we evaluate your processes and propose a solution with transparent pricing. Generally, the investment pays for itself within the first 3 months through saved time and resources."
+          "answer": "Automation plans start from €200/month, depending on process complexity and the number of integrations. The setup fee depends on each business's specifics and is determined after the initial free evaluation. The investment typically pays for itself within the first 3 months. We offer a 14-day free pilot."
         },
         {
           "question": "How long does automation implementation take?",
@@ -792,7 +792,7 @@
       "items": [
         {
           "question": "How much does a conversational AI agent cost?",
-          "answer": "The cost depends on the number of channels, interaction volume and integration complexity. As a reference, an AI agent costs significantly less than a full-time receptionist (€1,500-2,500/month). We offer a free demo and a personalized ROI calculation for your business."
+          "answer": "Conversational agent plans start from €200/month, significantly less than a full-time receptionist (€1,500-2,500/month). The setup fee varies based on your business's specifics and is determined after the free evaluation. We offer a 14-day free pilot and a personalized ROI calculation."
         },
         {
           "question": "Does the AI agent understand and speak Romanian?",
@@ -999,7 +999,7 @@
         },
         {
           "question": "How much does AI integration cost for a small or medium business?",
-          "answer": "A simple integration (1-2 systems, standard connectors) costs between €2,000-4,000. Complex multi-system projects with custom connectors range from €10,000-25,000. We offer free consultation for exact cost evaluation."
+          "answer": "Plans with AI integrations start from €200/month. The setup fee depends on project complexity and is determined individually after the free evaluation: simple integrations (1-2 systems) have a different setup cost than complex multi-system projects with custom connectors. We offer a 14-day free pilot."
         },
         {
           "question": "How long does AI integration implementation take?",

@@ -50,9 +50,8 @@ const currentPath = Astro.url.pathname;
 // Use buildAlternatePath for correct path translation (e.g., /ro/despre/ → /en/about/)
 const alternatePath = buildAlternatePath(currentPath, locale, alternateLocale);
 
-// Full URLs - Updated for GENERATIVA
-// TODO: Update to generativa.ro when domain is purchased
-const siteUrl = 'https://diginest-ai-platform.vercel.app';
+// Full URLs - GENERATIVA production domain
+const siteUrl = 'https://generativa.ro';
 const fullCanonicalUrl = canonicalUrl.startsWith('http') ? canonicalUrl : `${siteUrl}${canonicalUrl}`;
 const fullAlternateUrl = `${siteUrl}${alternatePath}`;
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
@@ -66,7 +65,7 @@ const organizationSchema = {
   url: siteUrl,
   logo: {
     '@type': 'ImageObject',
-    url: `${siteUrl}/images/generativa-logo.png`,
+    url: `${siteUrl}/images/generativa-logo-512.png`,
     width: 512,
     height: 512,
   },
