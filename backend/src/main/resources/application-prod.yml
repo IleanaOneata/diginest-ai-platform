@@ -18,11 +18,18 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update  # Uses update to auto-create/modify tables safely
+      ddl-auto: validate  # Flyway manages schema; Hibernate only validates
     show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # Flyway database migrations
+  flyway:
+    enabled: true
+    baseline-on-migrate: true  # Existing DB: mark V1 as applied without running it
+    baseline-version: 1
+    locations: classpath:db/migration
 
   # Disable H2 console in production
   h2:

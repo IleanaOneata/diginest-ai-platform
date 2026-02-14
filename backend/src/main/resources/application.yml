@@ -27,6 +27,10 @@ spring:
         format_sql: true
         dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.H2Dialect}
 
+  # Flyway disabled for dev (H2 uses Hibernate ddl-auto: update)
+  flyway:
+    enabled: false
+
   # H2 Console (development only)
   h2:
     console:
