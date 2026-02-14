@@ -83,21 +83,21 @@
 68. ✅ **TrustBar v7→v9 Compactare** - De la 11 la 3 logos client-facing, redesign ca Process Strip (3 pași simpli), BenefitsStrip eliminat, ANPC SAL+SOL pictograme în Footer
 69. ✅ **Hero Visual Upgrade** - Gradient tematic + dot pattern + blur blobs + elemente SVG decorative pe toate 4 paginile interioare (ProcessAutomation, ConversationalAgents, AiIntegrations, About). Teme: gears, speech bubbles+headset, connected nodes+integration diagram, team silhouettes. Stagger animations + ping eyebrow + bottom fade
 70. ✅ **About Scroll Arrows** - Dynamic scroll arrows adăugate pe Approach și Why Us
+71. ✅ **Technical Audit** - Audit complet full-stack: 8 CRITICE, 12 IMPORTANTE, 15 RECOMANDATE. Toate 8 CRITICE fixate (credențiale, IP spoofing, double-encoding, teste, security headers, cookie Secure, VAPI env vars, async executor). Vezi `docs/TECHNICAL-AUDIT.md`
+72. ✅ **VAPI EU Migration** - Migrare pe server EU GDPR-compliant (`api.eu.vapi.ai`), chei noi, SDK pinat v2.5.2, pre-init instanță la IntersectionObserver, preconnect hints
 
 ### În lucru:
+- [ ] Îmbunătățiri IMPORTANTE din audit tehnic (I1-I11)
 - [ ] Verificare vizuală pe staging preview URL
-- [ ] Feedback-uri finale înainte de merge
 
 ### Următorii pași (Prioritizat):
-1. 🔴 [ ] **Verificare staging URL** — Testare vizuală pe cel mai recent preview Vercel
+1. 🔴 [ ] **Audit IMPORTANTE** — I1 CORS, I3 GDPR consent, I8 API URL, I9 fonts, I5 rate limiter
 2. 🔴 [ ] **Setup analytics** — Plausible/Umami (privacy-first) — CRITIC: nu poți măsura nimic fără
 3. 🟡 [ ] **Sticky CTA pe service pages** — Buton fix "Solicită Demo" după scroll 50% (mobile)
 4. 🟡 [ ] **Calendar booking direct** — Integrare Calendly/Cal.com pe pagina demo
-5. 🟡 [ ] **IntegrationHub labels** — Etichete context ("Canale intrare" → "GENERATIVA" → "Sisteme output")
-6. 🟡 [ ] **Șterge fișierul `nul` din root repo** — Cauzează crash Railway CLI pe Windows
-7. 🟢 [ ] **Exit-intent popup** — Ofertă simplificată la abandon (doar desktop)
-8. 🟢 [ ] **Studii de caz** — Primele case studies după pilot-urile gratuite
-9. 🟢 [ ] **Merge staging → main** — Când totul e aprobat
+5. 🟡 [ ] **Șterge fișierul `nul` din root repo** — Cauzează crash Railway CLI pe Windows
+6. 🟢 [ ] **Exit-intent popup** — Ofertă simplificată la abandon (doar desktop)
+7. 🟢 [ ] **Merge staging → main** — Când totul e aprobat
 
 ---
 
@@ -1156,6 +1156,7 @@ container.addEventListener('scroll', updateArrows, { passive: true });
 | Feb 2026 | VAPI `Vapi is not a constructor` | 1. `define:vars` în Astro transformă `<script>` și sparge `import()` dinamic. 2. ESM CDN (jsdelivr) wraps exports cu nested `.default` | 1. Folosit `is:inline` + `data-*` attributes. 2. Fallback chain: `module.default.default \|\| module.default.Vapi \|\| module.default` |
 | Feb 2026 | VAPI eroare necesita refresh browser | După eroare de conexiune, `isInitialized` rămânea `true` dar instanța era coruptă | Reset `isInitialized = false` pe eroare → next click creează instanță nouă via `createVapiInstance()` |
 | Feb 2026 | Railway CLI deploy-uri eșuau mereu | `railway up` nu gestionează Root Directory `/backend` în monorepo | Deploy DOAR via GitHub push pe `main` (auto-deploy) |
+| Feb 2026 | VAPI 401 Unauthorized după migrare EU | VAPI migrat pe server EU (`api.eu.vapi.ai`), chei vechi invalidate | Chei noi + `apiBaseUrl` ca al 2-lea param la constructor SDK. SDK pinat v2.5.2, pre-init la IntersectionObserver |
 
 ### Link-uri care duc la 404 (Pagini neimplementate) ⚠️
 
@@ -1247,12 +1248,12 @@ const pathMappings: Record<string, Record<Locale, string>> = {
 > **Istoric complet mutat în `docs/SESSION-HISTORY.md`** (Februarie 2026) pentru a menține dimensiunea acestui fișier sub 1500 linii.
 > Citește `docs/SESSION-HISTORY.md` pentru toate sesiunile anterioare.
 
-### Ultima Sesiune: 14 Februarie 2026 - Hero Visual Upgrade & Decorative Elements
-- Hero upgrade pe 4 pagini (ProcessAutomation, ConversationalAgents, AiIntegrations, About): gradient tematic, dot pattern, blur blobs, elemente geometrice SVG decorative
-- Teme specifice: gears (automatizare), speech bubbles + headset (conversație), connected nodes + integration diagram (integrări), people silhouettes + team unity (about)
-- Dynamic scroll arrows adăugate pe About (Approach + Why Us)
-- 3 iterații bazate pe feedback: opacity crescută (0.06→0.12), +2 elemente/pagină, ajustări per pagină (telefon, diagramă, echipă)
-- **Commit**: `1065080` (staging)
+### Ultima Sesiune: 14 Februarie 2026 - Technical Audit + VAPI EU Migration
+- Audit tehnic full-stack: 8 CRITICE fixate (C1-C8), 3 IMPORTANTE fixate (I4, I12). Vezi `docs/TECHNICAL-AUDIT.md`
+- Fix-uri securitate: IP spoofing, double-encoding sanitize, security headers Vercel, cookie Secure, VAPI env vars, async executor custom, SecurityConfig denyAll
+- Teste create: SanitizeTest (7), IpExtractionTest (6), AiAgentsApplicationTest (1)
+- VAPI EU migration: server nou `api.eu.vapi.ai`, chei noi, SDK pinat v2.5.2, pre-init la IntersectionObserver, preconnect hints
+- **Commits**: `10f6cc6`, `e029e82`, `5c771ee` (staging) / `905e0e3` (main, doar backend)
 
 ---
 
@@ -1479,5 +1480,5 @@ Mesajele de validare sunt în `contact.form.validation` din `ro.json`/`en.json`:
 
 ---
 
-*Ultima actualizare: 14 Februarie 2026*
+*Ultima actualizare: 14 Februarie 2026 (sesiunea 2 — audit tehnic + VAPI EU)*
 *Pentru detalii complete despre strategie, vezi `docs/STRATEGY.md`*

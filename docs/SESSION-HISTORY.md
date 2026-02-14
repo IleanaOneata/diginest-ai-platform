@@ -162,4 +162,21 @@
 
 ---
 
-*Ultima actualizare: 14 Februarie 2026*
+### Sesiunea 14 Februarie 2026 (2) — Technical Audit + VAPI EU Migration
+- **Scop**: Audit tehnic complet full-stack + fix-uri securitate critice + migrare VAPI pe server EU
+- **Rezultate audit**: 8 CRITICE, 12 IMPORTANTE, 15 RECOMANDATE identificate. Toate 8 CRITICE fixate
+- **Fix-uri CRITICE** (C1-C8): Credențiale redactate din Git, IP spoofing fix (rightmost X-Forwarded-For), double-encoding sanitize fix, 14 teste create, 6 security headers Vercel, cookie Secure flag, VAPI env vars, AsyncConfig cu ThreadPoolTaskExecutor
+- **Fix-uri IMPORTANTE** (I4, I12): RestTemplate timeouts via SimpleClientHttpRequestFactory, SecurityConfig denyAll
+- **VAPI EU Migration**: Server migrat pe `api.eu.vapi.ai` (GDPR). Chei noi, `apiBaseUrl` ca al 2-lea param constructor. SDK pinat v2.5.2, pre-init instanță la IntersectionObserver, preconnect hints în BaseLayout
+- **Fișiere noi**: AsyncConfig.java, SanitizeTest.java, IpExtractionTest.java, AiAgentsApplicationTest.java, TECHNICAL-AUDIT.md
+- **Fișiere modificate** (~15): ContactController, DemoController, ContactService, DemoService, EmailService, SecurityConfig, VoiceWidget, CookieBanner, BaseLayout, vercel.json, CLAUDE.md, BUGS-AND-ISSUES.md
+- **Deploy**: Backend pe main via GitHub push (Railway). Frontend pe staging (Vercel)
+- **Commits**: `10f6cc6`, `e029e82`, `5c771ee` (staging) / `388b497`, `905e0e3` (main)
+- **Lecții**:
+  1. **Spring Boot 3.2.4**: `RestTemplateBuilder.connectTimeout(Duration)` NU există — folosește `SimpleClientHttpRequestFactory`
+  2. **Railway deploy**: `railway up` CLI NU funcționează cu monorepo Root Directory — doar GitHub push
+  3. **VAPI SDK constructor**: Al 2-lea parametru e `apiBaseUrl` (default `api.vapi.ai`) — necesar pentru server EU
+
+---
+
+*Ultima actualizare: 14 Februarie 2026 (sesiunea 2)*
