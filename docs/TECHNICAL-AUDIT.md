@@ -96,19 +96,10 @@
 
 ## 🟠 PROBLEME IMPORTANTE — Fix Urgent După Lansare (12)
 
-### I1. ❌ CORS wildcard `*` pe API
-**Fișier**: `CorsConfig.java` linia 34 + `ContactController.java` linia 25
-**Risc**: `configuration.addAllowedOrigin("*")` permite oricărui site să facă cereri la API. Mai grav, `@CrossOrigin(origins = "*")` pe controller override-ează orice configurare centralizată.
-**Impact**: Oricine poate face cereri la API-ul vostru de pe orice domeniu
-**Soluție**: Înlocuiește `*` cu domeniile reale, elimină `@CrossOrigin` de pe controllere (folosește doar CorsConfig centralizat):
-```java
-configuration.setAllowedOrigins(List.of(
-    "https://generativa.ro",
-    "https://www.generativa.ro",
-    "https://diginest-ai-platform.vercel.app"
-));
-// + configuration.addAllowedOriginPattern("https://*.vercel.app");
-```
+### I1. ✅ CORS wildcard `*` pe API — FIXAT 14 Feb 2026
+**Fișier**: `CorsConfig.java`, `ContactController.java`, `DemoController.java`
+**Ce s-a făcut**: Eliminat `addAllowedOrigin("*")`, acum parsează originile din config (`app.cors.allowed-origins`). Wildcard patterns (ex: `https://*.vercel.app`) folosesc `addAllowedOriginPattern`. Eliminat `@CrossOrigin` de pe ambele controllere — CorsConfig e single source of truth. Eliminat metode HTTP inutile (PUT, DELETE).
+**Data fix**: 14 Februarie 2026
 
 ---
 
@@ -120,11 +111,10 @@ configuration.setAllowedOrigins(List.of(
 
 ---
 
-### I3. ❌ GDPR consent fără validare server-side
+### I3. ✅ GDPR consent fără validare server-side — FIXAT 14 Feb 2026
 **Fișier**: `DemoRequestDTO.java`
-**Risc**: Câmpul `gdprConsent` e un `boolean` simplu fără `@AssertTrue`. Un client poate trimite `gdprConsent: false` și cererea e acceptată.
-**Impact**: Procesezi date fără consent GDPR valid — amendă potențială
-**Soluție**: Adaugă `@AssertTrue(message = "GDPR consent is required")` pe câmpul `gdprConsent`.
+**Ce s-a făcut**: Adăugat `@AssertTrue(message = "GDPR consent is required")` pe câmpul `gdprConsent`. Acum serverul respinge cereri cu `gdprConsent: false` (GDPR Art. 6(1)(a)).
+**Data fix**: 14 Februarie 2026
 
 ---
 
@@ -135,11 +125,10 @@ configuration.setAllowedOrigins(List.of(
 
 ---
 
-### I5. ❌ Rate limiter memory leak
-**Fișier**: `RateLimitConfig.java`
-**Risc**: `ConcurrentHashMap<String, Bucket>` crește nelimitat — fiecare IP unic adaugă un entry care nu e niciodată șters. `cleanupOldBuckets()` e GOL.
-**Impact**: Cu trafic moderat (~1000 IP-uri/zi), map-ul crește cu ~365K entries/an.
-**Soluție**: Folosește Caffeine cache cu TTL sau implementează cleanup periodic.
+### I5. ✅ Rate limiter memory leak — FIXAT 14 Feb 2026
+**Fișier**: `RateLimitConfig.java`, `AiAgentsApplication.java`
+**Ce s-a făcut**: Implementat `@Scheduled(fixedRate = 7200000)` cleanup la fiecare 2 ore care golește `ConcurrentHashMap`. IP-urile active recrează bucket-urile la next request (operațiune cheapă). Adăugat `@EnableScheduling` pe Application.
+**Data fix**: 14 Februarie 2026
 
 ---
 
@@ -151,27 +140,24 @@ configuration.setAllowedOrigins(List.of(
 
 ---
 
-### I7. ❌ Fără email retry logic
+### I7. ✅ Fără email retry logic — FIXAT 14 Feb 2026
 **Fișier**: `EmailService.java`
-**Risc**: Dacă Resend API returnează timeout/5xx, emailul e pierdut definitiv.
-**Impact**: Utilizatorii nu primesc confirmare, admin nu primește notificări
-**Soluție**: Adaugă retry simplu (3 încercări cu backoff exponențial) sau Spring Retry `@Retryable`.
+**Ce s-a făcut**: Retry loop în `sendViaResend()`: 3 încercări cu backoff exponențial (1s, 2s, 4s). Nu retry pe 4xx (client errors — bad auth, bad request). Retry doar pe 5xx și timeout exceptions.
+**Data fix**: 14 Februarie 2026
 
 ---
 
-### I8. ❌ Hardcoded API URL cu branding vechi
-**Fișier**: `ContactForm.astro` (~linia 295)
-**Risc**: URL-ul API e hardcodat ca `https://diginest-backend-production.up.railway.app/api/v1/contact`.
-**Impact**: Mentenabilitate scăzută, risc la deploy
-**Soluție**: Mută în environment variable (`PUBLIC_API_URL`) sau centralizează într-un `config.ts`.
+### I8. ✅ Hardcoded API URL cu branding vechi — FIXAT 14 Feb 2026
+**Fișier**: `ContactForm.astro`, `DemoForm.astro`
+**Ce s-a făcut**: API URL mutat în env var `PUBLIC_API_URL` (Astro `import.meta.env`), pasat în script via `define:vars`. Fallback la Railway URL curent. Ambele forme actualizate.
+**Data fix**: 14 Februarie 2026
 
 ---
 
-### I9. ❌ Render-blocking Google Fonts
+### I9. ✅ Render-blocking Google Fonts — FIXAT 14 Feb 2026
 **Fișier**: `BaseLayout.astro`
-**Risc**: Google Fonts se încarcă cu `<link>` blocking — blochează first paint.
-**Impact**: LCP degradat, Core Web Vitals penalizat
-**Soluție**: Adaugă `font-display: swap` + preconnect + async loading.
+**Ce s-a făcut**: `<link rel="stylesheet">` → `<link rel="preload" as="style">` + `media="print" onload="this.media='all'"` pattern. Fontul se încarcă async, nu blochează first paint. `<noscript>` fallback.
+**Data fix**: 14 Februarie 2026
 
 ---
 
@@ -183,11 +169,10 @@ configuration.setAllowedOrigins(List.of(
 
 ---
 
-### I11. ❌ IP-uri stocate indefinit (GDPR)
-**Fișier**: `ContactRequest` entity
-**Risc**: IP-urile sunt date personale sub GDPR. Stocarea lor indefinit fără politică de retenție e non-compliant.
-**Impact**: Non-conformitate GDPR
-**Soluție**: Scheduled job care anonimizează IP-urile > 90 zile.
+### I11. ✅ IP-uri stocate indefinit (GDPR) — FIXAT 14 Feb 2026
+**Fișier**: `GdprCleanupTask.java` (NOU), `ContactRepository.java`, `DemoRepository.java`
+**Ce s-a făcut**: `@Scheduled(cron = "0 0 3 * * *")` task zilnic la 03:00 UTC care anonimizează IP-urile > 90 zile. Query `@Modifying` UPDATE SET ipAddress='anonymized'. Ambele tabele (contact + demo).
+**Data fix**: 14 Februarie 2026
 
 ---
 
@@ -280,18 +265,17 @@ configuration.setAllowedOrigins(List.of(
 | Severitate | Count | Fixate | Rămase |
 |-----------|-------|--------|--------|
 | 🔴 CRITICE | 8 | **8** | **0** ✅ |
-| 🟠 IMPORTANTE | 12 | 2 | 10 |
+| 🟠 IMPORTANTE | 12 | **10** | **2** |
 | 🟡 RECOMANDATE | 15 | 0 | 15 |
 | 🟢 BINE FĂCUTE | 13 | — | — |
 
-### ✅ Toate problemele CRITICE au fost rezolvate!
+### ✅ Toate problemele CRITICE rezolvate + 10/12 IMPORTANTE!
 
-**Următoarele priorități** (IMPORTANTE):
-1. **Fix CORS wildcard** (I1) — restricționează la domenii reale
-2. **Sanitizare la output** (I2) — mută escaping din service → template
-3. **GDPR consent validare** (I3) — `@AssertTrue` pe gdprConsent
-4. **Rate limiter cleanup** (I5) — Caffeine cache cu TTL
-5. **ddl-auto: validate** (I6) — Flyway migrations
+**Rămase IMPORTANTE** (2):
+1. **Sanitizare la output** (I2) — mută escaping din service → template (refactoring mai amplu, risc regresii)
+2. **ddl-auto: validate** (I6) — necesită Flyway migration setup (complexitate medie, risc la deploy)
+
+**Rămase RECOMANDATE** (15): R1-R15 (vezi secțiunea dedicată)
 
 ---
 
@@ -309,5 +293,12 @@ configuration.setAllowedOrigins(List.of(
 | 14 Feb 2026 | C8 | AsyncConfig cu ThreadPoolTaskExecutor (2/5/25), RestTemplate timeouts via SimpleClientHttpRequestFactory (5s/10s) | `10f6cc6` (staging) / `905e0e3` (main) |
 | 14 Feb 2026 | I4 | RestTemplate timeouts via SimpleClientHttpRequestFactory (fixat ca parte din C8) | `10f6cc6` (staging) / `905e0e3` (main) |
 | 14 Feb 2026 | I12 | SecurityConfig: `anyRequest().permitAll()` → `anyRequest().denyAll()` | `10f6cc6` (staging) / `905e0e3` (main) |
+| 14 Feb 2026 | I1 | CORS: eliminat wildcard `*`, parsare origini din config, eliminat `@CrossOrigin` de pe controllere | `9014c2f` (staging) |
+| 14 Feb 2026 | I3 | `@AssertTrue` pe gdprConsent în DemoRequestDTO | `9014c2f` (staging) |
+| 14 Feb 2026 | I5 | Rate limiter cleanup `@Scheduled` la fiecare 2h, `@EnableScheduling` | `9014c2f` (staging) |
+| 14 Feb 2026 | I7 | Email retry: 3 încercări, backoff exponențial (1s/2s/4s), skip 4xx | `9014c2f` (staging) |
+| 14 Feb 2026 | I8 | API URL mutat în env var `PUBLIC_API_URL` (ContactForm + DemoForm) | `9014c2f` (staging) |
+| 14 Feb 2026 | I9 | Google Fonts non-blocking: preload + media=print onload swap | `9014c2f` (staging) |
+| 14 Feb 2026 | I11 | GDPR IP cleanup: `GdprCleanupTask` zilnic 03:00, anonimizare IP > 90 zile | `9014c2f` (staging) |
 
-*Ultima actualizare: 14 Februarie 2026*
+*Ultima actualizare: 14 Februarie 2026 (sesiunea 2)*
