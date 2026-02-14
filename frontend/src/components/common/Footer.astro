@@ -128,8 +128,49 @@ const socialLinks = [
       </div>
     </div>
 
+    <!-- ANPC Consumer Protection — Ordinul 449/2022 -->
+    <div class="mt-10 pt-8 border-t border-neutral-800">
+      <p class="text-center text-neutral-500 text-xs mb-4">
+        {locale === 'ro'
+          ? 'ANPC – Soluționarea alternativă și online a litigiilor'
+          : 'ANPC – Alternative and online dispute resolution'}
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a
+          href="https://anpc.ro/ce-este-sal/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={locale === 'ro' ? 'Soluționarea Alternativă a Litigiilor' : 'Alternative Dispute Resolution'}
+        >
+          <img
+            src="/images/anpc-sal.svg"
+            alt={locale === 'ro' ? 'ANPC – Soluționarea Alternativă a Litigiilor' : 'ANPC – Alternative Dispute Resolution'}
+            width="250"
+            height="50"
+            loading="lazy"
+            class="h-[50px] w-auto"
+          />
+        </a>
+        <a
+          href="https://ec.europa.eu/consumers/odr"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={locale === 'ro' ? 'Soluționarea Online a Litigiilor' : 'Online Dispute Resolution'}
+        >
+          <img
+            src="/images/anpc-sol.svg"
+            alt={locale === 'ro' ? 'ANPC – Soluționarea Online a Litigiilor' : 'ANPC – Online Dispute Resolution'}
+            width="250"
+            height="50"
+            loading="lazy"
+            class="h-[50px] w-auto"
+          />
+        </a>
+      </div>
+    </div>
+
     <!-- Bottom bar -->
-    <div class="mt-12 pt-8 border-t border-neutral-800">
+    <div class="mt-8 pt-6 border-t border-neutral-800">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <p class="text-neutral-500 text-sm">
           &copy; {currentYear} GENERATIVA. {t.footer.copyright}
