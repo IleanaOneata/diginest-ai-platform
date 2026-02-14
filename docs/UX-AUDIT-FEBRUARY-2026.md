@@ -125,10 +125,10 @@
 - **Compensare**: Loss-framed CTAs, first-person submit button ("Vreau evaluarea mea gratuită"), security badges lângă formular
 - **Toate CTA-urile** duc la `/demo/` (formularul detaliat de evaluare, nu contact simplu)
 
-#### 3. Adaugă Indicii de Preț — ❌ NEIMPLEMENTAT
-- Nu trebuie prețuri exacte. Un simplu "De la 200€/lună" sau "Investiție tipică: 200-1.000€" ajută enorm.
-- **De ce**: Cumpărătorii B2B care nu găsesc informații despre preț presupun că e "prea scump" și pleacă. 60% din cumpărătorii B2B consideră prețul cel mai important factor.
-- **Recomandare**: Adaugă în FAQ ("Care este investiția?") sau ca badge pe pagina demo
+#### 3. Adaugă Indicii de Preț — ✅ IMPLEMENTAT
+- ~~Nu trebuie prețuri exacte. Un simplu "De la 200€/lună" sau "Investiție tipică: 200-1.000€" ajută enorm.~~
+- **Implementat**: "Planuri de la 200€/lună după pilot" sub pilot offer card în CTA section. FAQ "Cât costă?" mutat la poziția 2 (primele 2-3 FAQ primesc 80% din click-uri).
+- **Commit**: `2014e68` (staging)
 
 ### 🟡 IMPORTANTE (Îmbunătățesc experiența)
 
@@ -149,9 +149,9 @@
 - Annotation pe linii: "date sincronizate"
 - **De ce**: Vizualizarea e frumoasă dar abstractă — utilizatorii non-tehnici nu înțeleg ce văd
 
-#### 7. Optimizează BenefitsStrip pe Mobile — ⚠️ PARȚIAL
-- ~~Adaugă swipe hint~~ → Dynamic scroll arrows implementate pe alte secțiuni
-- BenefitsStrip are scroll orizontal dar fără arrows explicit (dimensiune mică per card)
+#### 7. Optimizează BenefitsStrip pe Mobile — ✅ REZOLVAT
+- ~~Adaugă swipe hint~~ → BenefitsStrip eliminat complet (redundant cu TrustBar v9 Process Strip + Hero stats)
+- Homepage redusă la 9 secțiuni. Informațiile critice sunt acum în TrustBar (3 pași) și Hero stats.
 
 ### 🟢 NICE-TO-HAVE (Rafinamente)
 
@@ -175,16 +175,16 @@
 
 | Aspect | Scor | Comentariu |
 |--------|------|-----------|
-| **Structura paginii** | 9/10 | Flow-ul AIDA e aproape perfect |
-| **Design vizual** | 8.5/10 | Premium, consistent, branded |
-| **Copy/Messaging** | 7.5/10 | Bun dar lipsește social proof și pricing |
-| **UX Desktop** | 8/10 | Solid, câteva secțiuni abstracte |
-| **UX Mobile** | 7.5/10 | Horizontal scroll e smart, dar formular și labels au probleme |
-| **Conversion Path** | 6.5/10 | Formularul lung + lipsa social proof = fricțiune mare |
-| **Psihologie Buyer** | 7/10 | Bun pe awareness/consideration, slab pe decision/action |
+| **Structura paginii** | 9.5/10 | Flow AIDA excelent, 9 secțiuni optimizate, TrustBar Process Strip |
+| **Design vizual** | 9/10 | Premium, consistent, hero-uri cu decorații tematice per pagină |
+| **Copy/Messaging** | 8.5/10 | Loss aversion, first-person CTAs, pricing hints implementate |
+| **UX Desktop** | 8.5/10 | Solid, IntegrationHub + Wave încă abstracte |
+| **UX Mobile** | 8/10 | Horizontal scroll, dynamic arrows, snap-center pe toate paginile |
+| **Conversion Path** | 8/10 | Social proof + pricing + 3 CTA-uri per pagină + pilot offer |
+| **Psihologie Buyer** | 8.5/10 | CRO research-backed pe tot site-ul, garanții reale |
 | **SEO/AEO** | 9/10 | Question-based H2, Schema.org, FAQ — excelent |
 
-**Scor Global: 7.9/10** — Site solid cu fundație excelentă, dar cu 2-3 lipsuri critice care pot afecta semnificativ rata de conversie (social proof, pricing hints, formular simplificat).
+**Scor Global: 8.7/10** (actualizat 14 Februarie 2026) — De la 7.9 la 8.7 (+0.8). Social proof, pricing hints, CRO copy, hero visual upgrades toate implementate. Rămân: analytics setup, IntegrationHub labels, sticky CTA floating, calendar booking.
 
 ---
 
@@ -194,15 +194,14 @@
 
 ```
 1. HeroInteractive     → Loss-framed headline + Voice Demo  ✅ Excelent (CRO optimizat)
-2. BenefitsStrip       → Impact rapid (6 beneficii)          ✅ Bun
-3. TrustBar            → Tech partner logos + trust badges   ✅ NOU — Social proof
-4. Services            → Ce oferim (3 servicii)              ✅ CTAs unificate → /demo/
-5. UseCases            → Auto-identificare (6 industrii)     ✅ Excelent
-6. IntegrationHub      → Vizualizare conexiuni               ⚠️ Abstract fără labels
-7. Process             → Cum funcționăm (4 pași)             ✅ Clar
-8. ScaleWithConfidence → Metrici + animație wave             ⚠️ Wave decorativ
-9. FAQ                 → Obiecții rezolvate                  ✅ Excelent
-10. CTA                → Pilot gratuit + loss-framed copy    ✅ CRO optimizat
+2. TrustBar            → Process Strip (3 pași) + logos + badges ✅ v9 — Compact, actionable
+3. Services            → Ce oferim (3 servicii) + diff pills ✅ CTAs unificate → /demo/
+4. UseCases            → Auto-identificare (6 industrii)     ✅ Excelent
+5. IntegrationHub      → Vizualizare conexiuni               ⚠️ Abstract fără labels
+6. Process             → Cum funcționăm (4 pași)             ✅ Clar
+7. ScaleWithConfidence → Metrici + animație wave             ⚠️ Wave decorativ
+8. FAQ                 → Obiecții rezolvate (pricing la poz 2) ✅ Excelent
+9. CTA                 → Pilot gratuit + pricing hint + loss copy ✅ CRO optimizat
 ```
 
 ### Pagini Servicii — Pattern Comun (Actualizat 13 Februarie 2026)
