@@ -48,8 +48,8 @@ public class SecurityConfig {
                 // Secure admin endpoints (when implemented)
                 .requestMatchers("/api/v1/admin/**").authenticated()
 
-                // Allow everything else (adjust as needed)
-                .anyRequest().permitAll()
+                // Deny everything else (principle of least privilege)
+                .anyRequest().denyAll()
             )
 
             // Configure security headers

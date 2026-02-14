@@ -26,6 +26,11 @@ interface Props {
 const { locale = 'ro' } = Astro.props;
 
 const isEn = locale === 'en';
+
+// VAPI credentials — read from env vars (fallback to hardcoded for dev)
+// These are PUBLIC keys (safe for client-side), but stored in env for easy rotation
+const vapiPublicKey = import.meta.env.PUBLIC_VAPI_PUBLIC_KEY || '0a18ef59-2f8d-4e0a-aed3-1dfdee8f5caf';
+const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a480-433c-95ac-4899c467b972';
 ---
 
 <div
@@ -39,6 +44,8 @@ const isEn = locale === 'en';
   data-ended={isEn ? 'Call ended' : 'Apel încheiat'}
   data-error={isEn ? 'Connection error' : 'Eroare de conexiune'}
   data-hint-idle={isEn ? 'Live demo · Listen how it sounds' : 'Demo live · Ascultă cum sună'}
+  data-vapi-key={vapiPublicKey}
+  data-vapi-assistant={vapiAssistantId}
 >
   <!-- Animated Ring Container -->
   <div class="voice-rings-wrapper relative flex items-center justify-center w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 overflow-visible">
@@ -204,8 +211,10 @@ const isEn = locale === 'en';
   (function() {
     'use strict';
 
-    const VAPI_PUBLIC_KEY = '0a18ef59-2f8d-4e0a-aed3-1dfdee8f5caf';
-    const ASSISTANT_ID = '6feee494-a480-433c-95ac-4899c467b972';
+    // Read from data attributes (set by Astro from env vars)
+    var containerEl = document.querySelector('.voice-widget-container');
+    var VAPI_PUBLIC_KEY = containerEl ? containerEl.dataset.vapiKey : '';
+    var ASSISTANT_ID = containerEl ? containerEl.dataset.vapiAssistant : '';
 
     var vapi = null;
     var isActive = false;

@@ -175,10 +175,10 @@
 ### BUG-021: Credențiale în plain text în CLAUDE.md [P1]
 - **Fișier**: `CLAUDE.md`
 - **Secțiunea**: "Railway All Variables (February 2026)"
-- **Problemă**: API key Resend (`re_SSiJmdXw_...`), parola PostgreSQL (`RHiVbAXq...`), și alți credentials sunt în plain text într-un fișier comis în git.
+- **Problemă**: API key Resend și parola PostgreSQL erau în plain text într-un fișier comis în git. **ROTITE și REDACTATE pe 14 Feb 2026.**
 - **Impact**: Oricine cu acces la repository poate vedea credențialele.
-- **Fix**: Elimină secțiunea cu credențiale din CLAUDE.md. Credentials trebuie gestionate doar prin Railway dashboard / environment variables.
-- [ ] REZOLVAT
+- **Fix**: Credențiale rotite, valorile vechi invalide. CLAUDE.md redactat cu `***REDACTED***`. Credențiale noi DOAR pe Railway.
+- [x] REZOLVAT (14 Feb 2026)
 
 ---
 

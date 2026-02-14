@@ -1328,7 +1328,7 @@ Railway (și multe cloud platforms) **blochează porturile SMTP outbound** (25, 
 MAIL_HOST=smtp.resend.com        # Nu se mai folosește (SMTP blocat), dar păstrat
 MAIL_PORT=465                    # Nu se mai folosește
 MAIL_USERNAME=resend             # Nu se mai folosește
-MAIL_PASSWORD=re_SSiJmdXw_...   # API key Resend — FOLOSIT de HTTP API
+MAIL_PASSWORD=***REDACTED***     # API key Resend — FOLOSIT de HTTP API (setat pe Railway)
 MAIL_PROTOCOL=smtps              # Nu se mai folosește
 MAIL_SSL_ENABLE=true             # Nu se mai folosește
 MAIL_STARTTLS_ENABLE=false       # Nu se mai folosește
@@ -1383,18 +1383,21 @@ User submit form → ContactController (HTTP thread)
 
 ### Railway All Variables (February 2026)
 
+> ⚠️ **SECRETELE NU SE STOCHEAZĂ ÎN GIT** — Credențialele sunt DOAR pe Railway dashboard.
+> Folosește `railway variables` din CLI pentru a vedea valorile curente.
+
 ```
 SPRING_PROFILES_ACTIVE=prod
 DATABASE_URL=jdbc:postgresql://metro.proxy.rlwy.net:32252/railway
 DATABASE_USERNAME=postgres
-DATABASE_PASSWORD=RHiVbAXqsXtuIoqvsEMXPopcYjcvSARB
+DATABASE_PASSWORD=***REDACTED*** (setat pe Railway, rotit 14 Feb 2026)
 MAIL_HOST=smtp.resend.com
-MAIL_PORT=465
+MAIL_PORT=587
 MAIL_USERNAME=resend
-MAIL_PASSWORD=re_SSiJmdXw_MUuf9eTTqgmWjoUDJPDmwFzo
-MAIL_PROTOCOL=smtps
-MAIL_SSL_ENABLE=true
-MAIL_STARTTLS_ENABLE=false
+MAIL_PASSWORD=***REDACTED*** (Resend API key, setat pe Railway)
+MAIL_PROTOCOL=smtp
+MAIL_SSL_ENABLE=false
+MAIL_STARTTLS_ENABLE=true
 EMAIL_FROM=contact@generativa.ro
 EMAIL_ADMIN=contact@generativa.ro
 EMAIL_ENABLED=true
