@@ -148,6 +148,9 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
     <!-- Preconnect to important third-party origins -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- VAPI voice widget — preconnect to CDN + EU API for faster cold start -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://api.eu.vapi.ai" crossorigin />
 
     <!-- Google Fonts — Inter (UI) + Prompt (logo only) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@600;700&display=swap" rel="stylesheet" />

@@ -49,15 +49,15 @@
 
 ---
 
-### C4. ❌ Zero teste — 0% coverage
-**Fișier**: `backend/src/test/` — directorul e gol
-**Risc**: Orice modificare poate introduce regresii fără detecție. Bug-ul C3 ar fi fost prins de un test simplu.
-**Impact**: Risc maxim de regresii la fiecare modificare, imposibil de refactorizat safe
-**Soluție minimală** (înainte de lansare):
-1. Test pentru sanitize() — verifică ordinea encoding-ului
-2. Test pentru ContactController — happy path + rate limiting
-3. Test pentru EmailService — mock Resend API, verifică HTML escape
-4. Test pentru CORS — verifică că nu e wildcard pe rute protejate
+### C4. ✅ Zero teste — FIXAT 14 Feb 2026
+**Fișier**: `backend/src/test/`
+**Risc**: Orice modificare putea introduce regresii fără detecție. Bug-ul C3 ar fi fost prins de un test simplu.
+**Ce s-a făcut**:
+1. ✅ `SanitizeTest.java` — 7 teste: null handling, normal text, whitespace trim, double-encoding prevention, ampersand encoding, quotes escaping, DemoService parity
+2. ✅ `IpExtractionTest.java` — 6 teste: rightmost X-Forwarded-For, X-Real-IP fallback, RemoteAddr fallback, whitespace handling, single IP, null header
+3. ✅ `AiAgentsApplicationTest.java` — smoke test (Spring context loads)
+**RĂMÂNE**: EmailService mock test, CORS test, integration tests (recomandat post-lansare)
+**Data fix**: 14 Februarie 2026
 
 ---
 
@@ -89,7 +89,7 @@
 **Ce s-a făcut**:
 1. Creat `AsyncConfig.java` cu `ThreadPoolTaskExecutor`: core=2, max=5, queue=25, graceful shutdown 30s
 2. Implementat `AsyncUncaughtExceptionHandler` pentru logging erorilor async
-3. **Bonus**: Adăugat timeouts la RestTemplate din EmailService (connect 5s, read 10s) via `RestTemplateBuilder`
+3. **Bonus**: Adăugat timeouts la RestTemplate din EmailService (connect 5s, read 10s) via `SimpleClientHttpRequestFactory`
 **Data fix**: 14 Februarie 2026
 
 ---
@@ -130,7 +130,7 @@ configuration.setAllowedOrigins(List.of(
 
 ### I4. ✅ RestTemplate fără timeouts — FIXAT 14 Feb 2026
 **Fișier**: `EmailService.java`
-**Ce s-a făcut**: Înlocuit `new RestTemplate()` cu `RestTemplateBuilder` cu connect timeout 5s și read timeout 10s. Fixat ca parte din C8.
+**Ce s-a făcut**: Înlocuit `new RestTemplate()` cu `SimpleClientHttpRequestFactory` cu connect timeout 5s și read timeout 10s. Fixat ca parte din C8.
 **Data fix**: 14 Februarie 2026
 
 ---
@@ -299,14 +299,15 @@ configuration.setAllowedOrigins(List.of(
 
 | Data | ID | Descriere | Commit |
 |------|-----|-----------|--------|
-| 14 Feb 2026 | C1 | Credențiale rotite (Resend API key), redactate din CLAUDE.md + BUGS-AND-ISSUES.md. DB password NU s-a putut roti (Railway limitation — setat la creare, immutable via env vars) | pending |
-| 14 Feb 2026 | C2 | IP Spoofing fix: `X-Forwarded-For` `[0]` → `[ips.length-1]` (rightmost = trusted proxy) | pending |
-| 14 Feb 2026 | C3 | Double-encoding fix: `&` replacement mutat prima în `sanitize()` | pending |
-| 14 Feb 2026 | C5 | Security headers adăugate în vercel.json (6 headers: nosniff, DENY, XSS, referrer, permissions, HSTS) | pending |
-| 14 Feb 2026 | C6 | Cookie Secure flag adăugat la consent cookie | pending |
-| 14 Feb 2026 | C7 | VAPI credentials mutate din hardcoded → env vars Astro cu data attributes | pending |
-| 14 Feb 2026 | C8 | AsyncConfig cu ThreadPoolTaskExecutor (2/5/25), RestTemplate timeouts (5s/10s) | pending |
-| 14 Feb 2026 | I4 | RestTemplate timeouts (fixat ca parte din C8) | pending |
-| 14 Feb 2026 | I12 | SecurityConfig: `anyRequest().permitAll()` → `anyRequest().denyAll()` | pending |
+| 14 Feb 2026 | C1 | Credențiale rotite (Resend API key), redactate din CLAUDE.md + BUGS-AND-ISSUES.md. DB password NU s-a putut roti (Railway limitation — setat la creare, immutable via env vars) | pre-audit |
+| 14 Feb 2026 | C2 | IP Spoofing fix: `X-Forwarded-For` `[0]` → `[ips.length-1]` (rightmost = trusted proxy) | `10f6cc6` (staging) / `905e0e3` (main) |
+| 14 Feb 2026 | C3 | Double-encoding fix: `&` replacement mutat prima în `sanitize()` | `10f6cc6` (staging) / `905e0e3` (main) |
+| 14 Feb 2026 | C4 | Teste create: SanitizeTest (7), IpExtractionTest (6), AiAgentsApplicationTest (1) | `10f6cc6` (staging) / `905e0e3` (main) |
+| 14 Feb 2026 | C5 | Security headers adăugate în vercel.json (6 headers: nosniff, DENY, XSS, referrer, permissions, HSTS) | `10f6cc6` (staging) |
+| 14 Feb 2026 | C6 | Cookie Secure flag adăugat la consent cookie | `10f6cc6` (staging) |
+| 14 Feb 2026 | C7 | VAPI credentials mutate din hardcoded → env vars Astro cu data attributes | `10f6cc6` (staging) |
+| 14 Feb 2026 | C8 | AsyncConfig cu ThreadPoolTaskExecutor (2/5/25), RestTemplate timeouts via SimpleClientHttpRequestFactory (5s/10s) | `10f6cc6` (staging) / `905e0e3` (main) |
+| 14 Feb 2026 | I4 | RestTemplate timeouts via SimpleClientHttpRequestFactory (fixat ca parte din C8) | `10f6cc6` (staging) / `905e0e3` (main) |
+| 14 Feb 2026 | I12 | SecurityConfig: `anyRequest().permitAll()` → `anyRequest().denyAll()` | `10f6cc6` (staging) / `905e0e3` (main) |
 
 *Ultima actualizare: 14 Februarie 2026*

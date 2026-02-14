@@ -29,8 +29,9 @@ const isEn = locale === 'en';
 
 // VAPI credentials — read from env vars (fallback to hardcoded for dev)
 // These are PUBLIC keys (safe for client-side), but stored in env for easy rotation
-const vapiPublicKey = import.meta.env.PUBLIC_VAPI_PUBLIC_KEY || '0a18ef59-2f8d-4e0a-aed3-1dfdee8f5caf';
-const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a480-433c-95ac-4899c467b972';
+const vapiPublicKey = import.meta.env.PUBLIC_VAPI_PUBLIC_KEY || 'b2bf9912-fd4e-44f9-9918-80534970bf59';
+const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '4f9646d7-8f0c-4ed3-86a7-ea9f0d7122a8';
+const vapiApiUrl = import.meta.env.PUBLIC_VAPI_API_URL || 'https://api.eu.vapi.ai';
 ---
 
 <div
@@ -46,6 +47,7 @@ const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a4
   data-hint-idle={isEn ? 'Live demo · Listen how it sounds' : 'Demo live · Ascultă cum sună'}
   data-vapi-key={vapiPublicKey}
   data-vapi-assistant={vapiAssistantId}
+  data-vapi-url={vapiApiUrl}
 >
   <!-- Animated Ring Container -->
   <div class="voice-rings-wrapper relative flex items-center justify-center w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 overflow-visible">
@@ -215,6 +217,7 @@ const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a4
     var containerEl = document.querySelector('.voice-widget-container');
     var VAPI_PUBLIC_KEY = containerEl ? containerEl.dataset.vapiKey : '';
     var ASSISTANT_ID = containerEl ? containerEl.dataset.vapiAssistant : '';
+    var VAPI_API_URL = containerEl ? containerEl.dataset.vapiUrl : 'https://api.eu.vapi.ai';
 
     var vapi = null;
     var isActive = false;
@@ -308,9 +311,12 @@ const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a4
       // Cached VAPI constructor (loaded once, reusable)
       var VapiConstructor = null;
 
+      // Pinned SDK version for cache stability (no @latest resolution delay)
+      var SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.5.2/+esm';
+
       function loadSdk() {
         if (VapiConstructor) return Promise.resolve(VapiConstructor);
-        return import('https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/+esm')
+        return import(SDK_URL)
           .then(function(module) {
             var VapiModule = module.default || module;
             VapiConstructor = (typeof VapiModule === 'function')
@@ -318,6 +324,30 @@ const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a4
               : (VapiModule.default || VapiModule.Vapi || VapiModule);
             return VapiConstructor;
           });
+      }
+
+      function wireVapiEvents() {
+        if (!vapi) return;
+        vapi.on('call-start', function() {
+          isActive = true;
+          updateUI('active');
+        });
+        vapi.on('call-end', function() {
+          isActive = false;
+          updateUI('ended');
+        });
+        vapi.on('speech-start', function() {
+          if (isActive) updateUI('listening');
+        });
+        vapi.on('speech-end', function() {
+          if (isActive) updateUI('processing');
+        });
+        vapi.on('error', function(e) {
+          console.error('VAPI error:', e);
+          isActive = false;
+          isInitialized = false;
+          updateUI('error');
+        });
       }
 
       function createVapiInstance() {
@@ -330,41 +360,18 @@ const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a4
         isActive = false;
 
         return loadSdk().then(function(Vapi) {
-          vapi = new Vapi(VAPI_PUBLIC_KEY);
-
-          vapi.on('call-start', function() {
-            isActive = true;
-            updateUI('active');
-          });
-
-          vapi.on('call-end', function() {
-            isActive = false;
-            updateUI('ended');
-          });
-
-          vapi.on('speech-start', function() {
-            if (isActive) updateUI('listening');
-          });
-
-          vapi.on('speech-end', function() {
-            if (isActive) updateUI('processing');
-          });
-
-          vapi.on('error', function(e) {
-            console.error('VAPI error:', e);
-            isActive = false;
-            updateUI('error');
-          });
-
+          vapi = new Vapi(VAPI_PUBLIC_KEY, VAPI_API_URL);
+          wireVapiEvents();
           isInitialized = true;
         });
       }
 
-      // Preload SDK when widget becomes visible (no waiting on click)
+      // Eagerly preload SDK + pre-create VAPI instance when widget is visible
+      // This eliminates all latency on first click (SDK + constructor already done)
       var preloadObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
-            loadSdk().catch(function() { /* silent preload fail is OK */ });
+            createVapiInstance().catch(function() { /* silent preload fail is OK */ });
             preloadObserver.disconnect();
           }
         });
@@ -379,8 +386,8 @@ const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a4
 
         updateUI('connecting');
 
-        // If already initialized and healthy, just start
-        // If not (first time or after error), create fresh instance
+        // If already pre-initialized, start immediately
+        // If not (first time load or after error), create fresh instance first
         var ready = isInitialized ? Promise.resolve() : createVapiInstance();
 
         ready
@@ -392,7 +399,6 @@ const vapiAssistantId = import.meta.env.PUBLIC_VAPI_ASSISTANT_ID || '6feee494-a4
           .catch(function(e) {
             console.error('VAPI error:', e);
             isActive = false;
-            // Reset so next click will create a fresh instance
             isInitialized = false;
             updateUI('error');
           });
