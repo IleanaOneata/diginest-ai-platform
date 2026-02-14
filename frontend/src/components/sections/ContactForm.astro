@@ -17,6 +17,9 @@ const { locale } = Astro.props;
 const t = getTranslations(locale);
 const v = t.contact.form.validation;
 
+// API base URL — configurable via env var (default: Railway production)
+const apiBaseUrl = import.meta.env.PUBLIC_API_URL || 'https://diginest-backend-production.up.railway.app';
+
 // Dynamic headline data for ?source= parameter
 const titleBySource = t.contact.titleBySource || {};
 const subtitleBySource = t.contact.subtitleBySource || {};
@@ -290,9 +293,9 @@ const trustText = locale === 'ro'
   document.addEventListener('astro:page-load', initDynamicHeadline);
 </script>
 
-<script define:vars={{ validationMessages: v }}>
+<script define:vars={{ validationMessages: v, apiBase: apiBaseUrl }}>
   // Contact form handling with custom validation
-  const API_URL = 'https://diginest-backend-production.up.railway.app/api/v1/contact';
+  const API_URL = apiBase + '/api/v1/contact';
 
   const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
   // Only allow valid phone characters: +, digits, spaces, dashes, dots, parentheses

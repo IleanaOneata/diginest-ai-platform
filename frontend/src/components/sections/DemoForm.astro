@@ -19,6 +19,9 @@ const t = getTranslations(locale);
 const d = t.demo.form;
 const v = d.validation;
 
+// API base URL — configurable via env var (default: Railway production)
+const apiBaseUrl = import.meta.env.PUBLIC_API_URL || 'https://diginest-backend-production.up.railway.app';
+
 // Dynamic headline data for ?source= parameter
 const titleBySource = t.demo.titleBySource || {};
 const subtitleBySource = t.demo.subtitleBySource || {};
@@ -326,9 +329,9 @@ const subtitleBySource = t.demo.subtitleBySource || {};
   document.addEventListener('astro:page-load', initDemoDynamicHeadline);
 </script>
 
-<script define:vars={{ validationMessages: v }}>
+<script define:vars={{ validationMessages: v, apiBase: apiBaseUrl }}>
   // Demo form handling with custom validation + sessionStorage persistence
-  const API_URL = 'https://diginest-backend-production.up.railway.app/api/v1/demo';
+  const API_URL = apiBase + '/api/v1/demo';
   const STORAGE_KEY = 'generativa_demo_form';
 
   const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;

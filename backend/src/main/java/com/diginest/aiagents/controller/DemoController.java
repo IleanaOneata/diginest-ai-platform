@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * REST Controller for demo request form submissions.
+ * CORS handled centrally by CorsConfig — no @CrossOrigin here.
  */
 @RestController
 @RequestMapping("/api/v1/demo")
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 public class DemoController {
 
     private static final Logger log = LoggerFactory.getLogger(DemoController.class);

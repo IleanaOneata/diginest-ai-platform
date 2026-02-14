@@ -1,5 +1,6 @@
 package com.diginest.aiagents.model.dto;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -39,7 +40,8 @@ public record DemoRequestDTO(
     @Size(max = 2000, message = "Details must be at most 2000 characters")
     String details,
 
-    // GDPR consent (validated client-side, stored for audit)
+    // GDPR consent — must be true to process personal data (GDPR Art. 6(1)(a))
+    @AssertTrue(message = "GDPR consent is required")
     boolean gdprConsent,
 
     // Optional: source tracking

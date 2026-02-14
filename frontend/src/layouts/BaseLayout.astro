@@ -152,8 +152,10 @@ const pageSchema = schema ? [organizationSchema, schema] : [organizationSchema];
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="preconnect" href="https://api.eu.vapi.ai" crossorigin />
 
-    <!-- Google Fonts — Inter (UI) + Prompt (logo only) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@600;700&display=swap" rel="stylesheet" />
+    <!-- Google Fonts — Inter (UI) + Prompt (logo only) — non-blocking load -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Prompt:wght@600;700&display=swap" /></noscript>
 
     <!-- Schema.org JSON-LD -->
     {pageSchema.map((schema) => (
