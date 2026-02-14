@@ -80,12 +80,17 @@ public class ContactController {
 
     /**
      * Extract client IP address, considering proxy headers.
+     *
+     * Uses the RIGHTMOST IP in X-Forwarded-For because that's the one
+     * added by Railway's trusted proxy (not spoofable by clients).
+     * The leftmost IP is set by the client and can be trivially faked.
      */
     private String getClientIp(HttpServletRequest request) {
         String xForwardedFor = request.getHeader("X-Forwarded-For");
         if (xForwardedFor != null && !xForwardedFor.isEmpty()) {
-            // X-Forwarded-For can contain multiple IPs, get the first one
-            return xForwardedFor.split(",")[0].trim();
+            String[] ips = xForwardedFor.split(",");
+            // Rightmost IP = added by Railway proxy (trusted)
+            return ips[ips.length - 1].trim();
         }
 
         String xRealIp = request.getHeader("X-Real-IP");
