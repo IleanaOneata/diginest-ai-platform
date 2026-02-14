@@ -7,13 +7,12 @@ import com.diginest.aiagents.repository.DemoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.*;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -50,13 +49,12 @@ public class EmailService {
     @Value("${MAIL_PASSWORD:}")
     private String resendApiKey;
 
-    public EmailService(ContactRepository contactRepository, DemoRepository demoRepository,
-                        RestTemplateBuilder restTemplateBuilder) {
+    public EmailService(ContactRepository contactRepository, DemoRepository demoRepository) {
         // Configure timeouts to prevent threads hanging on Resend API issues
-        this.restTemplate = restTemplateBuilder
-            .connectTimeout(Duration.ofSeconds(5))
-            .readTimeout(Duration.ofSeconds(10))
-            .build();
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setConnectTimeout(5000);  // 5 seconds
+        factory.setReadTimeout(10000);    // 10 seconds
+        this.restTemplate = new RestTemplate(factory);
         this.contactRepository = contactRepository;
         this.demoRepository = demoRepository;
     }
