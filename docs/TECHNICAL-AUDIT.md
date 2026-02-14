@@ -132,11 +132,10 @@
 
 ---
 
-### I6. ❌ `ddl-auto: update` în producție
-**Fișier**: `application-prod.yml`
-**Risc**: Hibernate poate modifica schema DB automat la fiecare deploy. Nu e reversibil, nu e trackable.
-**Impact**: Schema drift, posibilă pierdere de date la coloane șterse
-**Soluție**: Schimbă la `validate` + folosește Flyway pentru migrări.
+### I6. ✅ `ddl-auto: update` în producție — FIXAT 14 Feb 2026
+**Fișier**: `application-prod.yml`, `pom.xml`, `V1__baseline.sql`
+**Ce s-a făcut**: Flyway integrat cu `baseline-on-migrate: true` (DB existent). Migrarea `V1__baseline.sql` captează schema curentă (contact_requests + demo_requests) cu indexuri. Production: `ddl-auto: validate` + Flyway. Dev: Flyway dezactivat, păstrează `ddl-auto: update` pentru H2.
+**Data fix**: 14 Februarie 2026
 
 ---
 
@@ -265,15 +264,14 @@
 | Severitate | Count | Fixate | Rămase |
 |-----------|-------|--------|--------|
 | 🔴 CRITICE | 8 | **8** | **0** ✅ |
-| 🟠 IMPORTANTE | 12 | **10** | **2** |
+| 🟠 IMPORTANTE | 12 | **11** | **1** |
 | 🟡 RECOMANDATE | 15 | 0 | 15 |
 | 🟢 BINE FĂCUTE | 13 | — | — |
 
-### ✅ Toate problemele CRITICE rezolvate + 10/12 IMPORTANTE!
+### ✅ Toate problemele CRITICE rezolvate + 11/12 IMPORTANTE!
 
-**Rămase IMPORTANTE** (2):
+**Rămase IMPORTANTE** (1):
 1. **Sanitizare la output** (I2) — mută escaping din service → template (refactoring mai amplu, risc regresii)
-2. **ddl-auto: validate** (I6) — necesită Flyway migration setup (complexitate medie, risc la deploy)
 
 **Rămase RECOMANDATE** (15): R1-R15 (vezi secțiunea dedicată)
 
@@ -293,12 +291,13 @@
 | 14 Feb 2026 | C8 | AsyncConfig cu ThreadPoolTaskExecutor (2/5/25), RestTemplate timeouts via SimpleClientHttpRequestFactory (5s/10s) | `10f6cc6` (staging) / `905e0e3` (main) |
 | 14 Feb 2026 | I4 | RestTemplate timeouts via SimpleClientHttpRequestFactory (fixat ca parte din C8) | `10f6cc6` (staging) / `905e0e3` (main) |
 | 14 Feb 2026 | I12 | SecurityConfig: `anyRequest().permitAll()` → `anyRequest().denyAll()` | `10f6cc6` (staging) / `905e0e3` (main) |
-| 14 Feb 2026 | I1 | CORS: eliminat wildcard `*`, parsare origini din config, eliminat `@CrossOrigin` de pe controllere | `9014c2f` (staging) |
-| 14 Feb 2026 | I3 | `@AssertTrue` pe gdprConsent în DemoRequestDTO | `9014c2f` (staging) |
-| 14 Feb 2026 | I5 | Rate limiter cleanup `@Scheduled` la fiecare 2h, `@EnableScheduling` | `9014c2f` (staging) |
-| 14 Feb 2026 | I7 | Email retry: 3 încercări, backoff exponențial (1s/2s/4s), skip 4xx | `9014c2f` (staging) |
+| 14 Feb 2026 | I1 | CORS: eliminat wildcard `*`, parsare origini din config, eliminat `@CrossOrigin` de pe controllere | `9014c2f` (staging) / `2126043` (main) |
+| 14 Feb 2026 | I3 | `@AssertTrue` pe gdprConsent în DemoRequestDTO | `9014c2f` (staging) / `2126043` (main) |
+| 14 Feb 2026 | I5 | Rate limiter cleanup `@Scheduled` la fiecare 2h, `@EnableScheduling` | `9014c2f` (staging) / `2126043` (main) |
+| 14 Feb 2026 | I7 | Email retry: 3 încercări, backoff exponențial (1s/2s/4s), skip 4xx | `9014c2f` (staging) / `2126043` (main) |
 | 14 Feb 2026 | I8 | API URL mutat în env var `PUBLIC_API_URL` (ContactForm + DemoForm) | `9014c2f` (staging) |
 | 14 Feb 2026 | I9 | Google Fonts non-blocking: preload + media=print onload swap | `9014c2f` (staging) |
-| 14 Feb 2026 | I11 | GDPR IP cleanup: `GdprCleanupTask` zilnic 03:00, anonimizare IP > 90 zile | `9014c2f` (staging) |
+| 14 Feb 2026 | I11 | GDPR IP cleanup: `GdprCleanupTask` zilnic 03:00, anonimizare IP > 90 zile | `9014c2f` (staging) / `2126043` (main) |
+| 14 Feb 2026 | I6 | Flyway migrations: `V1__baseline.sql`, `ddl-auto: validate`, `baseline-on-migrate: true` | `254c79a` (staging) / `1c975d7` (main) |
 
-*Ultima actualizare: 14 Februarie 2026 (sesiunea 2)*
+*Ultima actualizare: 14 Februarie 2026 (sesiunea 3)*
