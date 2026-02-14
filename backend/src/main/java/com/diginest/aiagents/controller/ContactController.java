@@ -14,15 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * REST Controller for contact form submissions.
+ * CORS handled centrally by CorsConfig — no @CrossOrigin here.
  */
 @RestController
 @RequestMapping("/api/v1/contact")
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS})
 public class ContactController {
 
     private static final Logger log = LoggerFactory.getLogger(ContactController.class);

@@ -13,8 +13,10 @@ import java.util.List;
 /**
  * CORS configuration for cross-origin requests.
  *
- * Allows the frontend to communicate with the API.
- * Supports wildcards for Vercel preview URLs.
+ * Restricts API access to known frontend origins only.
+ * Vercel preview URLs supported via allowedOriginPatterns.
+ *
+ * IMPORTANT: @CrossOrigin on controllers is REMOVED — this is the single source of truth.
  */
 @Configuration
 public class CorsConfig {
@@ -26,27 +28,27 @@ public class CorsConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Parse allowed origins from configuration
+        // Parse allowed origins from configuration (exact matches)
         List<String> origins = Arrays.asList(allowedOrigins.split(","));
+        for (String origin : origins) {
+            String trimmed = origin.trim();
+            if (trimmed.contains("*")) {
+                // Wildcard patterns (e.g., https://*.vercel.app) use allowedOriginPatterns
+                configuration.addAllowedOriginPattern(trimmed);
+            } else {
+                configuration.addAllowedOrigin(trimmed);
+            }
+        }
 
-        // Allow ALL origins for now (contact form doesn't need credentials)
-        // This is safe because we don't use cookies/sessions for the contact API
-        configuration.addAllowedOrigin("*");
-
-        // Allowed HTTP methods
+        // Allowed HTTP methods — only what we actually need
         configuration.setAllowedMethods(Arrays.asList(
-            "GET", "POST", "PUT", "DELETE", "OPTIONS"
+            "GET", "POST", "OPTIONS"
         ));
 
-        // Allowed headers - allow all
+        // Allowed headers
         configuration.addAllowedHeader("*");
 
-        // Exposed headers (can be read by frontend)
-        configuration.setExposedHeaders(Arrays.asList(
-            "Access-Control-Allow-Origin"
-        ));
-
-        // Disable credentials - required when using wildcard origin "*"
+        // No credentials needed (stateless API, no cookies/sessions)
         configuration.setAllowCredentials(false);
 
         // Cache preflight response for 1 hour

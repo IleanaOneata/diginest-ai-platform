@@ -495,6 +495,7 @@ public class EmailService {
     /**
      * Send email via Resend HTTP API (port 443 - always available on cloud).
      * Supports both plain text and HTML content.
+     * Retries up to 3 times with exponential backoff (1s, 2s, 4s) on 5xx/timeout errors.
      */
     private void sendViaResend(String to, String subject, String content, boolean isHtml) {
         HttpHeaders headers = new HttpHeaders();
@@ -513,13 +514,43 @@ public class EmailService {
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(RESEND_API_URL, entity, String.class);
+        int maxRetries = 3;
+        for (int attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+                ResponseEntity<String> response = restTemplate.postForEntity(RESEND_API_URL, entity, String.class);
 
-        if (!response.getStatusCode().is2xxSuccessful()) {
-            throw new RuntimeException("Resend API error: " + response.getStatusCode() + " - " + response.getBody());
+                if (response.getStatusCode().is2xxSuccessful()) {
+                    log.debug("Resend API response (attempt {}): {}", attempt, response.getBody());
+                    return; // success
+                }
+
+                // 4xx = client error, don't retry (bad request, auth error, etc.)
+                if (response.getStatusCode().is4xxClientError()) {
+                    throw new RuntimeException("Resend API client error: " + response.getStatusCode() + " - " + response.getBody());
+                }
+
+                // 5xx = server error, retry
+                log.warn("Resend API server error (attempt {}/{}): {} - {}", attempt, maxRetries, response.getStatusCode(), response.getBody());
+            } catch (RuntimeException e) {
+                if (e.getMessage() != null && e.getMessage().startsWith("Resend API client error")) {
+                    throw e; // don't retry client errors
+                }
+                log.warn("Resend API call failed (attempt {}/{}): {}", attempt, maxRetries, e.getMessage());
+                if (attempt == maxRetries) {
+                    throw e; // exhausted retries
+                }
+            }
+
+            // Exponential backoff: 1s, 2s, 4s
+            try {
+                Thread.sleep(1000L * (1L << (attempt - 1)));
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Email send interrupted", ie);
+            }
         }
 
-        log.debug("Resend API response: {}", response.getBody());
+        throw new RuntimeException("Resend API: all " + maxRetries + " retries exhausted for " + to);
     }
 
     private String buildAdminNotificationText(ContactRequest request) {
