@@ -4,6 +4,29 @@
 
 ---
 
+## 🔴🔴🔴 SUPER CRITICAL: CALITATEA CODULUI ESTE PRIORITATEA #1 🔴🔴🔴
+
+> **NICIODATĂ nu face push pe `main` fără a te asigura că codul compilează și este de calitate.**
+
+### Reguli ABSOLUTE (fără excepții):
+
+1. **VERIFICĂ COMPILAREA** — Înainte de orice push pe `main`, asigură-te că backend-ul compilează. Dacă Maven nu e disponibil local, verifică manual FIECARE fișier modificat pentru: import-uri corecte, compatibilitate versiuni dependințe, sintaxă Java validă.
+
+2. **VERIFICĂ COMPATIBILITATEA DEPENDINȚELOR** — Când adaugi dependințe noi, verifică ÎNTOTDEAUNA ce versiune gestionează Spring Boot BOM-ul curent (3.2.4). NU presupune că modulele noi (ex: `flyway-database-postgresql` din Flyway 10) există în versiunea managed de Spring Boot.
+
+3. **NU FACE PUSH SPECULATIV** — Dacă nu ești 100% sigur că codul funcționează, NU face push pe `main`. `main` = producție cu auto-deploy. Un push stricat = site-ul pică.
+
+4. **TESTEAZĂ LOCAL CÂND E POSIBIL** — Rulează `mvn compile` sau `mvn verify` local înainte de push. Dacă Maven nu e disponibil, fă review manual riguros.
+
+5. **CHERRY-PICK CU ATENȚIE** — Când cherry-pick de pe staging → main, verifică că TOATE fișierele funcționează în contextul branch-ului main (poate avea versiuni diferite, dependințe diferite).
+
+6. **UN COMMIT = UN FIX VERIFICAT** — Nu combina mai multe fix-uri într-un commit mare nevalidat. Preferă commit-uri mici, fiecare verificat individual.
+
+### Lecții Învățate (din greșeli reale):
+- **14 Feb 2026**: `flyway-database-postgresql` adăugat în pom.xml, dar acest modul există doar în Flyway 10+ (Spring Boot 3.3+). Spring Boot 3.2.4 folosește Flyway 9.22.x care include suport PostgreSQL direct în `flyway-core`. Deploy-ul pe Railway a picat.
+
+---
+
 ## 🚨 STATUS CURENT (Februarie 2026)
 
 ### Branch-uri Git

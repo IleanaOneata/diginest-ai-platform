@@ -299,5 +299,6 @@
 | 14 Feb 2026 | I9 | Google Fonts non-blocking: preload + media=print onload swap | `9014c2f` (staging) |
 | 14 Feb 2026 | I11 | GDPR IP cleanup: `GdprCleanupTask` zilnic 03:00, anonimizare IP > 90 zile | `9014c2f` (staging) / `2126043` (main) |
 | 14 Feb 2026 | I6 | Flyway migrations: `V1__baseline.sql`, `ddl-auto: validate`, `baseline-on-migrate: true` | `254c79a` (staging) / `1c975d7` (main) |
+| 15 Feb 2026 | I6 | Fix: eliminat `flyway-database-postgresql` (Flyway 10+ only, SB 3.2.4 = Flyway 9.x) | `f8dfdeb` (main) |
 
-*Ultima actualizare: 14 Februarie 2026 (sesiunea 3)*
+*Ultima actualizare: 15 Februarie 2026 (sesiunea 4 — fix deploy picat)*

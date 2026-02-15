@@ -69,13 +69,11 @@
         </dependency>
 
         <!-- Database Migrations -->
+        <!-- Spring Boot 3.2.x manages Flyway 9.x which includes PostgreSQL support in flyway-core.
+             flyway-database-postgresql is a Flyway 10+ module (Spring Boot 3.3+) and must NOT be added here. -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-database-postgresql</artifactId>
         </dependency>
 
         <!-- Rate Limiting -->
