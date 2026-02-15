@@ -312,7 +312,7 @@
 | 14 Feb 2026 | I11 | GDPR IP cleanup: `GdprCleanupTask` zilnic 03:00, anonimizare IP > 90 zile | `9014c2f` (staging) / `2126043` (main) |
 | 14 Feb 2026 | I6 | Flyway migrations: `V1__baseline.sql`, `ddl-auto: validate`, `baseline-on-migrate: true` | `254c79a` (staging) / `1c975d7` (main) |
 | 15 Feb 2026 | I6 | Fix: eliminat `flyway-database-postgresql` (Flyway 10+ only, SB 3.2.4 = Flyway 9.x) | `f8dfdeb` (main) |
-| 15 Feb 2026 | I2 | Sanitize → trim only (ContactService + DemoService), SanitizeTest actualizat, EscapeHtmlTest creat (6 teste) | TBD (staging) |
-| 15 Feb 2026 | I10 | WAI-ARIA Menu Button pattern, keyboard handlers, eliminat script duplicat BaseLayout | TBD (staging) |
+| 15 Feb 2026 | I2 | Sanitize → trim only (ContactService + DemoService), SanitizeTest actualizat, EscapeHtmlTest creat (6 teste) | `6e5fec3` (staging) |
+| 15 Feb 2026 | I10 | WAI-ARIA Menu Button pattern, keyboard handlers, eliminat script duplicat BaseLayout | `6e5fec3` (staging) |
 
 *Ultima actualizare: 15 Februarie 2026 (sesiunea 5 — I2 + I10 fixate, 12/12 IMPORTANTE done)*
