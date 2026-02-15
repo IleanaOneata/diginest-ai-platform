@@ -45,6 +45,7 @@
 **Fișier**: `ContactService.java` liniile 74-79
 **Risc**: `&` se înlocuia DUPĂ `<` și `>`, cauzând double-encoding (`&lt;` → `&amp;lt;`).
 **Ce s-a făcut**: Mutat `&` replacement pe prima poziție (acum consistent cu `EmailService.escapeHtml()`).
+**Superceded**: I2 (15 Feb) a eliminat complet HTML escaping din sanitize() → doar trim(). Escaping rămâne doar la output layer.
 **Data fix**: 14 Februarie 2026
 
 ---
@@ -103,11 +104,17 @@
 
 ---
 
-### I2. ❌ Sanitizare la layer greșit — date corupte în DB
-**Fișier**: `ContactService.java`
+### I2. ✅ Sanitizare la layer greșit — date corupte în DB — FIXAT 15 Feb 2026
+**Fișier**: `ContactService.java`, `DemoService.java`
 **Risc**: HTML escaping se face în **service layer** înainte de a salva în DB. Asta înseamnă că datele din DB sunt `&lt;script&gt;` în loc de `<script>`. Orice utilizare viitoare (export CSV, API GET, migration) va avea date pre-corupte.
 **Impact**: Date corupte permanent, dificil de reparat retroactiv
-**Soluție**: Salvează date **raw** în DB (doar trim). Aplică escaping **la output** (în template-ul email, în API responses).
+**Ce s-a făcut**:
+1. ✅ `ContactService.sanitize()` → doar `trim()` (eliminat 5 replace-uri HTML)
+2. ✅ `DemoService.sanitize()` → identic, doar `trim()`
+3. ✅ `SanitizeTest.java` — actualizat 7 aserțiuni (expected = raw, nu HTML-encoded)
+4. ✅ `EscapeHtmlTest.java` — **NOU** 6 teste pentru `EmailService.escapeHtml()` (output layer)
+**Arhitectură**: `input → trim() → DB (raw) → escapeHtml() → email (escaped)`. XSS protecție la output layer, nu input.
+**Data fix**: 15 Februarie 2026
 
 ---
 
@@ -160,11 +167,19 @@
 
 ---
 
-### I10. ❌ Keyboard accessibility failure (WCAG 2.1)
-**Fișier**: `Header.astro` — dropdown menu servicii
+### I10. ✅ Keyboard accessibility failure (WCAG 2.1) — FIXAT 15 Feb 2026
+**Fișier**: `Header.astro`, `BaseLayout.astro`
 **Risc**: Dropdown-ul de servicii se deschide doar pe hover/click, nu pe keyboard (Tab/Enter/Arrow keys).
 **Impact**: WCAG 2.1 Level A failure, risc legal (EU Accessibility Act 2025)
-**Soluție**: Adaugă `role="menu"`, `aria-expanded`, keyboard handlers.
+**Ce s-a făcut**:
+1. ✅ WAI-ARIA Menu Button pattern: `role="menu"`, `role="menuitem"`, `aria-expanded` synced, `aria-controls`, `aria-labelledby`
+2. ✅ Keyboard handlers: Enter/Space toggle, ArrowDown/Up navighează items (cu wrap), Home/End, Escape închide + focus buton, Tab închide natural
+3. ✅ Mouse hover preserved (mouseenter/mouseleave pe container)
+4. ✅ Click outside + focusout → închide dropdown
+5. ✅ Mobile: Escape key + click outside închid meniu-ul
+6. ✅ Eliminat script duplicat din BaseLayout.astro (conflicta cu Header.astro)
+7. ✅ Eliminat CSS `group-hover` → totul gestionat via JS (consistent hover + keyboard)
+**Data fix**: 15 Februarie 2026
 
 ---
 
@@ -264,16 +279,13 @@
 | Severitate | Count | Fixate | Rămase |
 |-----------|-------|--------|--------|
 | 🔴 CRITICE | 8 | **8** | **0** ✅ |
-| 🟠 IMPORTANTE | 12 | **11** | **1** |
+| 🟠 IMPORTANTE | 12 | **12** | **0** ✅ |
 | 🟡 RECOMANDATE | 15 | 0 | 15 |
 | 🟢 BINE FĂCUTE | 13 | — | — |
 
-### ✅ Toate problemele CRITICE rezolvate + 11/12 IMPORTANTE!
+### ✅ Toate problemele CRITICE + IMPORTANTE rezolvate! (8/8 + 12/12)
 
-**Rămase IMPORTANTE** (1):
-1. **Sanitizare la output** (I2) — mută escaping din service → template (refactoring mai amplu, risc regresii)
-
-**Rămase RECOMANDATE** (15): R1-R15 (vezi secțiunea dedicată)
+**Rămase RECOMANDATE** (15): R1-R15 (vezi secțiunea dedicată) — nice-to-have, nu blochează lansarea
 
 ---
 
@@ -300,5 +312,7 @@
 | 14 Feb 2026 | I11 | GDPR IP cleanup: `GdprCleanupTask` zilnic 03:00, anonimizare IP > 90 zile | `9014c2f` (staging) / `2126043` (main) |
 | 14 Feb 2026 | I6 | Flyway migrations: `V1__baseline.sql`, `ddl-auto: validate`, `baseline-on-migrate: true` | `254c79a` (staging) / `1c975d7` (main) |
 | 15 Feb 2026 | I6 | Fix: eliminat `flyway-database-postgresql` (Flyway 10+ only, SB 3.2.4 = Flyway 9.x) | `f8dfdeb` (main) |
+| 15 Feb 2026 | I2 | Sanitize → trim only (ContactService + DemoService), SanitizeTest actualizat, EscapeHtmlTest creat (6 teste) | TBD (staging) |
+| 15 Feb 2026 | I10 | WAI-ARIA Menu Button pattern, keyboard handlers, eliminat script duplicat BaseLayout | TBD (staging) |
 
-*Ultima actualizare: 15 Februarie 2026 (sesiunea 4 — fix deploy picat)*
+*Ultima actualizare: 15 Februarie 2026 (sesiunea 5 — I2 + I10 fixate, 12/12 IMPORTANTE done)*
