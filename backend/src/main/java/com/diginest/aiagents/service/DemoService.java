@@ -61,20 +61,15 @@ public class DemoService {
     }
 
     /**
-     * Sanitize input to prevent XSS and clean up whitespace.
+     * Clean up user input: trim whitespace only.
      *
-     * IMPORTANT: & must be replaced FIRST, before < and >.
-     * Otherwise "&lt;" from step 1 becomes "&amp;lt;" (double-encoding).
+     * Raw data is stored in DB — HTML escaping happens at the output layer
+     * (EmailService.escapeHtml()) to prevent double-encoding.
      */
     private String sanitize(String input) {
         if (input == null) {
             return null;
         }
-        return input.trim()
-            .replace("&", "&amp;")
-            .replace("<", "&lt;")
-            .replace(">", "&gt;")
-            .replace("\"", "&quot;")
-            .replace("'", "&#x27;");
+        return input.trim();
     }
 }

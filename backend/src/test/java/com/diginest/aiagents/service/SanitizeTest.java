@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Tests for the sanitize() method in ContactService and DemoService.
  *
- * Critical: Verifies that & is encoded BEFORE < and > to prevent double-encoding.
- * This was a bug (C3 in TECHNICAL-AUDIT.md) where "&lt;" became "&amp;lt;".
+ * After I2 audit fix: sanitize() performs ONLY trimming.
+ * HTML escaping is done at the output layer (EmailService.escapeHtml()).
  */
 class SanitizeTest {
 
@@ -46,40 +46,36 @@ class SanitizeTest {
     }
 
     @Test
-    @DisplayName("sanitize: escapes < and > without double-encoding &")
-    void sanitize_noDoubleEncoding() throws Exception {
+    @DisplayName("sanitize: HTML characters preserved raw (no escaping at input layer)")
+    void sanitize_htmlPreserved() throws Exception {
         ContactService service = new ContactService(null, null);
-        String result = callSanitize(service, "<script>alert('xss')</script>");
-
-        // Correct: & is encoded FIRST, then < and >
-        // "<script>" should become "&lt;script&gt;" NOT "&amp;lt;script&amp;gt;"
-        assertEquals("&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;", result);
-        assertFalse(result.contains("&amp;lt;"), "Double-encoding detected! & was encoded AFTER < replacement");
-        assertFalse(result.contains("&amp;gt;"), "Double-encoding detected! & was encoded AFTER > replacement");
+        // After I2 fix: sanitize does NOT HTML-encode.
+        // Raw data is stored in DB; escaping happens at output layer.
+        assertEquals("<script>alert('xss')</script>",
+            callSanitize(service, "<script>alert('xss')</script>"));
     }
 
     @Test
-    @DisplayName("sanitize: ampersand in normal text encoded correctly")
-    void sanitize_ampersand_encodedCorrectly() throws Exception {
+    @DisplayName("sanitize: ampersand preserved as raw character")
+    void sanitize_ampersandPreserved() throws Exception {
         ContactService service = new ContactService(null, null);
-        assertEquals("Tom &amp; Jerry", callSanitize(service, "Tom & Jerry"));
+        assertEquals("Tom & Jerry", callSanitize(service, "Tom & Jerry"));
     }
 
     @Test
-    @DisplayName("sanitize: quotes are escaped")
-    void sanitize_quotesEscaped() throws Exception {
+    @DisplayName("sanitize: quotes preserved as raw characters")
+    void sanitize_quotesPreserved() throws Exception {
         ContactService service = new ContactService(null, null);
         String result = callSanitize(service, "He said \"hello\" and it's fine");
-        assertTrue(result.contains("&quot;"), "Double quotes should be escaped");
-        assertTrue(result.contains("&#x27;"), "Single quotes should be escaped");
+        assertTrue(result.contains("\""), "Double quotes should be preserved raw");
+        assertTrue(result.contains("'"), "Single quotes should be preserved raw");
     }
 
     @Test
-    @DisplayName("sanitize: DemoService has same correct ordering")
-    void sanitize_demoService_sameOrdering() throws Exception {
+    @DisplayName("sanitize: DemoService behaves identically (trim only)")
+    void sanitize_demoService_identical() throws Exception {
         DemoService demoService = new DemoService(null, null);
-        String result = callSanitize(demoService, "<b>Bold & Beautiful</b>");
-        assertEquals("&lt;b&gt;Bold &amp; Beautiful&lt;/b&gt;", result);
-        assertFalse(result.contains("&amp;lt;"), "DemoService: Double-encoding detected!");
+        assertEquals("<b>Bold & Beautiful</b>",
+            callSanitize(demoService, "<b>Bold & Beautiful</b>"));
     }
 }

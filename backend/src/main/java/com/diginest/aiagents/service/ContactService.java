@@ -64,21 +64,18 @@ public class ContactService {
     }
 
     /**
-     * Sanitize input to prevent XSS and clean up whitespace.
+     * Clean up user input: trim whitespace only.
      *
-     * IMPORTANT: & must be replaced FIRST, before < and >.
-     * Otherwise "&lt;" from step 1 becomes "&amp;lt;" (double-encoding).
+     * Raw data is stored in DB — HTML escaping happens at the output layer
+     * (EmailService.escapeHtml()) to prevent double-encoding.
+     *
+     * Safety: @Valid on DTOs validates at API boundary. JPA uses parameterized
+     * queries (no SQL injection). XSS is handled at rendering time.
      */
     private String sanitize(String input) {
         if (input == null) {
             return null;
         }
-        // Trim whitespace and HTML escaping (& FIRST to avoid double-encoding)
-        return input.trim()
-            .replace("&", "&amp;")
-            .replace("<", "&lt;")
-            .replace(">", "&gt;")
-            .replace("\"", "&quot;")
-            .replace("'", "&#x27;");
+        return input.trim();
     }
 }
